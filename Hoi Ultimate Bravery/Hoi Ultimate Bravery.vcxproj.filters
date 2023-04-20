@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers sources\imgui">
+      <UniqueIdentifier>{536127d8-6ad4-4303-b0fb-2374b04b3d21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\imgui">
+      <UniqueIdentifier>{fa1a83b3-ecf6-4732-8caf-ac4e91508263}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\glfw">
+      <UniqueIdentifier>{fb9166ce-3338-40fe-934a-da44709af773}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Hoi Ultimate Bravery.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Librairies\Imgui\imgui_impl_glfw.cpp">
+      <Filter>Fichiers sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Librairies\Imgui\imgui_impl_opengl3.cpp">
+      <Filter>Fichiers sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Librairies\Imgui\imgui_tables.cpp">
+      <Filter>Fichiers sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Librairies\Imgui\imgui_widgets.cpp">
+      <Filter>Fichiers sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Librairies\Imgui\imgui.cpp">
+      <Filter>Fichiers sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Librairies\Imgui\imgui_demo.cpp">
+      <Filter>Fichiers sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Librairies\Imgui\imgui_draw.cpp">
+      <Filter>Fichiers sources\imgui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Librairies\Imgui\imstb_textedit.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\Imgui\imstb_truetype.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\Imgui\imconfig.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\Imgui\imgui.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\Imgui\imgui_impl_glfw.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\Imgui\imgui_impl_opengl3.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\Imgui\imgui_impl_opengl3_loader.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\Imgui\imgui_internal.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\Imgui\imstb_rectpack.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\GLFW\glfw3.h">
+      <Filter>Fichiers d%27en-tête\glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\GLFW\glfw3native.h">
+      <Filter>Fichiers d%27en-tête\glfw</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
