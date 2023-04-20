@@ -22,6 +22,9 @@
     <Filter Include="Fichiers d%27en-tête\glfw">
       <UniqueIdentifier>{fb9166ce-3338-40fe-934a-da44709af773}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\json">
+      <UniqueIdentifier>{24d24455-adec-4a2f-b8d8-76c4d195bb49}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Hoi Ultimate Bravery.cpp">
@@ -82,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="Librairies\GLFW\glfw3native.h">
       <Filter>Fichiers d%27en-tête\glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\Json\json.hpp">
+      <Filter>Fichiers d%27en-tête\json</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

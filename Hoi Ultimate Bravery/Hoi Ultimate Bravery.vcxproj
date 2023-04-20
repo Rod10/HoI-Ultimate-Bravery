@@ -118,10 +118,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>Librairies;Librairies/Imgui;Librairies/GLFW;Librairies/Json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Librairies/OpenGl/OpenGL32.Lib;Librairies/GLFW/glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -162,6 +164,7 @@
     <ClInclude Include="Librairies\Imgui\imstb_rectpack.h" />
     <ClInclude Include="Librairies\Imgui\imstb_textedit.h" />
     <ClInclude Include="Librairies\Imgui\imstb_truetype.h" />
+    <ClInclude Include="Librairies\Json\json.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
