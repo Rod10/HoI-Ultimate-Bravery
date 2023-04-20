@@ -25,9 +25,15 @@
     <Filter Include="Fichiers d%27en-tête\json">
       <UniqueIdentifier>{24d24455-adec-4a2f-b8d8-76c4d195bb49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\implot">
+      <UniqueIdentifier>{522c45e5-c1fc-4169-aafb-03c5b8efec47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\implot">
+      <UniqueIdentifier>{8446cc13-c72f-4d15-87e9-1b1593ffd57b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Hoi Ultimate Bravery.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Librairies\Imgui\imgui_impl_glfw.cpp">
@@ -50,6 +56,15 @@
     </ClCompile>
     <ClCompile Include="Librairies\Imgui\imgui_draw.cpp">
       <Filter>Fichiers sources\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Librairies\Implot\implot_items.cpp">
+      <Filter>Fichiers sources\implot</Filter>
+    </ClCompile>
+    <ClCompile Include="Librairies\Implot\implot.cpp">
+      <Filter>Fichiers sources\implot</Filter>
+    </ClCompile>
+    <ClCompile Include="Librairies\Implot\implot_demo.cpp">
+      <Filter>Fichiers sources\implot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +103,18 @@
     </ClInclude>
     <ClInclude Include="Librairies\Json\json.hpp">
       <Filter>Fichiers d%27en-tête\json</Filter>
+    </ClInclude>
+    <ClInclude Include="app_base.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="my_app.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\Implot\implot.h">
+      <Filter>Fichiers d%27en-tête\implot</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\Implot\implot_internal.h">
+      <Filter>Fichiers d%27en-tête\implot</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,2 +1,3 @@
-﻿  Hoi Ultimate Bravery.cpp
-  Hoi Ultimate Bravery.vcxproj -> C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\x64\Debug\Hoi Ultimate Bravery.exe
+﻿  main.cpp
+G:\DEV\perso\HoI-Ultimate-Bravery\Hoi Ultimate Bravery\app_base.hpp(241): warning C4305: 'argument' : troncation de 'double' à 'float'
+  Hoi Ultimate Bravery.vcxproj -> G:\DEV\perso\HoI-Ultimate-Bravery\x64\Debug\Hoi Ultimate Bravery.exe
