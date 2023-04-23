@@ -31,6 +31,9 @@
     <Filter Include="Fichiers sources\implot">
       <UniqueIdentifier>{8446cc13-c72f-4d15-87e9-1b1593ffd57b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\data">
+      <UniqueIdentifier>{8ffe7f15-3c01-4b71-8a82-59fdcd9191e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -65,6 +68,21 @@
     </ClCompile>
     <ClCompile Include="Librairies\Implot\implot_demo.cpp">
       <Filter>Fichiers sources\implot</Filter>
+    </ClCompile>
+    <ClCompile Include="tank.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="turret.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Cannon.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Stats.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Ressources.cpp">
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,5 +134,28 @@
     <ClInclude Include="Librairies\Implot\implot_internal.h">
       <Filter>Fichiers d%27en-tête\implot</Filter>
     </ClInclude>
+    <ClInclude Include="tank.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="turret.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Cannon.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Stats.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Ressources.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Data\Turret.json">
+      <Filter>Fichiers sources\data</Filter>
+    </None>
+    <None Include="Assets\Data\Canon.json">
+      <Filter>Fichiers sources\data</Filter>
+    </None>
   </ItemGroup>
 </Project>

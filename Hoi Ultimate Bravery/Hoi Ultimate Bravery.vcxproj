@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cannon.cpp" />
     <ClCompile Include="Librairies\Implot\implot.cpp" />
     <ClCompile Include="Librairies\Implot\implot_demo.cpp" />
     <ClCompile Include="Librairies\Implot\implot_items.cpp" />
@@ -155,9 +156,14 @@
     <ClCompile Include="Librairies\Imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="Librairies\Imgui\imgui_tables.cpp" />
     <ClCompile Include="Librairies\Imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Ressources.cpp" />
+    <ClCompile Include="Stats.cpp" />
+    <ClCompile Include="tank.cpp" />
+    <ClCompile Include="turret.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app_base.hpp" />
+    <ClInclude Include="Cannon.hpp" />
     <ClInclude Include="Librairies\GLFW\glfw3.h" />
     <ClInclude Include="Librairies\GLFW\glfw3native.h" />
     <ClInclude Include="Librairies\Imgui\imconfig.h" />
@@ -173,6 +179,14 @@
     <ClInclude Include="Librairies\Implot\implot_internal.h" />
     <ClInclude Include="Librairies\Json\json.hpp" />
     <ClInclude Include="my_app.hpp" />
+    <ClInclude Include="Ressources.hpp" />
+    <ClInclude Include="Stats.hpp" />
+    <ClInclude Include="tank.hpp" />
+    <ClInclude Include="turret.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Data\Canon.json" />
+    <None Include="Assets\Data\Turret.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -71,6 +71,10 @@
                     }
                 },
                 "improved": {
+                    "technologies": [
+                        "artillery",
+                        "antiTank"
+                    ],
                     "year": 1941,
                     "speed": -0.3,
                     "reliability": -15,

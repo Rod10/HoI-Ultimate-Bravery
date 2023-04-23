@@ -1,0 +1,203 @@
+{
+  "light": {
+    "crew": {
+      "0": {
+        "allowedGun": ["small", "medium"],
+        "stats": {
+          "speed": 0,
+          "reliability": 20,
+          "softAttack": 0,
+          "hardAttack": 0,
+          "breakthrough": "-25%",
+          "defense": 3,
+          "productionCost": 0.75
+        },
+        "fordids": ["spAA"]
+      },
+      "1": {
+        "allowedGun": ["small"],
+        "stats": {
+          "speed": 0,
+          "reliability": 0,
+          "softAttack": 0,
+          "hardAttack": 0,
+          "breakthrough": 7,
+          "defense": 0,
+          "productionCost": 0.50
+        },
+        "fordids": []
+      },
+      "2": {
+        "allowedGun": ["small"],
+        "stats": {
+          "speed": 0,
+          "reliability": 0,
+          "softAttack": 0,
+          "hardAttack": 0,
+          "breakthrough": 10,
+          "defense": 0,
+          "productionCost": 0.75
+        },
+        "fordids": []
+      },
+      "3": {
+        "allowedGun": ["small"],
+        "stats": {
+          "speed": -0.25,
+          "reliability": 0,
+          "softAttack": 0,
+          "hardAttack": 0,
+          "breakthrough": 14,
+          "defense": 0,
+          "productionCost": 1
+        },
+        "fordids": []
+      }
+    }
+  },
+  "medium": {
+    "crew": {
+      "0": {
+        "allowedGun": ["small", "medium", "large"],
+        "stats": {
+          "speed": 0,
+          "reliability": 20,
+          "softAttack": 0,
+          "hardAttack": 0,
+          "breakthrough": "-25%",
+          "defense": 3,
+          "productionCost": 1.50
+        },
+        "fordids": ["spAA"]
+      },
+      "1": {
+        "allowedGun": ["small", "medium"],
+        "stats": {
+          "speed": 0,
+          "reliability": 0,
+          "softAttack": "-25%",
+          "hardAttack": "-25%",
+          "breakthrough": 10,
+          "defense": 0,
+          "productionCost": 1
+        },
+        "fordids": []
+      },
+      "2": {
+        "allowedGun": ["small", "medium"],
+        "stats": {
+          "speed": 0,
+          "reliability": 0,
+          "softAttack": 0,
+          "hardAttack": 0,
+          "breakthrough": 16,
+          "defense": 0,
+          "productionCost": 1.50
+        },
+        "fordids": []
+      },
+      "3": {
+        "allowedGun": ["small", "medium"],
+        "stats": {
+          "speed": -0.25,
+          "reliability": 0,
+          "softAttack": 0,
+          "hardAttack": 0,
+          "breakthrough": 20,
+          "defense": 0,
+          "productionCost": 2
+        },
+        "fordids": []
+      }
+    }
+  },
+  "large": {
+    "crew": {
+      "0": {
+        "allowedGun": ["small", "medium", "large", "bfg"],
+        "stats": {
+          "speed": 0,
+          "reliability": 20,
+          "softAttack": 0,
+          "hardAttack": 0,
+          "breakthrough": "-25%",
+          "defense": 3,
+          "productionCost": 5
+        },
+        "fordids": ["spAA"]
+      },
+      "2": {
+        "allowedGun": ["small", "medium"," large"],
+        "stats": {
+          "speed": 0,
+          "reliability": 0,
+          "softAttack": 0,
+          "hardAttack": 0,
+          "breakthrough": 18,
+          "defense": 0,
+          "productionCost": 5
+        },
+        "fordids": []
+      },
+      "3": {
+        "allowedGun": ["small", "medium"," large"],
+        "stats": {
+          "speed": -0.25,
+          "reliability": 0,
+          "softAttack": 0,
+          "hardAttack": 0,
+          "breakthrough": 22,
+          "defense": 0,
+          "productionCost": 5.50
+        },
+        "fordids": []
+      }
+    }
+  },
+  "superHeavy": {
+    "crew": {
+      "3": {
+        "allowedGun": ["small", "medium"," large", "bfg"],
+        "stats": {
+          "speed": -0.2,
+          "reliability": "-10%",
+          "softAttack": 0,
+          "hardAttack": "-10%",
+          "breakthrough": 24,
+          "defense": 0,
+          "productionCost": 10.00
+        },
+        "fordids": []
+      },
+      "4": {
+        "allowedGun": ["small", "medium"," large", "bfg"],
+        "stats": {
+          "speed": -0.5,
+          "reliability": "-25%",
+          "softAttack": 0,
+          "hardAttack": 0,
+          "breakthrough": 35,
+          "defense": 0,
+          "productionCost": 12.00
+        },
+        "fordids": []
+      }
+    }
+  },
+  "modern": {
+    "crew": {
+      "0": {
+        "allowedGun": ["small", "medium", "large"],
+        "stats": {
+          "speed": 0,
+          "reliability": 0,
+          "softAttack": 0,
+          "hardAttack": 0,
+          "breakthrough": 24,
+          "defense": 0,
+          "productionCost": 8
+        }
+      }
+    }
+  }
+}

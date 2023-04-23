@@ -1,0 +1,60 @@
+#pragma once
+#include <string>
+#include <vector>
+#include "turret.hpp"
+
+struct Tank {
+	enum Type {
+		Light,
+		Medium,
+		Heavy,
+		SuperHeavy,
+		Modern,
+		Last
+	};
+
+	Tank(Type type, Turret turret) : type(type), turret(turret){}
+	Tank::Type type;
+	Turret turret;
+
+	static std::string tankTypeToString(Tank::Type& type) {
+		switch (type) {
+		default: return "INVALID TYPE";
+		case Tank::Type::Light: return "light";
+		case Tank::Type::Medium: return "medium";
+		case Tank::Type::Heavy: return "heavy";
+		case Tank::Type::SuperHeavy: return "superHeavy";
+		case Tank::Type::Modern: return "modern";
+		}
+	};
+	 
+	static std::vector<Turret::Type> getAllowedTurret(Tank::Type& type) {
+		std::vector<Turret::Type> allowedTurret;
+		switch (type) {
+		case Tank::Type::Light:
+			allowedTurret.push_back(Turret::Type::Light);
+			break;
+		case Tank::Type::Medium:
+			allowedTurret.push_back(Turret::Type::Light);
+			allowedTurret.push_back(Turret::Type::Medium);
+			break;
+		case Tank::Type::Heavy:
+			allowedTurret.push_back(Turret::Type::Light);
+			allowedTurret.push_back(Turret::Type::Medium);
+			allowedTurret.push_back(Turret::Type::Large);
+			break;
+		case Tank::Type::SuperHeavy:
+			allowedTurret.push_back(Turret::Type::Light);
+			allowedTurret.push_back(Turret::Type::Medium);
+			allowedTurret.push_back(Turret::Type::Large);
+			allowedTurret.push_back(Turret::Type::SuperHeavy);
+			break;
+		case Tank::Type::Modern:
+			allowedTurret.push_back(Turret::Type::Light);
+			allowedTurret.push_back(Turret::Type::Medium);
+			allowedTurret.push_back(Turret::Type::Large);
+			break;
+		}
+		return allowedTurret;
+	}
+};
