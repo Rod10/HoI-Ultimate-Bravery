@@ -1,9 +1,0 @@
-﻿  main.cpp
-C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\app_base.hpp(248): warning C4305: 'argument' : troncation de 'double' à 'float'
-C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\my_app.hpp(32,19): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
-C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\my_app.hpp(144,48): warning C5055: opérateur '/' : déprécié entre les énumérations et les types à virgule flottante
-C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Cannon.hpp(108): warning C4715: 'Gun::stringToGunSize' : les chemins de contrôle ne retournent pas tous une valeur
-C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Cannon.hpp(82): warning C4715: 'Gun::stringToGunType' : les chemins de contrôle ne retournent pas tous une valeur
-C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Cannon.hpp(97): warning C4715: 'Gun::sizeStringToInt' : les chemins de contrôle ne retournent pas tous une valeur
-C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Cannon.hpp(72): warning C4715: 'Gun::typeStringToInt' : les chemins de contrôle ne retournent pas tous une valeur
-  Hoi Ultimate Bravery.vcxproj -> C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\x64\Debug\Hoi Ultimate Bravery.exe
