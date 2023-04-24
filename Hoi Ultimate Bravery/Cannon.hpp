@@ -8,11 +8,11 @@ class Gun
 public:
 	enum Category {
 		Cannon,
-		/*Flamethrower,
+		Flamethrower,
 		FastFiringAntiGround,
 		AntiTank,
 		AntiInfantry,
-		AntiAir,*/
+		AntiAir,
 		Last
 	};
 
@@ -36,15 +36,22 @@ public:
 		size(size),
 		statsByType(statsByType){}
 
+	Gun(Gun::Category category,
+		Gun::Size size,
+		Stats stats) :
+		category(category),
+		size(size),
+		stats(stats){}
+
 	static std::string gunCategoryToString(Gun::Category& category) {
 		switch (category) {
 		default: return "INVALID CATEGORY";
 		case Gun::Category::Cannon: return "cannon";
-		//case Gun::Category::Flamethrower: return "flamethrower";
-		//case Gun::Category::FastFiringAntiGround: return "fastFiringAntiGround";
-		//case Gun::Category::AntiTank: return "antiTank";
-		//case Gun::Category::AntiInfantry: return "antiInfantry";
-		//case Gun::Category::AntiAir: return "antiAir";
+		case Gun::Category::Flamethrower: return "flamethrower";
+		case Gun::Category::FastFiringAntiGround: return "fastFiringAntiGround";
+		case Gun::Category::AntiTank: return "antiTank";
+		case Gun::Category::AntiInfantry: return "antiInfantry";
+		case Gun::Category::AntiAir: return "antiAir";
 		}
 	}
 
@@ -107,9 +114,12 @@ public:
 		}
 	}
 
+	static std::vector<Gun> generateGunList();
+
 	Gun::Category category;
 	Gun::Size size;
 	std::map<Type, Stats> statsByType;
+	Stats stats;
 	std::vector<std::string> roleAllowed;
 };
 

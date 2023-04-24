@@ -32,91 +32,10 @@ public:
         srand(time(0));
         Tank::Type tankType = static_cast<Tank::Type>(rand() % Tank::Type::Last);
         std::cout << "Tank Type: " << Tank::tankTypeToString(tankType) << std::endl;
-
-        //Turret
-        /*auto turretAllowed = Tank::getAllowedTurret(tankType);
-        Turret::Type turretType = *Utils::select_randomly(turretAllowed.begin(), turretAllowed.end());
-        std::ifstream fT("Assets/Data/Turret.json");
-        json data = json::parse(fT);
-        fT.close();
-        json turretJson = data[Turret::turretTypeToString(turretType)]["crew"];
-        std::cout << "Turret Type: " << Turret::turretTypeToString(turretType) << std::endl;
-        std::vector<std::string> turretCrew;
-        for (auto& el : turretJson.items()) {
-            turretCrew.push_back(el.key().c_str());
-        }
-        std::string crew = *Utils::select_randomly(turretCrew.begin(), turretCrew.end());
-        json turretData = turretJson[crew];
-        std::vector<Gun::Size> allowedGun;
-        for (auto& el : turretData["allowedGun"].items()) {
-            allowedGun.push_back(static_cast<Gun::Size>(std::stoi(el.key())));
-        }
-
-        //Turret Stats
-        json turretStats = turretData["stats"];
-        Ressources ressources = Ressources();
-        const std::string statsKey[13] = { "year", "speed", "reliability", "softAttack", "hardAttack", "piercing", "breakthrough", "airAttack", "productionCost", "armor", "defense", "entrenchment", "hardness" };
-        for (auto& el : statsKey) {
-            if (turretStats[el].is_null()) {
-                turretStats[el] = 0;
-            }
-        }
-        Stats stats = Stats(ressources, turretStats);
-
-        Turret turret = Turret(turretType, std::stoi(crew), allowedGun, stats);*/
-
         Turret turret = Turret::generatingRandomTurret(tankType);
-        const std::string statsKey[13] = { "year", "speed", "reliability", "softAttack", "hardAttack", "piercing", "breakthrough", "airAttack", "productionCost", "armor", "defense", "entrenchment", "hardness" };
-
-        //CannonList
-        Gun::Size gunSize = Gun::Size::Small;
-        Gun::Category cannonCategory;
-        std::vector<std::string> roleAllowed;
-        std::ifstream fC("Assets/Data/Cannon.json");
-        json CannonsData = json::parse(fC);
-        json cannonStats;
-        Stats stats;
-        Ressources gunRessources;
-        std::vector<Gun> gunList;
-        std::map<Gun::Type, Stats> statsByType;
-        for (int cannonCategoryInt = Gun::Category::Cannon; cannonCategoryInt != Gun::Category::Last; cannonCategoryInt++) {
-            cannonCategory = static_cast<Gun::Category>(cannonCategoryInt);
-            const json cannonCateData = CannonsData[Gun::gunCategoryToString(cannonCategory)];
-            for (auto& el : cannonCateData.items()) {
-                for (auto& data : cannonCateData[el.key()].items()) {
-                    if (data.key() == "size") {
-                        std::string stringSize = data.value();
-                        gunSize = Gun::stringToGunSize(stringSize);
-                    }
-                    if (data.key() == "type") {
-                        statsByType.clear();
-                        for (auto& type : cannonCateData[el.key()][data.key()].items()) {
-                            cannonStats = type.value();        
-                            for (auto& el : statsKey) {
-                                if (cannonStats[el].is_null()) {
-                                    cannonStats[el] = 0;
-                                }
-                            }
-                            gunRessources = Ressources(cannonStats["ressources"]);
-                            stats = Stats(gunRessources, cannonStats);
-                            std::string stringType = type.key();
-                            std::cout << el.key() << ": " << type.key() << std::endl;
-                            statsByType.insert(std::pair<Gun::Type, Stats>(Gun::stringToGunType(stringType), stats));
-                        }
-                        std::cout << "map clear" << std::endl;
-                    }
-                    if (data.key() == "roleAllowed") {
-                        for (auto& role : data.value()) {
-                            roleAllowed.push_back(role);
-                        }
-                    }
-                }
-                gunList.push_back(Gun(cannonCategory, gunSize, statsByType));
-
-                //TODO: Afficher GunCategory
-            }
-        }
-        fC.close();
+        auto test = Gun::generateGunList();
+        std::cout << "gun list generated" << std::endl;
+        //TODO: Afficher GunCategoryfa
     }
     ~MyApp() = default;
 
