@@ -16,7 +16,7 @@ public :
 		Last
 	};
 
-	Turret(Turret::Type type, int crew, std::vector<Cannon::Size> allowedGun, Stats stats) :
+	Turret(Turret::Type type, int crew, std::vector<Gun::Size> allowedGun, Stats stats) :
 		type(type),
 		crew(crew),
 		allowedGun(allowedGun),
@@ -33,9 +33,11 @@ public :
 		}
 	};
 
+    static Turret generatingRandomTurret(int tankType);
+
 	Turret::Type type;
 	int crew;
-	std::vector<Cannon::Size> allowedGun;
+	std::vector<Gun::Size> allowedGun;
 	Stats stats;
 };
 

@@ -34,6 +34,12 @@
     <Filter Include="Fichiers sources\data">
       <UniqueIdentifier>{8ffe7f15-3c01-4b71-8a82-59fdcd9191e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\soil">
+      <UniqueIdentifier>{a09262e7-fc2c-4dee-9497-60953c4a73f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\soil">
+      <UniqueIdentifier>{fa795225-bbf7-4fff-8cc1-1a30711ca539}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -82,6 +88,21 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Ressources.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Librairies\Soil\stb_image_aug.c">
+      <Filter>Fichiers sources\soil</Filter>
+    </ClCompile>
+    <ClCompile Include="Librairies\Soil\image_DXT.c">
+      <Filter>Fichiers sources\soil</Filter>
+    </ClCompile>
+    <ClCompile Include="Librairies\Soil\image_helper.c">
+      <Filter>Fichiers sources\soil</Filter>
+    </ClCompile>
+    <ClCompile Include="Librairies\Soil\SOIL.c">
+      <Filter>Fichiers sources\soil</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -147,6 +168,27 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Ressources.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\Soil\stbi_DDS_aug.h">
+      <Filter>Fichiers d%27en-tête\soil</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\Soil\stbi_DDS_aug_c.h">
+      <Filter>Fichiers d%27en-tête\soil</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\Soil\image_DXT.h">
+      <Filter>Fichiers d%27en-tête\soil</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\Soil\image_helper.h">
+      <Filter>Fichiers d%27en-tête\soil</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\Soil\SOIL.h">
+      <Filter>Fichiers d%27en-tête\soil</Filter>
+    </ClInclude>
+    <ClInclude Include="Librairies\Soil\stb_image_aug.h">
+      <Filter>Fichiers d%27en-tête\soil</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

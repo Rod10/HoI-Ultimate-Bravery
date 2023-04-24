@@ -116,9 +116,9 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>Librairies;Librairies/Imgui;Librairies/GLFW;Librairies/Json;Librairies/Implot;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Librairies;Librairies/Imgui;Librairies/GLFW;Librairies/Json;Librairies/Implot;Librairies/Soil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -148,6 +148,10 @@
     <ClCompile Include="Librairies\Implot\implot.cpp" />
     <ClCompile Include="Librairies\Implot\implot_demo.cpp" />
     <ClCompile Include="Librairies\Implot\implot_items.cpp" />
+    <ClCompile Include="Librairies\Soil\image_DXT.c" />
+    <ClCompile Include="Librairies\Soil\image_helper.c" />
+    <ClCompile Include="Librairies\Soil\SOIL.c" />
+    <ClCompile Include="Librairies\Soil\stb_image_aug.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Librairies\Imgui\imgui.cpp" />
     <ClCompile Include="Librairies\Imgui\imgui_demo.cpp" />
@@ -160,6 +164,7 @@
     <ClCompile Include="Stats.cpp" />
     <ClCompile Include="tank.cpp" />
     <ClCompile Include="turret.cpp" />
+    <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app_base.hpp" />
@@ -178,11 +183,18 @@
     <ClInclude Include="Librairies\Implot\implot.h" />
     <ClInclude Include="Librairies\Implot\implot_internal.h" />
     <ClInclude Include="Librairies\Json\json.hpp" />
+    <ClInclude Include="Librairies\Soil\image_DXT.h" />
+    <ClInclude Include="Librairies\Soil\image_helper.h" />
+    <ClInclude Include="Librairies\Soil\SOIL.h" />
+    <ClInclude Include="Librairies\Soil\stbi_DDS_aug.h" />
+    <ClInclude Include="Librairies\Soil\stbi_DDS_aug_c.h" />
+    <ClInclude Include="Librairies\Soil\stb_image_aug.h" />
     <ClInclude Include="my_app.hpp" />
     <ClInclude Include="Ressources.hpp" />
     <ClInclude Include="Stats.hpp" />
     <ClInclude Include="tank.hpp" />
     <ClInclude Include="turret.hpp" />
+    <ClInclude Include="utils.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Data\Canon.json" />

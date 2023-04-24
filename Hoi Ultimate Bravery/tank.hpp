@@ -27,6 +27,17 @@ struct Tank {
 		case Tank::Type::Modern: return "modern";
 		}
 	};
+
+	static Tank::Type intToTankType(int type) {
+		switch (type) {
+		default: break;
+		case 0: return Tank::Type::Light;
+		case 1: return Tank::Type::Medium;
+		case 2: return Tank::Type::Heavy;
+		case 3: return Tank::Type::SuperHeavy;
+		case 4: return Tank::Type::Modern;
+		}
+	};
 	 
 	static std::vector<Turret::Type> getAllowedTurret(Tank::Type& type) {
 		std::vector<Turret::Type> allowedTurret;

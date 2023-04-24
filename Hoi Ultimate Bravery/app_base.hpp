@@ -7,6 +7,8 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 #include "implot.h"
+#include "SOIL.h"
+
 #include <cstdlib>
 #include <stdio.h>
 #if defined(IMGUI_IMPL_OPENGL_ES2)
@@ -64,6 +66,11 @@ public:
         // GLFWmonitor* monitor = glfwGetPrimaryMonitor();
         window = glfwCreateWindow(1280, 720, "HoI Ultimate Bravery", nullptr, nullptr);
         glfwSetWindowSize(window, 1920, 1080);
+
+        GLFWimage icons[1];
+        icons[0].pixels = SOIL_load_image("Assets/Images/game_icon.png", &icons[0].width, &icons[0].height, 0, SOIL_LOAD_RGBA);
+        glfwSetWindowIcon(window, 1, icons);
+        SOIL_free_image_data(icons[0].pixels);
 
         if (window == NULL)
             std::exit(1);

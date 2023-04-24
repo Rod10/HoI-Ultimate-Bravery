@@ -1,4 +1,6 @@
 #pragma once
+#include <json.hpp>
+using json = nlohmann::json;
 class Ressources
 {
 public:
@@ -9,6 +11,11 @@ public:
 		steel(steel),
 		tungsten(tungsten),
 		chromium(chromium) {}
+
+	Ressources(json data) :
+		steel(data["steel"]),
+		tungsten(data["tungsten"]),
+		chromium(data["chromium"]) {}
 
 	int steel;
 	int tungsten;
