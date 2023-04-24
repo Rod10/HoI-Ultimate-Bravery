@@ -32,8 +32,8 @@ bld/
 [Ll]og/
 [Ll]ogs/
 **/[Dd]ebug/
-**/x64
-**/x86
+**/x64/
+**/x86/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
