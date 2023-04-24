@@ -69,7 +69,7 @@ public:
         const std::string statsKey[13] = { "year", "speed", "reliability", "softAttack", "hardAttack", "piercing", "breakthrough", "airAttack", "productionCost", "armor", "defense", "entrenchment", "hardness" };
 
         //CannonList
-        Gun::Size gunSize;
+        Gun::Size gunSize = Gun::Size::Small;
         Gun::Category cannonCategory;
         std::vector<std::string> roleAllowed;
         std::ifstream fC("Assets/Data/Cannon.json");
@@ -112,6 +112,8 @@ public:
                     }
                 }
                 gunList.push_back(Gun(cannonCategory, gunSize, statsByType));
+
+                //TODO: Afficher GunCategory
             }
         }
         fC.close();

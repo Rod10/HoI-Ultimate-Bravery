@@ -1,32 +1,9 @@
-﻿  Cannon.cpp
-  main.cpp
+﻿  main.cpp
 C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\app_base.hpp(248): warning C4305: 'argument' : troncation de 'double' à 'float'
 C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\my_app.hpp(32,19): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
 C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\my_app.hpp(144,48): warning C5055: opérateur '/' : déprécié entre les énumérations et les types à virgule flottante
-  tank.cpp
-  turret.cpp
-C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp(10,78): warning C4244: 'argument' : conversion de '__int64' en '_Ty', perte possible de données
-          with
-          [
-              _Ty=int
-          ]
-C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp(16): message : voir la référence à l'instanciation de la fonction modèle 'Iter Utils::select_randomly<Iter,std::mt19937>(Iter,Iter,RandomGenerator &)' en cours de compilation
-          with
-          [
-              Iter=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<Turret::Type>>>,
-              RandomGenerator=std::mt19937
-          ]
-C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\turret.cpp(12,97): message : voir la référence à l'instanciation de la fonction modèle 'Iter Utils::select_randomly<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>>(Iter,Iter)' en cours de compilation
-          with
-          [
-              Iter=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<Turret::Type>>>,
-              _Ty=Turret::Type
-          ]
-  Génération de code en cours...
-C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\tank.hpp(40): warning C4715: 'Tank::intToTankType' : les chemins de contrôle ne retournent pas tous une valeur
 C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Cannon.hpp(108): warning C4715: 'Gun::stringToGunSize' : les chemins de contrôle ne retournent pas tous une valeur
 C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Cannon.hpp(82): warning C4715: 'Gun::stringToGunType' : les chemins de contrôle ne retournent pas tous une valeur
 C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Cannon.hpp(97): warning C4715: 'Gun::sizeStringToInt' : les chemins de contrôle ne retournent pas tous une valeur
 C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Cannon.hpp(72): warning C4715: 'Gun::typeStringToInt' : les chemins de contrôle ne retournent pas tous une valeur
-LINK : warning LNK4098: conflit entre la bibliothèque par défaut 'MSVCRT' et les autres bibliothèques ; utilisez /NODEFAULTLIB:library
   Hoi Ultimate Bravery.vcxproj -> C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\x64\Debug\Hoi Ultimate Bravery.exe
