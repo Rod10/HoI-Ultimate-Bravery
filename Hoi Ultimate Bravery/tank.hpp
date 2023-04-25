@@ -13,9 +13,26 @@ struct Tank {
 		Last
 	};
 
-	Tank(Type type, Turret turret) : type(type), turret(turret){}
+	Tank(
+		Type type,
+		Turret turret,
+		Gun gun) :
+		type(type),
+		turret(turret),
+		gun(gun){}
+
 	Tank::Type type;
 	Turret turret;
+	Gun gun;
+
+	enum Modules {
+		Turret,
+		Gun,
+		Special,
+		Chassis,
+		Armor,
+		Engines
+	};
 
 	static std::string tankTypeToString(Tank::Type& type) {
 		switch (type) {

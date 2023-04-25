@@ -70,10 +70,14 @@ public:
         for (int gunCategoryInt = Gun::Category::Cannon; gunCategoryInt != Gun::Category::Last; gunCategoryInt++)
         {
             Gun::Category gunCategory = static_cast<Gun::Category>(gunCategoryInt);
+            auto catName = Gun::gunCategoryToString(gunCategory);
+            auto hash = Utils::hash(catName.c_str());
+            auto stringToShow = MyApp::getLocalizedString(hash);
             bool &windowOpen = gunCateogryWindowOpen.find(gunCategory)->second;
-            //ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
-            ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
-            ImGui::Begin("Gun Category", &mainWindowOpen, ImGuiWindowFlags_NoCollapse);
+            auto size = ImGui::CalcTextSize(stringToShow.c_str()).x;
+            ImGui::SetNextWindowPos(ImVec2(100.0f, 100.0f));
+            //ImGui::SetNextWindowSize(ImVec2(size * 2.5f, Gun::Category::Last * 25.0f));
+            ImGui::Begin("Gun Category", &mainWindowOpen, 7 | ImGuiWindowFlags_AlwaysAutoResize);
             ImGui::Checkbox(MyApp::getLocalizedString(Utils::hash(Gun::gunCategoryToString(gunCategory).c_str())).c_str(), &windowOpen);
             ImGui::End();
         }
@@ -81,14 +85,17 @@ public:
 
         for (auto& [key, val] : gunCateogryWindowOpen)
         {
+            ImGui::SetNextWindowPos(ImVec2(200.0f, 100.0f));
             if (val) {
                 for (Gun gun : gunList) {
                     if (gun.category == key) {
                         Gun::Category cat = static_cast<Gun::Category>(gun.category);
                         auto catName = Gun::gunCategoryToString(cat);
                         auto hash = Utils::hash(catName.c_str());
-                        auto stringToShow = MyApp::getLocalizedString(hash).c_str();
-                        ImGui::Begin(stringToShow, &val);
+                        auto stringToShow = MyApp::getLocalizedString(hash);
+                        std::cout << stringToShow.c_str() << std::endl;
+                        //ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
+                        ImGui::Begin(stringToShow.c_str(), &val);
                         ImGui::End();
                     }
                 }
