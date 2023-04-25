@@ -81,13 +81,13 @@
     <ClCompile Include="turret.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Cannon.cpp">
+    <ClCompile Include="gun.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Stats.cpp">
+    <ClCompile Include="stats.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Ressources.cpp">
+    <ClCompile Include="ressources.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Librairies\Soil\stb_image_aug.c">
@@ -161,13 +161,13 @@
     <ClInclude Include="turret.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Cannon.hpp">
+    <ClInclude Include="gun.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Stats.hpp">
+    <ClInclude Include="stats.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Ressources.hpp">
+    <ClInclude Include="ressources.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\Soil\stbi_DDS_aug.h">

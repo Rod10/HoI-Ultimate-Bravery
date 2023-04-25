@@ -144,7 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Cannon.cpp" />
+    <ClCompile Include="gun.cpp" />
     <ClCompile Include="Librairies\Implot\implot.cpp" />
     <ClCompile Include="Librairies\Implot\implot_demo.cpp" />
     <ClCompile Include="Librairies\Implot\implot_items.cpp" />
@@ -160,15 +160,15 @@
     <ClCompile Include="Librairies\Imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="Librairies\Imgui\imgui_tables.cpp" />
     <ClCompile Include="Librairies\Imgui\imgui_widgets.cpp" />
-    <ClCompile Include="Ressources.cpp" />
-    <ClCompile Include="Stats.cpp" />
+    <ClCompile Include="ressources.cpp" />
+    <ClCompile Include="stats.cpp" />
     <ClCompile Include="tank.cpp" />
     <ClCompile Include="turret.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app_base.hpp" />
-    <ClInclude Include="Cannon.hpp" />
+    <ClInclude Include="gun.hpp" />
     <ClInclude Include="Librairies\GLFW\glfw3.h" />
     <ClInclude Include="Librairies\GLFW\glfw3native.h" />
     <ClInclude Include="Librairies\Imgui\imconfig.h" />
@@ -190,8 +190,8 @@
     <ClInclude Include="Librairies\Soil\stbi_DDS_aug_c.h" />
     <ClInclude Include="Librairies\Soil\stb_image_aug.h" />
     <ClInclude Include="my_app.hpp" />
-    <ClInclude Include="Ressources.hpp" />
-    <ClInclude Include="Stats.hpp" />
+    <ClInclude Include="ressources.hpp" />
+    <ClInclude Include="stats.hpp" />
     <ClInclude Include="tank.hpp" />
     <ClInclude Include="turret.hpp" />
     <ClInclude Include="utils.hpp" />

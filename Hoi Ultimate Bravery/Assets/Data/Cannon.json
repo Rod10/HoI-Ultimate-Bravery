@@ -1,6 +1,6 @@
 {
     "cannon": {
-        "smallCanon": {
+        "smallCannon": {
             "size": "small",
             "type": {
                 "basic": {
@@ -46,7 +46,7 @@
                 "tank"
             ]
         },
-        "mediumCanon": {
+        "mediumCannon": {
             "size": "medium",
             "type": {
                 "basic": {
@@ -95,7 +95,7 @@
                 "tankDestroyer"
             ]
         },
-        "heavyCanon": {
+        "heavyCannon": {
             "size": "large",
             "type": {
                 "basic": {
@@ -156,7 +156,7 @@
                 "tankDestroyer"
             ]
         },
-        "superHeavyCanon": {
+        "superHeavyCannon": {
             "size": "bfg",
             "type": {
                 "basic": {
@@ -186,7 +186,6 @@
         }
     },
     "flamethrower": {
-        "name": "Flamethrower",
         "flamethrower": {
             "size": "small",
             "type": {
@@ -216,7 +215,6 @@
         }
     },
     "fastFiringAntiGround": {
-        "name": "Fast-Firing Anti-Ground",
         "hmg": {
             "size": "small",
             "type": {
@@ -244,7 +242,7 @@
                 "tank"
             ]
         },
-        "automaticCanon": {
+        "automaticCannon": {
             "size": "small",
             "type":{
                 "basic": {
@@ -292,7 +290,6 @@
         }
     },
     "antiTank": {
-        "name": "Anti-Tank",
         "highVelocitySmall": {
             "size": "small",
             "type": {
@@ -346,7 +343,7 @@
             ]
         },
         "highVelocityLarge": {
-            "size": "medium",
+            "size": "large",
             "type": {
                 "advanced": {
                     "technologies": ["antiTank"],
@@ -513,7 +510,6 @@
         }
     },
     "antiAir": {
-        "name": "Anti-Air",
         "antiAirSmall": {
             "size": "small",
             "type": {
@@ -557,7 +553,6 @@
             ]
         },
         "antiAirMedium": {
-            "size": "medium",
             "type": {
                 "advanced": {
                     "technologies": ["antiAir"],

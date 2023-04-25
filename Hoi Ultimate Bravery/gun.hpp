@@ -20,7 +20,7 @@ public:
 		Small,
 		Medium,
 		Large,
-		BFG,
+		BFG
 	};
 
 	enum Type {
@@ -29,17 +29,39 @@ public:
 		Advanced
 	};
 
+	enum Name {
+		SmallCannon,
+		MediumCannon,
+		HeavyCannon,
+		SuperHeavyCannon,
+		FT,
+		HMG,
+		AutomaticCannon,
+		HighVelocity,
+		CloseSupportGun,
+		MediumHowitzer,
+		RockectLauncher,
+		HeavyHowitzer,
+		AntiAirGun
+	};
+
+	Gun() {};
+
 	Gun(Gun::Category category,
+		Gun::Name name,
 		Gun::Size size,
 		std::map<Gun::Type, Stats> statsByType) :
 		category(category),
+		name(name),
 		size(size),
 		statsByType(statsByType){}
 
 	Gun(Gun::Category category,
+		Gun::Name name,
 		Gun::Size size,
 		Stats stats) :
 		category(category),
+		name(name),
 		size(size),
 		stats(stats){}
 
@@ -114,10 +136,74 @@ public:
 		}
 	}
 
+
+	static int stringNameToInt(std::string& name) {
+		if (name == "smallCannon") {
+			return 0;
+		}
+		else if (name == "mediumCannon") {
+			return 1;
+		}
+		else if (name == "heavyCannon") {
+			return 2;
+		}
+		else if (name == "superHeavyCannon") {
+			return 3;
+		}
+		else if (name == "flamethrower") {
+			return 4;
+		}
+		else if (name == "hmg") {
+			return 5;
+		}
+		else if (name == "automaticCannon") {
+			return 6;
+		}
+		else if (name == "highVelocitySmall" || name == "highVelocityMedium" || name == "highVelocityLarge") {
+			return 7;
+		}
+		else if (name == "closeSupportGun") {
+			return 8;
+		}
+		else if (name == "mediumHowitzer") {
+			return 9;
+		}
+		else if (name == "rocketLauncher") {
+			return 10;
+		}
+		else if (name == "heavyHowitzer") {
+			return 11;
+		}
+		else if (name == "antiAir") {
+			return 12;
+		}
+	}
+
+	static Gun::Name stringNameToGunName(std::string& name) {
+		switch (stringNameToInt(name))
+		{
+		default: break;		
+		case 0: return Gun::Name::SmallCannon;
+		case 1: return Gun::Name::MediumCannon;
+		case 2: return Gun::Name::HeavyCannon;
+		case 3: return Gun::Name::SuperHeavyCannon;
+		case 4: return Gun::Name::FT;
+		case 5: return Gun::Name::HMG;
+		case 6: return Gun::Name::AutomaticCannon;
+		case 7: return Gun::Name::HighVelocity;
+		case 8: return Gun::Name::CloseSupportGun;
+		case 9: return Gun::Name::MediumHowitzer;
+		case 10: return Gun::Name::RockectLauncher;
+		case 11: return Gun::Name::HeavyHowitzer;
+		case 12: return Gun::Name::AntiAirGun;
+		}
+	}
+
 	static std::vector<Gun> generateGunList();
 
 	Gun::Category category;
 	Gun::Size size;
+	Gun::Name name;
 	std::map<Type, Stats> statsByType;
 	Stats stats;
 	std::vector<std::string> roleAllowed;

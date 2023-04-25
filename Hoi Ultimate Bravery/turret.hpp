@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "Cannon.hpp"
+#include "gun.hpp"
 #include "Stats.hpp"
 
 class Turret
