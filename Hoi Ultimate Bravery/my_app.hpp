@@ -56,6 +56,11 @@ public:
             Gun::Category gunCategory = static_cast<Gun::Category>(gunCategoryInt);
             gunCateogryWindowOpen.insert(std::pair<Gun::Category, bool>(gunCategory, false));
         }
+
+        for (int gunNameInt = Gun::Name::SmallCannon; gunNameInt != Gun::Name::LastName; gunNameInt++) {
+            Gun::Name gunName = static_cast<Gun::Name>(gunNameInt);
+            gunNameWindowOpen.insert(std::pair<Gun::Name, bool>(gunName, false));
+        }
     }
 
     virtual void Update() final
@@ -76,29 +81,33 @@ public:
             bool &windowOpen = gunCateogryWindowOpen.find(gunCategory)->second;
             auto size = ImGui::CalcTextSize(stringToShow.c_str()).x;
             ImGui::SetNextWindowPos(ImVec2(100.0f, 100.0f));
-            //ImGui::SetNextWindowSize(ImVec2(size * 2.5f, Gun::Category::Last * 25.0f));
             ImGui::Begin("Gun Category", &mainWindowOpen, 7 | ImGuiWindowFlags_AlwaysAutoResize);
             ImGui::Checkbox(MyApp::getLocalizedString(Utils::hash(Gun::gunCategoryToString(gunCategory).c_str())).c_str(), &windowOpen);
             ImGui::End();
         }
         ImGui::End();
 
+        std::string stringToShow;
         for (auto& [key, val] : gunCateogryWindowOpen)
         {
-            ImGui::SetNextWindowPos(ImVec2(200.0f, 100.0f));
             if (val) {
-                for (Gun gun : gunList) {
+                auto& guns = gunList.find(key)->second;
+                auto catName = Gun::gunCategoryToString(key);
+                auto hash = Utils::hash(catName.c_str());
+                stringToShow = MyApp::getLocalizedString(hash);
+                ImGui::SetNextWindowPos(ImVec2(300.0f, 100.0f));
+                ImGui::Begin(stringToShow.c_str(), &val, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
+                createLabelWithPosition(stringToShow.c_str(), MIDDLE);
+                for (Gun gun : guns) {
                     if (gun.category == key) {
-                        Gun::Category cat = static_cast<Gun::Category>(gun.category);
-                        auto catName = Gun::gunCategoryToString(cat);
-                        auto hash = Utils::hash(catName.c_str());
-                        auto stringToShow = MyApp::getLocalizedString(hash);
-                        std::cout << stringToShow.c_str() << std::endl;
-                        //ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
-                        ImGui::Begin(stringToShow.c_str(), &val);
-                        ImGui::End();
+                        auto gunNameString = Gun::gunNameToString(gun.name);
+                        hash = Utils::hash(gunNameString.c_str());
+                        stringToShow = MyApp::getLocalizedString(hash);
+                        bool& windowOpen = gunNameWindowOpen.find(gun.name)->second;
+                        ImGui::Checkbox(stringToShow.c_str(), &windowOpen);
                     }
                 }
+                ImGui::End();
             }
         }
     }
@@ -106,8 +115,9 @@ public:
 private:
     bool mainWindowOpen = true;
     bool gunWindowCategoryOpen = true;
-    std::vector<Gun> gunList = Gun::generateGunList();
+    std::map<Gun::Category, std::vector<Gun>> gunList = Gun::generateGunList();
     std::map<Gun::Category, bool> gunCateogryWindowOpen;
+    std::map<Gun::Name, bool> gunNameWindowOpen;
     std::unordered_map<int, std::string> localizedStrings;
     enum Position {
         LEFT = 000,

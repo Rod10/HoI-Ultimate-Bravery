@@ -4,7 +4,7 @@
 
 #include "gun.hpp"
 
-std::vector<Gun> Gun::generateGunList()
+std::map<Gun::Category, std::vector<Gun>> Gun::generateGunList()
 {
     const std::string statsKey[13] = { "year", "speed", "reliability", "softAttack", "hardAttack", "piercing", "breakthrough", "airAttack", "productionCost", "armor", "defense", "entrenchment", "hardness" };
 
@@ -19,9 +19,11 @@ std::vector<Gun> Gun::generateGunList()
     Stats stats;
     Ressources gunRessources;
     std::vector<Gun> gunList;
+    std::map<Gun::Category, std::vector<Gun>> catList;
     std::map<Gun::Type, Stats> statsByType;
     Gun gun;
     for (int gunCategoryInt = Gun::Category::Cannon; gunCategoryInt != Gun::Category::Last; gunCategoryInt++) {
+        gunList.clear();
         gunCategory = static_cast<Gun::Category>(gunCategoryInt);
         const json gunCateData = GunData[Gun::gunCategoryToString(gunCategory)];
         for (auto& el : gunCateData.items()) {
@@ -55,6 +57,13 @@ std::vector<Gun> Gun::generateGunList()
             }
             gunList.push_back(Gun(gunCategory, gunName, gunSize, statsByType));
         }
+        catList.insert(std::pair<Gun::Category, std::vector<Gun>>(gunCategory, gunList));
     }
-    return gunList;
+    return catList;
+}
+
+std::string Gun::getLongestTextByCate(Gun::Category category)
+{
+    const std::string string[6] = { "superHeavyCannon", "flamethrowers", "fastFiringAntiGround", "highVelocityMedium" ,"closeSupportGun", "antiAirMedium" };
+    return string[category];
 }
