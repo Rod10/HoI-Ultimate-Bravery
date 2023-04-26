@@ -14,7 +14,6 @@ Turret Turret::generatingRandomTurret(int tankTypeInt)
     json data = json::parse(fT);
     fT.close();
     json turretJson = data[Turret::turretTypeToString(turretType)]["crew"];
-    std::cout << "Turret Type: " << Turret::turretTypeToString(turretType) << std::endl;
     std::vector<std::string> turretCrew;
     for (auto& el : turretJson.items()) {
         turretCrew.push_back(el.key().c_str());

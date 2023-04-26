@@ -7,6 +7,7 @@
 #include "stats.hpp"
 #include "utils.hpp"
 
+#include <algorithm>
 #include <chrono>
 #include <fstream>
 #include <iomanip>
@@ -61,6 +62,25 @@ public:
             Gun::Name gunName = static_cast<Gun::Name>(gunNameInt);
             gunNameWindowOpen.insert(std::pair<Gun::Name, bool>(gunName, false));
         }
+
+        srand(time(0));
+        Tank::Type tankType = static_cast<Tank::Type>(rand() % Tank::Type::Last);
+        std::cout << "Tank Type: " << Tank::tankTypeToString(tankType) << std::endl;
+        Turret turret = Turret::generatingRandomTurret(tankType);
+        std::cout << "Turret Type: " << Turret::turretTypeToString(turret.type) << std::endl;
+        std::vector<Gun> gunsCanBeUsed;        
+        for (auto& [key, val] : gunList) {
+            for (Gun gun : val) {
+                if (std::find(turret.allowedGun.begin(), turret.allowedGun.end(), gun.size) != turret.allowedGun.end()) {
+                    gunsCanBeUsed.push_back(gun);
+                }
+            }
+        }
+
+        Gun gun = *Utils::select_randomly(gunsCanBeUsed.begin(), gunsCanBeUsed.end());
+        gun.stats = Utils::select_randomly(gun.statsByType.begin(), gun.statsByType.end())->second;
+
+        Tank tank = Tank(tankType, turret, gun);
     }
 
     virtual void Update() final

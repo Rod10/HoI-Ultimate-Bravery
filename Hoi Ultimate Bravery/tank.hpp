@@ -1,6 +1,9 @@
 #pragma once
 #include <string>
 #include <vector>
+
+#include "gun.hpp"
+#include "special.hpp"
 #include "turret.hpp"
 
 struct Tank {
