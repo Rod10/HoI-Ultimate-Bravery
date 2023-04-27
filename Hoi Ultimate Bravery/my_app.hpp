@@ -86,7 +86,7 @@ public:
         gun.statsByType.clear();
 
         SpecialModule specialModules[4];
-        auto speModType = SpecialModule::Type;
+        //TODO get SpecialModuleType to remove limited module per vehicule
 
         std::ifstream fT("Assets/Data/Specials.json");
         json data = json::parse(fT);
