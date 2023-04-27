@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 
-#include "Stats.hpp"
+#include "stats.hpp"
 
 class Gun
 {

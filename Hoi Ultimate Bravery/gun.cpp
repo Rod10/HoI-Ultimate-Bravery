@@ -6,7 +6,7 @@
 
 std::map<Gun::Category, std::vector<Gun>> Gun::generateGunList()
 {
-    const std::string statsKey[13] = { "year", "speed", "reliability", "softAttack", "hardAttack", "piercing", "breakthrough", "airAttack", "productionCost", "armor", "defense", "entrenchment", "hardness" };
+    auto statsKey = Stats::getStatsKeyArray();
 
     Gun::Size gunSize = Gun::Size::Small;
     Gun::Category gunCategory;
@@ -40,7 +40,7 @@ std::map<Gun::Category, std::vector<Gun>> Gun::generateGunList()
                         gunStats = type.value();
                         for (auto& el : statsKey) {
                             if (gunStats[el].is_null()) {
-                                gunStats[el] = 0;
+                                gunStats[el] = 0.0f;
                             }
                         }
                         gunRessources = Ressources(gunStats["ressources"]);

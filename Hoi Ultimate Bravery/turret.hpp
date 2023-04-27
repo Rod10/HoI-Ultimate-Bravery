@@ -1,8 +1,9 @@
 #pragma once
 #include <string>
 #include <vector>
+
 #include "gun.hpp"
-#include "Stats.hpp"
+#include "stats.hpp"
 
 class Turret
 {

@@ -2,36 +2,51 @@
     "basicRadio": {
         "stats": {
             "year": 1936,
-            "breakthrough": "15%",
-            "defense": "+20%",
-            "productionCost": 0.50
+            "breakthroughP": 15.0,
+            "defenseO": 20.0,
+            "productionCost": 0.50,
+            "ressources": {
+                "steel": 0,
+                "tungsten": 0,
+                "chromium": 0
+            }
         }
     },
     "improvedRadio": {
         "stats": {
             "year": 1938,
-            "breakthrough": "25%",
-            "defense": "+40%",
-            "productionCost": 1.50
+            "breakthroughP": 25.0,
+            "defenseP": 40.0,
+            "productionCost": 1.50,
+            "ressources": {
+                "steel": 0,
+                "tungsten": 0,
+                "chromium": 0
+            }
         }
     },
     "advancedRadio": {
         "stats": {
             "year": 1940,
-            "breakthrough": "40%",
-            "defense": "+60%",
-            "productionCost": 2.50
+            "breakthroughP": 40.0,
+            "defenseP": 60.0,
+            "productionCost": 2.50,
+            "ressources": {
+                "steel": 0,
+                "tungsten": 0,
+                "chromium": 0
+            }
         }
     },
     "machineGuns": {
         "stats": {
             "year": 0,
             "softAttack": 1.0,
-            "piercing": 0,
-            "armor": 0,
-            "breakthrough": 0,
-            "defense": 2,
-            "entrenchment":0,
+            "piercing": 0.0,
+            "armor": 0.0,
+            "breakthrough": 0.0,
+            "defense": 2.0,
+            "entrenchment":0.0,
             "productionCost": 0.50,
             "ressources": {
                 "steel": 0,
@@ -43,14 +58,15 @@
     "amphibious": {
         "stats": {
             "year": 1941,
-            "reliability": "-15%",
+            "reliabilityP": -15.0,
             "softAttack": 0.0,
-            "piercing": 0,
-            "armor": 0,
-            "breakthrough": 0,
-            "defense": 0,
-            "entrenchment": 0,
-            "productionCost": "2+10%",
+            "piercing": 0.0,
+            "armor": 0.0,
+            "breakthrough": 0.0,
+            "defense": 0.0,
+            "entrenchment": 0.0,
+            "productionCost": 2.0,
+            "productionCostP": 10.0,
             "ressources": {
                 "steel": 0,
                 "tungsten": 0,
@@ -61,13 +77,13 @@
     "armorSkirts": {
         "stats": {
             "year": 1936,
-            "reliability": "-15%",
+            "reliabilityP": -15,
             "softAttack": 1.0,
-            "piercing": 0,
-            "armor": 2,
-            "breakthrough": 3,
-            "defense": 0,
-            "entrenchment":0,
+            "piercing": 0.0,
+            "armor": 2.0,
+            "breakthrough": 3.0,
+            "defense": 0.0,
+            "entrenchment":0.0,
             "productionCost": 0.50,
             "ressources": {
                 "steel": 0,
@@ -79,13 +95,13 @@
     "autoLoader": {
         "stats": {
             "year": 1943,
-            "reliability": "-15%",
+            "reliabilityP": -15,
             "softAttack": 1.0,
-            "piercing": 0,
-            "armor": 0,
-            "breakthrough": 4,
-            "defense": 4,
-            "entrenchment":0,
+            "piercing": 0.0,
+            "armor": 0.0,
+            "breakthrough": 4.0,
+            "defense": 4.0,
+            "entrenchment":0.0,
             "productionCost": 2.50,
             "ressources": {
                 "steel": 0,
@@ -97,13 +113,13 @@
     "dozerBlade": {
         "stats": {
             "year": 1939,
-            "reliability": "-15%",
+            "reliabilityP": -15,
             "softAttack": 1.0,
-            "piercing": 0,
-            "armor": 2,
-            "breakthrough": 3,
-            "defense": 0,
-            "entrenchment":1,
+            "piercing": 0.0,
+            "armor": 2.0,
+            "breakthrough": 3.0,
+            "defense": 0.0,
+            "entrenchment": 1.0,
             "productionCost": 1.0,
             "ressources": {
                 "steel": 0,
@@ -115,14 +131,14 @@
     "maintenance": {
         "stats": {
             "year": 1939,
-            "reliability": "10%",
+            "reliabilityP": 10.0,
             "softAttack": 0.0,
-            "piercing": 0,
-            "armor": 2,
-            "breakthrough": 3,
-            "defense": 0,
-            "entrenchment":0,
-            "productionCost": "-5.0%",
+            "piercing": 0.0,
+            "armor": 2.0,
+            "breakthrough": 3.0,
+            "defense": 0.0,
+            "entrenchment":0.0,
+            "productionCostP": -5.0,
             "ressources": {
                 "steel": 0,
                 "tungsten": 0,
@@ -133,13 +149,13 @@
     "extraAmmo": {
         "stats": {
             "year": 0,
-            "reliability": "-10%",
+            "reliabilityP": -10,
             "softAttack": 0.0,
-            "piercing": 0,
-            "armor": 0,
+            "piercing": 0.0,
+            "armor": 0.0,
             "breakthrough": 2.0,
             "defense": 4.0,
-            "entrenchment":0,
+            "entrenchment": 0.0,
             "productionCost": 0.00,
             "ressources": {
                 "steel": 0,
@@ -153,12 +169,12 @@
             "year": 0,
             "reliability": 0.0,
             "softAttack": 0.0,
-            "piercing": 0,
-            "armor": "25%",
-            "breakthrough": 0,
-            "defense": 0,
-            "entrenchment":0,
-            "productionCost": "10%",
+            "piercing": 0.0,
+            "armorP": 25.0,
+            "breakthrough": 0.0,
+            "defense": 0.0,
+            "entrenchment": 0.0,
+            "productionCost": 10.0,
             "ressources": {
                 "steel": 0,
                 "tungsten": 0,
@@ -172,10 +188,10 @@
             "reliability": 0.0,
             "softAttack": 0.0,
             "piercing": 0.0,
-            "armor": 0,
+            "armor": 0.0,
             "breakthrough": 1.0,
             "defense": 2.0,
-            "entrenchment":0,
+            "entrenchment": 0.0,
             "productionCost": 0.50,
             "ressources": {
                 "steel": 0,
@@ -189,11 +205,11 @@
             "year": 1939,
             "reliability": 0.0,
             "softAttack": 0.0,
-            "piercing": "10%",
-            "armor": 0,
-            "breakthrough": 0,
-            "defense": 0,
-            "entrenchment":0,
+            "piercingP": 10,
+            "armor": 0.0,
+            "breakthrough": 0.0,
+            "defense": 0.0,
+            "entrenchment": 0.0,
             "productionCost": 0.0,
             "ressources": {
                 "steel": 0,
@@ -207,11 +223,11 @@
             "year": 1940,
             "reliability": 0.0,
             "softAttack": 0.0,
-            "piercing": 0,
-            "armor": 0,
+            "piercing": 0.0,
+            "armor": 0.0,
             "breakthrough": 5.0,
-            "defense": 0,
-            "entrenchment":0,
+            "defense": 0.0,
+            "entrenchment": 0.0,
             "productionCost": 2.0,
             "ressources": {
                 "steel": 0,
@@ -223,14 +239,14 @@
     "wetAmmo": {
         "stats": {
             "year": 0,
-            "reliability": "15%",
+            "reliabilityP": 15,
             "softAttack": 0.0,
-            "piercing": 0,
-            "armor": 0,
-            "breakthrough": 0,
-            "defense": 0,
-            "entrenchment":0,
-            "productionCost": 1,
+            "piercing": 0.0,
+            "armor": 0.0,
+            "breakthrough": 0.0,
+            "defense": 0.0,
+            "entrenchment":0.0,
+            "productionCost": 1.0,
             "ressources": {
                 "steel": 0,
                 "tungsten": 0,

@@ -4,12 +4,12 @@
       "0": {
         "allowedGun": ["small", "medium"],
         "stats": {
-          "speed": 0,
-          "reliability": 20,
-          "softAttack": 0,
-          "hardAttack": 0,
-          "breakthrough": "-25%",
-          "defense": 3,
+          "speed": 0.0,
+          "reliabilityP": 20.0,
+          "softAttack": 0.0,
+          "hardAttack": 0.0,
+          "breakthroughP": -25.0,
+          "defense": 3.0,
           "productionCost": 0.75
         },
         "fordids": ["spAA"]
@@ -17,12 +17,12 @@
       "1": {
         "allowedGun": ["small"],
         "stats": {
-          "speed": 0,
-          "reliability": 0,
-          "softAttack": 0,
-          "hardAttack": 0,
-          "breakthrough": 7,
-          "defense": 0,
+          "speed": 0.0,
+          "reliability": 0.0,
+          "softAttack": 0.0,
+          "hardAttack": 0.0,
+          "breakthrough": 7.0,
+          "defense": 0.0,
           "productionCost": 0.50
         },
         "fordids": []
@@ -30,12 +30,12 @@
       "2": {
         "allowedGun": ["small"],
         "stats": {
-          "speed": 0,
-          "reliability": 0,
-          "softAttack": 0,
-          "hardAttack": 0,
-          "breakthrough": 10,
-          "defense": 0,
+          "speed": 0.0,
+          "reliability": 0.0,
+          "softAttack": 0.0,
+          "hardAttack": 0.0,
+          "breakthrough": 10.0,
+          "defense": 0.0,
           "productionCost": 0.75
         },
         "fordids": []
@@ -60,12 +60,12 @@
       "0": {
         "allowedGun": ["small", "medium", "large"],
         "stats": {
-          "speed": 0,
-          "reliability": 20,
-          "softAttack": 0,
-          "hardAttack": 0,
-          "breakthrough": "-25%",
-          "defense": 3,
+          "speed": 0.0,
+          "reliabilityP": 20.0,
+          "softAttack": 0.0,
+          "hardAttack": 0.0,
+          "breakthroughP": -25.0,
+          "defense": 3.0,
           "productionCost": 1.50
         },
         "fordids": ["spAA"]
@@ -73,25 +73,25 @@
       "1": {
         "allowedGun": ["small", "medium"],
         "stats": {
-          "speed": 0,
-          "reliability": 0,
-          "softAttack": "-25%",
-          "hardAttack": "-25%",
-          "breakthrough": 10,
-          "defense": 0,
-          "productionCost": 1
+          "speed": 0.0,
+          "reliability": 0.0,
+          "softAttackP": -25.0,
+          "hardAttackP": -25.0,
+          "breakthrough": 10.0,
+          "defense": 0.0,
+          "productionCost": 1.0
         },
         "fordids": []
       },
       "2": {
         "allowedGun": ["small", "medium"],
         "stats": {
-          "speed": 0,
-          "reliability": 0,
-          "softAttack": 0,
-          "hardAttack": 0,
-          "breakthrough": 16,
-          "defense": 0,
+          "speed": 0.0,
+          "reliability": 0.0,
+          "softAttack": 0.0,
+          "hardAttack": 0.0,
+          "breakthrough": 16.0,
+          "defense": 0.0,
           "productionCost": 1.50
         },
         "fordids": []
@@ -100,12 +100,12 @@
         "allowedGun": ["small", "medium"],
         "stats": {
           "speed": -0.25,
-          "reliability": 0,
-          "softAttack": 0,
-          "hardAttack": 0,
-          "breakthrough": 20,
-          "defense": 0,
-          "productionCost": 2
+          "reliability": 0.0,
+          "softAttack": 0.0,
+          "hardAttack": 0.0,
+          "breakthroughP": 20.0,
+          "defense": 0.0,
+          "productionCost": 2.0
         },
         "fordids": []
       }
@@ -116,26 +116,26 @@
       "0": {
         "allowedGun": ["small", "medium", "large", "bfg"],
         "stats": {
-          "speed": 0,
-          "reliability": 20,
-          "softAttack": 0,
-          "hardAttack": 0,
-          "breakthrough": "-25%",
-          "defense": 3,
-          "productionCost": 5
+          "speed": 0.0,
+          "reliabilityP": 20.0,
+          "softAttack": 0.0,
+          "hardAttack": 0.0,
+          "breakthroughP": -25,
+          "defense": 3.0,
+          "productionCost": 5.0
         },
         "fordids": ["spAA"]
       },
       "2": {
         "allowedGun": ["small", "medium"," large"],
         "stats": {
-          "speed": 0,
-          "reliability": 0,
-          "softAttack": 0,
-          "hardAttack": 0,
-          "breakthrough": 18,
-          "defense": 0,
-          "productionCost": 5
+          "speed": 0.0,
+          "reliability": 0.0,
+          "softAttack": 0.0,
+          "hardAttack": 0.0,
+          "breakthrough": 18.0,
+          "defense": 0.0,
+          "productionCost": 5.0
         },
         "fordids": []
       },
@@ -143,11 +143,11 @@
         "allowedGun": ["small", "medium"," large"],
         "stats": {
           "speed": -0.25,
-          "reliability": 0,
-          "softAttack": 0,
-          "hardAttack": 0,
-          "breakthrough": 22,
-          "defense": 0,
+          "reliability": 0.0,
+          "softAttack": 0.0,
+          "hardAttack": 0.0,
+          "breakthrough": 22.0,
+          "defense": 0.0,
           "productionCost": 5.50
         },
         "fordids": []
@@ -160,11 +160,11 @@
         "allowedGun": ["small", "medium"," large", "bfg"],
         "stats": {
           "speed": -0.2,
-          "reliability": "-10%",
-          "softAttack": 0,
-          "hardAttack": "-10%",
-          "breakthrough": 24,
-          "defense": 0,
+          "reliabilityP": -10.0,
+          "softAttack": 0.0,
+          "hardAttackP": -10.0,
+          "breakthrough": 24.0,
+          "defense": 0.0,
           "productionCost": 10.00
         },
         "fordids": []
@@ -173,11 +173,11 @@
         "allowedGun": ["small", "medium"," large", "bfg"],
         "stats": {
           "speed": -0.5,
-          "reliability": "-25%",
-          "softAttack": 0,
-          "hardAttack": 0,
-          "breakthrough": 35,
-          "defense": 0,
+          "reliabilityP": -25.0,
+          "softAttack": 0.0,
+          "hardAttack": 0.0,
+          "breakthrough": 35.0,
+          "defense": 0.0,
           "productionCost": 12.00
         },
         "fordids": []
@@ -189,13 +189,13 @@
       "0": {
         "allowedGun": ["small", "medium", "large"],
         "stats": {
-          "speed": 0,
-          "reliability": 0,
-          "softAttack": 0,
-          "hardAttack": 0,
-          "breakthrough": 24,
-          "defense": 0,
-          "productionCost": 8
+          "speed": 0.0,
+          "reliability": 0.0,
+          "softAttack": 0.0,
+          "hardAttack": 0.0,
+          "breakthrough": 24.0,
+          "defense": 0.0,
+          "productionCost": 8.0
         }
       }
     }

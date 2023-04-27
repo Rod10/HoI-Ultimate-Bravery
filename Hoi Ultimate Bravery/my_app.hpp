@@ -9,6 +9,7 @@
 #include "utils.hpp"
 
 #include <algorithm>
+#include <array>
 #include <chrono>
 #include <fstream>
 #include <iomanip>
@@ -32,6 +33,8 @@ public:
 
     virtual void StartUp() final
     {
+        auto statsKey = Stats::getStatsKeyArray();
+
         std::ifstream infile("Assets/Data/Langages/en-en.csv");
         std::string line;
         std::vector<std::vector<std::string>> content;
@@ -83,23 +86,30 @@ public:
         gun.statsByType.clear();
 
         SpecialModule specialModules[4];
+        auto speModType = SpecialModule::Type;
 
+        std::ifstream fT("Assets/Data/Specials.json");
+        json data = json::parse(fT);
+        fT.close();
+
+        bool hasAlreadyARadio = false;
         for (auto& specialModule : specialModules) {
             specialModule.type = static_cast<SpecialModule::Type>(rand() % SpecialModule::Type::Last);
-            std::cout << specialModule.type << std::endl;
-
-            const std::string statsKey[13] = { "year", "speed", "reliability", "softAttack", "hardAttack", "piercing", "breakthrough", "airAttack", "productionCost", "armor", "defense", "entrenchment", "hardness" };
-            json specialModuleStats;
-            for (std::string el: statsKey) {
-                for (auto& el : statsKey) {
-                    if (specialModuleStats[el].is_null()) {
-                        specialModuleStats[el] = 0;
-                    }
-                }
-                Ressources ressources = Ressources(specialModuleStats["ressources"]);
-                Stats stats = Stats(ressources, specialModuleStats);
-                specialModule.stats = stats;
+            std::string specialModuleName = specialModule.typeToString(specialModule.type);
+            if (specialModule.type == SpecialModule::Type::BasicRadio ||
+                specialModule.type == SpecialModule::Type::ImprovedRadio ||
+                specialModule.type == SpecialModule::Type::AdvancedRadio) {
+                hasAlreadyARadio = true;
             }
+            json moduleData = data[specialModuleName];
+            json moduleStats = moduleData["stats"];
+            for (auto& el : statsKey) {
+                if (moduleStats[el].is_null()) {
+                    moduleStats[el] = 0.0f;
+                }
+            }
+            Ressources moduleRessources = Ressources(moduleStats["ressources"]);
+            specialModule.stats = Stats(moduleRessources, moduleStats);
         }
 
         Tank tank = Tank(tankType, turret, gun, specialModules);
