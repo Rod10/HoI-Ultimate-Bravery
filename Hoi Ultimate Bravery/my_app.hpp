@@ -2,9 +2,10 @@
 
 #include "gun.hpp"
 #include "ressources.hpp"
+#include "special.hpp"
+#include "stats.hpp"
 #include "tank.hpp"
 #include "turret.hpp"
-#include "stats.hpp"
 #include "utils.hpp"
 
 #include <algorithm>
@@ -79,8 +80,29 @@ public:
 
         Gun gun = *Utils::select_randomly(gunsCanBeUsed.begin(), gunsCanBeUsed.end());
         gun.stats = Utils::select_randomly(gun.statsByType.begin(), gun.statsByType.end())->second;
+        gun.statsByType.clear();
 
-        Tank tank = Tank(tankType, turret, gun);
+        SpecialModule specialModules[4];
+
+        for (auto& specialModule : specialModules) {
+            specialModule.type = static_cast<SpecialModule::Type>(rand() % SpecialModule::Type::Last);
+            std::cout << specialModule.type << std::endl;
+
+            const std::string statsKey[13] = { "year", "speed", "reliability", "softAttack", "hardAttack", "piercing", "breakthrough", "airAttack", "productionCost", "armor", "defense", "entrenchment", "hardness" };
+            json specialModuleStats;
+            for (std::string el: statsKey) {
+                for (auto& el : statsKey) {
+                    if (specialModuleStats[el].is_null()) {
+                        specialModuleStats[el] = 0;
+                    }
+                }
+                Ressources ressources = Ressources(specialModuleStats["ressources"]);
+                Stats stats = Stats(ressources, specialModuleStats);
+                specialModule.stats = stats;
+            }
+        }
+
+        Tank tank = Tank(tankType, turret, gun, specialModules);
     }
 
     virtual void Update() final

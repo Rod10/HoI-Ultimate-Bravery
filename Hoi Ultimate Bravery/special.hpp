@@ -2,7 +2,7 @@
 #include "stats.hpp"
 
 class SpecialModule {
-public: 
+public:
 	enum Type {
 		BasicRadio,
 		ImprovedRadio,
@@ -19,7 +19,16 @@ public:
 		Adaptor,
 		Stabilizer,
 		WetAmmo,
+		Last,
 	};
+
+	SpecialModule() {}
+	SpecialModule(
+		SpecialModule::Type type,
+		Stats stats) :
+		type(type),
+		stats(stats) {}
+
 
 	static std::string typeToString(Type& type) {
 		switch (type) {
@@ -81,5 +90,4 @@ public:
 
 	Type type;
 	Stats stats;
-	std::string name;
 };

@@ -19,14 +19,17 @@ struct Tank {
 	Tank(
 		Type type,
 		Turret turret,
-		Gun gun) :
+		Gun gun,
+		SpecialModule specialModules[4]) :
 		type(type),
 		turret(turret),
-		gun(gun){}
+		gun(gun),
+		specialModules(){}
 
 	Tank::Type type;
 	Turret turret;
 	Gun gun;
+	SpecialModule specialModules[4];
 
 	enum Modules {
 		Turret,
