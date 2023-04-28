@@ -163,6 +163,7 @@
     <ClCompile Include="ressources.cpp" />
     <ClCompile Include="special.cpp" />
     <ClCompile Include="stats.cpp" />
+    <ClCompile Include="suspension.cpp" />
     <ClCompile Include="tank.cpp" />
     <ClCompile Include="turret.cpp" />
     <ClCompile Include="utils.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="ressources.hpp" />
     <ClInclude Include="special.hpp" />
     <ClInclude Include="stats.hpp" />
+    <ClInclude Include="suspension.hpp" />
     <ClInclude Include="tank.hpp" />
     <ClInclude Include="turret.hpp" />
     <ClInclude Include="utils.hpp" />

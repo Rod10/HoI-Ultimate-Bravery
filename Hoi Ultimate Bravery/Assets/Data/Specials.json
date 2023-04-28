@@ -1,5 +1,6 @@
 {
     "basicRadio": {
+        "onlyOne": true,
         "stats": {
             "year": 1936,
             "breakthroughP": 15.0,
@@ -13,6 +14,7 @@
         }
     },
     "improvedRadio": {
+        "onlyOne": true,
         "stats": {
             "year": 1938,
             "breakthroughP": 25.0,
@@ -26,6 +28,7 @@
         }
     },
     "advancedRadio": {
+        "onlyOne": true,
         "stats": {
             "year": 1940,
             "breakthroughP": 40.0,
@@ -39,6 +42,7 @@
         }
     },
     "machineGuns": {
+        "onlyOne": true,
         "stats": {
             "year": 0,
             "softAttack": 1.0,
@@ -56,6 +60,7 @@
         }
     },
     "amphibious": {
+        "onlyOne": true,
         "stats": {
             "year": 1941,
             "reliabilityP": -15.0,
@@ -75,6 +80,7 @@
         }
     },
     "armorSkirts": {
+        "onlyOne": true,
         "stats": {
             "year": 1936,
             "reliabilityP": -15,
@@ -93,6 +99,7 @@
         }
     },
     "autoLoader": {
+        "onlyOne": true,
         "stats": {
             "year": 1943,
             "reliabilityP": -15,
@@ -111,6 +118,7 @@
         }
     },
     "dozerBlade": {
+        "onlyOne": true,
         "stats": {
             "year": 1939,
             "reliabilityP": -15,
@@ -129,6 +137,7 @@
         }
     },
     "maintenance": {
+        "onlyOne": true,
         "stats": {
             "year": 1939,
             "reliabilityP": 10.0,
@@ -147,6 +156,7 @@
         }
     },
     "extraAmmo": {
+        "onlyOne": true,
         "stats": {
             "year": 0,
             "reliabilityP": -10,
@@ -165,6 +175,7 @@
         }
     },
     "sloppedArmor": {
+        "onlyOne": true,
         "stats": {
             "year": 0,
             "reliability": 0.0,
@@ -183,6 +194,7 @@
         }
     },
     "smokeLauncher": {
+        "onlyOne": true,
         "stats": {
             "year": 0,
             "reliability": 0.0,
@@ -201,6 +213,7 @@
         }
     },
     "adaptor": {
+        "onlyOne": true,
         "stats": {
             "year": 1939,
             "reliability": 0.0,
@@ -219,6 +232,7 @@
         }
     },
     "stabilizer": {
+        "onlyOne": true,
         "stats": {
             "year": 1940,
             "reliability": 0.0,
@@ -237,6 +251,7 @@
         }
     },
     "wetAmmo": {
+        "onlyOne": true,
         "stats": {
             "year": 0,
             "reliabilityP": 15,

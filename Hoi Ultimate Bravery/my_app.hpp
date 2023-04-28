@@ -4,6 +4,7 @@
 #include "ressources.hpp"
 #include "special.hpp"
 #include "stats.hpp"
+#include "suspension.hpp"
 #include "tank.hpp"
 #include "turret.hpp"
 #include "utils.hpp"
@@ -70,8 +71,29 @@ public:
         srand(time(0));
         Tank::Type tankType = static_cast<Tank::Type>(rand() % Tank::Type::Last);
         std::cout << "Tank Type: " << Tank::tankTypeToString(tankType) << std::endl;
+
+        std::ifstream f("Assets/Data/Tank.json");
+        json tankData = json::parse(f)[Tank::tankTypeToString(tankType)];
+        f.close();
+
+        std::vector<std::string> tankKey;
+        for (auto& el : tankData.items()) {
+            tankKey.push_back(el.key());
+        }
+        Tank::Version tankVersion = static_cast<Tank::Version>(rand() % (tankKey.size() + 1));
+        std::string tankVersionString = Tank::tankVersionToString(tankVersion);
+        json tankStatsData = tankData[tankVersionString]["stats"];
+        for (auto& el : statsKey) {
+            if (tankStatsData[el].is_null()) {
+                tankStatsData[el] = 0.0f;
+            }
+        }
+        Ressources ressources = tankStatsData["ressources"];
+        Stats tankStats = Stats(ressources, tankStatsData);
+
         Turret turret = Turret::generatingRandomTurret(tankType);
         std::cout << "Turret Type: " << Turret::turretTypeToString(turret.type) << std::endl;
+
         std::vector<Gun> gunsCanBeUsed;        
         for (auto& [key, val] : gunList) {
             for (Gun gun : val) {
@@ -80,13 +102,30 @@ public:
                 }
             }
         }
-
         Gun gun = *Utils::select_randomly(gunsCanBeUsed.begin(), gunsCanBeUsed.end());
         gun.stats = Utils::select_randomly(gun.statsByType.begin(), gun.statsByType.end())->second;
         gun.statsByType.clear();
 
         SpecialModule specialModules[4];
-        //TODO get SpecialModuleType to remove limited module per vehicule
+       
+        std::vector<SpecialModule::Type> specialModuleType = {
+            SpecialModule::Type::BasicRadio,
+            SpecialModule::Type::ImprovedRadio,
+            SpecialModule::Type::AdvancedRadio,
+            SpecialModule::Type::MachineGuns,
+            SpecialModule::Type::Amphibious,
+            SpecialModule::Type::ArmorSkirts,
+            SpecialModule::Type::AutoLoader,
+            SpecialModule::Type::DozerBlade,
+            SpecialModule::Type::Maintenance,
+            SpecialModule::Type::ExtraAmmo,
+            SpecialModule::Type::SloppedArmor,
+            SpecialModule::Type::SmokeLauncher,
+            SpecialModule::Type::Adaptor,
+            SpecialModule::Type::Stabilizer,
+            SpecialModule::Type::WetAmmo,
+            SpecialModule::Type::Last
+        };
 
         std::ifstream fT("Assets/Data/Specials.json");
         json data = json::parse(fT);
@@ -96,12 +135,12 @@ public:
         for (auto& specialModule : specialModules) {
             specialModule.type = static_cast<SpecialModule::Type>(rand() % SpecialModule::Type::Last);
             std::string specialModuleName = specialModule.typeToString(specialModule.type);
-            if (specialModule.type == SpecialModule::Type::BasicRadio ||
-                specialModule.type == SpecialModule::Type::ImprovedRadio ||
-                specialModule.type == SpecialModule::Type::AdvancedRadio) {
-                hasAlreadyARadio = true;
-            }
             json moduleData = data[specialModuleName];
+            if (moduleData["onlyOne"] == true) {
+                auto it = find(specialModuleType.begin(), specialModuleType.end(), specialModule.type);
+                int index = it - specialModuleType.begin();
+                specialModuleType.erase(specialModuleType.begin() + index);
+            }
             json moduleStats = moduleData["stats"];
             for (auto& el : statsKey) {
                 if (moduleStats[el].is_null()) {
@@ -112,7 +151,24 @@ public:
             specialModule.stats = Stats(moduleRessources, moduleStats);
         }
 
-        Tank tank = Tank(tankType, turret, gun, specialModules);
+        Suspension::Type suspensionType = static_cast<Suspension::Type>(rand() % Suspension::Type::Last);
+        std::string suspensionTypeString = Suspension::typeToString(suspensionType);
+
+        std::ifstream fs("Assets/Data/Suspensions.json");
+        json suspensionData = json::parse(fs);
+        fs.close();
+
+        json suspensionDataStats = suspensionData[suspensionTypeString]["stats"];
+        for (auto& el : statsKey) {
+            if (suspensionDataStats[el].is_null()) {
+                suspensionDataStats[el] = 0.0f;
+            }
+        }
+        Ressources moduleRessources;
+        Stats stats = Stats(moduleRessources, suspensionDataStats);
+
+        Suspension suspension = Suspension(suspensionType, stats);
+        Tank tank = Tank(tankType, tankVersion, turret, gun, specialModules, suspension, tankStats);
     }
 
     virtual void Update() final

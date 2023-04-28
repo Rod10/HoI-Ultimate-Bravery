@@ -1,0 +1,62 @@
+{
+    "bogie": {
+        "stats": {
+            "year": 0,
+            "speedP": 0.0,
+            "reliability": 0.0,
+            "hardness": 0.0,
+            "breakthrough": 0.0,
+            "productionCost": 0.0
+        }
+    },
+    "christie": {
+        "stats": {
+            "year": 0,
+            "speedP": 20.0,
+            "reliability": 0.0,
+            "hardness": 0.0,
+            "breakthrough": 0.0,
+            "productionCost": 1.0
+        }
+    },
+    "interleaved": {
+        "stats": {
+            "year": 0,
+            "speedP": 0.0,
+            "reliability": 0.0,
+            "hardness": 0.0,
+            "breakthrough": 4.0,
+            "productionCost": 2.0
+        }
+    },
+    "torsion": {
+        "stats": {
+            "year": 0,
+            "speedP": 0.0,
+            "reliabilityP": 15.0,
+            "hardness": 0.0,
+            "breakthrough": 0.0,
+            "productionCost": 1.0
+        }
+    },
+    "halfTrack": {
+        "stats": {
+            "year": 1940,
+            "speedP": 0.0,
+            "reliabilityP": -10.0,
+            "hardness": -20.0,
+            "breakthrough": 0.0,
+            "productionCostP": -5.0
+        }
+    },
+    "wheeled": {
+        "stats": {
+            "year": 1936,
+            "speedP": 0.0,
+            "reliabilityP": -20.0,
+            "hardnessP": -30.0,
+            "breakthrough": 0.0,
+            "productionCostP": -10.0
+        }
+    }
+}

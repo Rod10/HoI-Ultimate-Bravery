@@ -4,6 +4,7 @@
 
 #include "gun.hpp"
 #include "special.hpp"
+#include "suspension.hpp"
 #include "turret.hpp"
 
 struct Tank {
@@ -16,20 +17,37 @@ struct Tank {
 		Last
 	};
 
+	enum Version {
+		InterWar,
+		Basic,
+		Improved,
+		Advanced,
+		VLast
+	};
+
 	Tank(
 		Type type,
+		Version version,
 		Turret turret,
 		Gun gun,
-		SpecialModule specialModules[4]) :
+		SpecialModule specialModules[4],
+		Suspension suspension,
+		Stats stats) :
 		type(type),
+		version(version),
 		turret(turret),
 		gun(gun),
-		specialModules(){}
+		specialModules(),
+		suspension(suspension),
+		stats(stats){}
 
 	Tank::Type type;
+	Tank::Version version;
 	Turret turret;
 	Gun gun;
 	SpecialModule specialModules[4];
+	Suspension suspension;
+	Stats stats;
 
 	enum Modules {
 		Turret,
@@ -50,6 +68,16 @@ struct Tank {
 		case Tank::Type::Modern: return "modern";
 		}
 	};
+
+	static std::string tankVersionToString(Tank::Version& version) {
+		switch (version) {
+		default: return "INVALID VERSION";
+		case Tank::Version::InterWar: return "interWar";
+		case Tank::Version::Basic: return "basic";
+		case Tank::Version::Improved: return "improved";
+		case Tank::Version::Advanced: return "advanced";
+		}
+	}
 
 	static Tank::Type intToTankType(int type) {
 		switch (type) {
