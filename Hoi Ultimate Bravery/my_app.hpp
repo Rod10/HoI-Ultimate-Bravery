@@ -151,6 +151,8 @@ public:
             specialModule.stats = Stats(moduleRessources, moduleStats);
         }
 
+
+        //TODO restrict suspension type
         Suspension::Type suspensionType = static_cast<Suspension::Type>(rand() % Suspension::Type::Last);
         std::string suspensionTypeString = Suspension::typeToString(suspensionType);
 
