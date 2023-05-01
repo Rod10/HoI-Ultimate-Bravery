@@ -144,7 +144,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="armor.cpp" />
+    <ClCompile Include="engine.cpp" />
     <ClCompile Include="gun.cpp" />
+    <ClCompile Include="gunsize.cpp" />
     <ClCompile Include="Librairies\Implot\implot.cpp" />
     <ClCompile Include="Librairies\Implot\implot_demo.cpp" />
     <ClCompile Include="Librairies\Implot\implot_items.cpp" />
@@ -165,12 +168,17 @@
     <ClCompile Include="stats.cpp" />
     <ClCompile Include="suspension.cpp" />
     <ClCompile Include="tank.cpp" />
+    <ClCompile Include="tanktype.cpp" />
     <ClCompile Include="turret.cpp" />
+    <ClCompile Include="turrettype.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app_base.hpp" />
+    <ClInclude Include="armor.hpp" />
+    <ClInclude Include="engine.hpp" />
     <ClInclude Include="gun.hpp" />
+    <ClInclude Include="gunsize.hpp" />
     <ClInclude Include="Librairies\GLFW\glfw3.h" />
     <ClInclude Include="Librairies\GLFW\glfw3native.h" />
     <ClInclude Include="Librairies\Imgui\imconfig.h" />
@@ -197,7 +205,9 @@
     <ClInclude Include="stats.hpp" />
     <ClInclude Include="suspension.hpp" />
     <ClInclude Include="tank.hpp" />
+    <ClInclude Include="tanktype.hpp" />
     <ClInclude Include="turret.hpp" />
+    <ClInclude Include="turrettype.hpp" />
     <ClInclude Include="utils.hpp" />
   </ItemGroup>
   <ItemGroup>

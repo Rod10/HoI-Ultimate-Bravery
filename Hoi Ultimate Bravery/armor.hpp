@@ -1,0 +1,40 @@
+#pragma once
+#include "ressources.hpp"
+#include "stats.hpp"
+#include "utils.hpp"
+
+#include <fstream>
+#include <iostream>
+#include <string>
+class Armor {
+public: 
+	enum Type {
+		Cast,
+		Riveted,
+		Welded,
+		Last
+	};
+	
+	Armor();
+	Armor(
+		Type type,
+		Stats stats
+	) : 
+		type(type),
+		stats(stats) {}
+
+	static std::string typeToString(Type type) {
+		switch (type) {
+		default: return "INVALID TYPE";
+		case Cast: return "cast";
+		case Riveted: return "riveted";
+		case Welded: return "welded";
+		}
+	}
+
+	static Armor generateRandomArmor();
+
+	Type type;
+	Stats stats;
+};
+

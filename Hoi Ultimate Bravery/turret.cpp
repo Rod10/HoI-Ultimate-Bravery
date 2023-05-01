@@ -1,28 +1,23 @@
-#include <fstream>
-#include <iostream>
-
-#include "utils.hpp"
-#include "tank.hpp"
 #include "turret.hpp"
 
 Turret Turret::generatingRandomTurret(int tankTypeInt)
 {
-    Tank::Type tankType = Tank::intToTankType(tankTypeInt);
-    std::vector<Turret::Type> turretAllowed = Tank::getAllowedTurret(tankType);
-    Turret::Type turretType = *Utils::select_randomly(turretAllowed.begin(), turretAllowed.end());
+    TankType::Type tankType = TankType::intToTankType(tankTypeInt);
+    std::vector<TurretType::Type> turretAllowed = TurretType::getAllowedTurret(tankType);
+    TurretType::Type turretType = *Utils::select_randomly(turretAllowed.begin(), turretAllowed.end());
     std::ifstream fT("Assets/Data/Turret.json");
     json data = json::parse(fT);
     fT.close();
-    json turretJson = data[Turret::turretTypeToString(turretType)]["crew"];
+    json turretJson = data[TurretType::turretTypeToString(turretType)]["crew"];
     std::vector<std::string> turretCrew;
     for (auto& el : turretJson.items()) {
         turretCrew.push_back(el.key().c_str());
     }
     std::string crew = *Utils::select_randomly(turretCrew.begin(), turretCrew.end());
     json turretData = turretJson[crew];
-    std::vector<Gun::Size> allowedGun;
+    std::vector<GunSize::Size> allowedGun;
     for (auto& el : turretData["allowedGun"].items()) {
-        allowedGun.push_back(static_cast<Gun::Size>(std::stoi(el.key())));
+        allowedGun.push_back(static_cast<GunSize::Size>(std::stoi(el.key())));
     }
 
     //Turret Stats

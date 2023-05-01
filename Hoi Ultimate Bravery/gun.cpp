@@ -1,14 +1,10 @@
-#include <fstream>
-#include <iomanip>
-#include <iostream>
-
 #include "gun.hpp"
 
 std::map<Gun::Category, std::vector<Gun>> Gun::generateGunList()
 {
     auto statsKey = Stats::getStatsKeyArray();
 
-    Gun::Size gunSize = Gun::Size::Small;
+    GunSize::Size gunSize = GunSize::Size::Small;
     Gun::Category gunCategory;
     Gun::Name gunName;
     std::vector<std::string> roleAllowed;
@@ -60,6 +56,23 @@ std::map<Gun::Category, std::vector<Gun>> Gun::generateGunList()
         catList.insert(std::pair<Gun::Category, std::vector<Gun>>(gunCategory, gunList));
     }
     return catList;
+}
+
+Gun Gun::generateRandomGun(std::vector<GunSize::Size> allowedGun)
+{
+    auto gunList = Gun::generateGunList();
+    std::vector<Gun> gunsCanBeUsed;
+    for (auto& [key, val] : gunList) {
+        for (Gun gun : val) {
+            if (std::find(allowedGun.begin(), allowedGun.end(), gun.size) != allowedGun.end()) {
+                gunsCanBeUsed.push_back(gun);
+            }
+        }
+    }
+    Gun gun = *Utils::select_randomly(gunsCanBeUsed.begin(), gunsCanBeUsed.end());
+    gun.stats = Utils::select_randomly(gun.statsByType.begin(), gun.statsByType.end())->second;
+    gun.statsByType.clear();
+    return gun;
 }
 
 std::string Gun::getLongestTextByCate(Gun::Category category)

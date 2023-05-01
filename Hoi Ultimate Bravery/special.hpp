@@ -1,5 +1,12 @@
 #pragma once
 #include "stats.hpp"
+#include "utils.hpp"
+
+#include <algorithm>
+#include <array>
+#include <fstream>
+#include <json.hpp>
+#include <string>
 
 class SpecialModule {
 public:
@@ -19,12 +26,13 @@ public:
 		Adaptor,
 		Stabilizer,
 		WetAmmo,
+		FuelDrum,
 		Last,
 	};
 
 	SpecialModule() {}
 	SpecialModule(
-		SpecialModule::Type type,
+		Type type,
 		Stats stats) :
 		type(type),
 		stats(stats) {}
@@ -47,6 +55,7 @@ public:
 		case Adaptor: return "adaptor";
 		case Stabilizer: return "stabilizer";
 		case WetAmmo: return "wetAmmo";
+		case FuelDrum: return "fuelDrum";
 		}
 	}
 
@@ -66,6 +75,7 @@ public:
 		else if (type == "adaptor") return 12;
 		else if (type == "stabilizer") return 13;
 		else if (type == "wetAmmo") return 14;
+		else if (type == "fuelDrum") return 15;
 	}
 
 	static Type stringTypeToType(std::string& type) {
@@ -85,8 +95,11 @@ public:
 		case 12: return Adaptor;
 		case 13: return Stabilizer;
 		case 14: return WetAmmo;
+		case 15: return FuelDrum;
 		}
 	}
+
+	static std::array<SpecialModule, 4> generateSpecialModule();
 
 	Type type;
 	Stats stats;

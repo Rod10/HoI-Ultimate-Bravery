@@ -1,12 +1,13 @@
 #include "app_base.hpp"
 
+#include "armor.hpp"
 #include "gun.hpp"
-#include "ressources.hpp"
 #include "special.hpp"
-#include "stats.hpp"
 #include "suspension.hpp"
 #include "tank.hpp"
+#include "tanktype.hpp"
 #include "turret.hpp"
+#include "turrettype.hpp"
 #include "utils.hpp"
 
 #include <algorithm>
@@ -23,6 +24,7 @@
 #include <sstream>
 #include <string>
 #include <time.h>
+#include "engine.hpp"
 using json = nlohmann::json;
 
 class MyApp : public AppBase
@@ -68,163 +70,156 @@ public:
             gunNameWindowOpen.insert(std::pair<Gun::Name, bool>(gunName, false));
         }
 
-        srand(time(0));
-        Tank::Type tankType = static_cast<Tank::Type>(rand() % Tank::Type::Last);
+        /*srand(time(0));
+        TankType::Type tankType = static_cast<TankType::Type>(rand() % TankType::Type::Last);
         std::cout << "Tank Type: " << Tank::tankTypeToString(tankType) << std::endl;
 
-        std::ifstream f("Assets/Data/Tank.json");
-        json tankData = json::parse(f)[Tank::tankTypeToString(tankType)];
-        f.close();
-
-        std::vector<std::string> tankKey;
-        for (auto& el : tankData.items()) {
-            tankKey.push_back(el.key());
-        }
-        Tank::Version tankVersion = static_cast<Tank::Version>(rand() % (tankKey.size() + 1));
-        std::string tankVersionString = Tank::tankVersionToString(tankVersion);
-        json tankStatsData = tankData[tankVersionString]["stats"];
-        for (auto& el : statsKey) {
-            if (tankStatsData[el].is_null()) {
-                tankStatsData[el] = 0.0f;
-            }
-        }
-        Ressources ressources = tankStatsData["ressources"];
-        Stats tankStats = Stats(ressources, tankStatsData);
+        Tank::Version tankVersion = Tank::generatingRandomVersion(tankType);
+        Stats tankStats = Tank::getStatsFromVersion(tankType, tankVersion);
 
         Turret turret = Turret::generatingRandomTurret(tankType);
-        std::cout << "Turret Type: " << Turret::turretTypeToString(turret.type) << std::endl;
+        std::cout << "Turret Type: " << TurretType::turretTypeToString(turret.type) << std::endl;
 
-        std::vector<Gun> gunsCanBeUsed;        
-        for (auto& [key, val] : gunList) {
-            for (Gun gun : val) {
-                if (std::find(turret.allowedGun.begin(), turret.allowedGun.end(), gun.size) != turret.allowedGun.end()) {
-                    gunsCanBeUsed.push_back(gun);
-                }
-            }
-        }
-        Gun gun = *Utils::select_randomly(gunsCanBeUsed.begin(), gunsCanBeUsed.end());
-        gun.stats = Utils::select_randomly(gun.statsByType.begin(), gun.statsByType.end())->second;
-        gun.statsByType.clear();
+        Gun gun = Gun::generateRandomGun(turret.allowedGun);
 
-        SpecialModule specialModules[4];
-       
-        std::vector<SpecialModule::Type> specialModuleType = {
-            SpecialModule::Type::BasicRadio,
-            SpecialModule::Type::ImprovedRadio,
-            SpecialModule::Type::AdvancedRadio,
-            SpecialModule::Type::MachineGuns,
-            SpecialModule::Type::Amphibious,
-            SpecialModule::Type::ArmorSkirts,
-            SpecialModule::Type::AutoLoader,
-            SpecialModule::Type::DozerBlade,
-            SpecialModule::Type::Maintenance,
-            SpecialModule::Type::ExtraAmmo,
-            SpecialModule::Type::SloppedArmor,
-            SpecialModule::Type::SmokeLauncher,
-            SpecialModule::Type::Adaptor,
-            SpecialModule::Type::Stabilizer,
-            SpecialModule::Type::WetAmmo,
-            SpecialModule::Type::Last
-        };
+        std::array<SpecialModule, 4> specialModules = SpecialModule::generateSpecialModule();
 
-        std::ifstream fT("Assets/Data/Specials.json");
-        json data = json::parse(fT);
-        fT.close();
+        Suspension suspension = Suspension::generateRandomSuspension(tankType);
 
-        bool hasAlreadyARadio = false;
-        for (auto& specialModule : specialModules) {
-            specialModule.type = static_cast<SpecialModule::Type>(rand() % SpecialModule::Type::Last);
-            std::string specialModuleName = specialModule.typeToString(specialModule.type);
-            json moduleData = data[specialModuleName];
-            if (moduleData["onlyOne"] == true) {
-                auto it = find(specialModuleType.begin(), specialModuleType.end(), specialModule.type);
-                int index = it - specialModuleType.begin();
-                specialModuleType.erase(specialModuleType.begin() + index);
-            }
-            json moduleStats = moduleData["stats"];
-            for (auto& el : statsKey) {
-                if (moduleStats[el].is_null()) {
-                    moduleStats[el] = 0.0f;
-                }
-            }
-            Ressources moduleRessources = Ressources(moduleStats["ressources"]);
-            specialModule.stats = Stats(moduleRessources, moduleStats);
-        }
-
-
-        //TODO restrict suspension type
-        Suspension::Type suspensionType = static_cast<Suspension::Type>(rand() % Suspension::Type::Last);
-        std::string suspensionTypeString = Suspension::typeToString(suspensionType);
-
-        std::ifstream fs("Assets/Data/Suspensions.json");
-        json suspensionData = json::parse(fs);
-        fs.close();
-
-        json suspensionDataStats = suspensionData[suspensionTypeString]["stats"];
-        for (auto& el : statsKey) {
-            if (suspensionDataStats[el].is_null()) {
-                suspensionDataStats[el] = 0.0f;
-            }
-        }
-        Ressources moduleRessources;
-        Stats stats = Stats(moduleRessources, suspensionDataStats);
-
-        Suspension suspension = Suspension(suspensionType, stats);
-        Tank tank = Tank(tankType, tankVersion, turret, gun, specialModules, suspension, tankStats);
+        Armor armor = Armor::generateRandomArmor();
+        Engine engine = Engine::generateRandomEngine();
+        Tank tank = Tank(tankType, tankVersion, turret, gun, specialModules, suspension, armor, tankStats);*/
     }
 
     virtual void Update() final
     {
+        ImGuiIO& io = ImGui::GetIO();
+        ImFont* basicFont = io.Fonts->Fonts[0];
+        ImFont* titleFont = io.Fonts->Fonts[1];
         ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
         ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
+        ImGui::PushFont(titleFont);
+        ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(59, 65, 57, 255));
+        ImGui::PushStyleColor(ImGuiCol_WindowBg, backgroundColor);
         ImGui::Begin("Main Window", &mainWindowOpen, 7 | ImGuiWindowFlags_NoInputs); // Create a window called "Hello, world!" and append into it.
-        ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 255, 0, 255));
         createLabelWithPosition("HoI Ultimate Bravery", MIDDLE);
         ImGui::PopStyleColor();
+        ImGui::PopStyleColor();
+        ImGui::PopFont();
 
-        for (int gunCategoryInt = Gun::Category::Cannon; gunCategoryInt != Gun::Category::Last; gunCategoryInt++)
-        {
-            Gun::Category gunCategory = static_cast<Gun::Category>(gunCategoryInt);
-            auto catName = Gun::gunCategoryToString(gunCategory);
-            auto hash = Utils::hash(catName.c_str());
-            auto stringToShow = MyApp::getLocalizedString(hash);
-            bool &windowOpen = gunCateogryWindowOpen.find(gunCategory)->second;
-            auto size = ImGui::CalcTextSize(stringToShow.c_str()).x;
-            ImGui::SetNextWindowPos(ImVec2(100.0f, 100.0f));
-            ImGui::Begin("Gun Category", &mainWindowOpen, 7 | ImGuiWindowFlags_AlwaysAutoResize);
-            ImGui::Checkbox(MyApp::getLocalizedString(Utils::hash(Gun::gunCategoryToString(gunCategory).c_str())).c_str(), &windowOpen);
+        auto off = calculatePos(MIDDLE, "generate");
+
+        // Main Menu Block
+        if (mainMenuOpen) {
+            ImGui::SetNextWindowPos(ImVec2(off, 200.0f));
+            ImGui::PushStyleColor(ImGuiCol_WindowBg, windowColor);
+            ImGui::Begin("generate", &mainMenuOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
+            ImGui::PopStyleColor();
+            ImGui::PushFont(basicFont);
+            ImGui::PushStyleColor(ImGuiCol_Button, buttonColor);
+            if (createButtonlWithPosition("Generate", MIDDLE)) {
+                mainMenuOpen = false;
+                generateWindowOpen = true;
+            }
+            if (createButtonlWithPosition("Option", MIDDLE)) {
+                mainMenuOpen = false;
+                optionWindowOpen = true;
+            }
+            if (createButtonlWithPosition("Quit", MIDDLE)) {
+                exit(1);
+            }
+            ImGui::PopStyleColor();
+            ImGui::PopFont();
             ImGui::End();
         }
-        ImGui::End();
+        // Main Menu Block
 
-        std::string stringToShow;
-        for (auto& [key, val] : gunCateogryWindowOpen)
-        {
-            if (val) {
-                auto& guns = gunList.find(key)->second;
-                auto catName = Gun::gunCategoryToString(key);
-                auto hash = Utils::hash(catName.c_str());
-                stringToShow = MyApp::getLocalizedString(hash);
-                ImGui::SetNextWindowPos(ImVec2(300.0f, 100.0f));
-                ImGui::Begin(stringToShow.c_str(), &val, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
-                createLabelWithPosition(stringToShow.c_str(), MIDDLE);
-                for (Gun gun : guns) {
-                    if (gun.category == key) {
-                        auto gunNameString = Gun::gunNameToString(gun.name);
-                        hash = Utils::hash(gunNameString.c_str());
-                        stringToShow = MyApp::getLocalizedString(hash);
-                        bool& windowOpen = gunNameWindowOpen.find(gun.name)->second;
-                        ImGui::Checkbox(stringToShow.c_str(), &windowOpen);
-                    }
-                }
-                ImGui::End();
+        // Generate Menu
+        if (generateWindowOpen) {
+            auto off = calculatePos(MIDDLE, "Tank: Light Medium Heavy Super Heavy Modern");
+            ImGui::SetNextWindowPos(ImVec2(off, 200.0f));
+            ImGui::PushStyleColor(ImGuiCol_WindowBg, windowColor);
+            ImGui::Begin("generate", &generateWindowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
+            ImGui::PopStyleColor();
+            createLabelWithPosition("Generate", MIDDLE);
+            createLabelWithPosition("Tank: ", LEFT);
+            ImGui::PushStyleColor(ImGuiCol_Button, buttonColor);
+            ImGuiStyle& style = ImGui::GetStyle();
+            float width = 0.0f;
+            width += ImGui::CalcTextSize("Tank: ").x;
+            width += style.ItemSpacing.x;
+            width += ImGui::CalcTextSize("Light").x;
+            width += style.ItemSpacing.x;
+            width += ImGui::CalcTextSize("Medium").x;
+            width += style.ItemSpacing.x;
+            width += ImGui::CalcTextSize("Heavy").x;
+            width += style.ItemSpacing.x;
+            width += ImGui::CalcTextSize("Super Heavy").x;
+            width += style.ItemSpacing.x;
+            width += ImGui::CalcTextSize("Modern").x;
+            AlignForWidth(width);
+            ImGui::SameLine();
+            if (ImGui::Button("Light")) {
+                lightWindowOpen = true;
+                generateWindowOpen = false;
             }
+            ImGui::SameLine();
+            ImGui::Button("Medium"); // Fixed size
+            ImGui::SameLine();
+            ImGui::Button("Heavy");
+            ImGui::SameLine();
+            ImGui::Button("Super Heavy");
+            ImGui::SameLine();
+            ImGui::Button("Modern");
+            createButtonlWithPosition("Full Random", MIDDLE);
+
+            if (createButtonlWithPosition("Back", MIDDLE)) {
+                mainMenuOpen = true;
+                generateWindowOpen = false;
+            }
+            ImGui::PopStyleColor();
+            ImGui::End();
         }
+        // Generate Menu
+
+        //light Tank
+        if (lightWindowOpen) {
+            int my_image_width = 0;
+            int my_image_height = 0;
+            GLuint my_image_texture = 0;
+            auto fileName = std::format("./Assets/Images/tank_designer_bg.png");
+            bool ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+            IM_ASSERT(ret);
+            auto off = calculatePos(MIDDLE, my_image_width);
+            ImGui::SetNextWindowPos(ImVec2(off, 200.0f));
+            ImGui::Begin("Light", &lightWindowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
+            ImGui::PushFont(titleFont);
+            ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
+            ImGui::PopStyleColor();
+            ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
+            ImGui::SetCursorPosY(ImGui::GetCursorPosY() - my_image_height + 10.0f);
+            createLabelWithPosition("Equipment Designer", MIDDLE);
+            ImGui::SetCursorPosY(ImGui::GetContentRegionAvail().x - my_image_height + 15.0f);
+            ImGui::PopFont();
+
+            if (createButtonlWithPosition("Back", MIDDLE)) {
+                generateWindowOpen = true;
+                lightWindowOpen = false;
+            }
+            ImGui::End();
+        }
+        //light Tank
+
+        ImGui::End();
     }
 
 private:
     bool mainWindowOpen = true;
-    bool gunWindowCategoryOpen = true;
+    bool mainMenuOpen = true;
+    bool generateWindowOpen = false;
+    bool optionWindowOpen = false;
+    bool lightWindowOpen = false;
+
     std::map<Gun::Category, std::vector<Gun>> gunList = Gun::generateGunList();
     std::map<Gun::Category, bool> gunCateogryWindowOpen;
     std::map<Gun::Name, bool> gunNameWindowOpen;
@@ -234,6 +229,10 @@ private:
         MIDDLE = 500,
         RIGHT = 1000,
     };
+
+    ImVec4 backgroundColor = ImVec4(0.831f, 0.902f, 0.945f, 1.00f);
+    ImVec4 windowColor = ImVec4(0.149f, 0.137f, 0.125f, 1.00f);
+    ImVec4 buttonColor = ImVec4(0.231f, 0.255f, 0.224f, 1.00f);
 
     void createLabelWithPosition(const char* label, Position position)
     {
@@ -249,7 +248,64 @@ private:
         return ImGui::Text(label);
     }
 
+    void createLabelWithPosition(const char* label, Position position, ImGuiInputTextFlags_ flag)
+    {
+        ImGuiStyle& style = ImGui::GetStyle();
+
+        float size = ImGui::CalcTextSize(label).x + style.FramePadding.x * 2.0f;
+        float avail = ImGui::GetContentRegionAvail().x;
+
+        float off = (avail - size) * (position / 1000.f);
+        if (off > 0.0f)
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
+
+        return ImGui::Text(label, flag);
+    }
+
+    bool createButtonlWithPosition(const char* label, Position position)
+    {
+        ImGuiStyle& style = ImGui::GetStyle();
+
+        float size = ImGui::CalcTextSize(label).x + style.FramePadding.x * 2.0f;
+        float avail = ImGui::GetContentRegionAvail().x;
+
+        float off = (avail - size) * (position / 1000.f);
+        if (off > 0.0f)
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
+
+        return ImGui::Button(label);
+    }
+
+    float calculatePos(Position position, std::string text) {
+        ImGuiStyle& style = ImGui::GetStyle();
+
+        float size = ImGui::CalcTextSize(text.c_str()).x - style.FramePadding.x * 2.0f;
+        float avail = ImGui::GetContentRegionAvail().x;
+
+        float off = (avail - size) * (position / 1000.f);
+        return off;
+    }
+
+    float calculatePos(Position position, int width) {
+        ImGuiStyle& style = ImGui::GetStyle();
+
+        float size = width - style.FramePadding.x * 2.0f;
+        float avail = ImGui::GetContentRegionAvail().x;
+
+        float off = (avail - size) * (position / 1000.f);
+        return off;
+    }
+
     std::string getLocalizedString(int id) {
         return localizedStrings[id];
+    }
+
+    void AlignForWidth(float width, float alignment = 0.5f)
+    {
+        ImGuiStyle& style = ImGui::GetStyle();
+        float avail = ImGui::GetContentRegionAvail().x;
+        float off = (avail - width) * alignment;
+        if (off > 0.0f)
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
     }
 };

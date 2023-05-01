@@ -268,5 +268,12 @@
                 "chromium": 0
             }
         }
+    },
+    "fuelDrum": {
+        "stats": {
+            "speed": -0.25,
+            "fuelCapacity": 100.0,
+            "productionCost": 1.0
+        }
     }
 }

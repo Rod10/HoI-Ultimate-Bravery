@@ -1,5 +1,8 @@
 #pragma once
 #include "stats.hpp"
+#include "tanktype.hpp"
+
+#include <fstream>
 
 class Suspension{
 public:
@@ -32,6 +35,8 @@ public:
 		case Wheeled: return "wheeled";
 		}
 	}
+
+	static Suspension generateRandomSuspension(TankType::Type type);
 
 	Type type;
 	Stats stats;

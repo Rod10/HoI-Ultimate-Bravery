@@ -1,7 +1,12 @@
 #pragma once
-#include <iostream>
-
+#include "gunsize.hpp"
 #include "stats.hpp"
+#include "turret.hpp"
+#include "utils.hpp"
+
+#include <fstream>
+#include <iomanip>
+#include <iostream>
 
 class Gun
 {
@@ -14,13 +19,6 @@ public:
 		AntiInfantry,
 		AntiAir,
 		Last
-	};
-
-	enum Size {
-		Small,
-		Medium,
-		Large,
-		BFG
 	};
 
 	enum Type {
@@ -53,7 +51,7 @@ public:
 
 	Gun(Gun::Category category,
 		Gun::Name name,
-		Gun::Size size,
+		GunSize::Size size,
 		std::map<Gun::Type, Stats> statsByType) :
 		category(category),
 		name(name),
@@ -62,7 +60,7 @@ public:
 
 	Gun(Gun::Category category,
 		Gun::Name name,
-		Gun::Size size,
+		GunSize::Size size,
 		Stats stats) :
 		category(category),
 		name(name),
@@ -93,14 +91,14 @@ public:
 		}
 	}
 
-	static std::string gunSizeToString(Gun::Size& size) {
+	static std::string gunSizeToString(GunSize::Size& size) {
 		switch (size)
 		{
 		default: return "INVALID SIZE";
-		case Gun::Size::Small: return "small";
-		case Gun::Size::Medium: return "medium";
-		case Gun::Size::Large: return "large";
-		case Gun::Size::BFG: return "bfg";
+		case GunSize::Size::Small: return "small";
+		case GunSize::Size::Medium: return "medium";
+		case GunSize::Size::Large: return "large";
+		case GunSize::Size::BFG: return "bfg";
 		}
 	}
 
@@ -113,6 +111,16 @@ public:
 		}
 		else if (type == "advanced") {
 			return 2;
+		}
+	}
+
+	static std::string typeToString(Type& type) {
+		switch (type)
+		{
+		default: return "INVALID TYPE";
+		case Basic: return "basic";
+		case Improved: return "improved";
+		case Advanced: return "advanced";
 		}
 	}
 
@@ -141,14 +149,14 @@ public:
 		}
 	}
 
-	static Gun::Size stringToGunSize(std::string& size) {
+	static GunSize::Size stringToGunSize(std::string& size) {
 		switch (sizeStringToInt(size))
 		{
 		default: break;
-		case 0: return Gun::Size::Small;
-		case 1: return Gun::Size::Medium;
-		case 2: return Gun::Size::Large;
-		case 3: return Gun::Size::BFG;
+		case 0: return GunSize::Size::Small;
+		case 1: return GunSize::Size::Medium;
+		case 2: return GunSize::Size::Large;
+		case 3: return GunSize::Size::BFG;
 		}
 	}
 
@@ -251,13 +259,13 @@ public:
 	}
 
 	static std::map<Gun::Category, std::vector<Gun>> generateGunList();
+	static Gun generateRandomGun(std::vector<GunSize::Size> turret);
 	static std::string getLongestTextByCate(Gun::Category category);
 
 	Gun::Category category;
-	Gun::Size size;
+	GunSize::Size size;
 	Gun::Name name;
 	std::map<Type, Stats> statsByType;
 	Stats stats;
 	std::vector<std::string> roleAllowed;
 };
-

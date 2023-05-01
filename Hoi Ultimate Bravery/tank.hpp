@@ -1,22 +1,20 @@
 #pragma once
-#include <string>
-#include <vector>
-
+#include "armor.hpp"
 #include "gun.hpp"
 #include "special.hpp"
 #include "suspension.hpp"
+#include "tanktype.hpp"
 #include "turret.hpp"
+#include "turrettype.hpp"
 
-struct Tank {
-	enum Type {
-		Light,
-		Medium,
-		Heavy,
-		SuperHeavy,
-		Modern,
-		Last
-	};
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <vector>
 
+class Tank {
+public:
 	enum Version {
 		InterWar,
 		Basic,
@@ -25,32 +23,41 @@ struct Tank {
 		VLast
 	};
 
+	Tank();
 	Tank(
-		Type type,
+		TankType::Type type,
 		Version version,
 		Turret turret,
 		Gun gun,
-		SpecialModule specialModules[4],
+		std::array<SpecialModule, 4> specialModules,
 		Suspension suspension,
+		Armor armor,
 		Stats stats) :
 		type(type),
 		version(version),
 		turret(turret),
 		gun(gun),
-		specialModules(),
+		specialModules(specialModules),
 		suspension(suspension),
-		stats(stats){}
+		armor(armor),
+		stats(stats) {
+		engineLevel = rand() % 20;
+		armorLevel = rand() % 20;
+	}
 
-	Tank::Type type;
+	TankType::Type type;
 	Tank::Version version;
 	Turret turret;
 	Gun gun;
-	SpecialModule specialModules[4];
+	std::array<SpecialModule, 4> specialModules;
 	Suspension suspension;
+	Armor armor;
 	Stats stats;
+	int engineLevel;
+	int armorLevel;
 
 	enum Modules {
-		Turret,
+		Turret, 
 		Gun,
 		Special,
 		Chassis,
@@ -58,14 +65,14 @@ struct Tank {
 		Engines
 	};
 
-	static std::string tankTypeToString(Tank::Type& type) {
+	static std::string tankTypeToString(TankType::Type& type) {
 		switch (type) {
 		default: return "INVALID TYPE";
-		case Tank::Type::Light: return "light";
-		case Tank::Type::Medium: return "medium";
-		case Tank::Type::Heavy: return "heavy";
-		case Tank::Type::SuperHeavy: return "superHeavy";
-		case Tank::Type::Modern: return "modern";
+		case TankType::Type::Light: return "light";
+		case TankType::Type::Medium: return "medium";
+		case TankType::Type::Heavy: return "heavy";
+		case TankType::Type::SuperHeavy: return "superHeavy";
+		case TankType::Type::Modern: return "modern";
 		}
 	};
 
@@ -78,45 +85,23 @@ struct Tank {
 		case Tank::Version::Advanced: return "advanced";
 		}
 	}
-
-	static Tank::Type intToTankType(int type) {
-		switch (type) {
-		default: break;
-		case 0: return Tank::Type::Light;
-		case 1: return Tank::Type::Medium;
-		case 2: return Tank::Type::Heavy;
-		case 3: return Tank::Type::SuperHeavy;
-		case 4: return Tank::Type::Modern;
-		}
-	};
-	 
-	static std::vector<Turret::Type> getAllowedTurret(Tank::Type& type) {
-		std::vector<Turret::Type> allowedTurret;
-		switch (type) {
-		case Tank::Type::Light:
-			allowedTurret.push_back(Turret::Type::Light);
-			break;
-		case Tank::Type::Medium:
-			allowedTurret.push_back(Turret::Type::Light);
-			allowedTurret.push_back(Turret::Type::Medium);
-			break;
-		case Tank::Type::Heavy:
-			allowedTurret.push_back(Turret::Type::Light);
-			allowedTurret.push_back(Turret::Type::Medium);
-			allowedTurret.push_back(Turret::Type::Large);
-			break;
-		case Tank::Type::SuperHeavy:
-			allowedTurret.push_back(Turret::Type::Light);
-			allowedTurret.push_back(Turret::Type::Medium);
-			allowedTurret.push_back(Turret::Type::Large);
-			allowedTurret.push_back(Turret::Type::SuperHeavy);
-			break;
-		case Tank::Type::Modern:
-			allowedTurret.push_back(Turret::Type::Light);
-			allowedTurret.push_back(Turret::Type::Medium);
-			allowedTurret.push_back(Turret::Type::Large);
-			break;
-		}
-		return allowedTurret;
+	
+	static int tankVersionStringToInt(std::string version) {
+		if (version == "interWar") return 0;
+		else if (version == "basic") return 1;
+		else if (version == "improved") return 2;
+		else if (version == "advanced") return 3;
 	}
+
+	static Tank::Version tankVersionStringToVersion(std::string& version) {
+		switch (tankVersionStringToInt(version)) {
+		case 0: return Tank::Version::InterWar;
+		case 1: return Tank::Version::Basic;
+		case 2: return Tank::Version::Improved;
+		case 3: return Tank::Version::Advanced;
+		}
+	}
+
+	static Tank::Version generatingRandomVersion(TankType::Type type);
+	static Stats getStatsFromVersion(TankType::Type type, Tank::Version version);
 };

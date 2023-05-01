@@ -1,0 +1,56 @@
+{
+    "diesel": {
+        "stats": {
+            "speed": 0.0,
+            "speedP": 0.0,
+            "reliabilityP": 25.0,
+            "breakthrough": 0.0,
+            "breakthroughP": 0.0,
+            "defense": 0.0,
+            "defenseP": 0.0,
+            "fuelUsage": 2.0,
+            "productionCost": 1.0,
+            "productionCostP": 0.0
+        }
+    },
+    "gas": {
+        "stats": {
+            "speed": 0.5,
+            "speedP": 25.0,
+            "reliabilityP": -10.0,
+            "breakthrough": 0.0,
+            "defense": 0.0,
+            "defenseP": 0.0,
+            "fuelUsage": 4.0,
+            "productionCost": 3.0,
+            "productionCostP": 0.0
+        }
+    },
+    "gasoline": {
+        "stats": {
+            "speed": 0.5,
+            "speedP": 15.0,
+            "reliabilityP": 0.0,
+            "breakthrough": 0.0,
+            "defense": 0.0,
+            "defenseP": 0.0,
+            "fuelUsage": 2.0,
+            "productionCost": 1.0,
+            "productionCostP": 0.0
+        }
+    },
+    "petrolElectric": {
+        "stats": {
+            "speed": 0.0,
+            "speedP": 0.0,
+            "reliabilityP": -50.0,
+            "breakthrough": 2.0,
+            "breakthroughP": 15.0,
+            "defense": 2.0,
+            "defenseP": 15.0,
+            "fuelUsage": 2.0,
+            "productionCost": 2.0,
+            "productionCostP": 15.0
+        }
+    }
+}

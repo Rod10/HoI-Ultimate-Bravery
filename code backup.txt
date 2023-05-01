@@ -1,0 +1,52 @@
+        for (int gunCategoryInt = Gun::Category::Cannon; gunCategoryInt != Gun::Category::Last; gunCategoryInt++)
+        {
+            Gun::Category gunCategory = static_cast<Gun::Category>(gunCategoryInt);
+            auto catName = Gun::gunCategoryToString(gunCategory);
+            auto hash = Utils::hash(catName.c_str());
+            auto stringToShow = MyApp::getLocalizedString(hash);
+            bool &windowOpen = gunCateogryWindowOpen.find(gunCategory)->second;
+            auto size = ImGui::CalcTextSize(stringToShow.c_str()).x;
+            ImGui::SetNextWindowPos(ImVec2(100.0f, 100.0f));
+            ImGui::Begin("Gun Category", &mainWindowOpen, 7 | ImGuiWindowFlags_AlwaysAutoResize);
+            ImGui::Checkbox(MyApp::getLocalizedString(Utils::hash(Gun::gunCategoryToString(gunCategory).c_str())).c_str(), &windowOpen);
+            ImGui::End();
+        }
+        ImGui::End();
+
+        std::string stringToShow;
+        for (auto& [key, val] : gunCateogryWindowOpen)
+        {
+            if (val) {
+                auto& guns = gunList.find(key)->second;
+                auto catName = Gun::gunCategoryToString(key);
+                auto hash = Utils::hash(catName.c_str());
+                stringToShow = MyApp::getLocalizedString(hash);
+                ImGui::SetNextWindowPos(ImVec2(300.0f, 100.0f));
+                ImGui::Begin(stringToShow.c_str(), &val, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
+                createLabelWithPosition(stringToShow.c_str(), MIDDLE);
+                for (Gun gun : guns) {
+                    if (gun.category == key) {
+                        auto gunNameString = Gun::gunNameToString(gun.name);
+                        hash = Utils::hash(gunNameString.c_str());
+                        stringToShow = MyApp::getLocalizedString(hash);
+                        bool& windowOpen = gunNameWindowOpen.find(gun.name)->second;
+                        ImGui::Checkbox(stringToShow.c_str(), &windowOpen);
+                        if (windowOpen) {
+                            ImGui::Begin(stringToShow.c_str(), &windowOpen);
+                            createLabelWithPosition(stringToShow.c_str(), MIDDLE);
+                            for (std::pair<Gun::Type, Stats> type : gun.statsByType) {
+                                int my_image_width = 0;
+                                int my_image_height = 0;
+                                GLuint my_image_texture = 0;
+                                auto fileName = std::format("./Assets/Images/Cannon/{0}_{1}.png", Gun::gunNameToString(gun.name), Gun::typeToString(type.first));
+                                bool ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+                                IM_ASSERT(ret);
+                                ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
+                            }
+                            ImGui::End();
+                        }
+                    }
+                }
+                ImGui::End();
+            }
+        }

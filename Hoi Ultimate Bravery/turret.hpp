@@ -1,44 +1,30 @@
 #pragma once
+//#include "gun.hpp"
+#include "gunsize.hpp"
+#include "stats.hpp"
+#include "tanktype.hpp"
+#include "turrettype.hpp"
+#include "utils.hpp"
+
+#include <fstream>
+#include <iostream>
 #include <string>
 #include <vector>
-
-#include "gun.hpp"
-#include "stats.hpp"
 
 class Turret
 {
 public :
-	enum Type {
-		Light,
-		Medium,
-		Large,
-		SuperHeavy,
-		Modern,
-		Last
-	};
-
-	Turret(Turret::Type type, int crew, std::vector<Gun::Size> allowedGun, Stats stats) :
+		Turret(TurretType::Type type, int crew, std::vector<GunSize::Size> allowedGun, Stats stats) :
 		type(type),
 		crew(crew),
 		allowedGun(allowedGun),
 		stats(stats) {}
 
-	static std::string turretTypeToString(Turret::Type& type) {
-		switch (type) {
-		default: return "INVALID TYPE";
-		case Turret::Type::Light: return "light";
-		case Turret::Type::Medium: return "medium";
-		case Turret::Type::Large: return "large";
-		case Turret::Type::SuperHeavy: return "superHeavy";
-		case Turret::Type::Modern: return "modern";
-		}
-	};
-
     static Turret generatingRandomTurret(int tankType);
 
-	Turret::Type type;
+	TurretType::Type type;
 	int crew;
-	std::vector<Gun::Size> allowedGun;
+	std::vector<GunSize::Size> allowedGun;
 	Stats stats;
 };
 

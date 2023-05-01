@@ -182,8 +182,8 @@ public:
         // - Read 'docs/FONTS.md' for more instructions and details.
         // - Remember that in C/C++ if you want to include a backslash \ in a string literal you need to write a double
         // backslash \\ !
-        // io.Fonts->AddFontDefault();
-        // io.Fonts->AddFontFromFileTTF("../../../imgui/misc/fonts/Roboto-Medium.ttf", 18.0f);
+        io.Fonts->AddFontDefault();
+        io.Fonts->AddFontFromFileTTF("./Assets/Fonts/Freshman.ttf", 18.0f);
         // io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
         // io.Fonts->AddFontFromFileTTF("../../misc/fonts/DroidSans.ttf", 16.0f);
         // io.Fonts->AddFontFromFileTTF("../../misc/fonts/ProggyTiny.ttf", 10.0f);
@@ -245,5 +245,5 @@ public:
 
 private:
     GLFWwindow* window = nullptr;
-    ImVec4 clear_color = ImVec4(0.1058, 0.1137f, 0.1255f, 1.00f);
+    ImVec4 clear_color = ImVec4(0.831f, 0.902f, 0.945f, 1.00f);
 };

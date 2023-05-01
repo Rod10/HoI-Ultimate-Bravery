@@ -36,10 +36,14 @@ public:
 		entrenchment(data["entrenchment"]),
 		entrenchmentP(data["entrenchmentP"]),
 		hardness(data["hardness"]),
-		hardnessP(data["hardnessP"])
+		hardnessP(data["hardnessP"]),
+		fuelUsage(data["fuelUsage"]),
+		fuelUsageP(data["fuelUsageP"]),
+		fuelCapacity(data["fuelCapacity"]),
+		fuelCapacityP(data["fuelCapacityP"])
 	{};
 
-	static std::array<std::string, 25> getStatsKeyArray();
+	static std::array<std::string, 29> getStatsKeyArray();
 
 	int year;
 	float speed;
@@ -66,5 +70,9 @@ public:
 	float entrenchmentP;
 	float hardness;
 	float hardnessP;
+	float fuelUsage;
+	float fuelUsageP;
+	float fuelCapacity;
+	float fuelCapacityP;
 	Ressources ressources;
 };

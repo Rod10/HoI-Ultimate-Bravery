@@ -479,7 +479,7 @@
                         "chromium": 0
                     }
                 },
-                "medium": {
+                "improved": {
                     "technologies": ["rocket"],
                     "year": 1943,
                     "speed": -0.2,
