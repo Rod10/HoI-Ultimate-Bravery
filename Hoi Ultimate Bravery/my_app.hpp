@@ -195,12 +195,41 @@ public:
             ImGui::Begin("Light", &lightWindowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
             ImGui::PushFont(titleFont);
             ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
-            ImGui::PopStyleColor();
             ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
-            ImGui::SetCursorPosY(ImGui::GetCursorPosY() - my_image_height + 10.0f);
+            ImGui::SetCursorPosY(TITLE_HEIGHT);
             createLabelWithPosition("Equipment Designer", MIDDLE);
-            ImGui::SetCursorPosY(ImGui::GetContentRegionAvail().x - my_image_height + 15.0f);
             ImGui::PopFont();
+            ImGui::PopStyleColor();
+            ImGui::SetCursorPosY(TANK_NAME_HEIGHT);
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 20.0f);
+
+            fileName = std::format("./Assets/Images/tank_name_bg.png");
+            ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+            IM_ASSERT(ret);
+            ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
+            ImGui::SetCursorPosY(TANK_ROLE_HEIGHT);
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 20.0f);
+            fileName = std::format("./Assets/Images/tank_role_bg.png");
+            ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+            IM_ASSERT(ret);
+            ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
+
+
+            std::cout << ImGui::GetCursorPosY() << std::endl;
+            ImGui::SetCursorPosY(TANK_MODULE_HEIGHT);
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15.0f);
+            fileName = std::format("./Assets/Images/equipment_icon_bg.png");
+            ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+            IM_ASSERT(ret);
+            ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
+
+
+
+
+
+
+
+
 
             if (createButtonlWithPosition("Back", MIDDLE)) {
                 generateWindowOpen = true;
@@ -214,6 +243,11 @@ public:
     }
 
 private:
+    const float TITLE_HEIGHT = 24.0f;
+    const float TANK_NAME_HEIGHT = 63.0f;
+    const float TANK_ROLE_HEIGHT = 106.0f;
+    const float TANK_MODULE_HEIGHT = 155.0f;
+
     bool mainWindowOpen = true;
     bool mainMenuOpen = true;
     bool generateWindowOpen = false;
