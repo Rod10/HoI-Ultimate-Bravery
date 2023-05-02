@@ -200,13 +200,23 @@ public:
             createLabelWithPosition("Equipment Designer", MIDDLE);
             ImGui::PopFont();
             ImGui::PopStyleColor();
+
             ImGui::SetCursorPosY(TANK_NAME_HEIGHT);
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 20.0f);
-
             fileName = std::format("./Assets/Images/tank_name_bg.png");
             ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
             IM_ASSERT(ret);
             ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
+
+            ImGui::SetCursorPosY(TANK_NAME_HEIGHT + (my_image_height / 2.5));
+            ImGui::SetCursorPosX(my_image_width + 50.0f);
+            fileName = std::format("./Assets/Images/equipment_icon_bg.png");
+            ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+            IM_ASSERT(ret);
+            my_image_width = 154;
+            my_image_height = 56;
+            ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
+
             ImGui::SetCursorPosY(TANK_ROLE_HEIGHT);
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 20.0f);
             fileName = std::format("./Assets/Images/tank_role_bg.png");
@@ -214,26 +224,44 @@ public:
             IM_ASSERT(ret);
             ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
 
+            for (int i = 0; i <= 5; i++) {
+                ImGui::SetCursorPosY(TANK_MODULE_HEIGHT);
+                if (i == 0) {
+                    ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15.0f);
+                }
+                else {
+                    ImGui::SetCursorPosX(ImGui::GetCursorPosX() + (my_image_width * i) + (12.0f - (i * 3)));
+                }
+                fileName = std::format("./Assets/Images/equipment_icon_bg.png");
+                ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+                IM_ASSERT(ret);
+                ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
+            }
 
-            std::cout << ImGui::GetCursorPosY() << std::endl;
-            ImGui::SetCursorPosY(TANK_MODULE_HEIGHT);
-            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15.0f);
-            fileName = std::format("./Assets/Images/equipment_icon_bg.png");
+            ImGui::SetCursorPosY(ImGui::GetCursorPosY() - 4.0f);
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 16.0f);
+            fileName = std::format("./Assets/Images/tank_blueprint_background.png");
             ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
             IM_ASSERT(ret);
             ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
 
-
-
-
-
-
-
-
-
             if (createButtonlWithPosition("Back", MIDDLE)) {
                 generateWindowOpen = true;
                 lightWindowOpen = false;
+            }            
+
+            for (int i = 0; i <= 2; i++) {
+                if (i == 0) {
+                    ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15.0f);
+                }
+                else {
+                    ImGui::SetCursorPosX(ImGui::GetCursorPosX() + (my_image_width * i) + (12.0f - (i * 3)));
+                }
+                ImGui::SetCursorPosY(455);
+                fileName = std::format("./Assets/Images/equipment_icon_bg.png");
+                ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+                IM_ASSERT(ret);
+                ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
             }
             ImGui::End();
         }
