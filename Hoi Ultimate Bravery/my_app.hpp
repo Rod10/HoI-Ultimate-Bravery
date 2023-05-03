@@ -109,7 +109,40 @@ public:
         texture = Texture(my_image_width, my_image_height, my_image_texture);
         textureMap.insert(std::pair<std::string, Texture>("tank_blueprint_background", texture));
 
+        fileName = std::format("./Assets/Images/light.png");
+        ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+        IM_ASSERT(ret);
+        texture = Texture(my_image_width, my_image_height, my_image_texture);
+        textureMap.insert(std::pair<std::string, Texture>("light", texture));
+
         std::string path = "./Assets/Images/Cannon";
+        for (const auto& entry : std::filesystem::directory_iterator(path)) {
+            const std::string imagePath = entry.path().string();
+            ret = Utils::LoadTextureFromFile(imagePath.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+            IM_ASSERT(ret);
+            texture = Texture(my_image_width, my_image_height, my_image_texture);
+
+            std::string base_filename = imagePath.substr(imagePath.find_last_of("/\\") + 1);
+            std::string::size_type const p(base_filename.find_last_of('.'));
+            std::string file_without_extension = base_filename.substr(0, p);
+
+            textureMap.insert(std::pair<std::string, Texture>(file_without_extension, texture));
+        }
+
+        path = "./Assets/Images/Turret";
+        for (const auto& entry : std::filesystem::directory_iterator(path)) {
+            const std::string imagePath = entry.path().string();
+            ret = Utils::LoadTextureFromFile(imagePath.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+            IM_ASSERT(ret);
+            texture = Texture(my_image_width, my_image_height, my_image_texture);
+
+            std::string base_filename = imagePath.substr(imagePath.find_last_of("/\\") + 1);
+            std::string::size_type const p(base_filename.find_last_of('.'));
+            std::string file_without_extension = base_filename.substr(0, p);
+
+            textureMap.insert(std::pair<std::string, Texture>(file_without_extension, texture));
+        }
+        path = "./Assets/Images/Special";
         for (const auto& entry : std::filesystem::directory_iterator(path)) {
             const std::string imagePath = entry.path().string();
             ret = Utils::LoadTextureFromFile(imagePath.c_str(), &my_image_texture, &my_image_width, &my_image_height);
@@ -232,14 +265,56 @@ public:
             ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
             ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 61.0f);
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 30.0f);
-            ImGui::Text("Light Tank");
-            ImGui::PopStyleColor();
-            ImGui::PopFont();
+            ImGui::Text(Tank::tankTypeToString(lightTank.type).c_str());
 
-            std::string fileName = std::format("{0}_{1}", Gun::gunNameToString(lightTank.gun.name), Gun::typeToString(lightTank.gun.type));
+            fileName = std::format("{0}", Tank::tankTypeToString(lightTank.type));
             Texture texture = textureMap.find(fileName)->second;
+            ImGui::SetCursorPosY(ImGui::GetCursorPosY() - 20.0f);
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 325.0f);
             ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
 
+            ImGui::SetCursorPosY(ImGui::GetCursorPosY() - 25.0f);
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 30.0f);
+            ImGui::Text(Tank::tankVersionToString(lightTank.version).c_str());
+
+            std::string fileName = std::format("{0}_{1}", Gun::gunNameToString(lightTank.gun.name), Gun::typeToString(lightTank.gun.type));
+            texture = textureMap.find(fileName)->second;
+            ImGui::SetCursorPosY(TANK_MODULE_HEIGHT + 2.0f);
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 22.0f);
+            ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+            
+            fileName = std::format("{0}_turret_{1}", TurretType::turretTypeToString(lightTank.turret.type), lightTank.turret.crew);
+            texture = textureMap.find(fileName)->second;
+            ImGui::SetCursorPosY(TANK_MODULE_HEIGHT + 2.0f);
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 88.0f);
+            ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+            
+            fileName = std::format("{0}", SpecialModule::typeToString(lightTank.specialModules[0].type));
+            texture = textureMap.find(fileName)->second;
+            ImGui::SetCursorPosY(TANK_MODULE_HEIGHT + 2.0f);
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 170.0f);
+            ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+
+            fileName = std::format("{0}", SpecialModule::typeToString(lightTank.specialModules[1].type));
+            texture = textureMap.find(fileName)->second;
+            ImGui::SetCursorPosY(TANK_MODULE_HEIGHT + 2.0f);
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 240.0f);
+            ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+            
+            fileName = std::format("{0}", SpecialModule::typeToString(lightTank.specialModules[2].type));
+            texture = textureMap.find(fileName)->second;
+            ImGui::SetCursorPosY(TANK_MODULE_HEIGHT + 2.0f);
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 315.0f);
+            ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+
+            fileName = std::format("{0}", SpecialModule::typeToString(lightTank.specialModules[3].type));
+            texture = textureMap.find(fileName)->second;
+            ImGui::SetCursorPosY(TANK_MODULE_HEIGHT + 2.0f);
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 390.0f);
+            ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+
+            ImGui::PopStyleColor();
+            ImGui::PopFont();
             ImGui::End();
         }
         //light Tank
