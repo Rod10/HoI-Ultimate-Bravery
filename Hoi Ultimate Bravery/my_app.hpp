@@ -1,11 +1,13 @@
 #include "app_base.hpp"
 
 #include "armor.hpp"
+#include "engine.hpp"
 #include "gun.hpp"
 #include "special.hpp"
 #include "suspension.hpp"
 #include "tank.hpp"
 #include "tanktype.hpp"
+#include "texture.hpp"
 #include "turret.hpp"
 #include "turrettype.hpp"
 #include "utils.hpp"
@@ -13,6 +15,7 @@
 #include <algorithm>
 #include <array>
 #include <chrono>
+#include <filesystem>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -24,7 +27,6 @@
 #include <sstream>
 #include <string>
 #include <time.h>
-#include "engine.hpp"
 using json = nlohmann::json;
 
 class MyApp : public AppBase
@@ -70,25 +72,58 @@ public:
             gunNameWindowOpen.insert(std::pair<Gun::Name, bool>(gunName, false));
         }
 
-        /*srand(time(0));
-        TankType::Type tankType = static_cast<TankType::Type>(rand() % TankType::Type::Last);
-        std::cout << "Tank Type: " << Tank::tankTypeToString(tankType) << std::endl;
+        fileName = std::format("./Assets/Images/tank_designer_bg.png");
+        ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+        IM_ASSERT(ret);
+        Texture texture = Texture(my_image_width, my_image_height, my_image_texture);
+        textureMap.insert(std::pair<std::string, Texture>("tank_designer_bg", texture));
 
-        Tank::Version tankVersion = Tank::generatingRandomVersion(tankType);
-        Stats tankStats = Tank::getStatsFromVersion(tankType, tankVersion);
+        fileName = std::format("./Assets/Images/tank_name_bg.png");
+        ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+        IM_ASSERT(ret);
+        texture = Texture(my_image_width, my_image_height, my_image_texture);
+        textureMap.insert(std::pair<std::string, Texture>("tank_name_bg", texture));
 
-        Turret turret = Turret::generatingRandomTurret(tankType);
-        std::cout << "Turret Type: " << TurretType::turretTypeToString(turret.type) << std::endl;
+        fileName = std::format("./Assets/Images/tank_role_bg.png");
+        ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+        IM_ASSERT(ret);
+        texture = Texture(my_image_width, my_image_height, my_image_texture);
+        textureMap.insert(std::pair<std::string, Texture>("tank_role_bg", texture));
 
-        Gun gun = Gun::generateRandomGun(turret.allowedGun);
+        fileName = std::format("./Assets/Images/equipment_icon_bg.png");
+        ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+        IM_ASSERT(ret);
+        texture = Texture(my_image_width, my_image_height, my_image_texture);
+        texture.my_image_width = 154;
+        texture.my_image_height = 56;
+        textureMap.insert(std::pair<std::string, Texture>("tank_icon_bg", texture));
 
-        std::array<SpecialModule, 4> specialModules = SpecialModule::generateSpecialModule();
+        ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+        IM_ASSERT(ret);
+        texture = Texture(my_image_width, my_image_height, my_image_texture);
+        textureMap.insert(std::pair<std::string, Texture>("equipment_icon_bg", texture));
 
-        Suspension suspension = Suspension::generateRandomSuspension(tankType);
+        fileName = std::format("./Assets/Images/tank_blueprint_background.png");
+        ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+        IM_ASSERT(ret);
+        texture = Texture(my_image_width, my_image_height, my_image_texture);
+        textureMap.insert(std::pair<std::string, Texture>("tank_blueprint_background", texture));
 
-        Armor armor = Armor::generateRandomArmor();
-        Engine engine = Engine::generateRandomEngine();
-        Tank tank = Tank(tankType, tankVersion, turret, gun, specialModules, suspension, armor, tankStats);*/
+        std::string path = "./Assets/Images/Cannon";
+        for (const auto& entry : std::filesystem::directory_iterator(path)) {
+            const std::string imagePath = entry.path().string();
+            ret = Utils::LoadTextureFromFile(imagePath.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+            IM_ASSERT(ret);
+            texture = Texture(my_image_width, my_image_height, my_image_texture);
+
+            std::string base_filename = imagePath.substr(imagePath.find_last_of("/\\") + 1);
+            std::string::size_type const p(base_filename.find_last_of('.'));
+            std::string file_without_extension = base_filename.substr(0, p);
+
+            textureMap.insert(std::pair<std::string, Texture>(file_without_extension, texture));
+        }
+
+        srand(time(0));
     }
 
     virtual void Update() final
@@ -164,7 +199,7 @@ public:
                 generateWindowOpen = false;
             }
             ImGui::SameLine();
-            ImGui::Button("Medium"); // Fixed size
+            ImGui::Button("Medium");
             ImGui::SameLine();
             ImGui::Button("Heavy");
             ImGui::SameLine();
@@ -184,85 +219,27 @@ public:
 
         //light Tank
         if (lightWindowOpen) {
-            int my_image_width = 0;
-            int my_image_height = 0;
-            GLuint my_image_texture = 0;
-            auto fileName = std::format("./Assets/Images/tank_designer_bg.png");
-            bool ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
-            IM_ASSERT(ret);
-            auto off = calculatePos(MIDDLE, my_image_width);
+            generateTankDesignerWindow(lightTank);
+
+            ImGuiIO& io = ImGui::GetIO();
+            ImFont* basicFont = io.Fonts->Fonts[2];
+
+            auto off = calculatePos(MIDDLE, 1092);
             ImGui::SetNextWindowPos(ImVec2(off, 200.0f));
-            ImGui::Begin("Light", &lightWindowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
-            ImGui::PushFont(titleFont);
+            ImGui::SetNextWindowSize(ImVec2(1108, 569));
+            ImGui::Begin("Light Tank", &lightWindowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar);
+            ImGui::PushFont(basicFont);
             ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
-            ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
-            ImGui::SetCursorPosY(TITLE_HEIGHT);
-            createLabelWithPosition("Equipment Designer", MIDDLE);
-            ImGui::PopFont();
+            ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 61.0f);
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 30.0f);
+            ImGui::Text("Light Tank");
             ImGui::PopStyleColor();
+            ImGui::PopFont();
 
-            ImGui::SetCursorPosY(TANK_NAME_HEIGHT);
-            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 20.0f);
-            fileName = std::format("./Assets/Images/tank_name_bg.png");
-            ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
-            IM_ASSERT(ret);
-            ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
+            std::string fileName = std::format("{0}_{1}", Gun::gunNameToString(lightTank.gun.name), Gun::typeToString(lightTank.gun.type));
+            Texture texture = textureMap.find(fileName)->second;
+            ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
 
-            ImGui::SetCursorPosY(TANK_NAME_HEIGHT + (my_image_height / 2.5));
-            ImGui::SetCursorPosX(my_image_width + 50.0f);
-            fileName = std::format("./Assets/Images/equipment_icon_bg.png");
-            ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
-            IM_ASSERT(ret);
-            my_image_width = 154;
-            my_image_height = 56;
-            ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
-
-            ImGui::SetCursorPosY(TANK_ROLE_HEIGHT);
-            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 20.0f);
-            fileName = std::format("./Assets/Images/tank_role_bg.png");
-            ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
-            IM_ASSERT(ret);
-            ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
-
-            for (int i = 0; i <= 5; i++) {
-                ImGui::SetCursorPosY(TANK_MODULE_HEIGHT);
-                if (i == 0) {
-                    ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15.0f);
-                }
-                else {
-                    ImGui::SetCursorPosX(ImGui::GetCursorPosX() + (my_image_width * i) + (12.0f - (i * 3)));
-                }
-                fileName = std::format("./Assets/Images/equipment_icon_bg.png");
-                ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
-                IM_ASSERT(ret);
-                ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
-            }
-
-            ImGui::SetCursorPosY(ImGui::GetCursorPosY() - 4.0f);
-            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 16.0f);
-            fileName = std::format("./Assets/Images/tank_blueprint_background.png");
-            ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
-            IM_ASSERT(ret);
-            ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
-
-            if (createButtonlWithPosition("Back", MIDDLE)) {
-                generateWindowOpen = true;
-                lightWindowOpen = false;
-            }            
-
-            for (int i = 0; i <= 2; i++) {
-                if (i == 0) {
-                    ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15.0f);
-                }
-                else {
-                    ImGui::SetCursorPosX(ImGui::GetCursorPosX() + (my_image_width * i) + (12.0f - (i * 3)));
-                }
-                ImGui::SetCursorPosY(455);
-                fileName = std::format("./Assets/Images/equipment_icon_bg.png");
-                ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
-                IM_ASSERT(ret);
-                ImGui::Image((void*)(intptr_t)my_image_texture, ImVec2(my_image_width, my_image_height));
-            }
             ImGui::End();
         }
         //light Tank
@@ -271,10 +248,13 @@ public:
     }
 
 private:
+    Tank lightTank = Tank::generateRandomTank(TankType::Type::Light);
+
     const float TITLE_HEIGHT = 24.0f;
     const float TANK_NAME_HEIGHT = 63.0f;
     const float TANK_ROLE_HEIGHT = 106.0f;
     const float TANK_MODULE_HEIGHT = 155.0f;
+    const float TANK_MODULE_HEIGHT_2 = 455.0f;
 
     bool mainWindowOpen = true;
     bool mainMenuOpen = true;
@@ -282,9 +262,17 @@ private:
     bool optionWindowOpen = false;
     bool lightWindowOpen = false;
 
+    int my_image_width = 0;
+    int my_image_height = 0;
+    GLuint my_image_texture = 0;
+    std::string fileName;
+    bool ret;
+    std::map<std::string, Texture> textureMap;
+
     std::map<Gun::Category, std::vector<Gun>> gunList = Gun::generateGunList();
     std::map<Gun::Category, bool> gunCateogryWindowOpen;
     std::map<Gun::Name, bool> gunNameWindowOpen;
+
     std::unordered_map<int, std::string> localizedStrings;
     enum Position {
         LEFT = 000,
@@ -369,5 +357,80 @@ private:
         float off = (avail - width) * alignment;
         if (off > 0.0f)
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
+    }
+
+    void generateTankDesignerWindow(Tank tank) {
+        ImGuiIO& io = ImGui::GetIO();
+        ImFont* basicFont = io.Fonts->Fonts[0];
+        ImFont* titleFont = io.Fonts->Fonts[1];
+        Texture texture = textureMap.find("tank_designer_bg")->second;
+        auto off = calculatePos(MIDDLE, texture.my_image_width);
+        ImGui::SetNextWindowPos(ImVec2(off, 200.0f));
+        ImGui::Begin(Tank::tankTypeToString(tank.type).c_str(), &lightWindowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
+        ImGui::PushFont(titleFont);
+        ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
+        ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+        ImGui::SetCursorPosY(TITLE_HEIGHT);
+        createLabelWithPosition("Equipment Designer", MIDDLE);
+        ImGui::PopFont();
+        ImGui::PopStyleColor();
+
+        ImGui::SetCursorPosY(TANK_NAME_HEIGHT);
+        ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 20.0f);
+        texture = textureMap.find("tank_name_bg")->second;
+        ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+
+        ImGui::SetCursorPosY(TANK_NAME_HEIGHT + (texture.my_image_height / 2.5));
+        ImGui::SetCursorPosX(texture.my_image_width + 50.0f);
+        texture = textureMap.find("tank_icon_bg")->second;
+        ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+
+        ImGui::SetCursorPosY(TANK_ROLE_HEIGHT);
+        ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 20.0f);
+        texture = textureMap.find("tank_role_bg")->second;
+        ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+
+        texture = textureMap.find("equipment_icon_bg")->second;
+        for (int i = 0; i <= 5; i++) {
+            ImGui::SetCursorPosY(TANK_MODULE_HEIGHT);
+            if (i == 0) {
+                ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15.0f);
+            }
+            else {
+                ImGui::SetCursorPosX(ImGui::GetCursorPosX() + (texture.my_image_width * i) + (13.0f - (i * 3)));
+            }
+            ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+        }
+
+        ImGui::SetCursorPosY(ImGui::GetCursorPosY() - 4.0f);
+        ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 16.0f);
+        texture = textureMap.find("tank_blueprint_background")->second;
+        ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+
+        texture = textureMap.find("equipment_icon_bg")->second;
+        for (int i = 0; i <= 2; i++) {
+            if (i == 0) {
+                ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15.0f);
+            }
+            else {
+                ImGui::SetCursorPosX(ImGui::GetCursorPosX() + (texture.my_image_width * i) + (12.0f - (i * 3)));
+            }
+            ImGui::SetCursorPosY(TANK_MODULE_HEIGHT_2);
+            ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+        }
+
+        ImGui::SetCursorPosX(MIDDLE - 100.0f);
+        ImGui::SetCursorPosY(TANK_MODULE_HEIGHT_2);
+        ImGui::Text("Engine");
+        ImGui::SetCursorPosX(MIDDLE - 20.0f);
+        ImGui::SetCursorPosY(TANK_MODULE_HEIGHT_2);
+        ImGui::Text("Armor");
+
+        ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 45.0f);
+        if (createButtonlWithPosition("Back", MIDDLE)) {
+            generateWindowOpen = true;
+            lightWindowOpen = false;
+        }
+        ImGui::End();
     }
 };

@@ -1,11 +1,14 @@
 #pragma once
 #include "armor.hpp"
+#include "engine.hpp"
 #include "gun.hpp"
 #include "special.hpp"
 #include "suspension.hpp"
 #include "tanktype.hpp"
+#include "texture.hpp"
 #include "turret.hpp"
 #include "turrettype.hpp"
+#include "utils.hpp"
 
 #include <fstream>
 #include <iostream>
@@ -56,14 +59,14 @@ public:
 	int engineLevel;
 	int armorLevel;
 
-	enum Modules {
+	/*enum Modules {
 		Turret, 
 		Gun,
 		Special,
 		Chassis,
 		Armor,
 		Engines
-	};
+	};*/
 
 	static std::string tankTypeToString(TankType::Type& type) {
 		switch (type) {
@@ -104,4 +107,7 @@ public:
 
 	static Tank::Version generatingRandomVersion(TankType::Type type);
 	static Stats getStatsFromVersion(TankType::Type type, Tank::Version version);
+
+	static Tank generateRandomTank();
+	static Tank generateRandomTank(TankType::Type type);
 };

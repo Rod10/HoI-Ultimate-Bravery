@@ -31,3 +31,44 @@ Stats Tank::getStatsFromVersion(TankType::Type type, Tank::Version version)
     Stats tankStats = Stats(ressources, tankStatsData);
     return tankStats;
 }
+
+Tank Tank::generateRandomTank()
+{
+    TankType::Type tankType = static_cast<TankType::Type>(rand() % TankType::Type::Last);
+    std::cout << "Tank Type: " << Tank::tankTypeToString(tankType) << std::endl;
+
+    Tank::Version tankVersion = Tank::generatingRandomVersion(tankType);
+    Stats tankStats = Tank::getStatsFromVersion(tankType, tankVersion);
+
+    Turret turret = Turret::generatingRandomTurret(tankType);
+    std::cout << "Turret Type: " << TurretType::turretTypeToString(turret.type) << std::endl;
+
+    Gun gun = Gun::generateRandomGun(turret.allowedGun);
+
+    std::array<SpecialModule, 4> specialModules = SpecialModule::generateSpecialModule();
+
+    Suspension suspension = Suspension::generateRandomSuspension(tankType);
+
+    Armor armor = Armor::generateRandomArmor();
+    Engine engine = Engine::generateRandomEngine();
+    return Tank(tankType, tankVersion, turret, gun, specialModules, suspension, armor, tankStats);
+}
+
+Tank Tank::generateRandomTank(TankType::Type type)
+{
+    Tank::Version tankVersion = Tank::generatingRandomVersion(type);
+    Stats tankStats = Tank::getStatsFromVersion(type, tankVersion);
+
+    Turret turret = Turret::generatingRandomTurret(type);
+    std::cout << "Turret Type: " << TurretType::turretTypeToString(turret.type) << std::endl;
+
+    Gun gun = Gun::generateRandomGun(turret.allowedGun);
+
+    std::array<SpecialModule, 4> specialModules = SpecialModule::generateSpecialModule();
+
+    Suspension suspension = Suspension::generateRandomSuspension(type);
+
+    Armor armor = Armor::generateRandomArmor();
+    Engine engine = Engine::generateRandomEngine();
+    return Tank(type, tankVersion, turret, gun, specialModules, suspension, armor, tankStats);
+}

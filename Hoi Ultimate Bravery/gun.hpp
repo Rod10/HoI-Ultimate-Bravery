@@ -61,11 +61,13 @@ public:
 	Gun(Gun::Category category,
 		Gun::Name name,
 		GunSize::Size size,
+		Gun::Type type,
 		Stats stats) :
 		category(category),
 		name(name),
 		size(size),
-		stats(stats){}
+		stats(stats),
+		type(type) {}
 
 	static std::string gunCategoryToString(Gun::Category& category) {
 		switch (category) {
@@ -264,6 +266,7 @@ public:
 
 	Gun::Category category;
 	GunSize::Size size;
+	Gun::Type type;
 	Gun::Name name;
 	std::map<Type, Stats> statsByType;
 	Stats stats;

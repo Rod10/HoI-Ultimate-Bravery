@@ -70,7 +70,8 @@ Gun Gun::generateRandomGun(std::vector<GunSize::Size> allowedGun)
         }
     }
     Gun gun = *Utils::select_randomly(gunsCanBeUsed.begin(), gunsCanBeUsed.end());
-    gun.stats = Utils::select_randomly(gun.statsByType.begin(), gun.statsByType.end())->second;
+    gun.type = Utils::select_randomly(gun.statsByType.begin(), gun.statsByType.end())->first;
+    gun.stats = gun.statsByType[gun.type];
     gun.statsByType.clear();
     return gun;
 }
