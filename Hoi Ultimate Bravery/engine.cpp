@@ -2,6 +2,7 @@
 
 Engine Engine::generateRandomEngine()
 {
+    srand(time(0));
     auto statsKey = Stats::getStatsKeyArray();
 
     Engine::Type type = static_cast<Engine::Type>(rand() % Engine::Type::Last);

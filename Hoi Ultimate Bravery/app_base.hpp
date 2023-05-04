@@ -185,6 +185,8 @@ public:
         io.Fonts->AddFontDefault();
         io.Fonts->AddFontFromFileTTF("./Assets/Fonts/Freshman.ttf", 18.0f);
         io.Fonts->AddFontFromFileTTF("./Assets/Fonts/coolvetica rg.otf", 25.0f);
+        io.Fonts->AddFontFromFileTTF("./Assets/Fonts/JMH Typewriter-Thin.ttf", 25.0f);
+        io.Fonts->AddFontFromFileTTF("./Assets/Fonts/JMH Typewriter-Thin.ttf", 16.0f);
         // io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
         // io.Fonts->AddFontFromFileTTF("../../misc/fonts/DroidSans.ttf", 16.0f);
         // io.Fonts->AddFontFromFileTTF("../../misc/fonts/ProggyTiny.ttf", 10.0f);

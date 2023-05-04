@@ -75,4 +75,10 @@ public:
 	float fuelCapacity;
 	float fuelCapacityP;
 	Ressources ressources;
+
+	Stats& operator+=(const Stats& rhs) {
+
+		this->Stats += rhs.m_iNumber;
+		return *this;
+	}
 };

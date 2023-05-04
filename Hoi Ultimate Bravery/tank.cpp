@@ -2,6 +2,7 @@
 
 Tank::Version Tank::generatingRandomVersion(TankType::Type type)
 {
+    srand(time(0));
     std::ifstream f("Assets/Data/Tank.json");
     json tankData = json::parse(f)[Tank::tankTypeToString(type)];
     f.close();
@@ -51,7 +52,7 @@ Tank Tank::generateRandomTank()
 
     Armor armor = Armor::generateRandomArmor();
     Engine engine = Engine::generateRandomEngine();
-    return Tank(tankType, tankVersion, turret, gun, specialModules, suspension, armor, tankStats);
+    return Tank(tankType, tankVersion, turret, gun, specialModules, suspension, armor, engine, tankStats);
 }
 
 Tank Tank::generateRandomTank(TankType::Type type)
@@ -70,5 +71,5 @@ Tank Tank::generateRandomTank(TankType::Type type)
 
     Armor armor = Armor::generateRandomArmor();
     Engine engine = Engine::generateRandomEngine();
-    return Tank(type, tankVersion, turret, gun, specialModules, suspension, armor, tankStats);
+    return Tank(type, tankVersion, turret, gun, specialModules, suspension, armor, engine, tankStats);
 }

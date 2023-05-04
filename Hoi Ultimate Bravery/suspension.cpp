@@ -2,6 +2,7 @@
 
 Suspension Suspension::generateRandomSuspension(TankType::Type type)
 {
+    srand(time(0));
     auto statsKey = Stats::getStatsKeyArray();
 
     Suspension::Type suspensionType = static_cast<Suspension::Type>(rand() % Suspension::Type::Last);

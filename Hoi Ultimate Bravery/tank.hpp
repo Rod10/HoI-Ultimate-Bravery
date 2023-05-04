@@ -35,6 +35,7 @@ public:
 		std::array<SpecialModule, 4> specialModules,
 		Suspension suspension,
 		Armor armor,
+		Engine engine,
 		Stats stats) :
 		type(type),
 		version(version),
@@ -43,6 +44,7 @@ public:
 		specialModules(specialModules),
 		suspension(suspension),
 		armor(armor),
+		engine(engine),
 		stats(stats) {
 		engineLevel = rand() % 20;
 		armorLevel = rand() % 20;
@@ -55,6 +57,7 @@ public:
 	std::array<SpecialModule, 4> specialModules;
 	Suspension suspension;
 	Armor armor;
+	Engine engine;
 	Stats stats;
 	int engineLevel;
 	int armorLevel;
@@ -103,6 +106,11 @@ public:
 		case 2: return Tank::Version::Improved;
 		case 3: return Tank::Version::Advanced;
 		}
+	}
+
+	static int tankModuleToInt(std::string module) {
+		if (module == "gun") return 0;
+		if (module == "turret") return 1;
 	}
 
 	static Tank::Version generatingRandomVersion(TankType::Type type);
