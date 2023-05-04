@@ -77,8 +77,35 @@ public:
 	Ressources ressources;
 
 	Stats& operator+=(const Stats& rhs) {
-
-		this->Stats += rhs.m_iNumber;
+		this->speed += rhs.speed;
+		this->speedP += rhs.speedP;
+		this->reliability += rhs.reliability;
+		this->reliabilityP += rhs.reliabilityP;
+		this->softAttack += rhs.softAttack;
+		this->softAttackP += rhs.softAttackP;
+		this->hardAttack += rhs.hardAttack;
+		this->hardAttackP += rhs.hardAttackP;
+		this->piercing += rhs.piercing;
+		this->piercingP += rhs.piercingP;
+		this->breakthrough += rhs.breakthrough;
+		this->breakthroughP += rhs.breakthroughP;
+		this->airAttack += rhs.airAttack;
+		this->airAttackP += rhs.airAttackP;
+		this->productionCost += rhs.productionCost;
+		this->productionCostP += rhs.productionCostP;
+		this->armor += rhs.armor;
+		this->armorP += rhs.armorP;
+		this->defense += rhs.defense;
+		this->defenseP += rhs.defenseP;
+		this->entrenchment += rhs.entrenchment;
+		this->entrenchmentP += rhs.entrenchmentP;
+		this->hardness += rhs.hardness;
+		this->hardnessP += rhs.hardnessP;
+		this->fuelUsage += rhs.fuelUsage;
+		this->fuelUsageP += rhs.fuelUsageP;
+		this->fuelCapacity += rhs.fuelCapacity;
+		this->fuelCapacityP += rhs.fuelCapacityP;
+		this->ressources += rhs.ressources;
 		return *this;
 	}
 };

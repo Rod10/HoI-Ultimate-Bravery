@@ -279,6 +279,17 @@ public:
             ImGui::SameLine();
             if (ImGui::Button("Light")) {
                 lightTank = Tank::generateRandomTank(TankType::Type::Light);
+
+                Stats stats;
+                Stats newStats = lightTank.stats;
+
+                for (auto& module : tankModule) {
+                    stats = getStats(lightTank, module);
+                    newStats += stats;
+                }
+
+                newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Light, newStats));
+
                 lightWindowOpen = true;
                 generateWindowOpen = false;
             }
@@ -401,14 +412,7 @@ public:
             ImGui::PushFont(statsFont);
             ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
             ImGui::SetCursorPosY(TITLE_HEIGHT + 60.0f);
-            std::string speed = std::format("{:.1f} km/h", lightTank.stats.speed);
-
-            Stats stats;
-
-            for (auto& module : tankModule) {
-                stats += getStats(lightTank, module);
-            }
-
+            std::string speed = std::format("{:.1f} km/h", newTankStats.find(TankType::Type::Light)->second.speed);
             ImGui::SetCursorPosX(720.0f - ImGui::CalcTextSize(speed.c_str()).x);
             ImGui::Text(speed.c_str());
 
@@ -464,6 +468,7 @@ private:
     };
 
     std::vector<std::string> tankModule = {"gun", "turret"};
+    std::unordered_map<TankType::Type, Stats> newTankStats;
 
     ImVec4 backgroundColor = ImVec4(0.831f, 0.902f, 0.945f, 1.00f);
     ImVec4 windowColor = ImVec4(0.149f, 0.137f, 0.125f, 1.00f);

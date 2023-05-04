@@ -20,5 +20,12 @@ public:
 	int steel;
 	int tungsten;
 	int chromium;
+
+	Ressources& operator+=(const Ressources& rhs) {
+		this->steel += rhs.steel;
+		this->tungsten += rhs.tungsten;
+		this->chromium += rhs.chromium;
+		return *this;
+	}
 };
 
