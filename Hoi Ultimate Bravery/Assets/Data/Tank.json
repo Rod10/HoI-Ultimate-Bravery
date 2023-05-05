@@ -6,6 +6,7 @@
                 "reliabilityP": 80.0,
                 "armor": 5.0,
                 "productionCost": 1.0,
+                "supplyUse": 0.22,
                 "ressources": {
                     "steel": 1,
                     "chromium": 0,
@@ -19,6 +20,7 @@
                 "reliabilityP": 95.0,
                 "armor": 10.0,
                 "productionCost": 1.25,
+                "supplyUse": 0.22,
                 "ressources": {
                     "steel": 1,
                     "chromium": 0,
@@ -32,6 +34,7 @@
                 "reliabilityP": 110.0,
                 "armor": 15.0,
                 "productionCost": 1.60,
+                "supplyUse": 0.22,
                 "ressources": {
                     "steel": 1,
                     "chromium": 0,
@@ -45,6 +48,7 @@
                 "reliabilityP": 130.0,
                 "armor": 20.0,
                 "productionCost": 2.0,
+                "supplyUse": 0.22,
                 "ressources": {
                     "steel": 2,
                     "chromium": 0,
@@ -75,6 +79,7 @@
                 "reliabilityP": 75.0,
                 "armor": 25.0,
                 "productionCost": 2.50,
+                "supplyUse": 0.25,
                 "ressources": {
                     "steel": 1,
                     "chromium": 0,
@@ -88,6 +93,7 @@
                 "reliabilityP": 100.0,
                 "armor": 35.0,
                 "productionCost": 2.50,
+                "supplyUse": 0.25,
                 "ressources": {
                     "steel": 1,
                     "chromium": 0,
@@ -101,6 +107,7 @@
                 "reliabilityP": 130.0,
                 "armor": 45.0,
                 "productionCost": 3.20,
+                "supplyUse": 0.25,
                 "ressources": {
                     "steel": 1,
                     "chromium": 0,
@@ -114,6 +121,7 @@
                 "reliabilityP": 160.0,
                 "armor": 50.0,
                 "productionCost": 4.0,
+                "supplyUse": 0.25,
                 "ressources": {
                     "steel": 2,
                     "chromium": 0,
@@ -129,6 +137,7 @@
                 "reliabilityP": 100.0,
                 "armor": 30.0,
                 "productionCost": 10.0,
+                "supplyUse": 0.32,
                 "ressources": {
                     "steel": 1,
                     "chromium": 0,
@@ -142,6 +151,7 @@
                 "reliabilityP": 100.0,
                 "armor": 35.0,
                 "productionCost": 10.0,
+                "supplyUse": 0.32,
                 "ressources": {
                     "steel": 1,
                     "chromium": 0,
@@ -155,6 +165,7 @@
                 "reliabilityP": 115.0,
                 "armor": 55.0,
                 "productionCost": 10.0,
+                "supplyUse": 0.32,
                 "ressources": {
                     "steel": 1,
                     "chromium": 1,
@@ -168,6 +179,7 @@
                 "reliabilityP": 130.0,
                 "armor": 75.0,
                 "productionCost": 12.0,
+                "supplyUse": 0.32,
                 "ressources": {
                     "steel": 2,
                     "chromium": 1,
@@ -183,6 +195,7 @@
                 "reliabilityP": 130.0,
                 "armor": 85.0,
                 "productionCost": 24.0,
+                "supplyUse": 0.40,
                 "ressources": {
                     "steel": 3,
                     "chromium": 2,
@@ -198,6 +211,7 @@
                 "reliabilityP": 160.0,
                 "armor": 75.0,
                 "productionCost": 6.0,
+                "supplyUse": 0.25,
                 "ressources": {
                     "steel": 2,
                     "chromium": 1,

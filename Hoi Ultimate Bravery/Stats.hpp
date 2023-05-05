@@ -40,10 +40,12 @@ public:
 		fuelUsage(data["fuelUsage"]),
 		fuelUsageP(data["fuelUsageP"]),
 		fuelCapacity(data["fuelCapacity"]),
-		fuelCapacityP(data["fuelCapacityP"])
+		fuelCapacityP(data["fuelCapacityP"]),
+		supplyUse(data["supplyUse"]),
+		supplyUseP(data["supplyUseP"])
 	{};
 
-	static std::array<std::string, 29> getStatsKeyArray();
+	static std::array<std::string, 31> getStatsKeyArray();
 
 	int year;
 	float speed;
@@ -74,6 +76,8 @@ public:
 	float fuelUsageP;
 	float fuelCapacity;
 	float fuelCapacityP;
+	float supplyUse;
+	float supplyUseP;
 	Ressources ressources;
 
 	Stats& operator+=(const Stats& rhs) {
@@ -105,6 +109,8 @@ public:
 		this->fuelUsageP += rhs.fuelUsageP;
 		this->fuelCapacity += rhs.fuelCapacity;
 		this->fuelCapacityP += rhs.fuelCapacityP;
+		this->supplyUse += rhs.supplyUse;
+		this->supplyUseP += rhs.supplyUseP;
 		this->ressources += rhs.ressources;
 		return *this;
 	}

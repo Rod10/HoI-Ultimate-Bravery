@@ -1,6 +1,6 @@
 #include "stats.hpp"
 
-std::array<std::string, 29> Stats::getStatsKeyArray()
+std::array<std::string, 31> Stats::getStatsKeyArray()
 {
 	return {
 		"year",
@@ -31,6 +31,8 @@ std::array<std::string, 29> Stats::getStatsKeyArray()
 		"fuelUsage",
 		"fuelUsageP",
 		"fuelCapacity",
-		"fuelCapacityP"
+		"fuelCapacityP",
+		"supplyUse",
+		"supplyUseP"
 	   };
 }

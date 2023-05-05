@@ -111,6 +111,9 @@ public:
 	static int tankModuleToInt(std::string module) {
 		if (module == "gun") return 0;
 		if (module == "turret") return 1;
+		if (module == "suspension") return 2;
+		if (module == "armor") return 3;
+		if (module == "engine") return 4;
 	}
 
 	static Tank::Version generatingRandomVersion(TankType::Type type);

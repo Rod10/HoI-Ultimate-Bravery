@@ -15,6 +15,7 @@
 class Texture
 {
 public:
+    Texture();
     Texture(int my_image_width, int my_image_height, GLuint my_image_texture) : 
         my_image_width(my_image_width),
         my_image_height(my_image_height),

@@ -279,6 +279,7 @@ public:
             ImGui::SameLine();
             if (ImGui::Button("Light")) {
                 lightTank = Tank::generateRandomTank(TankType::Type::Light);
+                newTankStats.clear();
 
                 Stats stats;
                 Stats newStats = lightTank.stats;
@@ -287,6 +288,54 @@ public:
                     stats = getStats(lightTank, module);
                     newStats += stats;
                 }
+
+                //Add Stats of special modules
+                for (SpecialModule module : lightTank.specialModules) {
+                    newStats += module.stats;
+                }
+                //Add Stats of special modules
+
+                // Base Stats
+                float totalSpeedP = newStats.speedP + (lightTank.engineLevel * 10) + (lightTank.armorLevel * -5.0);
+                float reliabilityP = newStats.reliabilityP + (lightTank.engineLevel * -1.5) + (lightTank.armorLevel * 1.5);
+                float speedf = newStats.speed + (newStats.speed * (totalSpeedP / 100));
+                newStats.speed = speedf;
+
+                float reliabilityf = newStats.reliability + reliabilityP;
+                newStats.reliability = reliabilityf;
+                //Base Stats
+
+                //Combat Stats
+                float softAttackF = newStats.softAttack + (newStats.softAttack * (newStats.softAttackP / 100));
+                newStats.softAttack = softAttackF;
+
+                float hardAttackF = newStats.hardAttack + (newStats.hardAttack * (newStats.hardAttackP / 100));
+                newStats.hardAttack = hardAttackF;
+
+                float piercingF = newStats.piercing + (newStats.piercing * (newStats.piercingP / 100));
+                newStats.piercing = piercingF;
+
+                float hardnessF = newStats.hardness + (newStats.hardness * (newStats.hardnessP / 100));
+                newStats.hardness = hardnessF;
+
+                float totalArmorP = newStats.armorP + (lightTank.armorLevel * 8.5);
+                float armorF = newStats.armor + (newStats.armor * (totalArmorP / 100));
+                newStats.armor = armorF;
+
+                float totalBreakthroughF = newStats.breakthrough + lightTank.armorLevel * 1.2;
+                float breakthroughF = totalBreakthroughF + (totalBreakthroughF * (newStats.breakthroughP / 100));
+                newStats.breakthrough = breakthroughF;
+
+                float defenseF = newStats.defense + (newStats.defense * (newStats.defenseP / 100));
+                newStats.defense = defenseF;
+                
+                float airAttackF = newStats.airAttack + (newStats.airAttack * (newStats.airAttackP / 100));
+                newStats.airAttack = airAttackF;
+                //Combat Stats
+
+                //Misc Stats
+                
+                //Misc Stats
 
                 newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Light, newStats));
 
@@ -329,37 +378,24 @@ public:
             ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 61.0f);
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 30.0f);
             ImGui::Text(Tank::tankTypeToString(lightTank.type).c_str());
-
-            fileName = std::format("{0}", Tank::tankTypeToString(lightTank.type));
-            Texture texture = textureMap.find(fileName)->second;
-            ImGui::SetCursorPosY(ImGui::GetCursorPosY() - 20.0f);
-            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 325.0f);
-            ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+            
+            setImage(ImGui::GetCursorPosY() - 20.0f, ImGui::GetCursorPosX() + 325.0f, Tank::tankTypeToString(lightTank.type));
 
             ImGui::SetCursorPosY(ImGui::GetCursorPosY() - 25.0f);
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 30.0f);
             ImGui::Text(Tank::tankVersionToString(lightTank.version).c_str());
 
             std::string fileName = std::format("{0}_{1}", Gun::gunNameToString(lightTank.gun.name), Gun::typeToString(lightTank.gun.type));
-            texture = textureMap.find(fileName)->second;
-            ImGui::SetCursorPosY(TANK_MODULE_HEIGHT + 2.0f);
-            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 22.0f);
-            ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+            setImage(TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 22.0f, fileName);
 
             fileName = std::format("{0}_turret_{1}", TurretType::turretTypeToString(lightTank.turret.type), lightTank.turret.crew);
-            texture = textureMap.find(fileName)->second;
-            ImGui::SetCursorPosY(TANK_MODULE_HEIGHT + 2.0f);
-            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 88.0f);
-            ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+            setImage(TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 88.0f, fileName);
 
             fileName = std::format("{0}", SpecialModule::typeToString(lightTank.specialModules[0].type));
-            texture = textureMap.find(fileName)->second;
-            ImGui::SetCursorPosY(TANK_MODULE_HEIGHT + 2.0f);
-            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 170.0f);
-            ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+            setImage(TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 170.0f, fileName);
 
             fileName = std::format("{0}", SpecialModule::typeToString(lightTank.specialModules[1].type));
-            texture = textureMap.find(fileName)->second;
+            Texture texture = textureMap.find(fileName)->second;
             ImGui::SetCursorPosY(TANK_MODULE_HEIGHT + 2.0f);
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 240.0f);
             ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
@@ -405,21 +441,69 @@ public:
             ImGui::Text(std::to_string(lightTank.engineLevel).c_str());
 
             off = calculatePos(MIDDLE, std::to_string(lightTank.armorLevel).c_str());
-            ImGui::SetCursorPosY(TANK_MODULE_HEIGHT_2 + 20.0f);
-            ImGui::SetCursorPosX(off - 55.0f);
-            ImGui::Text(std::to_string(lightTank.armorLevel).c_str());
+            createLabelWithPosition(std::to_string(lightTank.armorLevel).c_str(), off - 55.0f, TANK_MODULE_HEIGHT_2 + 20.0f);
 
             ImGui::PushFont(statsFont);
             ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
-            ImGui::SetCursorPosY(TITLE_HEIGHT + 60.0f);
+            
+            //Base stats
             std::string speed = std::format("{:.1f} km/h", newTankStats.find(TankType::Type::Light)->second.speed);
-            ImGui::SetCursorPosX(720.0f - ImGui::CalcTextSize(speed.c_str()).x);
-            ImGui::Text(speed.c_str());
+            createLabelWithPosition(speed.c_str(), BASE_STATS_POS, TITLE_HEIGHT + 60.0f);
+
+            std::string reliability = std::format("{:.1f}", newTankStats.find(TankType::Type::Light)->second.reliability);
+            createLabelWithPosition(reliability.c_str(), BASE_STATS_POS, TITLE_HEIGHT + 80.0f);
+
+            std::string supplyUse = std::format("{:.2f}", newTankStats.find(TankType::Type::Light)->second.supplyUse);
+            createLabelWithPosition(supplyUse.c_str(), BASE_STATS_POS, TITLE_HEIGHT + 100.0f);
+            //Base stats
+
+            //Combat stats
+            std::string softAttack = std::format("{:.2f}", newTankStats.find(TankType::Type::Light)->second.softAttack);
+            createLabelWithPosition(softAttack.c_str(), COMBAT_STATS_POS, TITLE_HEIGHT + 60.0f);
+
+            std::string hardAttack = std::format("{:.2f}", newTankStats.find(TankType::Type::Light)->second.hardAttack);
+            createLabelWithPosition(hardAttack.c_str(), COMBAT_STATS_POS, TITLE_HEIGHT + 80.0f);
+
+            std::string piercing = std::format("{:.2f}", newTankStats.find(TankType::Type::Light)->second.piercing);
+            createLabelWithPosition(piercing.c_str(), COMBAT_STATS_POS, TITLE_HEIGHT + 100.0f);
+
+            std::string hardness = std::format("{:.2f}", newTankStats.find(TankType::Type::Light)->second.hardness);
+            createLabelWithPosition(hardness.c_str(), COMBAT_STATS_POS, TITLE_HEIGHT + 120.0f);
+
+            std::string armor = std::format("{:.2f}", newTankStats.find(TankType::Type::Light)->second.armor);
+            createLabelWithPosition(armor.c_str(), COMBAT_STATS_POS, TITLE_HEIGHT + 140.0f);
+
+            std::string breakthrough = std::format("{:.2f}", newTankStats.find(TankType::Type::Light)->second.breakthrough);
+            createLabelWithPosition(breakthrough.c_str(), COMBAT_STATS_POS, TITLE_HEIGHT + 160.0f);
+
+            std::string defense = std::format("{:.2f}", newTankStats.find(TankType::Type::Light)->second.defense);
+            createLabelWithPosition(defense.c_str(), COMBAT_STATS_POS, TITLE_HEIGHT + 180.0f);
+
+            std::string airAttack = std::format("{:.2f}", newTankStats.find(TankType::Type::Light)->second.airAttack);
+            createLabelWithPosition(airAttack.c_str(), COMBAT_STATS_POS, TITLE_HEIGHT + 200.0f);
+            //Combat stats
+
+            //Misc Stats
+            std::string fuelCapacity = std::format("{:.2f}", newTankStats.find(TankType::Type::Light)->second.fuelCapacity);
+            createLabelWithPosition(fuelCapacity.c_str(), 1060.0f, TITLE_HEIGHT + 60.0f);
+
+            std::string fuelUsage = std::format("{:.2f}", newTankStats.find(TankType::Type::Light)->second.fuelUsage);
+            createLabelWithPosition(fuelUsage.c_str(), 1060.0f, TITLE_HEIGHT + 80.0f);
+
+            //TODO research suppression value
+            createLabelWithPosition("???", 1060.0f, TITLE_HEIGHT + 100.0f);
+
+            //TODO research reconnaissance value
+            createLabelWithPosition("???", 1060.0f, TITLE_HEIGHT + 120.0f);
+
+            std::string entrenchment = std::format("{:.2f}", newTankStats.find(TankType::Type::Light)->second.entrenchment);
+            createLabelWithPosition(entrenchment.c_str(), 1060.0f, TITLE_HEIGHT + 140.0f);
+            //Misc Stats
 
             ImGui::PopStyleColor();
             ImGui::PopFont();
 
-            ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 10.0f);
+            ImGui::SetCursorPosY(515.0f);
             if (createButtonlWithPosition("Back", MIDDLE)) {
                 generateWindowOpen = true;
                 lightWindowOpen = false;
@@ -442,6 +526,9 @@ private:
     const float TANK_ROLE_HEIGHT = 106.0f;
     const float TANK_MODULE_HEIGHT = 155.0f;
     const float TANK_MODULE_HEIGHT_2 = 455.0f;
+    const float BASE_STATS_POS = 720.0f;
+    const float COMBAT_STATS_POS = 895.0f;
+    const float MISC_STATS_POS = 910.0f;
 
     bool mainWindowOpen = true;
     bool mainMenuOpen = true;
@@ -467,7 +554,7 @@ private:
         RIGHT = 1000,
     };
 
-    std::vector<std::string> tankModule = {"gun", "turret"};
+    std::vector<std::string> tankModule = {"gun", "turret", "suspension", "engine", "armor"};
     std::unordered_map<TankType::Type, Stats> newTankStats;
 
     ImVec4 backgroundColor = ImVec4(0.831f, 0.902f, 0.945f, 1.00f);
@@ -500,6 +587,13 @@ private:
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
 
         return ImGui::Text(label, flag);
+    }
+
+    void createLabelWithPosition(const char* label, float x, float y)
+    {
+        ImGui::SetCursorPosY(y);
+        ImGui::SetCursorPosX(x - ImGui::CalcTextSize(label).x);
+        return ImGui::Text(label);
     }
 
     bool createButtonlWithPosition(const char* label, Position position)
@@ -549,6 +643,13 @@ private:
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
     }
 
+    void setImage(float y, float x, std::string name) {
+        ImGui::SetCursorPosY(y);
+        ImGui::SetCursorPosX(x);
+        Texture texture = textureMap.find(name)->second;
+        ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+    }
+
     void generateTankDesignerWindow(Tank tank) {
         ImGuiIO& io = ImGui::GetIO();
         ImFont* basicFont = io.Fonts->Fonts[0];
@@ -568,48 +669,29 @@ private:
         ImGui::PopFont();
         ImGui::PopStyleColor();
 
-        ImGui::SetCursorPosY(TANK_NAME_HEIGHT);
-        ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 20.0f);
-        texture = textureMap.find("tank_name_bg")->second;
-        ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+        setImage(TANK_NAME_HEIGHT, ImGui::GetCursorPosX() + 20.0f, "tank_name_bg");
 
-        ImGui::SetCursorPosY(TANK_NAME_HEIGHT + (texture.my_image_height / 2.5));
-        ImGui::SetCursorPosX(texture.my_image_width + 50.0f);
-        texture = textureMap.find("tank_icon_bg")->second;
-        ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+        setImage(79.8, 329, "tank_icon_bg");
 
-        ImGui::SetCursorPosY(TANK_ROLE_HEIGHT);
-        ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 20.0f);
-        texture = textureMap.find("tank_role_bg")->second;
-        ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+        setImage(TANK_ROLE_HEIGHT, ImGui::GetCursorPosX() + 20.0f, "tank_role_bg");
 
-        texture = textureMap.find("equipment_icon_bg")->second;
         for (int i = 0; i <= 5; i++) {
-            ImGui::SetCursorPosY(TANK_MODULE_HEIGHT);
+            float x = ImGui::GetCursorPosX() + (76 * i) + (13.0f - (i * 3));
             if (i == 0) {
-                ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15.0f);
+                x = 23.0f;
             }
-            else {
-                ImGui::SetCursorPosX(ImGui::GetCursorPosX() + (texture.my_image_width * i) + (13.0f - (i * 3)));
-            }
-            ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+            setImage(TANK_MODULE_HEIGHT, x, "equipment_icon_bg");
         }
 
-        ImGui::SetCursorPosY(ImGui::GetCursorPosY() - 4.0f);
-        ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 16.0f);
-        texture = textureMap.find("tank_blueprint_background")->second;
-        ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+        setImage(ImGui::GetCursorPosY() - 4.0f, ImGui::GetCursorPosX() + 16.0f, "tank_blueprint_background");
 
         texture = textureMap.find("equipment_icon_bg")->second;
         for (int i = 0; i <= 2; i++) {
+            float x = ImGui::GetCursorPosX() + (76 * i) + (12.0f - (i * 3));
             if (i == 0) {
-                ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15.0f);
+                x = 23.0f;
             }
-            else {
-                ImGui::SetCursorPosX(ImGui::GetCursorPosX() + (texture.my_image_width * i) + (12.0f - (i * 3)));
-            }
-            ImGui::SetCursorPosY(TANK_MODULE_HEIGHT_2);
-            ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+            setImage(TANK_MODULE_HEIGHT_2, x, "equipment_icon_bg");
         }
         ImGui::PushFont(TitleStatsFont);
         ImGui::SetCursorPosX(MIDDLE + 60.0f);
@@ -624,6 +706,7 @@ private:
         ImGui::Text("Misc. Stats");
         ImGui::PopFont();
 
+        //Base Stats 
         ImGui::PushFont(statsFont);
         ImGui::SetCursorPosY(TITLE_HEIGHT + 60.0f);
         ImGui::SetCursorPosX(MIDDLE + 60.0f);
@@ -634,7 +717,9 @@ private:
         ImGui::SetCursorPosY(TITLE_HEIGHT + 100.0f);
         ImGui::SetCursorPosX(MIDDLE + 60.0f);
         ImGui::Text("Supply use:");
+        //Base Stats 
 
+        //Combat Stats 
         ImGui::SetCursorPosX(MIDDLE + 235.0f);
         ImGui::SetCursorPosY(TITLE_HEIGHT + 60.0f);
         ImGui::Text("Soft attack:");
@@ -659,6 +744,7 @@ private:
         ImGui::SetCursorPosX(MIDDLE + 235.0f);
         ImGui::SetCursorPosY(TITLE_HEIGHT + 200.0f);
         ImGui::Text("Air attack:");
+        //Combat Stats
 
         ImGui::SetCursorPosX(MIDDLE + 410.0f);
         ImGui::SetCursorPosY(TITLE_HEIGHT + 60.0f);
@@ -695,6 +781,9 @@ private:
         switch (tank.tankModuleToInt(module)) {
         case 0: return Stats(tank.gun.stats);
         case 1: return Stats(tank.turret.stats);
+        case 2: return Stats(tank.suspension.stats);
+        case 3: return Stats(tank.armor.stats);
+        case 4: return Stats(tank.engine.stats);
         }
     }
 };
