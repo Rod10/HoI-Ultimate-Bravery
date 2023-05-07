@@ -45,6 +45,7 @@ Tank Tank::generateRandomTank()
     std::cout << "Turret Type: " << TurretType::turretTypeToString(turret.type) << std::endl;
 
     Gun gun = Gun::generateRandomGun(turret.allowedGun);
+    Role::Type role = *Utils::select_randomly(gun.roleAllowed.begin(), gun.roleAllowed.end());
 
     std::array<SpecialModule, 4> specialModules = SpecialModule::generateSpecialModule();
 
@@ -52,7 +53,7 @@ Tank Tank::generateRandomTank()
 
     Armor armor = Armor::generateRandomArmor();
     Engine engine = Engine::generateRandomEngine();
-    return Tank(tankType, tankVersion, turret, gun, specialModules, suspension, armor, engine, tankStats);
+    return Tank(tankType, tankVersion, turret, gun, specialModules, suspension, armor, engine, tankStats, role);
 }
 
 Tank Tank::generateRandomTank(TankType::Type type)
@@ -61,9 +62,9 @@ Tank Tank::generateRandomTank(TankType::Type type)
     Stats tankStats = Tank::getStatsFromVersion(type, tankVersion);
 
     Turret turret = Turret::generatingRandomTurret(type);
-    std::cout << "Turret Type: " << TurretType::turretTypeToString(turret.type) << std::endl;
 
     Gun gun = Gun::generateRandomGun(turret.allowedGun);
+    Role::Type role = *Utils::select_randomly(gun.roleAllowed.begin(), gun.roleAllowed.end());
 
     std::array<SpecialModule, 4> specialModules = SpecialModule::generateSpecialModule();
 
@@ -71,5 +72,5 @@ Tank Tank::generateRandomTank(TankType::Type type)
 
     Armor armor = Armor::generateRandomArmor();
     Engine engine = Engine::generateRandomEngine();
-    return Tank(type, tankVersion, turret, gun, specialModules, suspension, armor, engine, tankStats);
+    return Tank(type, tankVersion, turret, gun, specialModules, suspension, armor, engine, tankStats, role);
 }

@@ -7,7 +7,7 @@ std::map<Gun::Category, std::vector<Gun>> Gun::generateGunList()
     GunSize::Size gunSize = GunSize::Size::Small;
     Gun::Category gunCategory;
     Gun::Name gunName;
-    std::vector<std::string> roleAllowed;
+    std::vector<Role::Type> roleAllowed;
     std::ifstream fC("Assets/Data/Cannon.json");
     json GunData = json::parse(fC);
     fC.close();
@@ -46,12 +46,13 @@ std::map<Gun::Category, std::vector<Gun>> Gun::generateGunList()
                     }
                 }
                 if (data.key() == "roleAllowed") {
+                    roleAllowed.clear();
                     for (auto& role : data.value()) {
-                        roleAllowed.push_back(role);
+                        roleAllowed.push_back(Role::stringToType(role));
                     }
                 }
             }
-            gunList.push_back(Gun(gunCategory, gunName, gunSize, statsByType));
+            gunList.push_back(Gun(gunCategory, gunName, gunSize, statsByType, roleAllowed));
         }
         catList.insert(std::pair<Gun::Category, std::vector<Gun>>(gunCategory, gunList));
     }

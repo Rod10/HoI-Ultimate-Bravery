@@ -1,5 +1,6 @@
 #pragma once
 #include "gunsize.hpp"
+#include "role.hpp"
 #include "stats.hpp"
 #include "turret.hpp"
 #include "utils.hpp"
@@ -52,22 +53,26 @@ public:
 	Gun(Gun::Category category,
 		Gun::Name name,
 		GunSize::Size size,
-		std::map<Gun::Type, Stats> statsByType) :
+		std::map<Gun::Type, Stats> statsByType,
+		std::vector<Role::Type> roleAllowed) :
 		category(category),
 		name(name),
 		size(size),
-		statsByType(statsByType){}
+		statsByType(statsByType),
+		roleAllowed(roleAllowed) {}
 
 	Gun(Gun::Category category,
 		Gun::Name name,
 		GunSize::Size size,
 		Gun::Type type,
-		Stats stats) :
+		Stats stats,
+		std::vector<Role::Type> roleAllowed) :
 		category(category),
 		name(name),
 		size(size),
 		stats(stats),
-		type(type) {}
+		type(type),
+		roleAllowed(roleAllowed) {}
 
 	static std::string gunCategoryToString(Gun::Category& category) {
 		switch (category) {
@@ -270,5 +275,5 @@ public:
 	Gun::Name name;
 	std::map<Type, Stats> statsByType;
 	Stats stats;
-	std::vector<std::string> roleAllowed;
+	std::vector<Role::Type> roleAllowed;
 };

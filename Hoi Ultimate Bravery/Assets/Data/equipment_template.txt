@@ -1,0 +1,23 @@
+	create_equipment_variant = {
+		name = %tankName%
+		type = %tankTypeVersion%
+		parent_version = 0
+		modules = {
+			main_armament_slot = %gunName%
+			turret_type_slot = %turretName%
+			suspension_type_slot = %suspensionName%
+			armor_type_slot = %armorName%
+			engine_type_slot = %engineName%
+			special_type_slot_1 = %specialName_1%
+			special_type_slot_2 = %specialName_2%
+			special_type_slot_3 = %specialName_3%
+			special_type_slot_4 = %specialName_4%
+		}
+		upgrades = {
+			tank_nsb_engine_upgrade = %engineUpgrade%
+			tank_nsb_armor_upgrade = %armorUpgrade%
+		}
+		active = yes
+		obsolete = no
+		icon = "GFX_gwtank_medium"
+	}

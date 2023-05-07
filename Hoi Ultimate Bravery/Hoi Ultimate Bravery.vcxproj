@@ -167,6 +167,7 @@
     <ClCompile Include="Librairies\Imgui\imgui_tables.cpp" />
     <ClCompile Include="Librairies\Imgui\imgui_widgets.cpp" />
     <ClCompile Include="ressources.cpp" />
+    <ClCompile Include="role.cpp" />
     <ClCompile Include="special.cpp" />
     <ClCompile Include="stats.cpp" />
     <ClCompile Include="suspension.cpp" />
@@ -205,6 +206,7 @@
     <ClInclude Include="Librairies\Soil\stb_image_aug.h" />
     <ClInclude Include="my_app.hpp" />
     <ClInclude Include="ressources.hpp" />
+    <ClInclude Include="role.hpp" />
     <ClInclude Include="special.hpp" />
     <ClInclude Include="stats.hpp" />
     <ClInclude Include="suspension.hpp" />

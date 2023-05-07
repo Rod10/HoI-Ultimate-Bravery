@@ -6,6 +6,13 @@
 #include <glfw3.h>
 #include <stb_image_aug.h>
 
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <map>
+#include <sstream>
+#include <string>
+#include <unordered_map>
 class Utils
 {
     public :
@@ -32,6 +39,7 @@ class Utils
 
             return hash;
         }
+
         // Simple helper function to load an image into a OpenGL texture with common settings
         static bool LoadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height)
         {
@@ -65,6 +73,32 @@ class Utils
             *out_height = image_height;
 
             return true;
+        }
+
+        static std::unordered_map<int, std::string> loadTranslation(std::string path) {
+            std::unordered_map<int, std::string> localizedStrings;
+            std::ifstream infile(path);
+            std::string line;
+            std::vector<std::vector<std::string>> content;
+            std::vector<std::string> row;
+            while (std::getline(infile, line))
+            {
+                row.clear();
+                std::stringstream iss(line);
+                std::string token;
+                char delimiter = ',';
+                std::string value;
+                while (std::getline(iss, value, ','))
+                    row.push_back(value);
+                content.push_back(row);
+            }
+
+            for (std::vector<std::string> pair : content) {
+                int key = Utils::hash(pair[0].c_str());
+                std::string translation = pair[1];
+                localizedStrings.insert(std::pair<int, std::string>(key, translation));
+            }
+            return localizedStrings;
         }
 };
 

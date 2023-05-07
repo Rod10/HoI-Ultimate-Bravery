@@ -2,6 +2,7 @@
 #include "armor.hpp"
 #include "engine.hpp"
 #include "gun.hpp"
+#include "role.hpp"
 #include "special.hpp"
 #include "suspension.hpp"
 #include "tanktype.hpp"
@@ -36,7 +37,8 @@ public:
 		Suspension suspension,
 		Armor armor,
 		Engine engine,
-		Stats stats) :
+		Stats stats,
+		Role::Type role) :
 		type(type),
 		version(version),
 		turret(turret),
@@ -45,7 +47,8 @@ public:
 		suspension(suspension),
 		armor(armor),
 		engine(engine),
-		stats(stats) {
+		stats(stats),
+		role(role){
 		engineLevel = rand() % 20;
 		armorLevel = rand() % 20;
 	}
@@ -59,6 +62,7 @@ public:
 	Armor armor;
 	Engine engine;
 	Stats stats;
+	Role::Type role;
 	int engineLevel;
 	int armorLevel;
 
@@ -89,6 +93,15 @@ public:
 		case Tank::Version::Basic: return "basic";
 		case Tank::Version::Improved: return "improved";
 		case Tank::Version::Advanced: return "advanced";
+		}
+	}
+
+	static int tankVersionToInt(Tank::Version& version) {
+		switch (version) {
+		case Tank::Version::InterWar: return 0;
+		case Tank::Version::Basic: return 1;
+		case Tank::Version::Improved: return 2;
+		case Tank::Version::Advanced: return 3;
 		}
 	}
 	
