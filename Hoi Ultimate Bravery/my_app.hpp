@@ -633,8 +633,106 @@ public:
             width += style.ItemSpacing.x;
             AlignForWidth(width);
             if (ImGui::Button("Import into game")) {
-                /*generateCountryFile();
-                generateIdeaFile();*/
+                /*generateCountryFile();*/std::vector<std::string> fileLines;
+
+                std::ifstream  src("C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\history\\countries\\GER - Germany.txt", std::ios::binary);
+                std::ofstream  backUp("./Assets/Data/GER - Germany.txt.back", std::ios::binary);
+                std::ofstream  newFile("./Assets/Data/GER - Germany.txt", std::ios::binary);
+                std::string line;
+                while (std::getline(src, line)) {
+                    fileLines.push_back(line);
+                }
+                src.close();
+                if (std::rename("C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\history\\countries\\GER - Germany.txt",
+                    "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\history\\countries\\GER - Germany.txt.back") != 0)
+                    perror("Error moving file");
+                else
+                    std::cout << "File moved successfully" << std::endl;
+
+                for (auto& line : fileLines) {
+                    backUp << line << std::endl;
+                }
+                backUp.close();
+                fileLines.insert(fileLines.begin() + 394, "ultimate_bravery");
+                int linesToDeleteStart = 561;
+                int linesToDeleteEnd = 638;
+                int lineToDeleteCount = linesToDeleteEnd - linesToDeleteStart;
+
+                std::vector<std::string> tempLine = fileLines;
+
+                for (int i = 0; i < fileLines.size(); i++) {
+                    if (i >= linesToDeleteStart && i <= linesToDeleteEnd && lineToDeleteCount != 0) {
+                        fileLines.erase(fileLines.begin() + 561);
+                        lineToDeleteCount--;
+                    }
+                }
+
+
+                std::vector<std::string> templateLine;
+                int counterTemplateLine = 0;
+
+                std::ifstream templateFile("./Assets/Data/equipment_template.txt", std::ios::binary);
+                int index;
+                for (auto& [type, tank] : tankList) {
+                    std::vector<std::string> replacementList{ "Test",
+                        std::format("{0}_{1}_chassis_{2}", Tank::tankTypeToString(tankList.find(type)->second.type), Role::typeToString(tankList.find(type)->second.role), Tank::tankVersionToInt(tankList.find(type)->second.version)),
+                        converterToGameName.find(Utils::hash(std::format("{0}_{1}", Gun::gunNameToString(tankList.find(type)->second.gun.name), Gun::typeToString(tankList.find(type)->second.gun.type)).c_str()))->second,
+                        converterToGameName.find(Utils::hash(std::format("{0}_{1}", TurretType::turretTypeToString(tankList.find(type)->second.turret.type), tankList.find(type)->second.turret.crew).c_str()))->second,
+                        converterToGameName.find(Utils::hash(Suspension::typeToString(tankList.find(type)->second.suspension.type).c_str()))->second,
+                        converterToGameName.find(Utils::hash(Armor::typeToString(tankList.find(type)->second.armor.type).c_str()))->second,
+                        converterToGameName.find(Utils::hash(Engine::typeToString(tankList.find(type)->second.engine.type).c_str()))->second,
+                        converterToGameName.find(Utils::hash(SpecialModule::typeToString(tankList.find(type)->second.specialModules[0].type).c_str()))->second,
+                        converterToGameName.find(Utils::hash(SpecialModule::typeToString(tankList.find(type)->second.specialModules[1].type).c_str()))->second,
+                        converterToGameName.find(Utils::hash(SpecialModule::typeToString(tankList.find(type)->second.specialModules[2].type).c_str()))->second,
+                        converterToGameName.find(Utils::hash(SpecialModule::typeToString(tankList.find(type)->second.specialModules[3].type).c_str()))->second,
+                        std::to_string(tankList.find(type)->second.engineLevel),
+                        std::to_string(tankList.find(type)->second.armorLevel),
+                    };
+                    std::vector<std::string> tokenList{ "%tankName%",
+                        "%tankTypeVersion%",
+                        "%gunName%",
+                        "%turretName%",
+                        "%suspensionName%",
+                        "%armorName%",
+                        "%engineName%",
+                        "%specialName_1%",
+                        "%specialName_2%",
+                        "%specialName_3%",
+                        "%specialName_4%",
+                        "%engineUpgrade%",
+                        "%armorUpgrade%" };
+                    while (std::getline(templateFile, line)) {
+                        for (int i = 0; i < tokenList.size(); i++) {
+                            while ((index = line.find(tokenList[i])) != std::string::npos) {
+                                line.replace(line.find(tokenList[i]), tokenList[i].length(), replacementList[i]);
+                            }
+                        }
+                        templateLine.push_back(line);
+                    }
+                }
+
+                for (int i = 0; i < fileLines.size(); i++) {
+                    if (i >= linesToDeleteStart && counterTemplateLine < templateLine.size()) {
+                        fileLines.insert(fileLines.begin() + i, templateLine[counterTemplateLine]);
+                        counterTemplateLine++;
+                    }
+                }
+
+
+                for (int i = 0; i < fileLines.size(); i++) {
+                    newFile << fileLines[i] << std::endl;
+                }
+                newFile.close();
+                /*if (std::rename("./Assets/Data/GER - Germany.txt",
+                    "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\history\\countries\\GER - Germany.txt") != 0) {
+                    perror("Error moving file");
+                }
+                else {
+                    std::cout << "File moved successfully" << std::endl;
+                };*/
+
+                
+                //generateIdeaFile();
             }
             ImGui::SameLine();
             if (ImGui::Button("Regenerate")) {
@@ -1103,6 +1201,7 @@ private:
             backUp << line << std::endl;
         }
         backUp.close();
+        fileLines.insert(fileLines.begin() + 394, "ultimate_bravery");
         int linesToDeleteStart = 561;
         int linesToDeleteEnd = 638;
         int lineToDeleteCount = linesToDeleteEnd - linesToDeleteStart;
@@ -1166,6 +1265,7 @@ private:
             }
         }
 
+
         for (int i = 0; i < fileLines.size(); i++) {
             newFile << fileLines[i] << std::endl;
         }
@@ -1200,7 +1300,7 @@ private:
             backUp << line << std::endl;
         }
         backUp.close();
-        int linesToAddStart = 4;
+        int linesToAddStart = 3;
         int counterTemplateLine = 0;
         std::vector<std::string> newLines;
         std::ifstream ideaFile("./Assets/Data/idea.txt", std::ios::binary);
@@ -1213,6 +1313,7 @@ private:
                 counterTemplateLine++;
             }
         }
+
         for (int i = 0; i < fileLines.size(); i++) {
             newFile << fileLines[i] << std::endl;
         }
