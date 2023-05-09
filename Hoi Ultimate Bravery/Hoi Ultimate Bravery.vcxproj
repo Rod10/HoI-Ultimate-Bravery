@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="armor.cpp" />
+    <ClCompile Include="country.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="gun.cpp" />
     <ClCompile Include="gunsize.cpp" />
@@ -181,6 +182,7 @@
   <ItemGroup>
     <ClInclude Include="app_base.hpp" />
     <ClInclude Include="armor.hpp" />
+    <ClInclude Include="country.hpp" />
     <ClInclude Include="engine.hpp" />
     <ClInclude Include="gun.hpp" />
     <ClInclude Include="gunsize.hpp" />

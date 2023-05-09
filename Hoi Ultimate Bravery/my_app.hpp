@@ -28,6 +28,7 @@
 #include <sstream>
 #include <string>
 #include <time.h>
+#include "country.hpp"
 using json = nlohmann::json;
 
 class MyApp : public AppBase
@@ -757,6 +758,13 @@ public:
         }
         //All Type
 
+        // Options
+        if (optionWindowOpen) {
+            ImGui::Begin("options", &optionWindowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
+            ImGui::End();
+        }
+        // Options
+
         ImGui::End();
     }
 
@@ -765,6 +773,7 @@ private:
     std::map<TankType::Type, Tank> tankList;
     std::unordered_map<TankType::Type, Stats> newTankStats;
     std::vector<std::string> tankModule = { "gun", "turret", "suspension", "engine", "armor" };
+    std::vector<Country> countryList = Country::generateCountryList();
 
     const float TITLE_HEIGHT = 24.0f;
     const float TANK_NAME_HEIGHT = 63.0f;

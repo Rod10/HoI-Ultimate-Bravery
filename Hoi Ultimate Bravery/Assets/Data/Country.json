@@ -1,0 +1,10 @@
+{
+    "Germany": {
+        "name": "Germany",
+        "tag": "GER",
+        "countryPosIdea": 394,
+        "linesToDeleteStart": 561,
+        "linesToDeleteEnd": 638,
+        "ideaPosIdea": 3
+    }
+}
