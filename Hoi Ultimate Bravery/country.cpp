@@ -8,7 +8,6 @@ std::vector<Country> Country::generateCountryList()
     json data = json::parse(fC);
     fC.close();
     for (auto& countryData : data.items()) {
-        std::cout << countryData.value().at("name") << std::endl;
         std::string name = countryData.value().at("name");
         std::string tag = countryData.value().at("tag");
         int countryPosIdea = countryData.value().at("countryPosIdea");

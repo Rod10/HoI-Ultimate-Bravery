@@ -11,6 +11,7 @@ using json = nlohmann::json;
 class Country
 {
 public:
+	Country() {};
 	Country(std::string name,
 		std::string tag,
 		int countryPosIdea,

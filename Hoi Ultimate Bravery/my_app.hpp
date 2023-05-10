@@ -1,6 +1,7 @@
 #include "app_base.hpp"
 
 #include "armor.hpp"
+#include "country.hpp"
 #include "engine.hpp"
 #include "gun.hpp"
 #include "special.hpp"
@@ -28,7 +29,7 @@
 #include <sstream>
 #include <string>
 #include <time.h>
-#include "country.hpp"
+
 using json = nlohmann::json;
 
 class MyApp : public AppBase
@@ -377,6 +378,32 @@ public:
             ImGui::Begin("generate", &generateWindowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
             ImGui::PopStyleColor();
             createLabelWithPosition("Generate", MIDDLE);
+
+            off = calculatePos(MIDDLE, "Country: ");
+            createLabelWithPosition("Country: ", off, ImGui::GetCursorPosY() + 10.0f);
+            ImGui::SameLine();
+            static ImGuiComboFlags flags = 0;
+            Country *items = new Country[countryListSize];
+            std::copy(countryList.begin(), countryList.end(), items);
+            static int item_current_idx = 0; // Here we store our selection data as an index.
+            const char* combo_preview_value = items[item_current_idx].name.c_str();  // Pass in the preview value visible before opening the combo (it could be anything)
+            if (ImGui::BeginCombo("##", combo_preview_value, flags))
+            {
+                for (int n = 0; n < IM_ARRAYSIZE(items); n++)
+                {
+                    const bool is_selected = (item_current_idx == n);
+                    if (ImGui::Selectable(items[n].name.c_str(), is_selected))
+                        item_current_idx = n;
+
+                    // Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+                    if (is_selected)
+                        ImGui::SetItemDefaultFocus();
+                }
+                ImGui::EndCombo();
+            }
+            delete[] items;
+            ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 10.0f);
+
             createLabelWithPosition("Tank: ", LEFT);
             ImGui::PushStyleColor(ImGuiCol_Button, buttonColor);
             ImGuiStyle& style = ImGui::GetStyle();
@@ -774,6 +801,7 @@ private:
     std::unordered_map<TankType::Type, Stats> newTankStats;
     std::vector<std::string> tankModule = { "gun", "turret", "suspension", "engine", "armor" };
     std::vector<Country> countryList = Country::generateCountryList();
+    const int countryListSize = countryList.size();
 
     const float TITLE_HEIGHT = 24.0f;
     const float TANK_NAME_HEIGHT = 63.0f;
