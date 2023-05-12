@@ -4,6 +4,7 @@
 #include "country.hpp"
 #include "engine.hpp"
 #include "gun.hpp"
+#include "settings.hpp"
 #include "special.hpp"
 #include "suspension.hpp"
 #include "tank.hpp"
@@ -12,6 +13,8 @@
 #include "turret.hpp"
 #include "turrettype.hpp"
 #include "utils.hpp"
+
+#include "imgui_stdlib.h"
 
 #include <algorithm>
 #include <array>
@@ -383,17 +386,17 @@ public:
             createLabelWithPosition("Country: ", off, ImGui::GetCursorPosY() + 10.0f);
             ImGui::SameLine();
             static ImGuiComboFlags flags = 0;
-            Country *items = new Country[countryListSize];
-            std::copy(countryList.begin(), countryList.end(), items);
             static int item_current_idx = 0; // Here we store our selection data as an index.
-            const char* combo_preview_value = items[item_current_idx].name.c_str();  // Pass in the preview value visible before opening the combo (it could be anything)
+            const char* combo_preview_value = countryList[item_current_idx].name.c_str();  // Pass in the preview value visible before opening the combo (it could be anything)
             if (ImGui::BeginCombo("##", combo_preview_value, flags))
             {
-                for (int n = 0; n < IM_ARRAYSIZE(items); n++)
+                for (int n = 0; n < countryList.size(); n++)
                 {
                     const bool is_selected = (item_current_idx == n);
-                    if (ImGui::Selectable(items[n].name.c_str(), is_selected))
+                    if (ImGui::Selectable(countryList[n].name.c_str(), is_selected)) {
                         item_current_idx = n;
+                        country = &countryList[n];
+                    }
 
                     // Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
                     if (is_selected)
@@ -401,7 +404,6 @@ public:
                 }
                 ImGui::EndCombo();
             }
-            delete[] items;
             ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 10.0f);
 
             createLabelWithPosition("Tank: ", LEFT);
@@ -780,14 +782,46 @@ public:
                 generateWindowOpen = true;
                 allGenerationWindowOpen = false;
             }
-            ImGui::PopFont();
+            ImGui::PopFont();   
             ImGui::End();
         }
         //All Type
 
         // Options
         if (optionWindowOpen) {
+            off = calculatePos(MIDDLE, 250);
+            ImGui::SetNextWindowPos(ImVec2(off, 200.0f));
             ImGui::Begin("options", &optionWindowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
+            createLabelWithPosition("Options", MIDDLE);
+
+            ImGui::Text("Game Path: ");
+            ImGuiStyle& style = ImGui::GetStyle();
+            float width = 0.0f;
+            width += ImGui::CalcTextSize("Game Path: ").x;
+            width += style.ItemSpacing.x;
+            width += ImGui::CalcTextSize(settings.gamePath.data()).x;
+            width += style.ItemSpacing.x;
+            AlignForWidth(width);
+            ImGui::SameLine();
+            //char &test = settings.gamePath.data();
+            //ImGui::InputText("test", &test);
+            std::cout << settings.gamePath << std::endl;
+
+            width = 0.0f;
+            width += ImGui::CalcTextSize("Save").x;
+            width += style.ItemSpacing.x;
+            width += ImGui::CalcTextSize("Back").x;
+            width += style.ItemSpacing.x;
+            AlignForWidth(width);
+            if (ImGui::Button("Save")) {    
+                json settingsFile;
+                //settingsFile["gamePath"] = 
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("Back")) {
+                mainMenuOpen = true;
+                optionWindowOpen = false;
+            }
             ImGui::End();
         }
         // Options
@@ -801,7 +835,8 @@ private:
     std::unordered_map<TankType::Type, Stats> newTankStats;
     std::vector<std::string> tankModule = { "gun", "turret", "suspension", "engine", "armor" };
     std::vector<Country> countryList = Country::generateCountryList();
-    const int countryListSize = countryList.size();
+    Country* country;
+    Settings settings;
 
     const float TITLE_HEIGHT = 24.0f;
     const float TANK_NAME_HEIGHT = 63.0f;

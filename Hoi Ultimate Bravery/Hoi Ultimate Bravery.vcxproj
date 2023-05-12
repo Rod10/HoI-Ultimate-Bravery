@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\source\repos\Hoi Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui_stdlib.cpp" />
     <ClCompile Include="armor.cpp" />
     <ClCompile Include="country.cpp" />
     <ClCompile Include="engine.cpp" />
@@ -169,6 +170,7 @@
     <ClCompile Include="Librairies\Imgui\imgui_widgets.cpp" />
     <ClCompile Include="ressources.cpp" />
     <ClCompile Include="role.cpp" />
+    <ClCompile Include="settings.cpp" />
     <ClCompile Include="special.cpp" />
     <ClCompile Include="stats.cpp" />
     <ClCompile Include="suspension.cpp" />
@@ -180,6 +182,7 @@
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\source\repos\Hoi Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui_stdlib.h" />
     <ClInclude Include="app_base.hpp" />
     <ClInclude Include="armor.hpp" />
     <ClInclude Include="country.hpp" />
@@ -209,6 +212,7 @@
     <ClInclude Include="my_app.hpp" />
     <ClInclude Include="ressources.hpp" />
     <ClInclude Include="role.hpp" />
+    <ClInclude Include="settings.hpp" />
     <ClInclude Include="special.hpp" />
     <ClInclude Include="stats.hpp" />
     <ClInclude Include="suspension.hpp" />

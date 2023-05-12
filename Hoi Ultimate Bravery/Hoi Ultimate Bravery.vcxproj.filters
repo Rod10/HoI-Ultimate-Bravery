@@ -135,6 +135,12 @@
     <ClCompile Include="country.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="settings.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\repos\Hoi Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui_stdlib.cpp">
+      <Filter>Fichiers sources\imgui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Librairies\Imgui\imstb_textedit.h">
@@ -250,6 +256,12 @@
     </ClInclude>
     <ClInclude Include="country.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="settings.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\repos\Hoi Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui_stdlib.h">
+      <Filter>Fichiers d%27en-tête\imgui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
