@@ -147,12 +147,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\source\repos\Hoi Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui_stdlib.cpp" />
     <ClCompile Include="armor.cpp" />
     <ClCompile Include="country.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="gun.cpp" />
     <ClCompile Include="gunsize.cpp" />
+    <ClCompile Include="Librairies\Imgui\imgui_stdlib.cpp" />
     <ClCompile Include="Librairies\Implot\implot.cpp" />
     <ClCompile Include="Librairies\Implot\implot_demo.cpp" />
     <ClCompile Include="Librairies\Implot\implot_items.cpp" />
@@ -182,7 +182,6 @@
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\source\repos\Hoi Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui_stdlib.h" />
     <ClInclude Include="app_base.hpp" />
     <ClInclude Include="armor.hpp" />
     <ClInclude Include="country.hpp" />
@@ -197,6 +196,7 @@
     <ClInclude Include="Librairies\Imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="Librairies\Imgui\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="Librairies\Imgui\imgui_internal.h" />
+    <ClInclude Include="Librairies\Imgui\imgui_stdlib.h" />
     <ClInclude Include="Librairies\Imgui\imstb_rectpack.h" />
     <ClInclude Include="Librairies\Imgui\imstb_textedit.h" />
     <ClInclude Include="Librairies\Imgui\imstb_truetype.h" />

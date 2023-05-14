@@ -6,7 +6,7 @@ Settings::Settings() {
     fC.close();
 
     gamePath = data["gamePath"];
-    language = data["language"];
+    //language = data["language"];
 }
 
 std::string Settings::getGamepath()

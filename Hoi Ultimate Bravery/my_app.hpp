@@ -340,7 +340,7 @@ public:
         ImGui::PushFont(titleFont);
         ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(59, 65, 57, 255));
         ImGui::PushStyleColor(ImGuiCol_WindowBg, backgroundColor);
-        ImGui::Begin("Main Window", &mainWindowOpen, 7); // Create a window called "Hello, world!" and append into it.
+        ImGui::Begin("Main Window", &mainWindowOpen, 7 | ImGuiWindowFlags_NoInputs); // Create a window called "Hello, world!" and append into it.
         createLabelWithPosition("HoI Ultimate Bravery", MIDDLE);
         ImGui::PopStyleColor();
         ImGui::PopStyleColor();
@@ -803,9 +803,8 @@ public:
             width += style.ItemSpacing.x;
             AlignForWidth(width);
             ImGui::SameLine();
-            //char &test = settings.gamePath.data();
-            //ImGui::InputText("test", &test);
-            std::cout << settings.gamePath << std::endl;
+            std::string *gamePath = &settings.gamePath;
+            ImGui::InputText("##", gamePath);
 
             width = 0.0f;
             width += ImGui::CalcTextSize("Save").x;
@@ -813,9 +812,11 @@ public:
             width += ImGui::CalcTextSize("Back").x;
             width += style.ItemSpacing.x;
             AlignForWidth(width);
-            if (ImGui::Button("Save")) {    
+            if (ImGui::Button("Save")) {
                 json settingsFile;
-                //settingsFile["gamePath"] = 
+                settingsFile["gamePath"] = *gamePath;
+                std::ofstream file("Assets/Data/Settings.json");
+                file << settingsFile;
             }
             ImGui::SameLine();
             if (ImGui::Button("Back")) {
