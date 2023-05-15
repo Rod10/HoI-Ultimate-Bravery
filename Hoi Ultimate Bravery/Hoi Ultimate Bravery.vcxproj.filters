@@ -13,32 +13,50 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Fichiers sources\imgui">
-      <UniqueIdentifier>{536127d8-6ad4-4303-b0fb-2374b04b3d21}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\imgui">
-      <UniqueIdentifier>{fa1a83b3-ecf6-4732-8caf-ac4e91508263}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\glfw">
-      <UniqueIdentifier>{fb9166ce-3338-40fe-934a-da44709af773}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\json">
-      <UniqueIdentifier>{24d24455-adec-4a2f-b8d8-76c4d195bb49}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\implot">
-      <UniqueIdentifier>{522c45e5-c1fc-4169-aafb-03c5b8efec47}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\implot">
-      <UniqueIdentifier>{8446cc13-c72f-4d15-87e9-1b1593ffd57b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers sources\data">
       <UniqueIdentifier>{8ffe7f15-3c01-4b71-8a82-59fdcd9191e1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête\soil">
+    <Filter Include="Fichiers d%27en-tête\Lib">
+      <UniqueIdentifier>{065909d9-2bfc-4fac-b036-fd0650dac8b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Lib\soil">
       <UniqueIdentifier>{a09262e7-fc2c-4dee-9497-60953c4a73f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers sources\soil">
+    <Filter Include="Fichiers d%27en-tête\Lib\json">
+      <UniqueIdentifier>{24d24455-adec-4a2f-b8d8-76c4d195bb49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Lib\implot">
+      <UniqueIdentifier>{522c45e5-c1fc-4169-aafb-03c5b8efec47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Lib\imgui">
+      <UniqueIdentifier>{fa1a83b3-ecf6-4732-8caf-ac4e91508263}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Lib\glfw">
+      <UniqueIdentifier>{fb9166ce-3338-40fe-934a-da44709af773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Lib">
+      <UniqueIdentifier>{33582a08-9ba4-491a-a8ba-5ae98071567e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Lib\imgui">
+      <UniqueIdentifier>{536127d8-6ad4-4303-b0fb-2374b04b3d21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Lib\implot">
+      <UniqueIdentifier>{8446cc13-c72f-4d15-87e9-1b1593ffd57b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Lib\soil">
       <UniqueIdentifier>{fa795225-bbf7-4fff-8cc1-1a30711ca539}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Tank">
+      <UniqueIdentifier>{2a08fdc7-ac17-4069-8782-1b12f493e696}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Tank">
+      <UniqueIdentifier>{738ed386-a743-45b5-bed3-b669c3b19ae4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Utils">
+      <UniqueIdentifier>{2df8e1e8-1a2c-43da-b553-d4de34eb0d98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Utils">
+      <UniqueIdentifier>{5e9c27c0-1cc8-4c02-abdd-0f27fde536ae}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -46,91 +64,46 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Librairies\Imgui\imgui_impl_glfw.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
+      <Filter>Fichiers sources\Lib\imgui</Filter>
     </ClCompile>
     <ClCompile Include="Librairies\Imgui\imgui_impl_opengl3.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
+      <Filter>Fichiers sources\Lib\imgui</Filter>
     </ClCompile>
     <ClCompile Include="Librairies\Imgui\imgui_tables.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
+      <Filter>Fichiers sources\Lib\imgui</Filter>
     </ClCompile>
     <ClCompile Include="Librairies\Imgui\imgui_widgets.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
+      <Filter>Fichiers sources\Lib\imgui</Filter>
     </ClCompile>
     <ClCompile Include="Librairies\Imgui\imgui.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
+      <Filter>Fichiers sources\Lib\imgui</Filter>
     </ClCompile>
     <ClCompile Include="Librairies\Imgui\imgui_demo.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
+      <Filter>Fichiers sources\Lib\imgui</Filter>
     </ClCompile>
     <ClCompile Include="Librairies\Imgui\imgui_draw.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
+      <Filter>Fichiers sources\Lib\imgui</Filter>
     </ClCompile>
     <ClCompile Include="Librairies\Implot\implot_items.cpp">
-      <Filter>Fichiers sources\implot</Filter>
+      <Filter>Fichiers sources\Lib\implot</Filter>
     </ClCompile>
     <ClCompile Include="Librairies\Implot\implot.cpp">
-      <Filter>Fichiers sources\implot</Filter>
+      <Filter>Fichiers sources\Lib\implot</Filter>
     </ClCompile>
     <ClCompile Include="Librairies\Implot\implot_demo.cpp">
-      <Filter>Fichiers sources\implot</Filter>
-    </ClCompile>
-    <ClCompile Include="tank.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="turret.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="gun.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="stats.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="ressources.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Lib\implot</Filter>
     </ClCompile>
     <ClCompile Include="Librairies\Soil\stb_image_aug.c">
-      <Filter>Fichiers sources\soil</Filter>
+      <Filter>Fichiers sources\Lib\soil</Filter>
     </ClCompile>
     <ClCompile Include="Librairies\Soil\image_DXT.c">
-      <Filter>Fichiers sources\soil</Filter>
+      <Filter>Fichiers sources\Lib\soil</Filter>
     </ClCompile>
     <ClCompile Include="Librairies\Soil\image_helper.c">
-      <Filter>Fichiers sources\soil</Filter>
+      <Filter>Fichiers sources\Lib\soil</Filter>
     </ClCompile>
     <ClCompile Include="Librairies\Soil\SOIL.c">
-      <Filter>Fichiers sources\soil</Filter>
-    </ClCompile>
-    <ClCompile Include="utils.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="special.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="suspension.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="engine.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="tanktype.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="turrettype.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="gunsize.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="armor.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="texture.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="role.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Lib\soil</Filter>
     </ClCompile>
     <ClCompile Include="country.cpp">
       <Filter>Fichiers sources</Filter>
@@ -139,45 +112,99 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Librairies\Imgui\imgui_stdlib.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
+      <Filter>Fichiers sources\Lib\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="armor.cpp">
+      <Filter>Fichiers sources\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="engine.cpp">
+      <Filter>Fichiers sources\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="gun.cpp">
+      <Filter>Fichiers sources\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="gunsize.cpp">
+      <Filter>Fichiers sources\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="ressources.cpp">
+      <Filter>Fichiers sources\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="role.cpp">
+      <Filter>Fichiers sources\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="special.cpp">
+      <Filter>Fichiers sources\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="stats.cpp">
+      <Filter>Fichiers sources\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="suspension.cpp">
+      <Filter>Fichiers sources\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="tank.cpp">
+      <Filter>Fichiers sources\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="tanktype.cpp">
+      <Filter>Fichiers sources\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="turret.cpp">
+      <Filter>Fichiers sources\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="turrettype.cpp">
+      <Filter>Fichiers sources\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Fichiers sources\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="texture.cpp">
+      <Filter>Fichiers sources\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="constant.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer.cpp">
+      <Filter>Fichiers sources\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="icon.cpp">
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Librairies\Imgui\imstb_textedit.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\imgui</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\Imgui\imstb_truetype.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\imgui</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\Imgui\imconfig.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\imgui</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\Imgui\imgui.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\imgui</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\Imgui\imgui_impl_glfw.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\imgui</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\Imgui\imgui_impl_opengl3.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\imgui</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\Imgui\imgui_impl_opengl3_loader.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\imgui</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\Imgui\imgui_internal.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\imgui</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\Imgui\imstb_rectpack.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\imgui</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\GLFW\glfw3.h">
-      <Filter>Fichiers d%27en-tête\glfw</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\glfw</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\GLFW\glfw3native.h">
-      <Filter>Fichiers d%27en-tête\glfw</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\glfw</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\Json\json.hpp">
-      <Filter>Fichiers d%27en-tête\json</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\json</Filter>
     </ClInclude>
     <ClInclude Include="app_base.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
@@ -186,82 +213,91 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\Implot\implot.h">
-      <Filter>Fichiers d%27en-tête\implot</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\implot</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\Implot\implot_internal.h">
-      <Filter>Fichiers d%27en-tête\implot</Filter>
-    </ClInclude>
-    <ClInclude Include="tank.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="turret.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="gun.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="stats.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="ressources.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\implot</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\Soil\stbi_DDS_aug.h">
-      <Filter>Fichiers d%27en-tête\soil</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\soil</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\Soil\stbi_DDS_aug_c.h">
-      <Filter>Fichiers d%27en-tête\soil</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\soil</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\Soil\image_DXT.h">
-      <Filter>Fichiers d%27en-tête\soil</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\soil</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\Soil\image_helper.h">
-      <Filter>Fichiers d%27en-tête\soil</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\soil</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\Soil\SOIL.h">
-      <Filter>Fichiers d%27en-tête\soil</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\soil</Filter>
     </ClInclude>
     <ClInclude Include="Librairies\Soil\stb_image_aug.h">
-      <Filter>Fichiers d%27en-tête\soil</Filter>
-    </ClInclude>
-    <ClInclude Include="utils.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="special.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="suspension.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="engine.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="tanktype.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="turrettype.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="gunsize.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="armor.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="texture.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="role.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Lib\soil</Filter>
     </ClInclude>
     <ClInclude Include="country.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="Librairies\Imgui\imgui_stdlib.h">
+      <Filter>Fichiers d%27en-tête\Lib\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="armor.hpp">
+      <Filter>Fichiers d%27en-tête\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="engine.hpp">
+      <Filter>Fichiers d%27en-tête\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="gun.hpp">
+      <Filter>Fichiers d%27en-tête\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="gunsize.hpp">
+      <Filter>Fichiers d%27en-tête\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="turrettype.hpp">
+      <Filter>Fichiers d%27en-tête\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="turret.hpp">
+      <Filter>Fichiers d%27en-tête\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="tanktype.hpp">
+      <Filter>Fichiers d%27en-tête\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="tank.hpp">
+      <Filter>Fichiers d%27en-tête\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="suspension.hpp">
+      <Filter>Fichiers d%27en-tête\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="stats.hpp">
+      <Filter>Fichiers d%27en-tête\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="special.hpp">
+      <Filter>Fichiers d%27en-tête\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="role.hpp">
+      <Filter>Fichiers d%27en-tête\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="ressources.hpp">
+      <Filter>Fichiers d%27en-tête\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.hpp">
+      <Filter>Fichiers d%27en-tête\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="texture.hpp">
+      <Filter>Fichiers d%27en-tête\Utils</Filter>
+    </ClInclude>
     <ClInclude Include="settings.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Librairies\Imgui\imgui_stdlib.h">
-      <Filter>Fichiers d%27en-tête\imgui</Filter>
+    <ClInclude Include="constant.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer.hpp">
+      <Filter>Fichiers d%27en-tête\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="icon.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

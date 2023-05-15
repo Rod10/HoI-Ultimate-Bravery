@@ -1,4 +1,11 @@
 #pragma once
+#include "constant.hpp"
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
+#include "implot.h"
+#include "SOIL.h"
+
 #define LOCSTR(token) hash(#token)
 #define STB_IMAGE_IMPLEMENTATION
 #include <iostream>
@@ -13,6 +20,13 @@
 #include <sstream>
 #include <string>
 #include <unordered_map>
+
+#include <cstdlib>
+#include <stdio.h>
+#if defined(IMGUI_IMPL_OPENGL_ES2)
+#include <GLES2/gl2.h>
+#endif
+#include <GLFW/glfw3.h> // Will drag system OpenGL headers
 class Utils
 {
     public :
@@ -99,6 +113,26 @@ class Utils
                 localizedStrings.insert(std::pair<int, std::string>(key, translation));
             }
             return localizedStrings;
+        }
+
+        static float calculatePos(Constant::Position position, std::string text) {
+            ImGuiStyle& style = ImGui::GetStyle();
+
+            float size = ImGui::CalcTextSize(text.c_str()).x - style.FramePadding.x * 2.0f;
+            float avail = ImGui::GetContentRegionAvail().x;
+
+            float off = (avail - size) * (position / 1000.f);
+            return off;
+        }
+
+        static float calculatePos(Constant::Position position, int width) {
+            ImGuiStyle& style = ImGui::GetStyle();
+
+            float size = width - style.FramePadding.x * 2.0f;
+            float avail = ImGui::GetContentRegionAvail().x;
+
+            float off = (avail - size) * (position / 1000.f);
+            return off;
         }
 };
 
