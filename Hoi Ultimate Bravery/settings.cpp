@@ -6,7 +6,12 @@ Settings::Settings() {
     fC.close();
 
     gamePath = data["gamePath"];
-    //language = data["language"];
+    std::vector<Language> languageList = Language::getLanguageList();
+    for (Language l : languageList) {
+        if (l.value == data["language"]) {
+            language = l;
+        }
+    }
 }
 
 std::string Settings::getGamepath()

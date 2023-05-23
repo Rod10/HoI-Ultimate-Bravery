@@ -154,6 +154,7 @@
     <ClCompile Include="gun.cpp" />
     <ClCompile Include="gunsize.cpp" />
     <ClCompile Include="icon.cpp" />
+    <ClCompile Include="language.cpp" />
     <ClCompile Include="Librairies\Imgui\imgui_stdlib.cpp" />
     <ClCompile Include="Librairies\Implot\implot.cpp" />
     <ClCompile Include="Librairies\Implot\implot_demo.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="gun.hpp" />
     <ClInclude Include="gunsize.hpp" />
     <ClInclude Include="icon.hpp" />
+    <ClInclude Include="language.hpp" />
     <ClInclude Include="Librairies\GLFW\glfw3.h" />
     <ClInclude Include="Librairies\GLFW\glfw3native.h" />
     <ClInclude Include="Librairies\Imgui\imconfig.h" />

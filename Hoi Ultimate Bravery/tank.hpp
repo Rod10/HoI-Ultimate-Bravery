@@ -49,6 +49,7 @@ public:
 		engine(engine),
 		stats(stats),
 		role(role){
+		srand(time(0));
 		engineLevel = rand() % 20;
 		armorLevel = rand() % 20;
 	}

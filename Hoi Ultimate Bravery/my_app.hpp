@@ -32,6 +32,7 @@
 #include <random>
 #include <sstream>
 #include <string>
+#include "language.hpp"
 
 using json = nlohmann::json;
 
@@ -41,52 +42,45 @@ public:
     MyApp()
     {}
     ~MyApp() {
-        std::string src("C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\history\\countries\\GER - Germany.txt");
-        std::remove(src.c_str());
-        std::string backUp("C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\history\\countries\\GER - Germany.txt.back");
-        if(std::rename(backUp.c_str(), src.c_str()) != 0) {
-            perror("Error moving file");
+        if (fileModified) {
+            std::string gamePath = settings.getGamepath();
+            std::string fileName = std::format("{0} - {1}.txt", country->tag, country->name);
+            std::string filePath = std::format("{0}\\history\\countries\\{1}", gamePath, fileName);
+            std::string backupFilePath = std::format("{0}\\history\\countries\\{1}.back", gamePath, fileName);
+
+            std::string src(fileName);
+            std::remove(src.c_str());
+            std::string backUp(backupFilePath);
+            if(std::rename(backUp.c_str(), src.c_str()) != 0) {
+                perror("Error moving file");
+            }
+            else {
+                std::cout << "File moved successfully" << std::endl;
+            };
+
+
+            fileName = std::format("{0}.txt", country->tag, country->name);
+            filePath = std::format("{0}\\common\\ideas\\{1}", gamePath, fileName);
+            backupFilePath = std::format("{0}\\history\\countries\\{1}.back", gamePath, fileName);
+            src = filePath;
+            std::remove(src.c_str());
+            backUp = backupFilePath;
+            if(std::rename(backUp.c_str(), src.c_str()) != 0) {
+                perror("Error moving file");
+            }
+            else {
+                std::cout << "File moved successfully" << std::endl;
+            };
         }
-        else {
-            std::cout << "File moved successfully" << std::endl;
-        };
-        src = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\common\\ideas\\GER.txt";
-        std::remove(src.c_str());
-        backUp = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\common\\ideas\\GER.txt.back";
-        if(std::rename(backUp.c_str(), src.c_str()) != 0) {
-            perror("Error moving file");
-        }
-        else {
-            std::cout << "File moved successfully" << std::endl;
-        };
     };
 
     virtual void StartUp() final
     {
         auto statsKey = Stats::getStatsKeyArray();
-
-        /*std::ifstream infile("Assets/Data/Langages/en-en.csv");
-        std::string line;
-        std::vector<std::vector<std::string>> content;
-        std::vector<std::string> row;
-        while (std::getline(infile, line))
-        {
-            row.clear();
-            std::stringstream iss(line);
-            std::string token;
-            char delimiter = ',';
-            std::string value;
-            while (std::getline(iss, value, ','))
-                row.push_back(value);
-            content.push_back(row);
-        }
-
-        for (std::vector<std::string> pair : content) {
-            int key = Utils::hash(pair[0].c_str());
-            std::string translation = pair[1];
-            localizedStrings.insert(std::pair<int, std::string>(key, translation));
-        }*/
-
+        languageFile = std::format("{0}.csv", settings.language.value);
+        languageFilePath = std::format("Assets/Data/languages/{0}", languageFile);
+        localizedStrings = Utils::loadTranslation(languageFilePath);
+        
         for (int gunCategoryInt = Gun::Category::Cannon; gunCategoryInt != Gun::Category::Last; gunCategoryInt++) {
             Gun::Category gunCategory = static_cast<Gun::Category>(gunCategoryInt);
             gunCateogryWindowOpen.insert(std::pair<Gun::Category, bool>(gunCategory, false));
@@ -125,15 +119,15 @@ public:
             ImGui::PopStyleColor();
             ImGui::PushFont(basicFont);
             ImGui::PushStyleColor(ImGuiCol_Button, buttonColor);
-            if (Renderer::createButtonWithPosition("Generate", Constant::Position::MIDDLE)) {
+            if (Renderer::createButtonWithPosition(getLocalizedString("generate"), Constant::Position::MIDDLE)) {
                 mainMenuOpen = false;
                 generateWindowOpen = true;
             }
-            if (Renderer::createButtonWithPosition("Option", Constant::Position::MIDDLE)) {
+            if (Renderer::createButtonWithPosition(getLocalizedString("options"), Constant::Position::MIDDLE)) {
                 mainMenuOpen = false;
                 optionWindowOpen = true;
             }
-            if (Renderer::createButtonWithPosition("Quit", Constant::Position::MIDDLE)) {
+            if (Renderer::createButtonWithPosition(getLocalizedString("quit"), Constant::Position::MIDDLE)) {
                 exit(1);
             }
             ImGui::PopStyleColor();
@@ -149,10 +143,10 @@ public:
             ImGui::PushStyleColor(ImGuiCol_WindowBg, windowColor);
             ImGui::Begin("generate", &generateWindowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
             ImGui::PopStyleColor();
-            Renderer::createLabelWithPosition("Generate", Constant::Position::MIDDLE);
+            Renderer::createLabelWithPosition(getLocalizedString("generate"), Constant::Position::MIDDLE);
 
-            off = Renderer::calculatePos(Constant::Position::MIDDLE, "Country: ");
-            Renderer::createLabelWithPosition("Country: ", off, ImGui::GetCursorPosY() + 10.0f);
+            off = Renderer::calculatePos(Constant::Position::MIDDLE, std::format("{0} :", getLocalizedString("country")));
+            Renderer::createLabelWithPosition(std::format("{0} :", getLocalizedString("country")).c_str(), off, ImGui::GetCursorPosY() + 10.0f);
             ImGui::SameLine();
             static ImGuiComboFlags flags = 0;
             static int item_current_idx = 0; // Here we store our selection data as an index.
@@ -173,26 +167,28 @@ public:
                 }
                 ImGui::EndCombo();
             }
+            off = Renderer::calculatePos(Constant::Position::MIDDLE, getLocalizedString("allCountries"));
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
+            ImGui::Checkbox(getLocalizedString("allCountries"), &allCountries);
             ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 10.0f);
-
-            Renderer::createLabelWithPosition("Tank: ", Constant::Position::LEFT);
+            Renderer::createLabelWithPosition(std::format("{0} :", getLocalizedString("tank")).c_str(), Constant::Position::LEFT);
             ImGui::PushStyleColor(ImGuiCol_Button, buttonColor);
             ImGuiStyle& style = ImGui::GetStyle();
             float width = 0.0f;
-            width += ImGui::CalcTextSize("Tank: ").x;
+            width += ImGui::CalcTextSize(std::format("{0}: ", getLocalizedString("tank")).c_str()).x;
             width += style.ItemSpacing.x;
-            width += ImGui::CalcTextSize("Light").x;
+            width += ImGui::CalcTextSize(getLocalizedString("light")).x;
             width += style.ItemSpacing.x;
-            width += ImGui::CalcTextSize("Medium").x;
+            width += ImGui::CalcTextSize(getLocalizedString("medium")).x;
             width += style.ItemSpacing.x;
-            width += ImGui::CalcTextSize("Heavy").x;
+            width += ImGui::CalcTextSize(getLocalizedString("heavy")).x;
             width += style.ItemSpacing.x;
-            width += ImGui::CalcTextSize("Super Heavy").x;
+            width += ImGui::CalcTextSize(getLocalizedString("superHeavy")).x;
             width += style.ItemSpacing.x;
-            width += ImGui::CalcTextSize("Modern").x;
+            width += ImGui::CalcTextSize(getLocalizedString("modern")).x;
             AlignForWidth(width);
             ImGui::SameLine();
-            if (ImGui::Button("Light")) {
+            if (ImGui::Button(getLocalizedString("light"))) {
                 typeToShow = TankType::Type::Light;
                 Tank tank = Tank::generateRandomTank(TankType::Type::Light);
                 tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Light, tank));
@@ -210,7 +206,7 @@ public:
                 generateWindowOpen = false;
             }
             ImGui::SameLine();
-            if (ImGui::Button("Medium")) {
+            if (ImGui::Button(getLocalizedString("medium"))) {
                 typeToShow = TankType::Type::Medium;
                 Tank tank = Tank::generateRandomTank(TankType::Type::Medium);
                 tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Medium, tank));
@@ -228,7 +224,7 @@ public:
                 generateWindowOpen = false;
             }
             ImGui::SameLine();
-            if (ImGui::Button("Heavy")) {
+            if (ImGui::Button(getLocalizedString("heavy"))) {
                 typeToShow = TankType::Type::Heavy;
                 Tank tank = Tank::generateRandomTank(TankType::Type::Heavy);
                 tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Heavy, tank));
@@ -246,7 +242,7 @@ public:
                 generateWindowOpen = false;
             }
             ImGui::SameLine();
-            if (ImGui::Button("Super Heavy")) {
+            if (ImGui::Button(getLocalizedString("superHeavy"))) {
                 typeToShow = TankType::Type::SuperHeavy;
                 Tank tank = Tank::generateRandomTank(TankType::Type::SuperHeavy);
                 tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::SuperHeavy, tank));
@@ -264,7 +260,7 @@ public:
                 generateWindowOpen = false;
             }
             ImGui::SameLine();
-            if (ImGui::Button("Modern")) {
+            if (ImGui::Button(getLocalizedString("modern"))) {
                 typeToShow = TankType::Type::Modern;
                 Tank tank = Tank::generateRandomTank(TankType::Type::Modern);
                 tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Modern, tank));
@@ -281,7 +277,7 @@ public:
                 designerWindowOpen = true;
                 generateWindowOpen = false;
             }
-            if (Renderer::createButtonWithPosition("Full Random", Constant::Position::MIDDLE)) {
+            if (Renderer::createButtonWithPosition(getLocalizedString("all"), Constant::Position::MIDDLE)) {
                 Tank lightTank = Tank::generateRandomTank(TankType::Type::Light);
                 tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Light, lightTank));
 
@@ -368,6 +364,7 @@ public:
             width += style.ItemSpacing.x;
             AlignForWidth(width);
             if (ImGui::Button("Import into game")) {
+                fileModified = true;
                 generateCountryFile(tankList.find(typeToShow)->second);
                 //generateIdeaFile();
             }
@@ -432,7 +429,7 @@ public:
             width += style.ItemSpacing.x;
             AlignForWidth(width);
             if (ImGui::Button("Import into game")) {
-            
+                fileModified = true;
                 std::vector<std::string> templateLine;
 
                 int index;
@@ -512,6 +509,30 @@ public:
             std::string *gamePath = &settings.gamePath;
             ImGui::InputText("##", gamePath);
 
+            ImGui::Text("Language: ");
+            ImGui::SameLine();
+            static ImGuiComboFlags flags = 0;
+            static int languageIndex = settings.language.index; 
+            static int nameIndex = 0;// Here we store our selection data as an index.
+            const char* combo_preview_value = languageList[languageIndex].name[nameIndex].c_str();  // Pass in the preview value visible before opening the combo (it could be anything)
+            std::cout << languageList[languageIndex].name[0].size() << std::endl;
+            if (ImGui::BeginCombo("###", combo_preview_value, flags))
+            {
+                for (int n = 0; n < languageList[languageIndex].name.size(); n++)
+                {
+                    const bool is_selected = (nameIndex == n);
+                    if (ImGui::Selectable(languageList[languageIndex].name[n].c_str(), is_selected)) {
+                        nameIndex = n;
+                        language = &languageList[n];
+                    }
+
+                    // Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+                    if (is_selected)
+                        ImGui::SetItemDefaultFocus();
+                }
+                ImGui::EndCombo();
+            }
+
             width = 0.0f;
             width += ImGui::CalcTextSize("Save").x;
             width += style.ItemSpacing.x;
@@ -521,7 +542,11 @@ public:
             if (ImGui::Button("Save")) {
                 json settingsFile;
                 settingsFile["gamePath"] = *gamePath;
+                settingsFile["language"] = language->value;
                 std::ofstream file("Assets/Data/Settings.json");
+                languageFile = std::format("{0}.csv", language->value);
+                languageFilePath = std::format("Assets/Data/languages/{0}", languageFile);
+                localizedStrings = Utils::loadTranslation(languageFilePath);
                 file << settingsFile;
             }
             ImGui::SameLine();
@@ -543,6 +568,8 @@ private:
     std::vector<std::string> tankModule = { "gun", "turret", "suspension", "engine", "armor" };
     std::vector<Country> countryList = Country::generateCountryList();
     Country* country = &countryList[0];
+    std::vector<Language> languageList = Language::getLanguageList();
+    Language* language;
     Settings settings;
 
     bool mainWindowOpen = true;
@@ -551,6 +578,9 @@ private:
     bool optionWindowOpen = false;
     bool designerWindowOpen = false;
     bool allGenerationWindowOpen = false;
+    bool allCountries = false;
+
+    bool fileModified = false;
 
     std::map<std::string, std::string> tankIconNames;
 
@@ -558,15 +588,18 @@ private:
     std::map<Gun::Category, bool> gunCateogryWindowOpen;
     std::map<Gun::Name, bool> gunNameWindowOpen;
 
-    std::unordered_map<int, std::string> localizedStrings = Utils::loadTranslation("Assets/Data/Langages/en-en.csv");
+    std::string languageFile;
+    std::string languageFilePath;
+    std::unordered_map<int, std::string> localizedStrings;
     std::unordered_map<int, std::string> converterToGameName = Utils::loadTranslation("Assets/Data/converter.csv");
 
     ImVec4 backgroundColor = ImVec4(0.831f, 0.902f, 0.945f, 1.00f);
     ImVec4 windowColor = ImVec4(0.149f, 0.137f, 0.125f, 1.00f);
     ImVec4 buttonColor = ImVec4(0.231f, 0.255f, 0.224f, 1.00f);
 
-    std::string getLocalizedString(int id) {
-        return localizedStrings[id];
+    const char* getLocalizedString(std::string text) {
+        int id = Utils::hash(text.c_str());
+        return localizedStrings[id].c_str();
     }
 
     void AlignForWidth(float width, float alignment = 0.5f)
@@ -649,7 +682,7 @@ private:
         std::string gamePath = settings.getGamepath();
         std::string fileName = std::format("{0} - {1}.txt", country->tag, country->name);
         std::string filePath = std::format("{0}\\history\\countries\\{1}", gamePath, fileName);
-        std::string backupFilePath = std::format("{0}\\history\\countries\\{1}", gamePath, fileName);
+        std::string backupFilePath = std::format("{0}\\history\\countries\\{1}.back", gamePath, fileName);
         
         std::ifstream  src(std::format("{0}\\history\\countries\\{1}", gamePath, fileName), std::ios::binary);
         std::ofstream  backUp(std::format("/Assets/Data/{0}.back", fileName), std::ios::binary);
@@ -748,17 +781,21 @@ private:
 
     void generateIdeaFile() {
         std::vector<std::string> fileLines;
+        std::string gamePath = settings.getGamepath();
+        std::string fileName = std::format("{0}.txt", country->tag, country->name);
+        std::string filePath = std::format("{0}\\common\\ideas\\{1}", gamePath, fileName);
+        std::string backupFilePath = std::format("{0}\\history\\countries\\{1}.back", gamePath, fileName);
 
-        std::ifstream  src("C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\common\\ideas\\GER.txt", std::ios::binary);
-        std::ofstream  backUp("./Assets/Data/GER.txt.back", std::ios::binary);
-        std::ofstream  newFile("./Assets/Data/GER.txt", std::ios::binary);
+        std::ifstream  src(filePath, std::ios::binary);
+        std::ofstream  backUp(std::format("/Assets/Data/{0}.back", fileName), std::ios::binary);
+        std::ofstream  newFile(std::format("/Assets/Data/{0}", fileName), std::ios::binary);
         std::string line;
         while (std::getline(src, line)) {
             fileLines.push_back(line);
         }
         src.close();
-        if (std::rename("C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\common\\ideas\\GER.txt",
-            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\common\\ideas\\GER.txt.back") != 0)
+        if (std::rename(filePath.c_str(),
+            backupFilePath.c_str()) != 0)
             perror("Error moving file");
         else
             std::cout << "File moved successfully" << std::endl;
@@ -767,10 +804,10 @@ private:
             backUp << line << std::endl;
         }
         backUp.close();
-        int linesToAddStart = 3;
+        int linesToAddStart = country->ideaPosIdea;
         int counterTemplateLine = 0;
         std::vector<std::string> newLines;
-        std::ifstream ideaFile("./Assets/Data/idea.txt", std::ios::binary);
+        std::ifstream ideaFile(std::format("/Assets/Data/{0}", fileName), std::ios::binary);
         while (std::getline(ideaFile, line)) {
             newLines.push_back(line);
         }
@@ -785,8 +822,8 @@ private:
             newFile << fileLines[i] << std::endl;
         }
         newFile.close();
-        if (std::rename("./Assets/Data/GER.txt",
-            "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\common\\ideas\\GER.txt") != 0) {
+        if (std::rename(std::format("/Assets/Data/{0}", fileName).c_str(),
+            filePath.c_str()) != 0) {
             perror("Error moving file");
         }
         else {

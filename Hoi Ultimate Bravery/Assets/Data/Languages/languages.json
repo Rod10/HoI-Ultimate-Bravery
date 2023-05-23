@@ -1,0 +1,16 @@
+{
+    "en-en": {
+        "name": [
+            "English",
+            "French"
+        ],
+        "value": "en-en"
+    },
+    "fr-fr": {
+        "name": [
+            "Anglais",
+            "Français"
+        ],
+        "value": "fr-fr"
+    }
+}

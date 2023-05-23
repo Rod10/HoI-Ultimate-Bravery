@@ -1,5 +1,6 @@
 #pragma once
 #include "json.hpp"
+#include "language.hpp"
 
 #include <fstream>
 #include <iostream>
@@ -13,6 +14,6 @@ public:
 
 	std::string getGamepath();
 	std::string gamePath;
-	std::string language;
+	Language language;
 };
 
