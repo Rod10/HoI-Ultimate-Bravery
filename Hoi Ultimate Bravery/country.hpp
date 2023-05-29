@@ -1,5 +1,7 @@
 #pragma once
 #include "json.hpp"
+#include "tank.hpp"
+#include "tanktype.hpp"
 
 #include <fstream>
 #include <iostream>
@@ -23,7 +25,8 @@ public:
 		countryPosIdea(countryPosIdea),
 		linesToDeleteStart(linesToDeleteStart),
 		linesToDeleteEnd(linesToDeleteEnd),
-		ideaPosIdea(ideaPosIdea) {
+		ideaPosIdea(ideaPosIdea),
+		tankList(tankList){
 		lineToDeleteCount = linesToDeleteEnd - linesToDeleteStart;
 	}
 	static std::vector<Country> generateCountryList();
@@ -35,5 +38,7 @@ public:
 	int linesToDeleteEnd;
 	int lineToDeleteCount;
 	int ideaPosIdea;
+	std::map<TankType::Type, Tank> tankList;
+	std::unordered_map<TankType::Type, Stats> newTankStats;
 };
 
