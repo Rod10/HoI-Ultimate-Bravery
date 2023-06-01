@@ -190,13 +190,22 @@ public:
             ImGui::SameLine();
             if (ImGui::Button(getLocalizedString("light"))) {
                 typeToShow = TankType::Type::Light;
-                Tank tank = Tank::generateRandomTank(TankType::Type::Light);
+                if (allCountries) {
+                    for (Country &country : countryList) {
+                        Tank tank = Tank::generateRandomTank(typeToShow);
 
-                country->tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Light, tank));
-                country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Light, generateNewStats(tank)));
+                        country.tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
+                        country.newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
+                    }
+                } else {
+                    Tank tank = Tank::generateRandomTank(typeToShow);
 
-                std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(tank.type));
-                tankIconNames.insert(std::pair<std::string, std::string>("light", getRandomIcon(tank)));
+                    country->tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
+                    country->newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
+                }
+
+                std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(typeToShow));
+                tankIconNames.insert(std::pair<std::string, std::string>("light", getRandomIcon(typeToShow)));
 
                 designerWindowOpen = true;
                 generateWindowOpen = false;
@@ -204,13 +213,23 @@ public:
             ImGui::SameLine();
             if (ImGui::Button(getLocalizedString("medium"))) {
                 typeToShow = TankType::Type::Medium;
-                Tank tank = Tank::generateRandomTank(TankType::Type::Medium);
-                country->tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Medium, tank));
+                if (allCountries) {
+                    for (Country &country : countryList) {
+                        Tank tank = Tank::generateRandomTank(typeToShow);
 
-                country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Medium, generateNewStats(tank)));
+                        country.tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
+                        country.newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
+                    }
+                }
+                else {
+                    Tank tank = Tank::generateRandomTank(typeToShow);
 
-                std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(tank.type));
-                tankIconNames.insert(std::pair<std::string, std::string>("medium", getRandomIcon(tank)));
+                    country->tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
+                    country->newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
+                }
+
+                std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(typeToShow));
+                tankIconNames.insert(std::pair<std::string, std::string>("light", getRandomIcon(typeToShow)));
 
                 designerWindowOpen = true;
                 generateWindowOpen = false;
@@ -218,11 +237,23 @@ public:
             ImGui::SameLine();
             if (ImGui::Button(getLocalizedString("heavy"))) {
                 typeToShow = TankType::Type::Heavy;
-                Tank tank = Tank::generateRandomTank(TankType::Type::Heavy);
-                country->tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Heavy, tank));
+                if (allCountries) {
+                    for (Country &country : countryList) {
+                        Tank tank = Tank::generateRandomTank(typeToShow);
 
-                country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Heavy, generateNewStats(tank)));
-                tankIconNames.insert(std::pair<std::string, std::string>("heavy", getRandomIcon(tank)));
+                        country.tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
+                        country.newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
+                    }
+                }
+                else {
+                    Tank tank = Tank::generateRandomTank(typeToShow);
+
+                    country->tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
+                    country->newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
+                }
+
+                std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(typeToShow));
+                tankIconNames.insert(std::pair<std::string, std::string>("light", getRandomIcon(typeToShow)));
 
                 designerWindowOpen = true;
                 generateWindowOpen = false;
@@ -230,13 +261,23 @@ public:
             ImGui::SameLine();
             if (ImGui::Button(getLocalizedString("superHeavy"))) {
                 typeToShow = TankType::Type::SuperHeavy;
-                Tank tank = Tank::generateRandomTank(TankType::Type::SuperHeavy);
-                country->tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::SuperHeavy, tank));
+                if (allCountries) {
+                    for (Country &country : countryList) {
+                        Tank tank = Tank::generateRandomTank(typeToShow);
 
-                country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::SuperHeavy, generateNewStats(tank)));
+                        country.tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
+                        country.newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
+                    }
+                }
+                else {
+                    Tank tank = Tank::generateRandomTank(typeToShow);
 
-                std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(tank.type));
-                tankIconNames.insert(std::pair<std::string, std::string>("superHeavy", getRandomIcon(tank)));
+                    country->tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
+                    country->newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
+                }
+
+                std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(typeToShow));
+                tankIconNames.insert(std::pair<std::string, std::string>("light", getRandomIcon(typeToShow)));
 
                 designerWindowOpen = true;
                 generateWindowOpen = false;
@@ -244,42 +285,86 @@ public:
             ImGui::SameLine();
             if (ImGui::Button(getLocalizedString("modern"))) {
                 typeToShow = TankType::Type::Modern;
-                Tank tank = Tank::generateRandomTank(TankType::Type::Modern);
-                country->tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Modern, tank));
+                if (allCountries) {
+                    for (Country &country : countryList) {
+                        Tank tank = Tank::generateRandomTank(typeToShow);
 
-                country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Modern, generateNewStats(tank)));
-                tankIconNames.insert(std::pair<std::string, std::string>("modern", getRandomIcon(tank)));
+                        country.tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
+                        country.newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
+                    }
+                }
+                else {
+                    Tank tank = Tank::generateRandomTank(typeToShow);
+
+                    country->tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
+                    country->newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
+                }
+
+                std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(typeToShow));
+                tankIconNames.insert(std::pair<std::string, std::string>("light", getRandomIcon(typeToShow)));
 
                 designerWindowOpen = true;
                 generateWindowOpen = false;
             }
             if (Renderer::createButtonWithPosition(getLocalizedString("all"), Constant::Position::MIDDLE)) {
-                Tank lightTank = Tank::generateRandomTank(TankType::Type::Light);
-                country->tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Light, lightTank));
+                if (allCountries) {
+                    for (Country &country : countryList) {
+                        Tank lightTank = Tank::generateRandomTank(TankType::Type::Light);
+                        country.tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Light, lightTank));
 
-                Tank mediumTank = Tank::generateRandomTank(TankType::Type::Medium);
-                country->tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Medium, mediumTank));
+                        Tank mediumTank = Tank::generateRandomTank(TankType::Type::Medium);
+                        country.tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Medium, mediumTank));
 
-                Tank heavyTank = Tank::generateRandomTank(TankType::Type::Heavy);
-                country->tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Heavy, heavyTank));
+                        Tank heavyTank = Tank::generateRandomTank(TankType::Type::Heavy);
+                        country.tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Heavy, heavyTank));
 
-                Tank superHeavyTank = Tank::generateRandomTank(TankType::Type::SuperHeavy);
-                country->tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::SuperHeavy, superHeavyTank));
+                        Tank superHeavyTank = Tank::generateRandomTank(TankType::Type::SuperHeavy);
+                        country.tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::SuperHeavy, superHeavyTank));
 
-                Tank modernTank = Tank::generateRandomTank(TankType::Type::Modern);
-                tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Modern, modernTank));
+                        Tank modernTank = Tank::generateRandomTank(TankType::Type::Modern);
+                        country.tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Modern, modernTank));
 
-                country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Light, generateNewStats(lightTank)));
-                country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Medium, generateNewStats(mediumTank)));
-                country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Heavy, generateNewStats(heavyTank)));
-                country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::SuperHeavy, generateNewStats(superHeavyTank)));
-                country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Modern, generateNewStats(modernTank)));
+                        country.newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Light, generateNewStats(lightTank)));
+                        country.newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Medium, generateNewStats(mediumTank)));
+                        country.newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Heavy, generateNewStats(heavyTank)));
+                        country.newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::SuperHeavy, generateNewStats(superHeavyTank)));
+                        country.newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Modern, generateNewStats(modernTank)));
 
-                tankIconNames.insert(std::pair<std::string, std::string>("light", getRandomIcon(lightTank)));
-                tankIconNames.insert(std::pair<std::string, std::string>("medium", getRandomIcon(mediumTank)));
-                tankIconNames.insert(std::pair<std::string, std::string>("heavy", getRandomIcon(heavyTank)));
-                tankIconNames.insert(std::pair<std::string, std::string>("superHeavy", getRandomIcon(superHeavyTank)));
-                tankIconNames.insert(std::pair<std::string, std::string>("modern", getRandomIcon(modernTank)));
+                        tankIconNames.insert(std::pair<std::string, std::string>("light", getRandomIcon(TankType::Type::Light)));
+                        tankIconNames.insert(std::pair<std::string, std::string>("medium", getRandomIcon(TankType::Type::Medium)));
+                        tankIconNames.insert(std::pair<std::string, std::string>("heavy", getRandomIcon(TankType::Type::Heavy)));
+                        tankIconNames.insert(std::pair<std::string, std::string>("superHeavy", getRandomIcon(TankType::Type::SuperHeavy)));
+                        tankIconNames.insert(std::pair<std::string, std::string>("modern", getRandomIcon(TankType::Type::Modern)));
+                    }
+                }
+                else {
+                    Tank lightTank = Tank::generateRandomTank(TankType::Type::Light);
+                    country->tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Light, lightTank));
+
+                    Tank mediumTank = Tank::generateRandomTank(TankType::Type::Medium);
+                    country->tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Medium, mediumTank));
+
+                    Tank heavyTank = Tank::generateRandomTank(TankType::Type::Heavy);
+                    country->tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Heavy, heavyTank));
+
+                    Tank superHeavyTank = Tank::generateRandomTank(TankType::Type::SuperHeavy);
+                    country->tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::SuperHeavy, superHeavyTank));
+
+                    Tank modernTank = Tank::generateRandomTank(TankType::Type::Modern);
+                    country->tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Modern, modernTank));
+
+                    country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Light, generateNewStats(lightTank)));
+                    country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Medium, generateNewStats(mediumTank)));
+                    country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Heavy, generateNewStats(heavyTank)));
+                    country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::SuperHeavy, generateNewStats(superHeavyTank)));
+                    country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Modern, generateNewStats(modernTank)));
+
+                    tankIconNames.insert(std::pair<std::string, std::string>("light", getRandomIcon(TankType::Type::Light)));
+                    tankIconNames.insert(std::pair<std::string, std::string>("medium", getRandomIcon(TankType::Type::Medium)));
+                    tankIconNames.insert(std::pair<std::string, std::string>("heavy", getRandomIcon(TankType::Type::Heavy)));
+                    tankIconNames.insert(std::pair<std::string, std::string>("superHeavy", getRandomIcon(TankType::Type::SuperHeavy)));
+                    tankIconNames.insert(std::pair<std::string, std::string>("modern", getRandomIcon(TankType::Type::Modern)));
+                }
 
                 allGenerationWindowOpen = true;
                 generateWindowOpen = false;
@@ -312,8 +397,16 @@ public:
             AlignForWidth(width);
             if (ImGui::Button("Import into game")) {
                 fileModified = true;
-                generateCountryFile(country->tankList.find(typeToShow)->second);
-                //generateIdeaFile();
+                if (allCountries) {
+                    for (Country &country : countryList) {
+                        generateCountryFile(country.tankList.find(typeToShow)->second, &country);
+                        generateIdeaFile(&country);
+                    }
+                }
+                else {
+                    generateCountryFile(country->tankList.find(typeToShow)->second, country);
+                    generateIdeaFile(country);
+                }
             }
             ImGui::SameLine();
             if (ImGui::Button("Regenerate")) {
@@ -343,7 +436,7 @@ public:
         if (allGenerationWindowOpen) {
             ImGui::Begin("generate", &designerWindowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar);
             int posMult = 250;
-            for (auto& [type, tank] : tankList) {
+            for (auto& [type, tank] : country->tankList) {
                 ImGui::SetNextWindowPos(ImVec2(posMult, 200.0f));
                 ImGui::Begin(Tank::tankTypeToString(tank.type).c_str(), &designerWindowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
                 Renderer::createLabelWithPosition(Tank::tankTypeToString(tank.type).c_str(), Constant::Position::MIDDLE);
@@ -584,8 +677,8 @@ private:
         //Add Stats of special modules
 
         // Base Stats
-        float totalSpeedP = newStats.speedP + (tank.engineLevel * 10) + (tank.armorLevel * -5.0);
-        float reliabilityP = newStats.reliabilityP + (tank.engineLevel * -1.5) + (tank.armorLevel * 1.5);
+        float totalSpeedP = newStats.speedP + ((tank.engineLevel * 10) + (tank.armorLevel * -5.0));
+        float reliabilityP = newStats.reliabilityP + ((tank.engineLevel * -1.5) + (tank.armorLevel * 1.5));
         float speedf = newStats.speed + (newStats.speed * (totalSpeedP / 100));
         newStats.speed = speedf;
 
@@ -623,7 +716,7 @@ private:
         return newStats;
     }
 
-    void generateCountryFile(Tank tank) {
+    void generateCountryFile(Tank tank, Country* country) {
         std::vector<std::string> fileLines;
 
         std::string gamePath = settings.getGamepath();
@@ -635,10 +728,13 @@ private:
         std::ofstream  backUp(std::format("/Assets/Data/{0}.back", fileName), std::ios::binary);
         std::ofstream  newFile(std::format("/Assets/Data/{0}", fileName), std::ios::binary);
         std::string line;
+
+        //generate a vector of line from file
         while (std::getline(src, line)) {
             fileLines.push_back(line);
         }
         src.close();
+
         if (std::rename(filePath.c_str(),
             backupFilePath.c_str()) != 0)
             perror("Error moving file");
@@ -726,7 +822,7 @@ private:
         };
     }
 
-    void generateIdeaFile() {
+    void generateIdeaFile(Country* country) {
         std::vector<std::string> fileLines;
         std::string gamePath = settings.getGamepath();
         std::string fileName = std::format("{0}.txt", country->tag, country->name);
@@ -779,8 +875,8 @@ private:
 
     }
 
-    std::string getRandomIcon(Tank tank) {
-        std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(tank.type));
+    std::string getRandomIcon(TankType::Type type) {
+        std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(type));
         auto it = icon.cbegin();
         int random = rand() % icon.size();
         std::advance(it, random);
