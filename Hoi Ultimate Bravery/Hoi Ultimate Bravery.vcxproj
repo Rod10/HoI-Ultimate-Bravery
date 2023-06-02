@@ -191,6 +191,7 @@
     <ClInclude Include="constant.hpp" />
     <ClInclude Include="country.hpp" />
     <ClInclude Include="engine.hpp" />
+    <ClInclude Include="files.hpp" />
     <ClInclude Include="gun.hpp" />
     <ClInclude Include="gunsize.hpp" />
     <ClInclude Include="icon.hpp" />
