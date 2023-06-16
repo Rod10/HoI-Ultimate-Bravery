@@ -22,5 +22,10 @@ Settings* Settings::getInstance() {
 
 std::string Settings::getGamepath()
 {
-    return gamePath;
+    return gamePath_;
+}
+
+Language Settings::getLanguage()
+{
+    return language_;
 }

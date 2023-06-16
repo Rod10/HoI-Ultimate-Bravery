@@ -4,10 +4,10 @@
 #include "settings.hpp"
 class Files {
 public:
-	static void generateCountryFile(Tank tank, Country* country, Settings settings, std::unordered_map<int, std::string> converterToGameName, bool debugMode) {
+	static void generateCountryFile(Tank tank, Country* country, std::unordered_map<int, std::string> converterToGameName, bool debugMode) {
         std::vector<std::string> fileLines;
 
-        std::string gamePath = settings.getGamepath();
+        std::string gamePath = Settings::getInstance()->getGamepath();
         std::string fileName = std::format("{0} - {1}.txt", country->tag, country->name);
         std::string filePath = std::format("{0}\\history\\countries\\{1}", gamePath, fileName);
         std::string backupFilePath = std::format("{0}\\history\\countries\\{1}.back", gamePath, fileName);

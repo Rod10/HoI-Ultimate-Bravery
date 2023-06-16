@@ -44,7 +44,7 @@ public:
     {}
     ~MyApp() {
         if (fileModified) {
-            std::string gamePath = settings.getGamepath();
+            std::string gamePath = settings->getGamepath();
             std::string fileName = std::format("{0} - {1}.txt", country->tag, country->name);
             std::string filePath = std::format("{0}\\history\\countries\\{1}", gamePath, fileName);
             std::string backupFilePath = std::format("{0}\\history\\countries\\{1}.back", gamePath, fileName);
@@ -78,7 +78,7 @@ public:
     virtual void StartUp() final
     {
         auto statsKey = Stats::getStatsKeyArray();
-        languageFile = std::format("{0}.csv", settings.language.value);
+        languageFile = std::format("{0}.csv", settings->getLanguage().value);
         languageFilePath = std::format("Assets/Data/languages/{0}", languageFile);
         localizedStrings = Utils::loadTranslation(languageFilePath);
         
@@ -400,12 +400,12 @@ public:
                 fileModified = true;
                 if (allCountries) {
                     for (Country &country : countryList) {
-                        Files::generateCountryFile(country.tankList.find(typeToShow)->second, &country, settings, converterToGameName, debugMode);
+                        Files::generateCountryFile(country.tankList.find(typeToShow)->second, &country, converterToGameName, debugMode);
                         generateIdeaFile(&country);
                     }
                 }
                 else {
-                    Files::generateCountryFile(country->tankList.find(typeToShow)->second, country, settings, converterToGameName, debugMode);
+                    Files::generateCountryFile(country->tankList.find(typeToShow)->second, country, converterToGameName, debugMode);
                     generateIdeaFile(country);
                 }
             }
@@ -543,17 +543,17 @@ public:
             float width = 0.0f;
             width += ImGui::CalcTextSize("Game Path: ").x;
             width += style.ItemSpacing.x;
-            width += ImGui::CalcTextSize(settings.gamePath.data()).x;
+            width += ImGui::CalcTextSize(settings->getGamepath().data()).x;
             width += style.ItemSpacing.x;
             AlignForWidth(width);
             ImGui::SameLine();
-            std::string *gamePath = &settings.gamePath;
+            std::string *gamePath = &settings->getGamepath();
             ImGui::InputText("##", gamePath);
 
             ImGui::Text("Language: ");
             ImGui::SameLine();
             static ImGuiComboFlags flags = 0;
-            static int languageIndex = settings.language.index; 
+            static int languageIndex = settings->getLanguage().index;
             static int nameIndex = 0;// Here we store our selection data as an index.
             const char* combo_preview_value = languageList[languageIndex].name[nameIndex].c_str();  // Pass in the preview value visible before opening the combo (it could be anything)
             std::cout << languageList[languageIndex].name[0].size() << std::endl;
@@ -612,7 +612,7 @@ private:
     Country* country = &countryList[0];
     std::vector<Language> languageList = Language::getLanguageList();
     Language* language;
-    Settings settings;
+    Settings* settings = Settings::getInstance();
 
     bool mainWindowOpen = true;
     bool mainMenuOpen = true;
@@ -720,7 +720,7 @@ private:
 
     void generateIdeaFile(Country* country) {
         std::vector<std::string> fileLines;
-        std::string gamePath = settings.getGamepath();
+        std::string gamePath = settings->getGamepath();
         std::string fileName = std::format("{0}.txt", country->tag, country->name);
         std::string filePath = std::format("{0}\\common\\ideas\\{1}", gamePath, fileName);
         std::string backupFilePath = std::format("{0}\\history\\countries\\{1}.back", gamePath, fileName);

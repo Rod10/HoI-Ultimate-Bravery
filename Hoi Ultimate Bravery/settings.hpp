@@ -26,8 +26,6 @@ public:
 	void operator=(const Settings&) = delete;
 	static Settings* getInstance();
 	std::string getGamepath();
-	std::string getLanguage();
-	std::string gamePath;
-	Language language;
+	Language getLanguage();
 };
 
