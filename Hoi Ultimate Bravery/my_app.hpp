@@ -547,7 +547,8 @@ public:
             width += style.ItemSpacing.x;
             AlignForWidth(width);
             ImGui::SameLine();
-            std::string *gamePath = &settings->getGamepath();
+            std::string gamePathT = settings->getGamepath();
+            std::string *gamePath = &gamePathT;
             ImGui::InputText("##", gamePath);
 
             ImGui::Text("Language: ");

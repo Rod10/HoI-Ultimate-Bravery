@@ -11,7 +11,9 @@ Settings* Settings::getInstance() {
         Language language;
         std::vector<Language> languageList = Language::getLanguageList();
         for (Language l : languageList) {
-            if (l.value == data["language"]) {
+            std::string value = l.value;
+            std::string test = data["language"];
+            if (value == test) {
                 language = l;
             }
         }
