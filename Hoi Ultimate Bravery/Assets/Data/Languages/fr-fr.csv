@@ -10,3 +10,23 @@ modern,Modern
 country,Pays
 all,Tout les types
 allCountries,Tout les pays
+setDlc, DLC
+setMod, Mod
+mtg,Man The Guns
+nsb,No Step Back
+bba,By Blood Alone
+back,Retour
+ship, Bateau
+destroyer,Destroyer
+cruiser,Croiseur
+heavyShip,Cuirassé
+superHeavyShip,Super Cuirassé
+carrier,Porte-avion
+submarine,Sous-marin
+fighter,Chasseur
+cas,Avion d'attaque au sol
+navalBomber,Bombardier naval
+tacticalBomber,Bombardier tactique
+strategicBomber,Bombardier stratégique
+interceptor,Intercepteur
+plane,Avion

@@ -1,4 +1,8 @@
 #pragma once
+#include <iostream>
+#include <cstdlib>
+#include <stdio.h> 
+#include <vector>
 class Constant
 {
 public:
@@ -17,5 +21,7 @@ public:
         COMBAT_STATS_POS = 895,
         MISC_STATS_POS = 910,
     };
+
+    static const std::vector<std::string> DLC;
 };
 

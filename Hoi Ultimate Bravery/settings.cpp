@@ -17,17 +17,40 @@ Settings* Settings::getInstance() {
                 language = l;
             }
         }
-        settings_ = new Settings(gamePath, language);
+        std::vector<Dlc> dlcSettings = {};
+        for (auto& dlc : Constant::DLC) {
+            if (data["dlc"][0] == dlc) {
+                dlcSettings.push_back(Dlc(dlc, true));
+            }
+            if (data["dlc"][1] == dlc) {
+                dlcSettings.push_back(Dlc(dlc, true));
+            }
+            if (data["dlc"][2] == dlc) {
+                dlcSettings.push_back(Dlc(dlc, true));
+            }
+        }
+        settings_ = new Settings(gamePath, language, dlcSettings);
     }
     return settings_;
 }
 
-std::string Settings::getGamepath()
-{
+std::string Settings::getGamepath() {
     return gamePath_;
 }
 
-Language Settings::getLanguage()
-{
+Language Settings::getLanguage() {
     return language_;
+}
+
+std::vector<Dlc> Settings::getDlc() {
+    return dlc_;
+}
+
+bool Settings::getDlcOwned(std::string name) {
+    for (auto& dlc : dlc_) {
+        if (dlc.name == name) {
+            return dlc.owned;
+        }
+    }
+    return false;
 }

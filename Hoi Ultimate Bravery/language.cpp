@@ -12,7 +12,6 @@ std::vector<Language> Language::getLanguageList() {
         std::vector<std::string> nameListVector;
         std::string value = languageData.value().at("value");
         for (auto& namesList : languageData.value().at("name").items()) {
-            std::cout << namesList.value() << std::endl;
             nameListVector.push_back(namesList.value());
         }
         Language language = Language(value, nameListVector, index);
