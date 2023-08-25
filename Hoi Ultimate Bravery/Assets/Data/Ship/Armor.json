@@ -1,0 +1,134 @@
+{
+  "lightCruiser": {
+    "early": {
+      "stats": {
+        "armor": 6.0,
+        "hpP": 0.0,
+        "maxSpeedP": -5.0,
+        "surfaceVisibility": 0.0
+      },
+      "basic": {
+        "stats": {
+          "armor": 8.0,
+          "hpP": 5.0,
+          "maxSpeedP": -7.5,
+          "surfaceVisibility": 0.0
+        }
+      },
+      "improved": {
+        "stats": {
+          "armor": 10.0,
+          "hpP": 10.0,
+          "maxSpeedP": -10.0,
+          "surfaceVisibility": 0.0
+        }
+      },
+      "advanced": {
+        "stats": {
+          "armor": 12.0,
+          "hpP": 15.0,
+          "maxSpeedP": -12.5,
+          "surfaceVisibility": 0.0
+        }
+      }
+    }
+  },
+  "heavyCruiser": {
+    "early": {
+      "stats": {
+        "armor": 6.0,
+        "hpP": 0.0,
+        "maxSpeedP": -5.0,
+        "surfaceVisibility": 0.0
+      },
+      "basic": {
+        "stats": {
+          "armor": 8.0,
+          "hpP": 5.0,
+          "maxSpeedP": -7.5,
+          "surfaceVisibility": 0.0
+        }
+      },
+      "improved": {
+        "stats": {
+          "armor": 10.0,
+          "hpP": 10.0,
+          "maxSpeedP": -10.0,
+          "surfaceVisibility": 0.0
+        }
+      },
+      "advanced": {
+        "stats": {
+          "armor": 12.0,
+          "hpP": 15.0,
+          "maxSpeedP": -12.5,
+          "surfaceVisibility": 0.0
+        }
+      }
+    }
+  },
+  "battleship": {
+    "stats": {
+      "basic": {
+        "armor": 30.0,
+        "hpP": 5.0,
+        "maxSpeedP": -30.0,
+        "surfaceVisibility": 0.0
+      },
+      "improved": {
+        "armor": 36.0,
+        "hpP": 10.0,
+        "maxSpeedP": -30.0,
+        "surfaceVisibility": 0.0
+      },
+      "advanced": {
+        "armor": 40.0,
+        "hpP": 15.0,
+        "maxSpeedP": -30.0,
+        "surfaceVisibility": 0.0
+      }
+    }
+  },
+  "battlecruiser":{
+    "stats": {
+      "basic": {
+        "armor": 22.0,
+        "hpP": 5.0,
+        "maxSpeedP": -15.0,
+        "surfaceVisibility": 0.0
+      },
+      "improved": {
+        "armor": 28.0,
+        "hpP": 10.0,
+        "maxSpeedP": -20.0,
+        "surfaceVisibility": 0.0
+      },
+      "advanced": {
+        "armor": 34.0,
+        "hpP": 15.0,
+        "maxSpeedP": -25.0,
+        "surfaceVisibility": 0.0
+      }
+    }
+  },
+  "superHeavy": {
+    "stats": {
+      "basic":{
+        "armor": 55.0,
+        "hpP": 10.0,
+        "maxSpeedP": -35.0,
+        "surfaceVisibility": 10.0
+      }
+    }
+  },
+  "carrier": {
+    "stats": {
+      "basic":{
+        "armor": 5.0,
+        "hp": 25.0,
+        "maxSpeedP": -5.0,
+        "surfaceVisibility": 0.0
+      }
+    }
+  }
+}

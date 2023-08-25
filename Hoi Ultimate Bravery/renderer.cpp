@@ -89,6 +89,26 @@ float Renderer::calculatePos(Constant::Position position, int width) {
     return off;
 }
 
+float Renderer::calculatePos(float position, std::string text) {
+    ImGuiStyle& style = ImGui::GetStyle();
+
+    float size = ImGui::CalcTextSize(text.c_str()).x - style.FramePadding.x * 2.0f;
+    float avail = ImGui::GetContentRegionAvail().x;
+
+    float off = (avail - size) * (position / 1000.f);
+    return off;
+}
+
+float Renderer::calculatePos(float position, int width) {
+    ImGuiStyle& style = ImGui::GetStyle();
+
+    float size = width - style.FramePadding.x * 2.0f;
+    float avail = ImGui::GetContentRegionAvail().x;
+
+    float off = (avail - size) * (position / 1000.f);
+    return off;
+}
+
 void Renderer::renderTankDesignerWindow(bool windowOpen, Tank tank)
 {
     ImGuiIO& io = ImGui::GetIO();
@@ -177,7 +197,7 @@ void Renderer::renderTankDesignerWindow(bool windowOpen, Tank tank)
     ImGui::End();
 }
 
-void Renderer::renderStats(bool windowOpen, Tank tank, std::map<std::string, std::string> tankIconNames, std::unordered_map<TankType::Type, Stats> newTankStats)
+void Renderer::renderStats(bool windowOpen, Tank tank, std::map<TankType::Type, std::string> tankIconNames, std::unordered_map<TankType::Type, Stats> newTankStats)
 {
     ImGuiIO& io = ImGui::GetIO();
     ImFont* basicFont = io.Fonts->Fonts[2];
@@ -193,7 +213,7 @@ void Renderer::renderStats(bool windowOpen, Tank tank, std::map<std::string, std
     ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 30.0f);
     ImGui::Text(Tank::tankTypeToString(tank.type).c_str());
 
-    setIcon(ImGui::GetCursorPosY() - 20.0f, ImGui::GetCursorPosX() + 325.0f, Tank::tankTypeToString(tank.type), tankIconNames.find(Tank::tankTypeToString(tank.type))->second);
+    setIcon(ImGui::GetCursorPosY() - 20.0f, ImGui::GetCursorPosX() + 325.0f, Tank::tankTypeToString(tank.type), tankIconNames.find(tank.type)->second);
 
     ImGui::SetCursorPosY(ImGui::GetCursorPosY() - 25.0f);
     ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 30.0f);

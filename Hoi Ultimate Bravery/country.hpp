@@ -1,5 +1,8 @@
 #pragma once
 #include "json.hpp"
+#include "ship.hpp"
+#include "shiptype.hpp"
+#include "shipversion.hpp"
 #include "tank.hpp"
 #include "tanktype.hpp"
 
@@ -40,5 +43,7 @@ public:
 	int ideaPosIdea;
 	std::map<TankType::Type, Tank> tankList;
 	std::unordered_map<TankType::Type, Stats> newTankStats;
+	std::map<ShipType::Type, Ship> shipList;
+	std::unordered_map<ShipType::Type, Stats> newShipStats;
 };
 

@@ -1,0 +1,324 @@
+{
+  "destroyer": {
+    "early": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 10.0,
+        "subDetection": 1.0,
+        "maxSpeed": 30.0,
+        "maxRange": 1500.0,
+        "hp": 25.0,
+        "depthCharge": 1.0,
+        "realibility": 80.0
+      }
+    },
+    "basic": {
+      "stats": {
+        "surfaceDectection": 20,
+        "surfaceVisibility": 10.0,
+        "subDetection": 1.0,
+        "maxSpeed": 30.0,
+        "maxRange": 1800.0,
+        "hp": 40.0,
+        "depthCharge": 1.0,
+        "realibility": 85.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 10.0,
+        "subDetection": 1.0,
+        "maxSpeed": 30.0,
+        "maxRange": 2000.0,
+        "hp": 50.0,
+        "depthCharge": 1.0,
+        "realibility": 90.0
+      }
+    },
+    "advanced": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 10.0,
+        "subDetection": 1.0,
+        "maxSpeed": 30.0,
+        "maxRange": 2500.0,
+        "hp": 60.0,
+        "depthCharge": 1.0,
+        "realibility": 92.0
+      }
+    }
+  },
+  "cruiser": {
+    "early": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 15.0,
+        "subDetection": 1.0,
+        "maxSpeed": 27.0,
+        "maxRange": 2500.0,
+        "hp": 100.0,
+        "realibility": 80.0
+      }
+    },
+    "basic": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 15.0,
+        "subDetection": 1.0,
+        "maxSpeed": 30.0,
+        "maxRange": 3000.0,
+        "hp": 110.0,
+        "realibility": 85.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 15.0,
+        "subDetection": 1.0,
+        "maxSpeed": 32.0,
+        "maxRange": 4000.0,
+        "hp": 120.0,
+        "realibility": 90.0
+      }
+    },
+    "advanced": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 15.0,
+        "subDetection": 1.0,
+        "maxSpeed": 33.0,
+        "maxRange": 4500.0,
+        "hp": 130.0,
+        "realibility": 95.0
+      }
+    },
+    "torpedo": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 15.0,
+        "subDetection": 1.0,
+        "maxSpeed": 30.0,
+        "maxRange": 4000.0,
+        "hp": 140.0,
+        "realibility": 90.0
+      }
+    },
+    "panzerschiff": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 22.0,
+        "subDetection": 1.0,
+        "maxSpeed": 23.0,
+        "maxRange": 7500.0,
+        "hp": 220.0,
+        "realibility": 80.0
+      }
+    },
+    "coastalDefense": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 20.0,
+        "subDetection": 1.0,
+        "maxSpeed": 20.0,
+        "maxRange": 1500.0,
+        "hp": 100.0,
+        "realibility": 80
+      }
+    }
+  },
+  "heavyShip": {
+    "preDreadnought": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 20.0,
+        "subDetection": 1.0,
+        "maxSpeed": 18.0,
+        "maxRange": 2250.0,
+        "hp": 300.0,
+        "realibility": 65.0
+      }
+    },
+    "early": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 20.0,
+        "subDetection": 1.0,
+        "maxSpeed": 30.0,
+        "maxRange": 3000.0,
+        "hp": 350.0,
+        "realibility": 80
+      }
+    },
+    "basic": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 20.0,
+        "subDetection": 1.0,
+        "maxSpeed": 30.0,
+        "maxRange": 3500.0,
+        "hp": 370.0,
+        "realibility": 85
+      }
+    },
+    "advanced": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 20.0,
+        "subDetection": 1.0,
+        "maxSpeed": 30.0,
+        "maxRange": 4000.0,
+        "hp": 400.0,
+        "realibility": 90.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 20.0,
+        "subDetection": 1.0,
+        "maxSpeed": 30.0,
+        "maxRange": 4500.0,
+        "hp": 450.0,
+        "realibility": 95.0
+      }
+    }
+  },
+  "superHeavy": {
+    "stats": {
+      "surfaceDectection": 20.0,
+      "surfaceVisibility": 20.0,
+      "subDetection": 1.0,
+      "maxSpeed": 32.0,
+      "maxRange": 4500.0,
+      "hp": 700.0,
+      "realibility": 80.0
+    }
+  },
+  "carrier": {
+    "basic": {
+      "stats": {
+        "surfaceDectection": 26.0,
+        "surfaceVisibility": 30.0,
+        "subDetection": 5.0,
+        "maxSpeed": 26.0,
+        "maxRange": 3000.0,
+        "hp": 250.0,
+        "realibility": 70.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "surfaceDectection": 26.0,
+        "surfaceVisibility": 30.0,
+        "subDetection": 5.0,
+        "maxSpeed": 26.0,
+        "maxRange": 4000.0,
+        "hp": 325.0,
+        "realibility": 75.0
+      }
+    },
+    "advanced": {
+      "stats": {
+        "surfaceDectection": 26.0,
+        "surfaceVisibility": 30.0,
+        "subDetection": 5.0,
+        "maxSpeed": 26.0,
+        "maxRange": 5000.0,
+        "hp": 350.0,
+        "realibility": 80.0
+      }
+    },
+    "convertedBattleship": {
+      "stats": {
+        "surfaceDectection": 26.0,
+        "surfaceVisibility": 30.0,
+        "subDetection": 5.0,
+        "maxSpeed": 24.0,
+        "maxRange": 4000.0,
+        "hp": 325.0,
+        "realibility": 65.0
+      }
+    },
+    "convertedCruiser": {
+      "stats": {
+        "surfaceDectection": 26.0,
+        "surfaceVisibility": 30.0,
+        "subDetection": 5.0,
+        "maxSpeed": 22.0,
+        "maxRange": 4000.0,
+        "hp": 125.0,
+        "realibility": 65.0
+      }
+    }
+  },
+  "submarine": {
+    "early": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 1.0,
+        "subVisibility": 25.0,
+        "maxSpeed": 13.0,
+        "maxRange": 25.0,
+        "hp": 10.0,
+        "realibility": 60
+      }
+    },
+    "basic": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 1.0,
+        "subVisibility": 22.0,
+        "maxSpeed": 17.0,
+        "maxRange": 4000.0,
+        "hp": 20.0,
+        "realibility": 70.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 1.0,
+        "subVisibility": 20.0,
+        "maxSpeed": 18.0,
+        "maxRange": 5000.0,
+        "hp": 30.0,
+        "realibility": 75.0
+      }
+    },
+    "advanced": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 1.0,
+        "subVisibility": 15.0,
+        "maxSpeed": 18.0,
+        "maxRange": 6000.0,
+        "hp": 35.0,
+        "realibility": 80.0
+      }
+    },
+    "cruiser": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 1.0,
+        "subVisibility": 20.0,
+        "maxSpeed": 20.0,
+        "maxRange": 5000.0,
+        "hp": 30.0,
+        "realibility": 75.0
+      }
+    },
+    "midget": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 1.0,
+        "subVisibility": 15.0,
+        "maxSpeed": 8.3,
+        "maxRange": 500.0,
+        "hp": 5.0,
+        "realibility": 65.0
+      }
+    }
+  }
+}

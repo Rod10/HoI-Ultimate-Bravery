@@ -9,6 +9,8 @@
 #include "language.hpp"
 #include "renderer.hpp"
 #include "settings.hpp"
+#include "shiptype.hpp"
+#include "ship.hpp"
 #include "special.hpp"
 #include "suspension.hpp"
 #include "tank.hpp"
@@ -100,7 +102,8 @@ public:
         ImGuiIO& io = ImGui::GetIO();
         ImFont* basicFont = io.Fonts->Fonts[0];
         ImFont* titleFont = io.Fonts->Fonts[1];
-        ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
+        ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+        ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
         ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
         ImGui::PushFont(titleFont);
         ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(59, 65, 57, 255));
@@ -111,11 +114,13 @@ public:
         ImGui::PopStyleColor();
         ImGui::PopFont();
 
-        auto off = Renderer::calculatePos(Constant::Position::MIDDLE, "generate");
+        float testMiddle = ImGui::GetWindowWidth() / 2.0f;
+
+        auto off = Renderer::calculatePos(testMiddle, "generate");
 
         // Main Menu Block
         if (mainMenuOpen) {
-            ImGui::SetNextWindowPos(ImVec2(off, 200.0f));
+            ImGui::SetNextWindowPos(ImVec2(testMiddle, 200.0f));
             ImGui::PushStyleColor(ImGuiCol_WindowBg, windowColor);
             ImGui::Begin("generate", &mainMenuOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
             ImGui::PopStyleColor();
@@ -140,7 +145,18 @@ public:
 
         // Generate Menu
         if (generateWindowOpen) {
-            auto off = Renderer::calculatePos(Constant::Position::MIDDLE, "Tank: Light Medium Heavy Super Heavy Modern");
+            auto off = Renderer::calculatePos(
+                Constant::Position::MIDDLE,
+                std::format("{0} : {1} {2} {3} {4} {5} {6}", 
+                    getLocalizedString("ship"),
+                    getLocalizedString("destroyer"),
+                    getLocalizedString("cruiser"),
+                    getLocalizedString("heavyShip"),
+                    getLocalizedString("superHeavyShip"),
+                    getLocalizedString("carrier"),
+                    getLocalizedString("submarine")
+                ).c_str()
+            );
             ImGui::SetNextWindowPos(ImVec2(off, 200.0f));
             ImGui::PushStyleColor(ImGuiCol_WindowBg, windowColor);
             ImGui::Begin("generate", &generateWindowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
@@ -196,8 +212,8 @@ public:
 
         //By Type
         if (designerWindowOpen) {
-            Renderer::renderTankDesignerWindow(designerWindowOpen, country->tankList.find(typeToShow)->second);
-            Renderer::renderStats(designerWindowOpen, country->tankList.find(typeToShow)->second, tankIconNames, country->newTankStats);
+            Renderer::renderTankDesignerWindow(designerWindowOpen, country->tankList.find(tankTypeToShow)->second);
+            Renderer::renderStats(designerWindowOpen, country->tankList.find(tankTypeToShow)->second, tankIconNames, country->newTankStats);
             
             ImGui::SetCursorPosY(515.0f);
             ImGuiStyle& style = ImGui::GetStyle();
@@ -213,26 +229,26 @@ public:
                 fileModified = true;
                 if (allCountries) {
                     for (Country &country : countryList) {
-                        Files::generateCountryFile(country.tankList.find(typeToShow)->second, &country, converterToGameName, debugMode);
+                        Files::generateCountryFile(country.tankList.find(tankTypeToShow)->second, &country, converterToGameName, debugMode);
                         generateIdeaFile(&country);
                     }
                 }
                 else {
-                    Files::generateCountryFile(country->tankList.find(typeToShow)->second, country, converterToGameName, debugMode);
+                    Files::generateCountryFile(country->tankList.find(tankTypeToShow)->second, country, converterToGameName, debugMode);
                     generateIdeaFile(country);
                 }
             }
             ImGui::SameLine();
             if (ImGui::Button("Regenerate")) {
-                country->tankList.find(typeToShow)->second = Tank::generateRandomTank(typeToShow);
-                country->newTankStats.find(typeToShow)->second = generateNewStats(country->tankList.find(typeToShow)->second);
+                country->tankList.find(tankTypeToShow)->second = Tank::generateRandomTank(tankTypeToShow);
+                country->newTankStats.find(tankTypeToShow)->second = generateNewStats(country->tankList.find(tankTypeToShow)->second);
 
-                std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(typeToShow));
+                std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(tankTypeToShow));
                 auto it = icon.cbegin();
                 int random = rand() % icon.size();
                 std::advance(it, random);
 
-                tankIconNames[Tank::tankTypeToString(typeToShow)] = it->first;
+                tankIconNames[tankTypeToShow] = it->first;
             }
             ImGui::SameLine();
             if (ImGui::Button("Back")) {
@@ -461,7 +477,8 @@ public:
 
 private:
     bool debugMode = true;
-    TankType::Type typeToShow;
+    Hull::Type hullTypeToShow;
+    TankType::Type tankTypeToShow;
     std::map<TankType::Type, Tank> tankList;
     std::unordered_map<TankType::Type, Stats> newTankStats;
     std::vector<std::string> tankModule = { "gun", "turret", "suspension", "engine", "armor" };
@@ -487,7 +504,7 @@ private:
 
     bool fileModified = false;
 
-    std::map<std::string, std::string> tankIconNames;
+    std::map<TankType::Type, std::string> tankIconNames;
 
     std::map<Gun::Category, std::vector<Gun>> gunList = Gun::generateGunList();
     std::map<Gun::Category, bool> gunCateogryWindowOpen;
@@ -547,19 +564,45 @@ private:
         AlignForWidth(width);
         ImGui::SameLine();
 
-        if (ImGui::Button(getLocalizedString("destroyer"))) {}
+        if (ImGui::Button(getLocalizedString("destroyer"))) {
+            hullTypeToShow = Hull::Destroyer;
+            generatingShip();
+        }
         ImGui::SameLine();
-        if (ImGui::Button(getLocalizedString("cruiser"))) {}
+        if (ImGui::Button(getLocalizedString("cruiser"))) {
+            hullTypeToShow = Hull::Cruiser;
+            generatingShip();
+        }
         ImGui::SameLine();
-        if (ImGui::Button(getLocalizedString("heavyShip"))) {}
+        if (ImGui::Button(getLocalizedString("heavyShip"))) {
+            hullTypeToShow = Hull::HeavyShip;
+            generatingShip();
+        }
         ImGui::SameLine();
-        if (ImGui::Button(getLocalizedString("superHeavyShip"))) {}
+        if (ImGui::Button(getLocalizedString("carrier"))) {
+            hullTypeToShow = Hull::Carrier;
+            generatingShip();
+        }
         ImGui::SameLine();
-        if (ImGui::Button(getLocalizedString("carrier"))) {}
-        ImGui::SameLine();
-        if (ImGui::Button(getLocalizedString("submarine"))) {}
+        if (ImGui::Button(getLocalizedString("submarine"))) {
+            hullTypeToShow = Hull::Submarine;
+             generatingShip();
+        }
+        if (Renderer::createButtonWithPosition(getLocalizedString("all"), Constant::Position::MIDDLE)) {}
 
         ImGui::PopStyleColor();
+    }
+    
+
+    void generatingShip() {
+        if (allCountries) {
+            for (Country& country : countryList) {
+                Ship ship = Ship::generateRandomShip(hullTypeToShow);
+            }
+        }
+        else {
+            Ship ship = Ship::generateRandomShip(hullTypeToShow);
+        }
     }
 
     void renderTankGenerate() {
@@ -581,123 +624,28 @@ private:
         AlignForWidth(width);
         ImGui::SameLine();
         if (ImGui::Button(getLocalizedString("light"))) {
-            typeToShow = TankType::Type::Light;
-            if (allCountries) {
-                for (Country& country : countryList) {
-                    Tank tank = Tank::generateRandomTank(typeToShow);
-
-                    country.tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
-                    country.newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
-                }
-            }
-            else {
-                Tank tank = Tank::generateRandomTank(typeToShow);
-
-                country->tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
-                country->newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
-            }
-
-            std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(typeToShow));
-            tankIconNames.insert(std::pair<std::string, std::string>("light", getRandomIcon(typeToShow)));
-
-            designerWindowOpen = true;
-            generateWindowOpen = false;
+            tankTypeToShow = TankType::Type::Light;
+            generatingTank();
         }
         ImGui::SameLine();
         if (ImGui::Button(getLocalizedString("medium"))) {
-            typeToShow = TankType::Type::Medium;
-            if (allCountries) {
-                for (Country& country : countryList) {
-                    Tank tank = Tank::generateRandomTank(typeToShow);
-
-                    country.tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
-                    country.newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
-                }
-            }
-            else {
-                Tank tank = Tank::generateRandomTank(typeToShow);
-
-                country->tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
-                country->newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
-            }
-
-            std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(typeToShow));
-            tankIconNames.insert(std::pair<std::string, std::string>("light", getRandomIcon(typeToShow)));
-
-            designerWindowOpen = true;
-            generateWindowOpen = false;
+            tankTypeToShow = TankType::Type::Medium;
+            generatingTank();
         }
         ImGui::SameLine();
         if (ImGui::Button(getLocalizedString("heavy"))) {
-            typeToShow = TankType::Type::Heavy;
-            if (allCountries) {
-                for (Country& country : countryList) {
-                    Tank tank = Tank::generateRandomTank(typeToShow);
-
-                    country.tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
-                    country.newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
-                }
-            }
-            else {
-                Tank tank = Tank::generateRandomTank(typeToShow);
-
-                country->tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
-                country->newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
-            }
-
-            std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(typeToShow));
-            tankIconNames.insert(std::pair<std::string, std::string>("light", getRandomIcon(typeToShow)));
-
-            designerWindowOpen = true;
-            generateWindowOpen = false;
+            tankTypeToShow = TankType::Type::Heavy;
+            generatingTank();
         }
         ImGui::SameLine();
         if (ImGui::Button(getLocalizedString("superHeavy"))) {
-            typeToShow = TankType::Type::SuperHeavy;
-            if (allCountries) {
-                for (Country& country : countryList) {
-                    Tank tank = Tank::generateRandomTank(typeToShow);
-
-                    country.tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
-                    country.newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
-                }
-            }
-            else {
-                Tank tank = Tank::generateRandomTank(typeToShow);
-
-                country->tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
-                country->newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
-            }
-
-            std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(typeToShow));
-            tankIconNames.insert(std::pair<std::string, std::string>("light", getRandomIcon(typeToShow)));
-
-            designerWindowOpen = true;
-            generateWindowOpen = false;
+            tankTypeToShow = TankType::Type::SuperHeavy;
+            generatingTank();
         }
         ImGui::SameLine();
         if (ImGui::Button(getLocalizedString("modern"))) {
-            typeToShow = TankType::Type::Modern;
-            if (allCountries) {
-                for (Country& country : countryList) {
-                    Tank tank = Tank::generateRandomTank(typeToShow);
-
-                    country.tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
-                    country.newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
-                }
-            }
-            else {
-                Tank tank = Tank::generateRandomTank(typeToShow);
-
-                country->tankList.insert(std::pair<TankType::Type, Tank>(typeToShow, tank));
-                country->newTankStats.insert(std::pair<TankType::Type, Stats>(typeToShow, generateNewStats(tank)));
-            }
-
-            std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(typeToShow));
-            tankIconNames.insert(std::pair<std::string, std::string>("light", getRandomIcon(typeToShow)));
-
-            designerWindowOpen = true;
-            generateWindowOpen = false;
+            tankTypeToShow = TankType::Type::Modern;
+            generatingTank();
         }
         if (Renderer::createButtonWithPosition(getLocalizedString("all"), Constant::Position::MIDDLE)) {
             if (allCountries) {
@@ -723,11 +671,11 @@ private:
                     country.newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::SuperHeavy, generateNewStats(superHeavyTank)));
                     country.newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Modern, generateNewStats(modernTank)));
 
-                    tankIconNames.insert(std::pair<std::string, std::string>("light", getRandomIcon(TankType::Type::Light)));
-                    tankIconNames.insert(std::pair<std::string, std::string>("medium", getRandomIcon(TankType::Type::Medium)));
-                    tankIconNames.insert(std::pair<std::string, std::string>("heavy", getRandomIcon(TankType::Type::Heavy)));
-                    tankIconNames.insert(std::pair<std::string, std::string>("superHeavy", getRandomIcon(TankType::Type::SuperHeavy)));
-                    tankIconNames.insert(std::pair<std::string, std::string>("modern", getRandomIcon(TankType::Type::Modern)));
+                    tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::Light, getRandomIcon(TankType::Type::Light)));
+                    tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::Medium, getRandomIcon(TankType::Type::Medium)));
+                    tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::Heavy, getRandomIcon(TankType::Type::Heavy)));
+                    tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::SuperHeavy, getRandomIcon(TankType::Type::SuperHeavy)));
+                    tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::Modern, getRandomIcon(TankType::Type::Modern)));
                 }
             }
             else {
@@ -752,11 +700,11 @@ private:
                 country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::SuperHeavy, generateNewStats(superHeavyTank)));
                 country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Modern, generateNewStats(modernTank)));
 
-                tankIconNames.insert(std::pair<std::string, std::string>("light", getRandomIcon(TankType::Type::Light)));
-                tankIconNames.insert(std::pair<std::string, std::string>("medium", getRandomIcon(TankType::Type::Medium)));
-                tankIconNames.insert(std::pair<std::string, std::string>("heavy", getRandomIcon(TankType::Type::Heavy)));
-                tankIconNames.insert(std::pair<std::string, std::string>("superHeavy", getRandomIcon(TankType::Type::SuperHeavy)));
-                tankIconNames.insert(std::pair<std::string, std::string>("modern", getRandomIcon(TankType::Type::Modern)));
+                tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::Light, getRandomIcon(TankType::Type::Light)));
+                tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::Medium, getRandomIcon(TankType::Type::Medium)));
+                tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::Heavy, getRandomIcon(TankType::Type::Heavy)));
+                tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::SuperHeavy, getRandomIcon(TankType::Type::SuperHeavy)));
+                tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::Modern, getRandomIcon(TankType::Type::Modern)));
             }
 
             allGenerationWindowOpen = true;
@@ -790,15 +738,15 @@ private:
 
         if (ImGui::Button(getLocalizedString("fighter"))) {}
         ImGui::SameLine();
-        if (ImGui::Button(getLocalizedString("cas"))) {}
+        if (ImGui::Button(getLocalizedString("interceptor"))) {}
         ImGui::SameLine();
+        if (ImGui::Button(getLocalizedString("cas"))) {}
         if (ImGui::Button(getLocalizedString("navalBomber"))) {}
         ImGui::SameLine();
         if (ImGui::Button(getLocalizedString("tacticalBomber"))) {}
         ImGui::SameLine();
         if (ImGui::Button(getLocalizedString("strategicBomber"))) {}
-        ImGui::SameLine();
-        if (ImGui::Button(getLocalizedString("interceptor"))) {}
+        if (Renderer::createButtonWithPosition(getLocalizedString("all"), Constant::Position::MIDDLE)) {}
 
         ImGui::PopStyleColor();
     }
@@ -917,5 +865,28 @@ private:
         int random = rand() % icon.size();
         std::advance(it, random);
         return it->first;
+    }
+
+    void generatingTank() {
+        if (allCountries) {
+            for (Country& country : countryList) {
+                Tank tank = Tank::generateRandomTank(tankTypeToShow);
+
+                country.tankList.insert(std::pair<TankType::Type, Tank>(tankTypeToShow, tank));
+                country.newTankStats.insert(std::pair<TankType::Type, Stats>(tankTypeToShow, generateNewStats(tank)));
+            }
+        }
+        else {
+            Tank tank = Tank::generateRandomTank(tankTypeToShow);
+
+            country->tankList.insert(std::pair<TankType::Type, Tank>(tankTypeToShow, tank));
+            country->newTankStats.insert(std::pair<TankType::Type, Stats>(tankTypeToShow, generateNewStats(tank)));
+        }
+
+        std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(tankTypeToShow));
+        tankIconNames.insert(std::pair<TankType::Type, std::string>(tankTypeToShow, getRandomIcon(tankTypeToShow)));
+
+        designerWindowOpen = true;
+        generateWindowOpen = false;
     }
 };

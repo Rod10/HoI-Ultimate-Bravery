@@ -1,0 +1,26 @@
+{
+    "Germany": {
+        "name": "Germany",
+        "tag": "GER",
+        "countryPosIdea": 394,
+        "linesToDeleteStart": 561,
+        "linesToDeleteEnd": 638,
+        "ideaPosIdea": 2
+    },
+    "France": {
+        "name": "France",
+        "tag": "FRA",
+        "countryPosIdea": 394,
+        "linesToDeleteStart": 561,
+        "linesToDeleteEnd": 638,
+        "ideaPosIdea": 2
+    },
+    "UK": {
+        "name": "United Kingdom",
+        "tag": "UK",
+        "countryPosIdea": 394,
+        "linesToDeleteStart": 561,
+        "linesToDeleteEnd": 638,
+        "ideaPosIdea": 2
+    }
+}

@@ -8,7 +8,7 @@ std::map<Gun::Category, std::vector<Gun>> Gun::generateGunList()
     Gun::Category gunCategory;
     Gun::Name gunName;
     std::vector<Role::Type> roleAllowed;
-    std::ifstream fC("Assets/Data/Cannon.json");
+    std::ifstream fC("Assets/Data/Tank/Cannon.json");
     json GunData = json::parse(fC);
     fC.close();
     json gunStats;

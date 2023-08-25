@@ -58,6 +58,12 @@
     <Filter Include="Fichiers sources\Utils">
       <UniqueIdentifier>{5e9c27c0-1cc8-4c02-abdd-0f27fde536ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Ship">
+      <UniqueIdentifier>{03e03a99-41e4-42b6-935d-4c078b926256}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Ship">
+      <UniqueIdentifier>{d069e845-f190-43f4-871b-ba312be84c5d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -172,6 +178,21 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="dlc.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ship.cpp">
+      <Filter>Fichiers sources\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="shiptype.cpp">
+      <Filter>Fichiers sources\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="shipversion.cpp">
+      <Filter>Fichiers sources\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="module.cpp">
+      <Filter>Fichiers sources\Ship</Filter>
+    </ClCompile>
+    <ClCompile Include="hull.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -313,6 +334,21 @@
     </ClInclude>
     <ClInclude Include="dlc.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="shiptype.hpp">
+      <Filter>Fichiers d%27en-tête\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="ship.hpp">
+      <Filter>Fichiers d%27en-tête\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="shipversion.hpp">
+      <Filter>Fichiers d%27en-tête\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="module.hpp">
+      <Filter>Fichiers d%27en-tête\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="hull.hpp">
+      <Filter>Fichiers d%27en-tête\Ship</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

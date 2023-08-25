@@ -1,0 +1,132 @@
+{
+  "destroyer": {
+    "early": {
+      "stats": {
+        "subVisibilityP": 0.0,
+        "maxSpeedP": 20.0
+      }
+    },
+    "basic": {
+      "stats": {
+        "subVisibilityP": 0.0,
+        "maxSpeedP": 25.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "subVisibilityP": 0.0,
+        "maxSpeedP": 30.0
+      }
+    },
+    "advanced": {
+      "stats": {
+        "subVisibilityP": 0.0,
+        "maxSpeedP": 35.0
+      }
+    }
+  },
+  "cruiser": {
+    "early": {
+      "stats": {
+        "subVisibilityP": 0.0,
+        "maxSpeedP": 20.0
+      }
+    },
+    "basic": {
+      "stats": {
+        "subVisibilityP": 0.0,
+        "maxSpeedP": 30.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "subVisibilityP": 0.0,
+        "maxSpeedP": 35.0
+      }
+    },
+    "advanced": {
+      "stats": {
+        "subVisibilityP": 0.0,
+        "maxSpeedP": 40.0
+      }
+    }
+  },
+  "heavyShip": {
+    "early": {
+      "stats": {
+        "subVisibilityP": 0.0,
+        "maxSpeedP": 20.0
+      }
+    },
+    "basic": {
+      "stats": {
+        "subVisibilityP": 0.0,
+        "maxSpeedP": 40.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "subVisibilityP": 0.0,
+        "maxSpeedP": 50.0
+      }
+    },
+    "advanced": {
+      "stats": {
+        "subVisibilityP": 0.0,
+        "maxSpeedP": 55.0
+      }
+    }
+  },
+  "carrier": {
+    "early": {
+      "stats": {
+        "subVisibilityP": 0.0,
+        "maxSpeedP": 30.0
+      }
+    },
+    "basic": {
+      "stats": {
+        "subVisibilityP": 0.0,
+        "maxSpeedP": 40.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "subVisibilityP": 0.0,
+        "maxSpeedP": 50.0
+      }
+    },
+    "advanced": {
+      "stats": {
+        "subVisibilityP": 0.0,
+        "maxSpeedP": 55.0
+      }
+    }
+  },
+  "submarine": {
+    "early": {
+      "stats": {
+        "subVisibilityP": 0.0,
+        "maxSpeedP": 5.0
+      }
+    },
+    "basic": {
+      "stats": {
+        "subVisibilityP": -5.0,
+        "maxSpeedP": 10.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "subVisibilityP": -10.0,
+        "maxSpeedP": 15.0
+      }
+    },
+    "advanced": {
+      "stats": {
+        "subVisibilityP": -15.0,
+        "maxSpeedP": 20.0
+      }
+    }
+  }
+}
