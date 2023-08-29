@@ -1,0 +1,116 @@
+{
+  "heavyCruiser": {
+    "early": {
+      "stats": {
+        "heavyAttack": 6.0,
+        "heavyPiercing": 22.0,
+        "hpP": 40.0,
+        "surfaceVisibility": 3.5,
+        "maxSpeedP": -4.0
+      }
+    },
+    "basic": {
+      "stats": {
+        "heavyAttack": 8.0,
+        "heavyPiercing": 25.0,
+        "hpP": 40.0,
+        "surfaceVisibility": 3.5,
+        "maxSpeedP": -6.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "heavyAttack": 10.0,
+        "heavyPiercing": 29.0,
+        "hpP": 40.0,
+        "surfaceVisibility": 3.5,
+        "maxSpeedP": -7.0
+      }
+    },
+    "advanced": {
+      "stats": {
+        "heavyAttack": 12.0,
+        "heavyPiercing": 34.0,
+        "hpP": 40.0,
+        "surfaceVisibility": 3.5,
+        "maxSpeedP": -8.0
+      }
+    }
+  },
+  "heavyShip": {
+    "early": {
+      "stats": {
+        "heavyAttack": 14.0,
+        "heavyPiercing": 31.0,
+        "hpP": 0.0,
+        "maxSpeedP": -5.0
+      }
+    },
+    "basic": {
+      "stats": {
+        "heavyAttack": 18.0,
+        "heavyPiercing": 36.0,
+        "hpP": 0.0,
+        "maxSpeedP": -6.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "heavyAttack": 22.0,
+        "heavyPiercing": 40.0,
+        "hpP": 0.0,
+        "maxSpeedP": -7.0
+      }
+    },
+    "advanced": {
+      "stats": {
+        "heavyAttack": 26.0,
+        "heavyPiercing": 45.0,
+        "hpP": 0.0,
+        "maxSpeedP": -8.0
+      }
+    }
+  },
+  "superHeavy": {
+    "early": {
+      "stats": {
+        "heavyAttack": 14.0,
+        "heavyPiercing": 31.0,
+        "hpP": 0.0,
+        "maxSpeedP": -5.0
+      }
+    },
+    "basic": {
+      "stats": {
+        "heavyAttack": 18.0,
+        "heavyPiercing": 36.0,
+        "hpP": 0.0,
+        "maxSpeedP": -6.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "heavyAttack": 22.0,
+        "heavyPiercing": 40.0,
+        "hpP": 0.0,
+        "maxSpeedP": -7.0
+      }
+    },
+    "advanced": {
+      "stats": {
+        "heavyAttack": 26.0,
+        "heavyPiercing": 45.0,
+        "hpP": 0.0,
+        "maxSpeedP": -8.0
+      }
+    },
+    "superHeavy": {
+      "stats": {
+        "heavyAttack": 27.0,
+        "heavyPiercing": 45.0,
+        "hpP": 0.0,
+        "maxSpeedP": -9.0
+      }
+    }
+  }
+}

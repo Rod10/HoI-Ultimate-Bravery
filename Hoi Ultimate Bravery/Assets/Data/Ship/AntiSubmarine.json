@@ -1,0 +1,28 @@
+{
+  "destroyer": {
+    "early": {
+      "stats": {
+        "submarineAttack": 8.0,
+        "maxSpeedP": -1.0
+      }
+    },
+    "basic": {
+      "stats": {
+        "submarineAttack": 12.0,
+        "maxSpeedP":  -1.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "submarineAttack": 16.0,
+        "maxSpeedP":  -2.0
+      }
+    },
+    "advanced": {
+      "stats": {
+        "submarineAttack": 20.0,
+        "maxSpeedP": -2.0
+      }
+    }
+  }
+}

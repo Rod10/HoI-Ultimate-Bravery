@@ -1,0 +1,10 @@
+{
+  "submarine": {
+    "early": {
+      "subVisibilityP": -10.0
+    },
+    "basic": {
+      "subVisibilityP":  -20.0
+    }
+  }
+}

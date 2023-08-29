@@ -1,0 +1,32 @@
+{
+  "destroyer/lightCruiser/heavyCruiser/battlecruiser/battleship/superHeavyBattleship/carrier/submarine": {
+    "early": {
+      "stats": {
+        "surfaceDetection": 5.0,
+        "subDetection": 0.0,
+        "antiAirP": 0.0
+      }
+    },
+    "basic": {
+      "stats": {
+        "surfaceDetection": 7.0,
+        "subDetection": 2.0,
+        "antiAirP": 5.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "surfaceDetection": 12.0,
+        "subDetection": 6.0,
+        "antiAirP": 7.5
+      }
+    },
+    "advanced": {
+      "stats": {
+        "surfaceDetection": 18.0,
+        "subDetection": 14.0,
+        "antiAirP": 10.0
+      }
+    }
+  }
+}

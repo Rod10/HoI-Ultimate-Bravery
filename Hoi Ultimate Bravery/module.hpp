@@ -2,6 +2,8 @@
 #include "shiptype.hpp"
 #include "shipversion.hpp"
 
+#include <time.h>
+
 class Module
 {
 public:
@@ -20,14 +22,19 @@ public:
 		Mine,
 		Aircraft,
 		Fuel,
-		None
+		Radar,
+		Sonar,
+		None,
+		Last
 	};
 
 	enum Version {
 		Basic,
 		Early,
 		Improved,
-		Advanced
+		Advanced,
+		AutoLoader,
+		SuperHeavy,
 	};
 
 	Module() {}
@@ -55,6 +62,8 @@ public:
 		case Module::Mine: return "Mine";
 		case Module::Aircraft: return "Aircraft";
 		case Module::Fuel: return "Fuel";
+		case Module::Radar: return "Radar";
+		case Module::Sonar: return "Sonar";
 		case Module::None:
 			break;
 		default:
@@ -69,6 +78,8 @@ public:
 		case 1: return Basic;
 		case 2: return Improved;
 		case 3: return Advanced;
+		case 4: return AutoLoader;
+		case 5: return SuperHeavy;
 		default:
 			break;
 		}

@@ -1,0 +1,125 @@
+{
+  "destroyer": {
+    "early": {
+      "stats": {
+        "lightAttack": 1.0,
+        "lightPiercing": 1.0,
+        "antiAir": 0.0,
+        "hp": 0.0,
+        "maxSpeedP": -1.0
+      }
+    },
+    "basic": {
+      "stats": {
+        "lightAttack": 1.5,
+        "lightPiercing": 2.0,
+        "antiAir": 0.0,
+        "hp": 0.0,
+        "maxSpeedP": -2.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "lightAttack": 2.0,
+        "lightPiercing": 2.5,
+        "antiAir": 0.0,
+        "hp": 0.0,
+        "maxSpeedP": -3.0
+      }
+    },
+    "advanced": {
+      "stats": {
+        "lightAttack": 3.0,
+        "lightPiercing": 2.5,
+        "antiAir": 0.0,
+        "hp": 0.0,
+        "maxSpeedP": -4.0
+      }
+    }
+  },
+  "lightCruiser": {
+    "early": {
+      "stats": {
+        "lightAttack": 4.0,
+        "lightPiercing": 5.5,
+        "antiAir": 0.0,
+        "hp": 20.0,
+        "maxSpeedP": -3.0
+      }
+    },
+    "basic": {
+      "stats": {
+        "lightAttack": 5.0,
+        "lightPiercing": 7.0,
+        "antiAir": 0.0,
+        "hp": 20.0,
+        "maxSpeedP": -4.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "lightAttack": 6.0,
+        "lightPiercing": 8.0,
+        "antiAir": 0.0,
+        "hp": 20.0,
+        "maxSpeedP": -5.0
+      }
+    },
+    "advanced": {
+      "stats": {
+        "lightAttack": 7.5,
+        "lightPiercing": 9.0,
+        "antiAir": 0.0,
+        "hp": 20.0,
+        "maxSpeedP": -6.0
+      }
+    },
+    "autoLoader": {
+      "stats": {
+        "lightAttack": 7.5,
+        "lightPiercing": 8.0,
+        "antiAir": 4.5,
+        "hp": 20.0,
+        "maxSpeedP": -6.0
+      }
+    }
+  },
+  "destroyer/lightCruiser": {
+    "early": {
+      "stats": {
+        "lightAttack": 1.0,
+        "lightPiercing": 0.5,
+        "antiAir": 1.0,
+        "hp": 0.0,
+        "maxSpeedP": -1.0
+      }
+    },
+    "basic": {
+      "stats": {
+        "lightAttack": 1.5,
+        "lightPiercing": 1.0,
+        "antiAir": 2.0,
+        "hp": 0.0,
+        "maxSpeedP": -2.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "lightAttack": 2.0,
+        "lightPiercing": 1.75,
+        "antiAir": 3,
+        "hp": 0.0,
+        "maxSpeedP": -3.0
+      }
+    },
+    "advanced": {
+      "stats": {
+        "lightAttack": 2.5,
+        "lightPiercing": 1.75,
+        "antiAir": 4.0,
+        "hp": 0.0,
+        "maxSpeedP": -4.0
+      }
+    }
+  }
+}

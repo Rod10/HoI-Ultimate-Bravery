@@ -1,0 +1,18 @@
+{
+  "destroyer": {
+    "basic": {
+      "stats": {
+        "mineLaying": 1.0,
+        "mineSweeping": 0.0,
+        "maxSpeedP": -2.0
+      }
+    },
+    "early": {
+      "stats": {
+        "mineLaying": 0.0,
+        "mineSweeping": 1.0,
+        "maxSpeedP": -2.0
+      }
+    }
+  }
+}

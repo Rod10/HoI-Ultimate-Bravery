@@ -1,0 +1,10 @@
+{
+  "destroyer": {
+    "basic": {
+      "subDetection": 6.0
+    },
+    "early": {
+      "subDetection": 10.0
+    }
+  }
+}

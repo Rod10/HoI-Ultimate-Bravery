@@ -1,0 +1,25 @@
+{
+  "lightCruiser/heavyCruiser/battlecruiser/battleship/superHeavyBattleship/": {
+    "early": {
+      "stats": {
+        "surfaceDetection": 7.0,
+        "subVisibility": 2.5,
+        "maxSpeedP": -1.0
+      }
+    },
+    "basic": {
+      "stats": {
+        "surfaceDetection":  10.0,
+        "subVisibility":  3.5,
+        "maxSpeedP": -1.0
+      }
+    }
+  },
+  "carrier": {
+    "early": {
+      "stats": {
+        "maxSpeedP": -5.0
+      }
+    }
+  }
+}

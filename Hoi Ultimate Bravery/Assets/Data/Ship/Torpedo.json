@@ -1,0 +1,61 @@
+{
+  "submarine": {
+    "early": {
+      "stats": {
+        "torpedoAttack": 14.0,
+        "torpedoHitChanceP": 0.0,
+        "maxSpeedP": 1.0
+      }
+    },
+    "basic": {
+      "stats": {
+        "torpedoAttack": 18.0,
+        "torpedoHitChanceP": 1.0,
+        "maxSpeedP": 2.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "torpedoAttack": 22.0,
+        "torpedoHitChanceP": 1.5,
+        "maxSpeedP": 3.0
+      }
+    },
+    "advanced": {
+      "stats": {
+        "torpedoAttack": 28.0,
+        "torpedoHitChanceP": 2.0,
+        "maxSpeedP": 4.0
+      }
+    }
+  },
+  "destroyer/lightCruiser": {
+    "early": {
+      "stats": {
+        "torpedoAttack": 18.0,
+        "torpedoHitChanceP": 0.0,
+        "maxSpeedP": 1.0
+      }
+    },
+    "basic": {
+      "stats": {
+        "torpedoAttack": 24.0,
+        "torpedoHitChanceP": 1.0,
+        "maxSpeedP": 2.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "torpedoAttack": 30.0,
+        "torpedoHitChanceP": 1.5,
+        "maxSpeedP": 3.0
+      }
+    },
+    "advanced": {
+      "stats": {
+        "torpedoAttack": 36.0,
+        "torpedoHitChanceP": 2.0,
+        "maxSpeedP": 4.0
+      }
+    }}
+}

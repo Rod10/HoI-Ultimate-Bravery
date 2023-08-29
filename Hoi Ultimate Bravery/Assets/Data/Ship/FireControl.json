@@ -1,0 +1,24 @@
+{
+  "destroyer/lightCruiser/heavyCruiser/battlecruiser/battleship/superHeavyBattleship/": {
+    "early": {
+      "stats": {
+        "antiAirP": 0.0
+      }
+    },
+    "basic": {
+      "stats": {
+        "antiAirP": 10.0
+      }
+    },
+    "improved": {
+      "stats": {
+        "antiAirP": 15.0
+      }
+    },
+    "advanced": {
+      "stats": {
+        "antiAirP": 20.0
+      }
+    }
+  }
+}

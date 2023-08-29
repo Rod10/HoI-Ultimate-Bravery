@@ -1,0 +1,9 @@
+{
+  "destroyer/lightCruiser/heavyCruiser/battlecruiser/battleship/superHeavyBattleship/carrier/submarine": {
+    "early": {
+      "stats": {
+        "navalRange": 1000.0
+      }
+    }
+  }
+}

@@ -26,6 +26,8 @@ public:
 
 	static ShipVersion::Version getRandomVersion(ShipType::Type type);
 	static std::map<Module::Type, Module> generateFixedModule(ShipType::Type type, ShipVersion::Version version);
+	// TODO pass lamda to get random type
+	static std::map<Module::Type, Module> generateCustomModule(ShipType::Type type, ShipVersion::Version version);
 	static Ship generateRandomShip(Hull::Type hull);
 };
 
