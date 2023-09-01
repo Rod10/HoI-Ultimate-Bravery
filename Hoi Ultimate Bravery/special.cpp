@@ -23,7 +23,7 @@ std::array<SpecialModule, 4> SpecialModule::generateSpecialModule() {
         SpecialModule::Type::WetAmmo
     };
 
-    std::ifstream fT("Assets/Data/Specials.json");
+    std::ifstream fT("Assets/Data/Tank/Specials.json");
     json data = json::parse(fT);
     fT.close();
 

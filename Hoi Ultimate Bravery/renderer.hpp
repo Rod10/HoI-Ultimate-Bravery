@@ -1,6 +1,7 @@
 #pragma once
 #include "icon.hpp"
 #include "tank.hpp"
+#include "ship.hpp"
 #include "utils.hpp"
 
 #include <algorithm>
@@ -32,6 +33,8 @@ public:
 	static void createLabelWithPosition(const char* label, float x, float y);
 	static void createTitleWithPosition(const char* label, float x, float y);
 	static void renderTankDesignerWindow(bool windowOpen, Tank tank);
+	static void renderShipDesignerWindow(bool windowOpen, Ship ship);
 	static void renderStats(bool windowOpen, Tank tank, std::map<TankType::Type, std::string> tankIconNames, std::unordered_map<TankType::Type, Stats> newTankStats);
+	static void renderStats(bool windowOpen, Ship ship, std::map<Hull::Type, std::string> shipIconNames, std::unordered_map<Hull::Type, Stats> newShipStats);
 };
 

@@ -28,21 +28,43 @@ public:
 		Last
 	};
 
+	enum SubType {
+		Light,
+		LightCruiser,
+		DualPurpose,
+		AutoLoader,
+		MineLaying,
+		MineSweeping
+	};
+
 	enum Version {
 		Basic,
 		Early,
 		Improved,
 		Advanced,
-		AutoLoader,
-		SuperHeavy,
+	};
+
+	enum CustomModulePos {
+		First = 20,
+		Second = 90,
+		Third = 168,
+		Four = 238,
+		Five = 313,
+		Six = 388,
+		Sevent = 455
 	};
 
 	Module() {}
 	Module(Type type, Version version) :
 		type(type),
 		version(version) {}
+	Module(Type type, SubType subType, Version version) :
+		type(type),
+		subType(subType),
+		version(version) {}
 
 	Type type;
+	SubType subType;
 	Version version;
 
 	static std::string moduleTypeToStringFile(Type type) {
@@ -78,8 +100,79 @@ public:
 		case 1: return Basic;
 		case 2: return Improved;
 		case 3: return Advanced;
-		case 4: return AutoLoader;
-		case 5: return SuperHeavy;
+		default:
+			break;
+		}
+	}
+
+	static Module::SubType stringToSubType(std::string type) {
+		if (type == "light") return Light;
+		if (type == "lightCruiser") return LightCruiser;
+		if (type == "dualPurpose") return DualPurpose;
+		if (type == "autoLoader") return AutoLoader;
+		if (type == "mineLaying") return MineLaying;
+		if (type == "mineSweeping") return MineSweeping;
+	}
+
+	static std::string typeToImagesString(Type type, SubType subType, ShipType::Type shipType) {
+		switch (type)
+		{
+		case Module::Engine: return "Engine";
+		case Module::Armor: 
+			if (shipType == ShipType::Type::Battlecruiser) {
+				return "Armor";
+			}
+			else if (shipType == ShipType::Type::Battleship || shipType == ShipType::Type::SuperHeavyBattleship) {
+				return "Armor_thick";
+			}
+			else if (shipType == ShipType::Type::Carrier) {
+				return "Armor_thin";
+			}
+		case Module::LightBattery:
+			if (subType == Light) {
+				return "Light_battery";
+			}
+			else if (subType == LightCruiser) {
+				return "Medium_light_battery";
+			}
+			else if (subType == AutoLoader) {
+				return "Dp_medium_light_battery";
+			}
+			else if (subType == DualPurpose) {
+				return "Dp_light_battery";
+			}
+		case Module::HeavyBattery:
+			break;
+		case Module::SecondaryBattery:
+			break;
+		case Module::AntiAir: return "Anti_air";
+		case Module::Torpedo:
+			if (shipType == ShipType::Submarine) {
+				return "Sub_torpedo_launcher";
+			} else {
+				return "Ship_torpedo_launcher";
+			}
+		case Module::Snorkel: return "Submarine_snorkel";
+		case Module::FireControl: return "Fire_control_system";
+		case Module::AntiSubmarine: return "Depth_charge";
+		case Module::Mine:
+			if (subType == MineLaying) {
+				return "Minelaying_rails";
+			}
+			else if (subType == MineSweeping) {
+				return "Minesweeping_gear";
+			}
+		case Module::Aircraft:
+			if (shipType == ShipType::Type::Carrier) {
+				return "Deck_space";
+			}
+			else {
+				return "Airplane_launcher";
+			}
+		case Module::Fuel: return "Fuel_tank";
+		case Module::Radar: return "Radar";
+		case Module::Sonar: return "Sonar";
+		case Module::None: return "None";
 		default:
 			break;
 		}

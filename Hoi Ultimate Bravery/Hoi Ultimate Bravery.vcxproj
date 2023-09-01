@@ -188,6 +188,7 @@
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="turret.cpp" />
     <ClCompile Include="turrettype.cpp" />
+    <ClCompile Include="unittype.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="shipversion.cpp" />
   </ItemGroup>
@@ -241,6 +242,7 @@
     <ClInclude Include="texture.hpp" />
     <ClInclude Include="turret.hpp" />
     <ClInclude Include="turrettype.hpp" />
+    <ClInclude Include="unittype.hpp" />
     <ClInclude Include="utils.hpp" />
     <ClInclude Include="shipversion.hpp" />
   </ItemGroup>

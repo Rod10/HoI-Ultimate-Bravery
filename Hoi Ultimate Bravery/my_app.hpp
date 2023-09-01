@@ -19,6 +19,7 @@
 #include "turret.hpp"
 #include "turrettype.hpp"
 #include "utils.hpp"
+#include "shipversion.hpp"
 
 #include "imgui_stdlib.h"
 
@@ -360,6 +361,12 @@ public:
         }
         //All Type
 
+        if (designerShipWindowOpen) {
+            Renderer::renderShipDesignerWindow(designerWindowOpen, country->shipList.find(hullTypeToShow)->second);
+            Renderer::renderStats(designerWindowOpen, country->shipList.find(hullTypeToShow)->second, shipIconNames, country->newShipStats);
+
+        }
+
         // Options
         if (optionWindowOpen) {
             off = Renderer::calculatePos(Constant::Position::MIDDLE, 250);
@@ -497,6 +504,7 @@ private:
     bool allCountries = false;
     bool dlcWindowOpen = false;
     bool modWindowOpen = false;
+    bool designerShipWindowOpen = false;
 
     bool mtg = settings->getDlcOwned("mtg");
     bool nsb = settings->getDlcOwned("nsb");
@@ -505,6 +513,7 @@ private:
     bool fileModified = false;
 
     std::map<TankType::Type, std::string> tankIconNames;
+    std::map<Hull::Type, std::string> shipIconNames;
 
     std::map<Gun::Category, std::vector<Gun>> gunList = Gun::generateGunList();
     std::map<Gun::Category, bool> gunCateogryWindowOpen;
@@ -598,11 +607,19 @@ private:
         if (allCountries) {
             for (Country& country : countryList) {
                 Ship ship = Ship::generateRandomShip(hullTypeToShow);
+                country.shipList.insert(std::pair<Hull::Type, Ship>(hullTypeToShow, ship));
+                country.newShipStats.insert(std::pair<Hull::Type, Stats>(hullTypeToShow, Stats()));
             }
         }
         else {
             Ship ship = Ship::generateRandomShip(hullTypeToShow);
+            country->shipList.insert(std::pair<Hull::Type, Ship>(hullTypeToShow, ship));
+            country->newShipStats.insert(std::pair<Hull::Type, Stats>(hullTypeToShow, Stats()));
         }
+        std::map<std::string, Texture> icon = Icon::GetInstance()->getShipIcon(Hull::typeToString(hullTypeToShow));
+        shipIconNames.insert(std::pair<Hull::Type, std::string>(hullTypeToShow, getShipIcon(hullTypeToShow)));
+        designerShipWindowOpen = true;
+        generateWindowOpen = false;
     }
 
     void renderTankGenerate() {
@@ -865,6 +882,12 @@ private:
         int random = rand() % icon.size();
         std::advance(it, random);
         return it->first;
+    }
+
+    std::string getShipIcon(Hull::Type type) {
+        std::map<std::string, Texture> icons = Icon::GetInstance()->getShipIcon(Hull::typeToString(type));
+        std::string string = std::format("{0}_{1}", ShipVersion::versionToFileString(country->shipList.find(type)->second.version), Hull::typeToString(type));
+        return icons.find(string)->first;
     }
 
     void generatingTank() {

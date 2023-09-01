@@ -195,6 +195,9 @@
     <ClCompile Include="hull.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="unittype.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Librairies\Imgui\imstb_textedit.h">
@@ -349,6 +352,9 @@
     </ClInclude>
     <ClInclude Include="hull.hpp">
       <Filter>Fichiers d%27en-tête\Ship</Filter>
+    </ClInclude>
+    <ClInclude Include="unittype.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

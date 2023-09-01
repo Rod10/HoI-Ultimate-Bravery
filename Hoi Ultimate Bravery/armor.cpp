@@ -5,7 +5,7 @@ Armor Armor::generateRandomArmor() {
 
     Armor::Type type = static_cast<Armor::Type>(rand() % Armor::Type::Last);
 
-    std::ifstream f("Assets/Data/Armor.json");
+    std::ifstream f("Assets/Data/Tank/Armor.json");
     json armorData = json::parse(f)[Armor::typeToString(type)]["stats"];
     f.close();
 

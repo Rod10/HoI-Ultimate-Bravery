@@ -13,7 +13,7 @@ Suspension Suspension::generateRandomSuspension(TankType::Type type)
     }
     std::string suspensionTypeString = Suspension::typeToString(suspensionType);
 
-    std::ifstream fs("Assets/Data/Suspensions.json");
+    std::ifstream fs("Assets/Data/Tank/Suspensions.json");
     json suspensionData = json::parse(fs);
     fs.close();
 

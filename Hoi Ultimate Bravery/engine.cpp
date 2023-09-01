@@ -7,7 +7,7 @@ Engine Engine::generateRandomEngine()
 
     Engine::Type type = static_cast<Engine::Type>(rand() % Engine::Type::Last);
 
-    std::ifstream f("Assets/Data/Engine.json");
+    std::ifstream f("Assets/Data/Tank/Engine.json");
     json armorData = json::parse(f)[Engine::typeToString(type)]["stats"];
     f.close();
 

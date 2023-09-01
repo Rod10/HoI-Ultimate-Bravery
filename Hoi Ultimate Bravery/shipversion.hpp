@@ -23,6 +23,7 @@ public:
 		ConvertedCruiser,
 		Cruiser,
 		Midged,
+		PreDreadnought,
 		Last
 	};
 
@@ -39,7 +40,53 @@ public:
 		if (version == "convertedCruiser") return ConvertedCruiser;
 		if (version == "cruiser") return Cruiser;
 		if (version == "midged") return Midged;
+		if (version == "preDreadnought") return PreDreadnought;
 	}
+
+	static std::string versionToFileString(Version version) {
+		switch (version)
+		{
+		case ShipVersion::Early: return "Early";
+		case ShipVersion::Basic: return "Basic";
+		case ShipVersion::Improved: return "Improved";
+		case ShipVersion::Advanced: return "Advanced";
+		case ShipVersion::Torpedo:
+			break;
+		case ShipVersion::Panzerschiff:
+			break;
+		case ShipVersion::CoastalDefense:
+			break;
+		case ShipVersion::SuperHeavy:
+			break;
+		case ShipVersion::ConvertedBattleship:
+			break;
+		case ShipVersion::ConvertedCruiser:
+			break;
+		case ShipVersion::Cruiser:
+			break;
+		case ShipVersion::Midged:
+			break;
+		case ShipVersion::PreDreadnought:
+			break;
+		case ShipVersion::Last:
+			break;
+		default:
+			break;
+		}
+	}
+
+	static std::string versionToYear(Version version) {
+		switch (version)
+		{
+		case ShipVersion::Early: return "1918";
+		case ShipVersion::Basic: return "1936";
+		case ShipVersion::Improved: return "1940";
+		case ShipVersion::Advanced: return "1944";
+		default:
+			break;
+		}
+	}
+
 	/*
 	enum DestroyerVersion {
 		Early,

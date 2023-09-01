@@ -3,7 +3,7 @@
 Tank::Version Tank::generatingRandomVersion(TankType::Type type)
 {
     srand(time(0));
-    std::ifstream f("Assets/Data/Tank.json");
+    std::ifstream f("Assets/Data/Tank/Tank.json");
     json tankData = json::parse(f)[Tank::tankTypeToString(type)];
     f.close();
 
@@ -18,7 +18,7 @@ Tank::Version Tank::generatingRandomVersion(TankType::Type type)
 
 Stats Tank::getStatsFromVersion(TankType::Type type, Tank::Version version)
 {
-    std::ifstream f("Assets/Data/Tank.json");
+    std::ifstream f("Assets/Data/Tank/Tank.json");
     json tankData = json::parse(f)[Tank::tankTypeToString(type)];
     f.close();
     auto statsKey = Stats::getStatsKeyArray();

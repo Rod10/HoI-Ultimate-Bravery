@@ -8,7 +8,6 @@ Module Module::generateModule(Type moduleType, ShipType::Type shipType, ShipVers
     }
     std::ifstream f(std::format("Assets/Data/Ship/{0}.json", Module::moduleTypeToStringFile(moduleType)));
     json module = json::parse(f);
-    //json moduleData = json::parse(f)[ShipType::shipTypeToString(shipType)];
     f.close();
 
     std::vector<std::string> moduleNameKey;
@@ -24,6 +23,21 @@ Module Module::generateModule(Type moduleType, ShipType::Type shipType, ShipVers
     for (auto& el : module[moduleName].items()) {
         moduleKey.push_back(el.key());
     }
+
+    if (moduleType == Type::LightBattery) {
+        std::vector<std::string> moduleVersion;
+        int moduleSubType = rand() % moduleKey.size();
+        Module::SubType subType = Module::stringToSubType(moduleKey[moduleSubType]);
+
+        for (auto& el : module[moduleName][moduleKey[moduleSubType]].items()) {
+            moduleVersion.push_back(el.key());
+        }
+        int moduleVersionInt = rand() % moduleVersion.size();
+        Module::Version version = Module::intToVersion(moduleVersionInt);
+
+        return Module(moduleType, subType, version);
+    }
+
     int moduleVersionInt = rand() % moduleKey.size();
     Module::Version version = Module::intToVersion(moduleVersionInt);
     return Module(moduleType, version);

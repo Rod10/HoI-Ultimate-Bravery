@@ -5,7 +5,7 @@ Turret Turret::generatingRandomTurret(int tankTypeInt)
     TankType::Type tankType = TankType::intToTankType(tankTypeInt);
     std::vector<TurretType::Type> turretAllowed = TurretType::getAllowedTurret(tankType);
     TurretType::Type turretType = *Utils::select_randomly(turretAllowed.begin(), turretAllowed.end());
-    std::ifstream fT("Assets/Data/Turret.json");
+    std::ifstream fT("Assets/Data/Tank/Turret.json");
     json data = json::parse(fT);
     fT.close();
     json turretJson = data[TurretType::turretTypeToString(turretType)]["crew"];
