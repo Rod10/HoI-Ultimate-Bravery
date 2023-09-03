@@ -24,7 +24,7 @@ Module Module::generateModule(Type moduleType, ShipType::Type shipType, ShipVers
         moduleKey.push_back(el.key());
     }
 
-    if (moduleType == Type::LightBattery) {
+    if (moduleType == Type::LightBattery || moduleType == Type::SecondaryBattery) {
         std::vector<std::string> moduleVersion;
         int moduleSubType = rand() % moduleKey.size();
         Module::SubType subType = Module::stringToSubType(moduleKey[moduleSubType]);

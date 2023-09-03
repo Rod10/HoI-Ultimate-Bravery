@@ -30,7 +30,7 @@ public:
 	std::unordered_map<Module::Type, Module> fixedModule;
 	Stats stats;
 
-	static ShipVersion::Version getRandomVersion(ShipType::Type type);
+	static ShipVersion::Version getRandomVersion(Hull::Type hull, ShipType::Type type);
 	static std::unordered_map<Module::Type, Module> generateFixedModule(ShipType::Type type, ShipVersion::Version version);
 	static std::unordered_map<Module::Type, Module> generateCustomModule(ShipType::Type type, ShipVersion::Version version);
 	static Ship generateRandomShip(Hull::Type hull);

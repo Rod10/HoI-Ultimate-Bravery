@@ -1,5 +1,62 @@
 {
   "lightCruiser/heavyCruiser/battlecruiser/battleship/superHeavyBattleship/carrier": {
-
+    "secondary": {
+      "early": {
+        "stats": {
+          "lightAttack": 3.0,
+          "lightPiercing": 5.5,
+          "antiAir": 0.0,
+          "hp": 0.0,
+          "maxSpeedP": -2.0
+        }
+      },
+      "basic": {
+        "stats": {
+          "lightAttack": 4.0,
+          "lightPiercing": 7.0,
+          "antiAir": 0.0,
+          "hp": 0.0,
+          "maxSpeedP": -3.0
+        }
+      }
+    },
+    "dualPurpose": {
+      "early": {
+        "stats": {
+          "lightAttack": 2.0,
+          "lightPiercing": 3.0,
+          "antiAir": 1.0,
+          "hp": 0.0,
+          "maxSpeedP": -1.0
+        }
+      },
+      "basic": {
+        "stats": {
+          "lightAttack": 3.0,
+          "lightPiercing": 4.0,
+          "antiAir": 2.0,
+          "hp": 0.0,
+          "maxSpeedP": -1.0
+        },
+        "immproved": {
+          "stats": {
+            "lightAttack": 4.0,
+            "lightPiercing": 7.0,
+            "antiAir": 2.5,
+            "hp": 0.0,
+            "maxSpeedP": -3.0
+          },
+          "basic": {
+            "stats": {
+              "lightAttack": 4.5,
+              "lightPiercing": 7.0,
+              "antiAir": 3.0,
+              "hp": 0.0,
+              "maxSpeedP": -3.0
+            }
+          }
+        }
+      }
+    }
   }
 }

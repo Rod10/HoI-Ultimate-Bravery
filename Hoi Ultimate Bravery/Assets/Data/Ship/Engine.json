@@ -25,7 +25,7 @@
       }
     }
   },
-  "cruiser": {
+  "lightCruiser/heavyCruiser": {
     "early": {
       "stats": {
         "subVisibilityP": 0.0,

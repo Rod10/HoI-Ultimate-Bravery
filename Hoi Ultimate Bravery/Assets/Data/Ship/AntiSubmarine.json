@@ -1,5 +1,5 @@
 {
-  "destroyer": {
+  "destroyer/lightCruiser/heavyCruiser": {
     "early": {
       "stats": {
         "submarineAttack": 8.0,

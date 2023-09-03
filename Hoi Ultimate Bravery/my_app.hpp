@@ -886,7 +886,7 @@ private:
 
     std::string getShipIcon(Hull::Type type) {
         std::map<std::string, Texture> icons = Icon::GetInstance()->getShipIcon(Hull::typeToString(type));
-        std::string string = std::format("{0}_{1}", ShipVersion::versionToFileString(country->shipList.find(type)->second.version), Hull::typeToString(type));
+        std::string string = std::format("{0}_{1}", ShipVersion::versionToFileString(country->shipList.find(type)->second.version), ShipType::shipTypeToIconString(country->shipList.find(type)->second.type));
         return icons.find(string)->first;
     }
 

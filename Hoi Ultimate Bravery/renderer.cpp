@@ -319,7 +319,7 @@ void Renderer::renderStats(bool windowOpen, Ship ship, std::map<Hull::Type, std:
     std::string string = std::format("{0} {1}", ShipVersion::versionToYear(ship.version), ShipType::shipTypeToString(ship.type).c_str());
     createTitleWithPosition(string.c_str(), ImGui::GetCursorPosX() + 30.0f, 65);
 
-    setIcon(ImGui::GetCursorPosY(), ImGui::GetCursorPosX() + 200, ShipType::shipTypeToString(ship.type), shipIconNames.find(ship.hull)->second, UnitType::Type::Ship);
+    setIcon(ImGui::GetCursorPosY(), ImGui::GetCursorPosX() + 200, Hull::typeToString(ship.hull), shipIconNames.find(ship.hull)->second, UnitType::Type::Ship);
 
     int index = 0;
     for (auto& module : ship.fixedModule) {

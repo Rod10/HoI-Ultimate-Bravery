@@ -48,6 +48,22 @@ public:
 		}
 	}
 
+	static std::string shipTypeToIconString(Type type) {
+		switch (type)
+		{
+		case ShipType::Destroyer: return "destroyer";
+		case ShipType::LightCruiser: return "light_cruiser";
+		case ShipType::HeavyCruiser: return "light_cruiser";
+		case ShipType::Battlecruiser: return "battlecruiser";
+		case ShipType::Battleship: return "battleship";
+		case ShipType::SuperHeavyBattleship: return "superHeavyBattleship";
+		case ShipType::Carrier: return "carrier";
+		case ShipType::Submarine: return "submarine";
+		default:
+			break;
+		}
+	}
+
 	static ShipType::Type hullToShipType(Hull::Type hull) {
 		switch (hull) {
 		case Hull::Destroyer: return Destroyer;

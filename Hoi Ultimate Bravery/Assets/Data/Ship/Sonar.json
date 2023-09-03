@@ -1,5 +1,5 @@
 {
-  "destroyer": {
+  "destroyer/lightCruiser/heavyCruiser/battlecruiser/battleship/superHeavyBattleship/carrier/submarine": {
     "basic": {
       "subDetection": 6.0
     },
