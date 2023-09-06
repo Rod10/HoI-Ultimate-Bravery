@@ -51,7 +51,7 @@
       }
     }
   },
-  "heavyShip": {
+  "battleship/battlecruiser/superHeavyBattleship": {
     "early": {
       "stats": {
         "subVisibilityP": 0.0,

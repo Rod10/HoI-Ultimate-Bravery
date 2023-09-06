@@ -37,7 +37,7 @@
       }
     }
   },
-  "heavyShip": {
+  "battleship/battlecruiser": {
     "early": {
       "stats": {
         "heavyAttack": 14.0,
@@ -71,7 +71,7 @@
       }
     }
   },
-  "superHeavy": {
+  "superHeavyBattleship": {
     "early": {
       "stats": {
         "heavyAttack": 14.0,
@@ -104,7 +104,7 @@
         "maxSpeedP": -8.0
       }
     },
-    "superHeavy": {
+    "superHeavyBattleship": {
       "stats": {
         "heavyAttack": 27.0,
         "heavyPiercing": 45.0,

@@ -24,7 +24,11 @@ Ship Ship::generateRandomShip(Hull::Type hull)
 ShipVersion::Version Ship::getRandomVersion(Hull::Type hull, ShipType::Type type) {
     srand(time(0));
     std::ifstream f("Assets/Data/Ship/Ship.json");
-    json shipData = json::parse(f)[Hull::typeToString(hull)];
+    json shipData;
+    if (type == ShipType::Type::SuperHeavyBattleship) {
+        shipData = json::parse(f)["superHeavy"];
+    }
+    else shipData = json::parse(f)[Hull::typeToString(hull)];
     f.close();
 
     std::vector<std::string> shipKey;
@@ -53,7 +57,7 @@ std::unordered_map<Module::Type, Module> Ship::generateFixedModule(ShipType::Typ
         modules.insert(std::pair < Module::Type, Module >(Module::Type::FireControl, Module::generateModule(Module::Type::FireControl, type, version)));
         modules.insert(std::pair < Module::Type, Module >(Module::Type::RadarSonar, Module::generateModule(Module::Type::RadarSonar, type, version)));
         modules.insert(std::pair < Module::Type, Module >(Module::Type::Engine, Module::generateModule(Module::Type::Engine, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::SecondaryBattery, Module::generateModule(Module::Type::Engine, type, version)));
+        modules.insert(std::pair < Module::Type, Module >(Module::Type::SecondaryBattery, Module::generateModule(Module::Type::SecondaryBattery, type, version)));
         modules.insert(std::pair < Module::Type, Module >(Module::Type::Armor, Module::generateModule(Module::Type::Armor, type, version)));
     }
     if (type == ShipType::HeavyCruiser) {
@@ -102,8 +106,8 @@ std::unordered_map<Module::Type, Module> Ship::generateFixedModule(ShipType::Typ
         modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module::generateModule(Module::Type::Armor, type, version)));
     }
     if (type == ShipType::Submarine) {
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::Torpedo, Module::generateModule(Module::Type::Aircraft, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::Engine, Module::generateModule(Module::Type::Aircraft, type, version)));
+        modules.insert(std::pair < Module::Type, Module >(Module::Type::Torpedo, Module::generateModule(Module::Type::Torpedo, type, version)));
+        modules.insert(std::pair < Module::Type, Module >(Module::Type::Engine, Module::generateModule(Module::Type::Engine, type, version)));
         modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
         modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
         modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));

@@ -18,7 +18,7 @@ public:
 		{
 		case Hull::Destroyer: return "destroyer";
 		case Hull::Cruiser: return "cruiser";
-		case Hull::HeavyShip: return "heavySHip";
+		case Hull::HeavyShip: return "heavyShip";
 		case Hull::SuperHeavyShip: return "superHeavyShip";
 		case Hull::Carrier: return "carrier";
 		case Hull::Submarine: return "submarine";

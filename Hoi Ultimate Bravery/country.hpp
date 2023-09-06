@@ -30,7 +30,7 @@ public:
 		linesToDeleteStart(linesToDeleteStart),
 		linesToDeleteEnd(linesToDeleteEnd),
 		ideaPosIdea(ideaPosIdea),
-		tankList(tankList){
+		tankList(tankList) {
 		lineToDeleteCount = linesToDeleteEnd - linesToDeleteStart;
 	}
 	static std::vector<Country> generateCountryList();

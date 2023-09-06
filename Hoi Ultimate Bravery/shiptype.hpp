@@ -54,7 +54,7 @@ public:
 		case ShipType::Destroyer: return "destroyer";
 		case ShipType::LightCruiser: return "light_cruiser";
 		case ShipType::HeavyCruiser: return "light_cruiser";
-		case ShipType::Battlecruiser: return "battlecruiser";
+		case ShipType::Battlecruiser: return "battleship";
 		case ShipType::Battleship: return "battleship";
 		case ShipType::SuperHeavyBattleship: return "superHeavyBattleship";
 		case ShipType::Carrier: return "carrier";

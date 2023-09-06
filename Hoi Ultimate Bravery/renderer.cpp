@@ -442,9 +442,8 @@ void Renderer::renderStats(bool windowOpen, Ship ship, std::map<Hull::Type, std:
     */
     ImGui::PopStyleColor();
     ImGui::PopFont();
-
-    ImGui::End();
 }
+
 void Renderer::renderStats(bool windowOpen, Tank tank, std::map<TankType::Type, std::string> tankIconNames, std::unordered_map<TankType::Type, Stats> newTankStats)
 {
     ImGuiIO& io = ImGui::GetIO();

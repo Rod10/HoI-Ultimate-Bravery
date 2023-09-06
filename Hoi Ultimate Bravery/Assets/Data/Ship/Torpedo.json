@@ -29,7 +29,7 @@
       }
     }
   },
-  "destroyer/lightCruiser": {
+  "destroyer/lightCruiser/heavyCruiser": {
     "early": {
       "stats": {
         "torpedoAttack": 18.0,

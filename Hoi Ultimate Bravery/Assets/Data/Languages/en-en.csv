@@ -30,3 +30,6 @@ tacticalBomber,Tactical bomber
 strategicBomber,Strategic bomber
 interceptor,Interceptor
 plane,Plane
+allShip,All the types
+allTank,All the types
+allPlane,All the types

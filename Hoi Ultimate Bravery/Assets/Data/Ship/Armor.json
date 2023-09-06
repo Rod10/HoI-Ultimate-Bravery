@@ -111,7 +111,7 @@
       }
     }
   },
-  "superHeavy": {
+  "superHeavyBattleship": {
     "stats": {
       "basic":{
         "armor": 55.0,

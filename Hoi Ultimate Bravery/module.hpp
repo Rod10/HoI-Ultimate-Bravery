@@ -34,7 +34,8 @@ public:
 		DualPurpose,
 		AutoLoader,
 		MineLaying,
-		MineSweeping
+		MineSweeping,
+		Secondary
 	};
 
 	enum Version {
@@ -112,6 +113,7 @@ public:
 		if (type == "autoLoader") return AutoLoader;
 		if (type == "mineLaying") return MineLaying;
 		if (type == "mineSweeping") return MineSweeping;
+		if (type == "secondary") return Secondary;
 	}
 
 	static std::string typeToImagesString(Type type, SubType subType, ShipType::Type shipType) {
@@ -125,7 +127,7 @@ public:
 			else if (shipType == ShipType::Type::Battleship || shipType == ShipType::Type::SuperHeavyBattleship) {
 				return "Armor_thick";
 			}
-			else if (shipType == ShipType::Type::Carrier) {
+			else if (shipType == ShipType::Type::Carrier || ShipType::Type::LightCruiser || ShipType::Type::HeavyCruiser) {
 				return "Armor_thin";
 			}
 		case Module::LightBattery:
@@ -142,9 +144,11 @@ public:
 				return "Dp_light_battery";
 			}
 		case Module::HeavyBattery:
-			break;
+			if (shipType == ShipType::Type::HeavyCruiser) return "Medium_battery";
+			else if (shipType == ShipType::Type::Battleship || shipType == ShipType::Type::SuperHeavyBattleship) return "Heavy_battery";
 		case Module::SecondaryBattery:
-			break;
+			if (subType == Secondary) return "Secondary_battery";
+			else if (subType == DualPurpose) return "Dp_secondary_battery";
 		case Module::AntiAir: return "Anti_air";
 		case Module::Torpedo:
 			if (shipType == ShipType::Submarine) {
@@ -173,6 +177,18 @@ public:
 		case Module::Radar: return "Radar";
 		case Module::Sonar: return "Sonar";
 		case Module::None: return "None";
+		default:
+			break;
+		}
+	}
+
+	static std::string versionToString(Version version) {
+		switch (version)
+		{
+		case Module::Basic: return "1";
+		case Module::Early: return "2";
+		case Module::Improved: return "3";
+		case Module::Advanced: return "4";
 		default:
 			break;
 		}

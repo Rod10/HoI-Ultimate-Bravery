@@ -50,24 +50,15 @@ public:
 		case ShipVersion::Basic: return "Basic";
 		case ShipVersion::Improved: return "Improved";
 		case ShipVersion::Advanced: return "Advanced";
-		case ShipVersion::Torpedo:
-			break;
-		case ShipVersion::Panzerschiff:
-			break;
-		case ShipVersion::CoastalDefense:
-			break;
-		case ShipVersion::SuperHeavy:
-			break;
-		case ShipVersion::ConvertedBattleship:
-			break;
-		case ShipVersion::ConvertedCruiser:
-			break;
-		case ShipVersion::Cruiser:
-			break;
-		case ShipVersion::Midged:
-			break;
-		case ShipVersion::PreDreadnought:
-			break;
+		case ShipVersion::Torpedo: return "Torpedo";
+		case ShipVersion::Panzerschiff: return "Ship_hull_panzerschiff";
+		case ShipVersion::CoastalDefense: return "Ship_hull_cruiser_coastal_defense_ship";
+		case ShipVersion::SuperHeavy: return "Heavy_battleship";
+		case ShipVersion::ConvertedBattleship:return "Ship_hull_carrier_conversion_ca";
+		case ShipVersion::ConvertedCruiser: return "Ship_hull_carrier_conversion_ca";
+		case ShipVersion::Cruiser: return "Ship_hull_cruiser";
+		case ShipVersion::Midged: return "Ship_hull_midget";
+		case ShipVersion::PreDreadnought: return "PreDreadnought";
 		case ShipVersion::Last:
 			break;
 		default:
@@ -82,76 +73,11 @@ public:
 		case ShipVersion::Basic: return "1936";
 		case ShipVersion::Improved: return "1940";
 		case ShipVersion::Advanced: return "1944";
+		case ShipVersion::CoastalDefense: return "Coastal Defense";
+		case ShipVersion::Torpedo: return "Torpedo";
+		case ShipVersion::Panzerschiff: return "Panzerschiff";
 		default:
 			break;
 		}
 	}
-
-	/*
-	enum DestroyerVersion {
-		Early,
-		Basic,
-		Improved,
-		Advanced,
-		DDLast
-	};
-
-	enum CruiserVersion {
-		Early,
-		Basic,
-		Improved,
-		Advanced,
-		Torpedo,
-		Panzerschiff,
-		CoastalDefense,
-		CALast
-	};
-
-	enum HeavyShipVersion {
-		PreDreadnought,
-		Early,
-		Basic,
-		Improved,
-		Advanced,
-		SuperHeavy,
-		BBLast
-	};
-
-	enum CarrierVersion {
-		Basic,
-		Improved,
-		Advanced,
-		ConvertedBattleship,
-		ConvertedCruiser,
-		CVLast
-	};
-
-	enum SubmarineVersion {
-		Early,
-		Basic,
-		Improved,
-		Advanced,
-		Cruiser,
-		Midged,
-		SSLast
-	};*/
-
-	/*static auto getRandomVersion(ShipType::Type type) {
-		srand(time(0));
-		switch (type)
-		{
-		case ShipType::Destroyer:
-			return static_cast<ShipVersion::DestroyerVersion>(rand() % ShipVersion::DestroyerVersion::Last);
-		case ShipType::Cruiser:
-			return static_cast<ShipVersion::CruiserVersion>(rand() % ShipVersion::CruiserVersion::Last);
-		case ShipType::HeavyShip:
-			return static_cast<ShipVersion::HeavyShipVersion>(rand() % ShipVersion::HeavyShipVersion::Last);
-		case ShipType::Carrier:
-			return static_cast<ShipVersion::DestroyerVersion>(rand() % ShipVersion::CarrierVersion::Last);
-		case ShipType::Submarine:
-			return static_cast<ShipVersion::DestroyerVersion>(rand() % ShipVersion::SubmarineVersion::Last);
-		default:
-			break;
-		}
-	}*/
 };

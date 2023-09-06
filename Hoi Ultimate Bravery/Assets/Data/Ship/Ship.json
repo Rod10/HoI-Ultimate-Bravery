@@ -186,14 +186,16 @@
     }
   },
   "superHeavy": {
-    "stats": {
-      "surfaceDectection": 20.0,
-      "surfaceVisibility": 20.0,
-      "subDetection": 1.0,
-      "maxSpeed": 32.0,
-      "maxRange": 4500.0,
-      "hp": 700.0,
-      "realibility": 80.0
+    "early": {
+      "stats": {
+        "surfaceDectection": 20.0,
+        "surfaceVisibility": 20.0,
+        "subDetection": 1.0,
+        "maxSpeed": 32.0,
+        "maxRange": 4500.0,
+        "hp": 700.0,
+        "realibility": 80.0
+      }
     }
   },
   "carrier": {

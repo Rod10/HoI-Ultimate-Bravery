@@ -1,5 +1,5 @@
 {
-  "destroyer": {
+  "destroyer/lightCruiser/heavyCruiser/submarine": {
     "mineLaying": {
       "basic": {
         "stats": {
