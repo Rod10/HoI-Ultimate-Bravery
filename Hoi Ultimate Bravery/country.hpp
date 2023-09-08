@@ -1,6 +1,7 @@
 #pragma once
 #include "json.hpp"
 #include "hull.hpp"
+#include "plane.hpp"
 #include "ship.hpp"
 #include "shiptype.hpp"
 #include "shipversion.hpp"
@@ -46,5 +47,7 @@ public:
 	std::unordered_map<TankType::Type, Stats> newTankStats;
 	std::map<Hull::Type, Ship> shipList;
 	std::unordered_map<Hull::Type, Stats> newShipStats;
+	std::map < PlaneRole::Role, Plane > planeList;
+	std::map < PlaneRole::Role, Stats > newPlaneStats;
 };
 

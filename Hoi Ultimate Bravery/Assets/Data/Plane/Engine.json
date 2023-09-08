@@ -1,0 +1,283 @@
+{
+  "small": {
+    "prop": {
+      "1": {
+        "early": {
+          "stats": {
+            "maxSpeed": 350.0,
+            "thrust": 15.0
+          }
+        },
+        "basic": {
+          "stats": {
+            "maxSpeed": 480.0,
+            "thrust": 16.0
+          }
+        },
+        "improved": {
+          "stats": {
+            "maxSpeed": 550.0,
+            "thrust": 30.0
+          }
+        },
+        "advanced": {
+          "stats": {
+            "maxSpeed": 750.0,
+            "thrust": 36.0
+          }
+        }
+      },
+      "2": {
+        "early": {
+          "stats": {
+            "maxSpeed": 300.0,
+            "thrust": 22.0
+          }
+        },
+        "basic": {
+          "stats": {
+            "maxSpeed": 450.0,
+            "thrust": 24.0
+          }
+        },
+        "improved": {
+          "stats": {
+            "maxSpeed": 500.0,
+            "thrust": 45.0
+          }
+        },
+        "advanced": {
+          "stats": {
+            "maxSpeed": 700.0,
+            "thrust": 54.0
+          }
+        }
+      }
+    },
+    "jet": {
+      "1": {
+        "early": {
+          "stats": {
+            "maxSpeed": 900.0,
+            "thrust": 40.0
+          }
+        }
+      },
+      "2": {
+        "early": {
+          "stats": {
+            "maxSpeed": 850.0,
+            "thrust": 60.0
+          }
+        }
+      }
+    },
+    "rocket": {
+      "1": {
+        "early": {
+          "stats": {
+            "maxSpeed": 700.0,
+            "thrust": 40.0,
+            "rangeP": -90.0
+          }
+        },
+        "basic": {
+          "stats": {
+            "maxSpeed": 800.0,
+            "thrust": 45.0,
+            "rangeP": -85.0
+          }
+        },
+        "improved": {
+          "stats": {
+            "maxSpeed": 1000.0,
+            "thrust": 50.0,
+            "rangeP": -80.0
+          }
+        }
+      }
+    }
+  },
+  "medium": {
+    "prop": {
+      "2": {
+        "early": {
+          "stats": {
+            "maxSpeed": 300.0,
+            "thrust": 22.0
+          }
+        },
+        "basic": {
+          "stats": {
+            "maxSpeed": 450.0,
+            "thrust": 24.0
+          }
+        },
+        "improved": {
+          "stats": {
+            "maxSpeed": 500.0,
+            "thrust": 45.0
+          }
+        },
+        "advanced": {
+          "stats": {
+            "maxSpeed": 700.0,
+            "thrust": 54.0
+          }
+        }
+      },
+      "3": {
+        "early": {
+          "stats": {
+            "maxSpeed": 300.0,
+            "thrust": 30.0
+          }
+        },
+        "basic": {
+          "stats": {
+            "maxSpeed": 450.0,
+            "thrust": 32.0
+          }
+        },
+        "improved": {
+          "stats": {
+            "maxSpeed": 500.0,
+            "thrust": 60.0
+          }
+        },
+        "advanced": {
+          "stats": {
+            "maxSpeed": 700.0,
+            "thrust": 72.0
+          }
+        }
+      },
+      "4": {
+        "early": {
+          "stats": {
+            "maxSpeed": 300.0,
+            "thrust": 37.0
+          }
+        },
+        "basic": {
+          "stats": {
+            "maxSpeed": 450.0,
+            "thrust": 40.0
+          }
+        },
+        "improved": {
+          "stats": {
+            "maxSpeed": 500.0,
+            "thrust": 75.0
+          }
+        },
+        "advanced": {
+          "stats": {
+            "maxSpeed": 700.0,
+            "thrust": 90.0
+          }
+        }
+      }
+    },
+    "jet": {
+      "2": {
+        "early": {
+          "stats": {
+            "maxSpeed": 850.0,
+            "thrust": 60.0
+          }
+        }
+      },
+      "3": {
+        "early": {
+          "stats": {
+            "maxSpeed": 850.0,
+            "thrust": 80.0
+          }
+        }
+      },
+      "4": {
+        "early": {
+          "stats": {
+            "maxSpeed": 850.0,
+            "thrust": 100.0
+          }
+        }
+      }
+    }
+  },
+  "large": {
+    "prop": {
+      "4": {
+        "early": {
+          "stats": {
+            "maxSpeed": 300.0,
+            "thrust": 37.0
+          }
+        },
+        "basic": {
+          "stats": {
+            "maxSpeed": 450.0,
+            "thrust": 40.0
+          }
+        },
+        "improved": {
+          "stats": {
+            "maxSpeed": 500.0,
+            "thrust": 75.0
+          }
+        },
+        "advanced": {
+          "stats": {
+            "maxSpeed": 700.0,
+            "thrust": 90.0
+          }
+        }
+      },
+      "6": {
+        "early": {
+          "stats": {
+            "maxSpeed": 300.0,
+            "thrust": 52.5
+          }
+        },
+        "basic": {
+          "stats": {
+            "maxSpeed": 450.0,
+            "thrust": 56.0
+          }
+        },
+        "improved": {
+          "stats": {
+            "maxSpeed": 500.0,
+            "thrust": 90.0
+          }
+        },
+        "advanced": {
+          "stats": {
+            "maxSpeed": 700.0,
+            "thrust": 126.0
+          }
+        }
+      }
+    },
+    "jet": {
+      "4": {
+        "early": {
+          "stats": {
+            "maxSpeed": 850.0,
+            "thrust": 100.0
+          }
+        }
+      },
+      "6": {
+        "early": {
+          "stats": {
+            "maxSpeed": 850.0,
+            "thrust": 120.0
+          }
+        }
+      }
+    }
+  }
+}

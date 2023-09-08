@@ -588,6 +588,7 @@ private:
 	bool debugMode = true;
 	Hull::Type hullTypeToShow;
 	TankType::Type tankTypeToShow;
+	PlaneRole::Role planeRoleToShow;
 	std::map<TankType::Type, Tank> tankList;
 	std::unordered_map<TankType::Type, Stats> newTankStats;
 	std::vector<std::string> tankModule = { "gun", "turret", "suspension", "engine", "armor" };
@@ -608,6 +609,7 @@ private:
 	bool dlcWindowOpen = false;
 	bool modWindowOpen = false;
 	bool designerShipWindowOpen = false;
+	bool designerPlaneWindowOpen = false;
 
 	bool mtg = settings->getDlcOwned("mtg");
 	bool nsb = settings->getDlcOwned("nsb");
@@ -719,7 +721,6 @@ private:
 
 		ImGui::PopStyleColor();
 	}
-
 
 	void generatingShip() {
 		if (allCountries) {
@@ -868,13 +869,13 @@ private:
 		width += style.ItemSpacing.x;
 		width += ImGui::CalcTextSize(getLocalizedString("strategicBomber")).x;
 		width += style.ItemSpacing.x;
-		width += ImGui::CalcTextSize(getLocalizedString("interceptor")).x;
 		AlignForWidth(width);
 		ImGui::SameLine();
 
-		if (ImGui::Button(getLocalizedString("fighter"))) {}
-		ImGui::SameLine();
-		if (ImGui::Button(getLocalizedString("interceptor"))) {}
+		if (ImGui::Button(getLocalizedString("fighter"))) {
+			planeRoleToShow = PlaneRole::Role::Fighter;
+			generatingPlane();
+		}
 		ImGui::SameLine();
 		if (ImGui::Button(getLocalizedString("cas"))) {}
 		if (ImGui::Button(getLocalizedString("navalBomber"))) {}
@@ -885,6 +886,29 @@ private:
 		if (Renderer::createButtonWithPosition(getLocalizedString("allPlane"), Constant::Position::MIDDLE)) {}
 
 		ImGui::PopStyleColor();
+	}
+
+	void generatingPlane() {
+		if (allCountries) {
+			for (Country& country : countryList) {
+				Plane plane = Plane::generateRandomPlane(planeRoleToShow);
+
+				country.planeList.insert(std::pair<PlaneRole::Role, Plane>(planeRoleToShow, plane));
+				country.newPlaneStats.insert(std::pair<PlaneRole::Role, Stats>(planeRoleToShow, Stats()));
+			}
+		}
+		else {
+			Plane plane = Plane::generateRandomPlane(planeRoleToShow);
+
+			country->planeList.insert(std::pair<PlaneRole::Role, Plane>(planeRoleToShow, plane));
+			country->newPlaneStats.insert(std::pair<PlaneRole::Role, Stats>(planeRoleToShow, Stats()));
+		}
+
+		/*std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(tankTypeToShow));
+		tankIconNames.insert(std::pair<TankType::Type, std::string>(tankTypeToShow, getRandomIcon(tankTypeToShow)));*/
+
+		designerPlaneWindowOpen = true;
+		generateWindowOpen = false;
 	}
 
 	Stats generateNewStats(Tank tank) {

@@ -1,0 +1,78 @@
+{
+  "small": {
+    "lmg": {
+      "2": {
+        "early": {
+          "stats": {
+            "airAttack": 4.0,
+            "agility": 0.0,
+            "weight": 1.0
+          }
+        }
+      },
+      "4": {
+        "early": {
+          "stats": {
+            "airAttack": 8.0,
+            "agility": 0.0,
+            "weight": 2.0
+          }
+        }
+      }
+    },
+    "hmg": {
+      "2": {
+        "early": {
+          "stats": {
+            "airAttack": 6.0,
+            "agility": 0.0,
+            "weight": 1.0
+          }
+        }
+      },
+      "4": {
+        "early": {
+          "stats": {
+            "airAttack": 12.0,
+            "agility": 0.0,
+            "weight": 2.0
+          }
+        }
+      }
+    },
+    "cannon": {
+      "1": {
+        "early": {
+          "stats": {
+            "airAttack": 10.0,
+            "agility": -3.0,
+            "weight": 4.0
+          }
+        },
+        "basic": {
+          "stats": {
+            "airAttack": 12.0,
+            "agility": -3.0,
+            "weight": 5.0
+          }
+        }
+      },
+      "2": {
+        "early": {
+          "stats": {
+            "airAttack": 20.0,
+            "agility": -6.0,
+            "weight": 8.0
+          }
+        },
+        "basic": {
+          "stats": {
+            "airAttack": 24.0,
+            "agility": -6.0,
+            "weight": 10.0
+          }
+        }
+      }
+    }
+  }
+}

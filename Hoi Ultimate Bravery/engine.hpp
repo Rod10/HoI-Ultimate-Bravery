@@ -1,4 +1,5 @@
 #pragma once
+#include "planetype.hpp"
 #include "ressources.hpp"
 #include "stats.hpp"
 #include "utils.hpp"
@@ -40,4 +41,50 @@ public:
 
 	Type type;
 	Stats stats;
+};
+
+class PlaneEngine {
+public:
+
+	enum Type {
+		Prop,
+		Jet,
+		Rocket,
+		TLast
+	};
+
+	enum Version {
+		Early,
+		Basic,
+		Improved,
+		Advanced,
+		VLast
+	};
+
+	PlaneEngine() {};
+	PlaneEngine(PlaneEngine::Type type,
+		PlaneEngine::Version version,
+		int number) : 
+	type(type),
+	version(version),
+	number(number) {};
+
+	PlaneEngine::Type type;
+	PlaneEngine::Version version;
+	int number;
+
+	static PlaneEngine::Type stringToType(std::string type) {
+		if (type == "prop") return Prop;
+		if (type == "jet") return Jet;
+		if (type == "rocket") return Rocket;
+	}
+
+	static PlaneEngine::Version stringToVersion(std::string version) {
+		if (version == "early") return Early;
+		if (version == "basic") return Basic;
+		if (version == "improved") return Improved;
+		if (version == "advanced") return Advanced;
+	}
+	
+	static PlaneEngine generateRandom(PlaneType::Type type);
 };

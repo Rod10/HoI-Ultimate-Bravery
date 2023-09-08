@@ -64,6 +64,12 @@
     <Filter Include="Fichiers sources\Ship">
       <UniqueIdentifier>{d069e845-f190-43f4-871b-ba312be84c5d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Plane">
+      <UniqueIdentifier>{59ec0ab6-898a-4ee3-99c2-0e3d011606a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Plane">
+      <UniqueIdentifier>{7d6dc33d-2962-4013-a7a1-f7f84680dae0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -197,6 +203,18 @@
     </ClCompile>
     <ClCompile Include="unittype.cpp">
       <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="planerole.cpp">
+      <Filter>Fichiers sources\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="plane.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="planetype.cpp">
+      <Filter>Fichiers sources\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="planeversion.cpp">
+      <Filter>Fichiers sources\Plane</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -355,6 +373,18 @@
     </ClInclude>
     <ClInclude Include="unittype.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="planerole.hpp">
+      <Filter>Fichiers d%27en-tête\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="plane.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="planetype.hpp">
+      <Filter>Fichiers d%27en-tête\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="planeversion.hpp">
+      <Filter>Fichiers d%27en-tête\Plane</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
