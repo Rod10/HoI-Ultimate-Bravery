@@ -1,0 +1,62 @@
+{
+  "small": {
+    "armorPlate": {
+      "early": {
+        "stats": {
+          "airDefense": 4.0,
+          "rangeP": -10.0,
+          "weight": 0.0
+        }
+      }
+    },
+    "nonStrategicMaterial": {
+      "early": {
+        "stats": {
+          "airDefense": -6.0,
+          "rangeP": 0.0,
+          "weight": 0.0
+        }
+      }
+    }
+  },
+  "medium": {
+    "armorPlate": {
+      "early": {
+        "stats": {
+          "airDefense": 6.0,
+          "rangeP": -10.0,
+          "weight": 60.0
+        }
+      }
+    },
+    "nonStrategicMaterial": {
+      "early": {
+        "stats": {
+          "airDefense": -8.0,
+          "rangeP": 0.0,
+          "weight": 0.0
+        }
+      }
+    }
+  },
+  "large": {
+    "armorPlate": {
+      "early": {
+        "stats": {
+          "airDefense": 8.0,
+          "rangeP": -10.0,
+          "weight": 15.0
+        }
+      }
+    },
+    "nonStrategicMaterial": {
+      "early": {
+        "stats": {
+          "airDefense": -10.0,
+          "rangeP": 0.0,
+          "weight": 0.0
+        }
+      }
+    }
+  }
+}

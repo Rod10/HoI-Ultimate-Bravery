@@ -4,6 +4,7 @@
 #include "stats.hpp"
 #include "utils.hpp"
 
+#include <format>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -86,5 +87,16 @@ public:
 		if (version == "advanced") return Advanced;
 	}
 	
+	static std::string engineToImageString(PlaneEngine engine) {
+		switch (engine.type)
+		{
+		case Prop: return std::format("Airplane_engine_{0}_{1}", (engine.version + 1), engine.number);
+		case Jet: return std::format("Airplane_jet_engine_{0}", engine.number);
+		case Rocket: return std::format("Airplane_rocket_engine_{0}", (engine.version + 1));
+		default:
+			break;
+		}
+	}
+
 	static PlaneEngine generateRandom(PlaneType::Type type);
 };

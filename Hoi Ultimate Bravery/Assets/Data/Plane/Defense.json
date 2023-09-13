@@ -1,0 +1,64 @@
+{
+  "small/medium/large": {
+    "lightMGDefense": {
+      "1": {
+        "early": {
+          "stats": {
+            "agility": -2.0,
+            "airAttack": 4.0,
+            "weight": 0.0
+          }
+        }
+      },
+      "2": {
+        "early": {
+          "stats": {
+            "agility": -3.0,
+            "airAttack": 6.0,
+            "weight": 1.0
+          }
+        }
+      }
+    },
+    "heavyMGDefense": {
+      "1": {
+        "early": {
+          "stats": {
+            "agility": -3.0,
+            "airAttack": 6.0,
+            "weight": 2.0
+          }
+        }
+      },
+      "2": {
+        "early": {
+          "stats": {
+            "agility": -6.0,
+            "airAttack": 10.0,
+            "weight": 4.0
+          }
+        }
+      }
+    },
+    "CannonDefense": {
+      "1": {
+        "early": {
+          "stats": {
+            "agility": -4.0,
+            "airAttack": 8.0,
+            "weight": 4.0
+          }
+        }
+      },
+      "2": {
+        "early": {
+          "stats": {
+            "agility": -7.0,
+            "airAttack": 14.0,
+            "weight": 8.0
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "small/medium": {
+    "bombLocks": {
+      "early": {
+        "stats": {
+          "agility": -20.0,
+          "groundAttack": 6.0,
+          "navalAttack": 2.0,
+          "navalTargeting": 6.0,
+          "weight": 4.0
+        }
+      }
+    },
+    "smallBombBay": {
+      "early": {
+        "stats": {
+          "agility": -15.0,
+          "groundAttack": 8.0,
+          "navalAttack": 2.0,
+          "navalTargeting": 4.0,
+          "weight": 5.0
+        }
+      }
+    },
+    "mediumBombBay": {
+      "early": {
+        "stats": {
+          "agility": -5.0,
+          "groundAttack": 3.0,
+          "strategicBombing": 6.0,
+          "weight": 6.0
+        }
+      }
+    },
+    "antiTankCannon": {
+      "early": {
+        "stats": {
+          "agility": -15.0,
+          "groundAttack": 8.0,
+          "navalAttack": 0.0,
+          "navalTargeting": 0.0,
+          "weight": 8.0
+        }
+      },
+      "basic": {
+        "stats": {
+          "agility": -20.0,
+          "groundAttack": 15.0,
+          "navalAttack": 0.0,
+          "navalTargeting": 0.0,
+          "weight": 12.0
+        }
+      }
+    },
+    "rocketRails": {
+      "early": {
+        "stats": {
+          "agility": 0.0,
+          "groundAttack": 4.0,
+          "navalAttack": 0.0,
+          "navalTargeting": 0.0,
+          "weight": 1.0
+        }
+      }
+    }
+  },
+  "large": {
+    "largeBombBay": {
+      "early": {
+        "stats": {
+          "agility": -10.0,
+          "strategicBombing": 15.0,
+          "navalAttack": 2.0,
+          "weight": 0.0
+        }
+      }
+    }
+  }
+}

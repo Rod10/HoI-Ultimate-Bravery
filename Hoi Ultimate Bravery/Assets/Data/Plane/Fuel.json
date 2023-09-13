@@ -1,0 +1,71 @@
+{
+  "small": {
+    "dropTanks": {
+      "early": {
+        "stats": {
+          "airDefense": 0.0,
+          "rangeP": 300.0,
+          "weight": 2.0
+        }
+      }
+    },
+    "extraFuelTanks": {
+      "early": {
+        "stats": {
+          "airDefense": -2.0,
+          "rangeP": 15.0,
+          "weight": 1.0
+        }
+      }
+    }
+  },
+  "selfSealingTanks": {
+    "early": {
+      "stats": {
+        "airDefense": 6.0,
+        "rangeP": 0.0,
+        "weight": 1.0
+      }
+    }
+  },
+  "medium": {
+    "extraFuelTanks": {
+      "early": {
+        "stats": {
+          "airDefense": -6.0,
+          "rangeP": 15.0,
+          "weight": 4.0
+        }
+      }
+    },
+    "selfSealingTanks": {
+      "early": {
+        "stats": {
+          "airDefense": 8.0,
+          "rangeP": 0.0,
+          "weight": 1.0
+        }
+      }
+    }
+  },
+  "large": {
+    "extraFuelTanks": {
+      "early": {
+        "stats": {
+          "airDefense": -8.0,
+          "rangeP": 15.0,
+          "weight": 6.0
+        }
+      }
+    },
+    "selfSealingTanks": {
+      "early": {
+        "stats": {
+          "airDefense": 10.0,
+          "rangeP": 0.0,
+          "weight": 1.0
+        }
+      }
+    }
+  }
+}

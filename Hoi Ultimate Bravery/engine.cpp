@@ -32,22 +32,22 @@ PlaneEngine PlaneEngine::generateRandom(PlaneType::Type type)
     for (auto& el : engineData.items()) {
         engineKey.push_back(el.key());
     }
-    int engineTypeInt = rand() % engineKey.size();
-    PlaneEngine::Type engineType = PlaneEngine::stringToType(engineKey[engineTypeInt]);
+    std::string engineTypeString = *Utils::select_randomly(engineKey.begin(), engineKey.end());
+    PlaneEngine::Type engineType = PlaneEngine::stringToType(engineTypeString);
     
     std::vector<std::string> engineNumberKey;
-    for (auto& el : engineData[engineKey[engineTypeInt]].items()) {
+    for (auto& el : engineData[engineTypeString].items()) {
         engineNumberKey.push_back(el.key());
     }
-    int engineNumberInt = rand() % engineNumberKey.size();
-    int engineNumber =  std::stoi(engineNumberKey[engineNumberInt]);
+    std::string engineNumberString= *Utils::select_randomly(engineNumberKey.begin(), engineNumberKey.end());
+    int engineNumber =  std::stoi(engineNumberString);
     
     std::vector<std::string> engineVersionKey;
-    for (auto& el : engineData[engineKey[engineTypeInt]][engineNumberKey[engineNumberInt]].items()) {
+    for (auto& el : engineData[engineTypeString][engineNumberString].items()) {
         engineVersionKey.push_back(el.key());
     }
-    int engineVersionInt = rand() % engineVersionKey.size();
-    PlaneEngine::Version version = PlaneEngine::stringToVersion(engineVersionKey[engineVersionInt]);
+    std::string engineVersionString = *Utils::select_randomly(engineVersionKey.begin(), engineVersionKey.end());
+    PlaneEngine::Version version = PlaneEngine::stringToVersion(engineVersionString);
 
     return PlaneEngine(engineType, version, engineNumber);
 }

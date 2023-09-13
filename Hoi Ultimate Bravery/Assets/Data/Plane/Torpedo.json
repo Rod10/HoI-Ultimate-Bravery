@@ -1,0 +1,24 @@
+{
+  "small/medium/large": {
+    "torpedo": {
+      "early": {
+        "stats": {
+          "agility": -12.0,
+          "navalAttack": 14.0,
+          "navalTargeting": 6.0,
+          "weight": 8.0
+        }
+      }
+    },
+    "missile": {
+      "early": {
+        "stats": {
+          "agility": -12.0,
+          "navalAttack": 8.0,
+          "navalTargeting": 10.0,
+          "weight": 15.0
+        }
+      }
+    }
+  }
+}

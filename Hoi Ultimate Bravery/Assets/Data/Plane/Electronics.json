@@ -1,0 +1,84 @@
+{
+  "small/medium/large": {
+    "airAirRadar": {
+      "early": {
+        "stats": {
+          "strategicBombing": 0.0,
+          "nightPenaltyP": -20.0,
+          "surfaceDetection": 0.0,
+          "subDetection": 0.0,
+          "weight": 1.0
+        }
+      },
+      "basic": {
+        "stats": {
+          "strategicBombing": 0.0,
+          "nightPenaltyP": -40.0,
+          "surfaceDetection": 0.0,
+          "subDetection": 0.0,
+          "weight": 1.0
+        }
+      }
+    },
+    "airGroundRadar": {
+      "early": {
+        "stats": {
+          "strategicBombing": 4.0,
+          "nightPenaltyP": -30.0,
+          "surfaceDetection": 10.0,
+          "subDetection": 5.0,
+          "weight": 1.0
+        }
+      },
+      "basic": {
+        "stats": {
+          "strategicBombing": 6.0,
+          "nightPenaltyP": -40.0,
+          "surfaceDetection": 20.0,
+          "subDetection": 10.0,
+          "weight": 1.0
+        }
+      }
+    },
+    "bombSight": {
+      "early": {
+        "stats": {
+          "strategicBombing": 4.0,
+          "nightPenaltyP": 0.0,
+          "surfaceDetection": 0.0,
+          "subDetection": 0.0,
+          "weight": 1.0
+        }
+      },
+      "basic": {
+        "stats": {
+          "strategicBombing": 6.0,
+          "nightPenaltyP": 0.0,
+          "surfaceDetection": 0.0,
+          "subDetection": 0.0,
+          "weight": 1.0
+        }
+      }
+    },
+    "radioNaviagation": {
+      "early": {
+        "stats": {
+          "strategicBombing": 4.0,
+          "nightPenaltyP": -10.0,
+          "surfaceDetection": 0.0,
+          "subDetection": 0.0,
+          "weight": 1.0
+        }
+      },
+      "basic": {
+        "stats": {
+          "strategicBombing": 6.0,
+          "nightPenaltyP": -20.0,
+          "surfaceDetection": 0.0,
+          "subDetection": 0.0,
+          "weight": 1.0
+        }
+      }
+    }
+  }
+}

@@ -11,7 +11,7 @@ PlaneVersion::Version PlaneVersion::generateRandom(PlaneType::Type type)
     for (auto& el : planeData.items()) {
         planeKey.push_back(el.key());
     }
-    int planeVersionInt = rand() % planeKey.size();
-    PlaneVersion::Version planeVersion = PlaneVersion::stringToVersion(planeKey[planeVersionInt]);
+    std::string planeVersionString = *Utils::select_randomly(planeKey.begin(), planeKey.end());
+    PlaneVersion::Version planeVersion = PlaneVersion::stringToVersion(planeVersionString);
     return planeVersion;
 }

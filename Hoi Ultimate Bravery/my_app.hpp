@@ -253,6 +253,28 @@ public:
 			}
 			ImGui::End();
 
+			ImGui::SetNextWindowPos(ImVec2(Constant::Position::RIGHT + 250.0f, 200.0f));
+			ImGui::Begin("planeDesigned", &generateWindowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
+			Renderer::createLabelWithPosition(getLocalizedString("plane"), Constant::Position::MIDDLE);
+			if (!country->planeList.empty()) {
+				off = Renderer::calculatePos(Constant::Position::LEFT, getLocalizedString("fighter"));
+				bool destroyer = country->planeList.count(PlaneRole::Fighter);
+				ImGui::Checkbox(getLocalizedString("fighter"), &destroyer);
+				off = Renderer::calculatePos(Constant::Position::LEFT, getLocalizedString("cas"));
+				bool cruiser = country->planeList.count(PlaneRole::CAS);
+				ImGui::Checkbox(getLocalizedString("cas"), &cruiser);
+				off = Renderer::calculatePos(Constant::Position::LEFT, getLocalizedString("navalBomber"));
+				bool heavyShip = country->planeList.count(PlaneRole::NavalBombing);
+				ImGui::Checkbox(getLocalizedString("navalBomber"), &heavyShip);
+				off = Renderer::calculatePos(Constant::Position::LEFT, getLocalizedString("tacticalBomber"));
+				bool carrier = country->planeList.count(PlaneRole::TacticalBombing);
+				ImGui::Checkbox(getLocalizedString("tacticalBomber"), &carrier);
+				off = Renderer::calculatePos(Constant::Position::LEFT, getLocalizedString("strategicBomber"));
+				bool submarine = country->planeList.count(PlaneRole::StrategicBombing);
+				ImGui::Checkbox(getLocalizedString("strategicBomber"), &submarine);
+			}
+			ImGui::End();
+
 		}
 		// Generate Menu
 
@@ -276,12 +298,12 @@ public:
 				if (allCountries) {
 					for (Country& country : countryList) {
 						Files::generateCountryFile(country.tankList.find(tankTypeToShow)->second, &country, converterToGameName, debugMode);
-						generateIdeaFile(&country);
+						Files::generateIdeaFile(&country);
 					}
 				}
 				else {
 					Files::generateCountryFile(country->tankList.find(tankTypeToShow)->second, country, converterToGameName, debugMode);
-					generateIdeaFile(country);
+					Files::generateIdeaFile(country);
 				}
 			}
 			ImGui::SameLine();
@@ -469,6 +491,67 @@ public:
 			ImGui::End();
 		}
 
+		if (designerPlaneWindowOpen) {
+			ImGui::PushFont(basicFont);
+			Renderer::renderPlaneDesignerWindow(designerWindowOpen, country->planeList.find(planeRoleToShow)->second);
+			Renderer::renderStats(designerWindowOpen, country->planeList.find(planeRoleToShow)->second, planeIconNames, country->newPlaneStats);
+			ImGui::SetCursorPosY(515.0f);
+			ImGuiStyle& style = ImGui::GetStyle();
+			float width = 0.0f;
+			width += ImGui::CalcTextSize("Regenerate").x;
+			width += style.ItemSpacing.x;
+			width += ImGui::CalcTextSize("Back").x;
+			width += style.ItemSpacing.x;
+			AlignForWidth(width);
+			if (ImGui::Button("Regenerate S")) {
+				country->planeList.find(planeRoleToShow)->second = Plane::generateRandomPlane(planeRoleToShow);
+			}
+			ImGui::SameLine();
+			if (ImGui::Button("Back")) {
+				generateWindowOpen = true;
+				designerPlaneWindowOpen = false;
+			}
+			ImGui::PopFont();
+			ImGui::End();
+		}
+
+		if (allGenerationPlaneWindowOpen) {
+			ImGui::Begin("generateAll", &allGenerationShipWindowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar);
+			int posMult = 250;
+			for (auto& [type, plane] : country->planeList) {
+				ImGui::SetNextWindowPos(ImVec2(posMult, 200.0f));
+				ImGui::Begin(PlaneRole::roleToString(plane.role).c_str(), &allGenerationWindowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
+				Renderer::createLabelWithPosition(std::format("{0} {1}", PlaneVersion::versionToYear(plane.version).c_str(), PlaneRole::roleToString(plane.role).c_str()).c_str(), Constant::Position::MIDDLE);
+				ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
+				ImGuiIO& io = ImGui::GetIO();
+				for (auto& module : plane.custom) {
+					if (module.type != PlaneModule::Type::None) {
+						Renderer::createLabelWithPosition(std::format("{0} {1}", PlaneModule::subTypeToString(module.subType), PlaneModule::versionToString(module.version)).c_str(), Constant::Position::LEFT);
+					}
+				}
+				posMult += 250;
+				ImGui::PopStyleColor();
+				ImGui::End();
+			}
+			ImGui::SetCursorPosY(515.0f);
+			ImGuiStyle& style = ImGui::GetStyle();
+			ImGui::PushFont(basicFont);
+			float width = 0.0f;
+			width += ImGui::CalcTextSize("Regenerate").x;
+			width += style.ItemSpacing.x;
+			width += ImGui::CalcTextSize("Back").x;
+			width += style.ItemSpacing.x;
+			AlignForWidth(width);
+			if (ImGui::Button("Regenerate")) {}
+			ImGui::SameLine();
+			if (ImGui::Button("Back")) {
+				generateWindowOpen = true;
+				allGenerationShipWindowOpen = false;
+			}
+			ImGui::PopFont();
+			ImGui::End();
+		}
+
 		// Options
 		if (optionWindowOpen) {
 			off = Renderer::calculatePos(Constant::Position::MIDDLE, 250);
@@ -605,6 +688,7 @@ private:
 	bool designerWindowOpen = false;
 	bool allGenerationWindowOpen = false;
 	bool allGenerationShipWindowOpen = false;
+	bool allGenerationPlaneWindowOpen = false;
 	bool allCountries = false;
 	bool dlcWindowOpen = false;
 	bool modWindowOpen = false;
@@ -619,6 +703,7 @@ private:
 
 	std::map<TankType::Type, std::string> tankIconNames;
 	std::map<Hull::Type, std::string> shipIconNames;
+	std::map<PlaneType::Type, std::string> planeIconNames;
 
 	std::map<Gun::Category, std::vector<Gun>> gunList = Gun::generateGunList();
 	std::map<Gun::Category, bool> gunCateogryWindowOpen;
@@ -785,63 +870,27 @@ private:
 		}
 
 		if (Renderer::createButtonWithPosition(getLocalizedString("allTank"), Constant::Position::MIDDLE)) {
+			std::vector<TankType::Type> tankType;
+			for (int i = 0; i < TankType::Type::Last; i++) {
+				tankType.push_back(static_cast<TankType::Type>(i));
+			}
 			if (allCountries) {
 				for (Country& country : countryList) {
-					Tank lightTank = Tank::generateRandomTank(TankType::Type::Light);
-					country.tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Light, lightTank));
-
-					Tank mediumTank = Tank::generateRandomTank(TankType::Type::Medium);
-					country.tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Medium, mediumTank));
-
-					Tank heavyTank = Tank::generateRandomTank(TankType::Type::Heavy);
-					country.tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Heavy, heavyTank));
-
-					Tank superHeavyTank = Tank::generateRandomTank(TankType::Type::SuperHeavy);
-					country.tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::SuperHeavy, superHeavyTank));
-
-					Tank modernTank = Tank::generateRandomTank(TankType::Type::Modern);
-					country.tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Modern, modernTank));
-
-					country.newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Light, generateNewStats(lightTank)));
-					country.newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Medium, generateNewStats(mediumTank)));
-					country.newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Heavy, generateNewStats(heavyTank)));
-					country.newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::SuperHeavy, generateNewStats(superHeavyTank)));
-					country.newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Modern, generateNewStats(modernTank)));
-
-					tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::Light, getRandomIcon(TankType::Type::Light)));
-					tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::Medium, getRandomIcon(TankType::Type::Medium)));
-					tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::Heavy, getRandomIcon(TankType::Type::Heavy)));
-					tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::SuperHeavy, getRandomIcon(TankType::Type::SuperHeavy)));
-					tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::Modern, getRandomIcon(TankType::Type::Modern)));
+					for (TankType::Type& type : tankType) {
+						Tank tank = Tank::generateRandomTank(type);
+						country.tankList.insert(std::pair<TankType::Type, Tank>(type, tank));
+						country.newTankStats.insert(std::pair<TankType::Type, Stats>(type, generateNewStats(tank)));
+						tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::Light, getRandomIcon(type)));
+					}
 				}
 			}
 			else {
-				Tank lightTank = Tank::generateRandomTank(TankType::Type::Light);
-				country->tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Light, lightTank));
-
-				Tank mediumTank = Tank::generateRandomTank(TankType::Type::Medium);
-				country->tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Medium, mediumTank));
-
-				Tank heavyTank = Tank::generateRandomTank(TankType::Type::Heavy);
-				country->tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Heavy, heavyTank));
-
-				Tank superHeavyTank = Tank::generateRandomTank(TankType::Type::SuperHeavy);
-				country->tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::SuperHeavy, superHeavyTank));
-
-				Tank modernTank = Tank::generateRandomTank(TankType::Type::Modern);
-				country->tankList.insert(std::pair<TankType::Type, Tank>(TankType::Type::Modern, modernTank));
-
-				country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Light, generateNewStats(lightTank)));
-				country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Medium, generateNewStats(mediumTank)));
-				country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Heavy, generateNewStats(heavyTank)));
-				country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::SuperHeavy, generateNewStats(superHeavyTank)));
-				country->newTankStats.insert(std::pair<TankType::Type, Stats>(TankType::Type::Modern, generateNewStats(modernTank)));
-
-				tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::Light, getRandomIcon(TankType::Type::Light)));
-				tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::Medium, getRandomIcon(TankType::Type::Medium)));
-				tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::Heavy, getRandomIcon(TankType::Type::Heavy)));
-				tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::SuperHeavy, getRandomIcon(TankType::Type::SuperHeavy)));
-				tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::Modern, getRandomIcon(TankType::Type::Modern)));
+				for (TankType::Type& type : tankType) {
+					Tank tank = Tank::generateRandomTank(type);
+					country->tankList.insert(std::pair<TankType::Type, Tank>(type, tank));
+					country->newTankStats.insert(std::pair<TankType::Type, Stats>(type, generateNewStats(tank)));
+					tankIconNames.insert(std::pair<TankType::Type, std::string>(TankType::Type::Light, getRandomIcon(type)));
+				}
 			}
 
 			allGenerationWindowOpen = true;
@@ -877,14 +926,52 @@ private:
 			generatingPlane();
 		}
 		ImGui::SameLine();
-		if (ImGui::Button(getLocalizedString("cas"))) {}
-		if (ImGui::Button(getLocalizedString("navalBomber"))) {}
+		if (ImGui::Button(getLocalizedString("cas"))) {
+			planeRoleToShow = PlaneRole::Role::CAS;
+			generatingPlane();
+		}
+		if (ImGui::Button(getLocalizedString("navalBomber"))) {
+			planeRoleToShow = PlaneRole::Role::NavalBombing;
+			generatingPlane();
+		}
 		ImGui::SameLine();
-		if (ImGui::Button(getLocalizedString("tacticalBomber"))) {}
+		if (ImGui::Button(getLocalizedString("tacticalBomber"))) {
+			planeRoleToShow = PlaneRole::Role::TacticalBombing;
+			generatingPlane();
+		}
 		ImGui::SameLine();
-		if (ImGui::Button(getLocalizedString("strategicBomber"))) {}
-		if (Renderer::createButtonWithPosition(getLocalizedString("allPlane"), Constant::Position::MIDDLE)) {}
+		if (ImGui::Button(getLocalizedString("strategicBomber"))) {
+			planeRoleToShow = PlaneRole::Role::StrategicBombing;
+			generatingPlane();
+		}
+		if (Renderer::createButtonWithPosition(getLocalizedString("allPlane"), Constant::Position::MIDDLE)) {
+			std::vector<PlaneRole::Role> planeRole;
+			for (int i = 0; i < PlaneRole::Role::Last; i++) {
+				planeRole.push_back(static_cast<PlaneRole::Role>(i));
+			}
+			if (allCountries) {
+				for (Country& country : countryList) {
+					for (PlaneRole::Role& role : planeRole) {
+						Plane plane = Plane::generateRandomPlane(role);
+						country.planeList.insert(std::pair<PlaneRole::Role, Plane>(role, plane));
+						country.newPlaneStats.insert(std::pair<PlaneRole::Role, Stats>(role, Stats()));
+						planeIconNames.insert(std::pair<PlaneType::Type, std::string>(plane.type, getPlaneIcon(plane.type, role)));
+					}
+				}
+			}
+			else {
+				for (PlaneRole::Role& role : planeRole) {
+					Plane plane = Plane::generateRandomPlane(role);
+					country->planeList.insert(std::pair<PlaneRole::Role, Plane>(role, plane));
+					country->newPlaneStats.insert(std::pair<PlaneRole::Role, Stats>(role, Stats()));
+					planeIconNames.insert(std::pair<PlaneType::Type, std::string>(plane.type, getPlaneIcon(plane.type, role)));
+				}
+			}
 
+			allGenerationPlaneWindowOpen = true;
+			generateWindowOpen = false;
+
+		}
 		ImGui::PopStyleColor();
 	}
 
@@ -895,6 +982,9 @@ private:
 
 				country.planeList.insert(std::pair<PlaneRole::Role, Plane>(planeRoleToShow, plane));
 				country.newPlaneStats.insert(std::pair<PlaneRole::Role, Stats>(planeRoleToShow, Stats()));
+
+				std::map<std::string, Texture> icon = Icon::GetInstance()->getPlaneIcon(PlaneType::typeToString(plane.type));
+				planeIconNames.insert(std::pair<PlaneType::Type, std::string>(plane.type, getPlaneIcon(plane.type, planeRoleToShow)));
 			}
 		}
 		else {
@@ -902,10 +992,10 @@ private:
 
 			country->planeList.insert(std::pair<PlaneRole::Role, Plane>(planeRoleToShow, plane));
 			country->newPlaneStats.insert(std::pair<PlaneRole::Role, Stats>(planeRoleToShow, Stats()));
-		}
 
-		/*std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(tankTypeToShow));
-		tankIconNames.insert(std::pair<TankType::Type, std::string>(tankTypeToShow, getRandomIcon(tankTypeToShow)));*/
+			std::map<std::string, Texture> icon = Icon::GetInstance()->getPlaneIcon(PlaneType::typeToString(plane.type));
+			planeIconNames.insert(std::pair<PlaneType::Type, std::string>(plane.type, getPlaneIcon(plane.type, planeRoleToShow)));
+		}
 
 		designerPlaneWindowOpen = true;
 		generateWindowOpen = false;
@@ -966,59 +1056,6 @@ private:
 		return newStats;
 	}
 
-	void generateIdeaFile(Country* country) {
-		std::vector<std::string> fileLines;
-		std::string gamePath = settings->getGamepath();
-		std::string fileName = std::format("{0}.txt", country->tag, country->name);
-		std::string filePath = std::format("{0}\\common\\ideas\\{1}", gamePath, fileName);
-		std::string backupFilePath = std::format("{0}\\history\\countries\\{1}.back", gamePath, fileName);
-
-		std::ifstream  src(filePath, std::ios::binary);
-		std::ofstream  backUp(std::format("/Assets/Data/{0}.back", fileName), std::ios::binary);
-		std::ofstream  newFile(std::format("/Assets/Data/{0}", fileName), std::ios::binary);
-		std::string line;
-		while (std::getline(src, line)) {
-			fileLines.push_back(line);
-		}
-		src.close();
-		if (std::rename(filePath.c_str(),
-			backupFilePath.c_str()) != 0)
-			perror("Error moving file");
-		else
-			std::cout << "File moved successfully" << std::endl;
-
-		for (auto& line : fileLines) {
-			backUp << line << std::endl;
-		}
-		backUp.close();
-		int linesToAddStart = country->ideaPosIdea;
-		int counterTemplateLine = 0;
-		std::vector<std::string> newLines;
-		std::ifstream ideaFile(std::format("/Assets/Data/{0}", fileName), std::ios::binary);
-		while (std::getline(ideaFile, line)) {
-			newLines.push_back(line);
-		}
-		for (int i = 0; i < fileLines.size(); i++) {
-			if (i >= linesToAddStart && counterTemplateLine < newLines.size()) {
-				fileLines.insert(fileLines.begin() + i, newLines[counterTemplateLine]);
-				counterTemplateLine++;
-			}
-		}
-
-		for (int i = 0; i < fileLines.size(); i++) {
-			newFile << fileLines[i] << std::endl;
-		}
-		newFile.close();
-		if (std::rename(std::format("/Assets/Data/{0}", fileName).c_str(),
-			filePath.c_str()) != 0) {
-			perror("Error moving file");
-		}
-		else {
-			std::cout << "File moved successfully" << std::endl;
-		};
-
-	}
-
 	std::string getRandomIcon(TankType::Type type) {
 		std::map<std::string, Texture> icon = Icon::GetInstance()->getTankIcon(Tank::tankTypeToString(type));
 		auto it = icon.cbegin();
@@ -1032,6 +1069,14 @@ private:
 		std::string version = ShipVersion::versionToFileString(country->shipList.find(type)->second.version);
 		std::string shipType = ShipType::shipTypeToIconString(country->shipList.find(type)->second.type);
 		std::string string = std::format("{0}_{1}", version, shipType);
+		return icons.find(string)->first;
+	}
+
+	std::string getPlaneIcon(PlaneType::Type type, PlaneRole::Role role) {
+		std::map<std::string, Texture> icons = Icon::GetInstance()->getPlaneIcon(PlaneType::typeToString(type));
+		std::string version = PlaneVersion::versionToFileString(country->planeList.find(role)->second.version);
+		std::string shipType = PlaneType::typeToIconString(type);
+		std::string string = std::format("{0}_plane_{1}", shipType, version);
 		return icons.find(string)->first;
 	}
 

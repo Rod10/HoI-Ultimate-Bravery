@@ -107,4 +107,57 @@ public:
             };
         }
     }
+
+    static void generateIdeaFile(Country* country) {
+        std::vector<std::string> fileLines; 
+        std::string gamePath = Settings::getInstance()->getGamepath();
+        std::string fileName = std::format("{0}.txt", country->tag, country->name);
+        std::string filePath = std::format("{0}\\common\\ideas\\{1}", gamePath, fileName);
+        std::string backupFilePath = std::format("{0}\\history\\countries\\{1}.back", gamePath, fileName);
+
+        std::ifstream  src(filePath, std::ios::binary);
+        std::ofstream  backUp(std::format("/Assets/Data/{0}.back", fileName), std::ios::binary);
+        std::ofstream  newFile(std::format("/Assets/Data/{0}", fileName), std::ios::binary);
+        std::string line;
+        while (std::getline(src, line)) {
+            fileLines.push_back(line);
+        }
+        src.close();
+        if (std::rename(filePath.c_str(),
+            backupFilePath.c_str()) != 0)
+            perror("Error moving file");
+        else
+            std::cout << "File moved successfully" << std::endl;
+
+        for (auto& line : fileLines) {
+            backUp << line << std::endl;
+        }
+        backUp.close();
+        int linesToAddStart = country->ideaPosIdea;
+        int counterTemplateLine = 0;
+        std::vector<std::string> newLines;
+        std::ifstream ideaFile(std::format("/Assets/Data/{0}", fileName), std::ios::binary);
+        while (std::getline(ideaFile, line)) {
+            newLines.push_back(line);
+        }
+        for (int i = 0; i < fileLines.size(); i++) {
+            if (i >= linesToAddStart && counterTemplateLine < newLines.size()) {
+                fileLines.insert(fileLines.begin() + i, newLines[counterTemplateLine]);
+                counterTemplateLine++;
+            }
+        }
+
+        for (int i = 0; i < fileLines.size(); i++) {
+            newFile << fileLines[i] << std::endl;
+        }
+        newFile.close();
+        if (std::rename(std::format("/Assets/Data/{0}", fileName).c_str(),
+            filePath.c_str()) != 0) {
+            perror("Error moving file");
+        }
+        else {
+            std::cout << "File moved successfully" << std::endl;
+        };
+
+    }
 };

@@ -1,6 +1,7 @@
 #pragma once
 #include "planetype.hpp"
 #include "Ressources.hpp"
+#include "utils.hpp"
 
 #include <fstream>
 #include <iostream>
@@ -37,6 +38,36 @@ public:
 		if (version == "improved") return Improved;
 		if (version == "advanced") return Advanced;
 		if (version == "modern") return Modern;
+	}
+
+	static std::string versionToYear(Version version) {
+		switch (version)
+		{
+		case PlaneVersion::InterWar: return "1933";
+		case PlaneVersion::Basic: return "1936";
+		case PlaneVersion::Improved: return "1939";
+		case PlaneVersion::Advanced: return "1942";
+		case PlaneVersion::Modern: return "1945";
+		case PlaneVersion::Last:
+			break;
+		default:
+			break;
+		}
+	}
+
+	static std::string versionToFileString(Version version) {
+		switch (version)
+		{
+		case PlaneVersion::InterWar: return "4";
+		case PlaneVersion::Basic: return "3";
+		case PlaneVersion::Improved: return "2";
+		case PlaneVersion::Advanced: return "1";
+		case PlaneVersion::Modern: return "0";
+		case PlaneVersion::Last:
+			break;
+		default:
+			break;
+		}
 	}
 
 	static Version generateRandom(PlaneType::Type type);

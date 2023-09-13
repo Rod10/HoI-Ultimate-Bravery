@@ -1,0 +1,70 @@
+{
+  "medium/large": {
+    "deminingCoil": {
+      "stats": {
+        "airDefense": 0.0,
+        "agility": -5.0,
+        "maxSpeedP": 0.0,
+        "surfaceDetection": 0.0,
+        "subDetection": 0.0,
+        "navalTargeting": 0.0,
+        "minesweepingP": 10.0,
+        "weight": 20.0
+      }
+    }
+  },
+  "small": {
+    "diveBrakes": {
+      "stats": {
+        "airDefense": 4.0,
+        "agility": 0.0,
+        "maxSpeedP": 0.0,
+        "surfaceDetection": 0.0,
+        "subDetection": 0.0,
+        "navalTargeting": 6.0,
+        "minesweeping": 0.0,
+        "weight": 1.0
+      }
+    },
+    "floats": {
+      "stats": {
+        "airDefense": 0.0,
+        "agility": -5.0,
+        "maxSpeedP": -30.0,
+        "surfaceDetection": 5.0,
+        "subDetection": 3.0,
+        "navalTargeting": 0.0,
+        "minesweeping": 0.0,
+        "weight": 0.0
+      }
+    }
+  },
+  "medium": {
+    "flyingBoat": {
+      "stats": {
+        "airDefense": 0.0,
+        "agility": 0.0,
+        "maxSpeedP": -40.0,
+        "surfaceDetection": 8.0,
+        "subDetection": 3.0,
+        "navalTargeting": 0.0,
+        "minesweeping": 0.0,
+        "weight": 0.0
+      }
+    }
+  },
+  "large": {
+    "flyingBoat": {
+      "stats": {
+        "airDefense": 0.0,
+        "agility": 0.0,
+        "maxSpeedP": -40.0,
+        "surfaceDetection": 12.0,
+        "subDetection": 5.0,
+        "navalTargeting": 0.0,
+        "minesweeping": 0.0,
+        "weight": 0.0
+      }
+    }
+  }
+}
