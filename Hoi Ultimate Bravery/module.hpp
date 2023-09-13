@@ -127,7 +127,7 @@ public:
 			else if (shipType == ShipType::Type::Battleship || shipType == ShipType::Type::SuperHeavyBattleship) {
 				return "Armor_thick";
 			}
-			else if (shipType == ShipType::Type::Carrier || ShipType::Type::LightCruiser || ShipType::Type::HeavyCruiser) {
+			else if (shipType == ShipType::Type::Carrier || shipType == ShipType::Type::LightCruiser || shipType == ShipType::Type::HeavyCruiser) {
 				return "Armor_thin";
 			}
 		case Module::LightBattery:

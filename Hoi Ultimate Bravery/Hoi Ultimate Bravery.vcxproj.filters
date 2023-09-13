@@ -198,23 +198,26 @@
     <ClCompile Include="module.cpp">
       <Filter>Fichiers sources\Ship</Filter>
     </ClCompile>
-    <ClCompile Include="hull.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="unittype.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="planerole.cpp">
       <Filter>Fichiers sources\Plane</Filter>
     </ClCompile>
-    <ClCompile Include="plane.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="planetype.cpp">
       <Filter>Fichiers sources\Plane</Filter>
     </ClCompile>
     <ClCompile Include="planeversion.cpp">
       <Filter>Fichiers sources\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="plane.cpp">
+      <Filter>Fichiers sources\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="planemodule.cpp">
+      <Filter>Fichiers sources\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="hull.cpp">
+      <Filter>Fichiers sources\Ship</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -377,13 +380,16 @@
     <ClInclude Include="planerole.hpp">
       <Filter>Fichiers d%27en-tête\Plane</Filter>
     </ClInclude>
-    <ClInclude Include="plane.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="planetype.hpp">
       <Filter>Fichiers d%27en-tête\Plane</Filter>
     </ClInclude>
     <ClInclude Include="planeversion.hpp">
+      <Filter>Fichiers d%27en-tête\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="plane.hpp">
+      <Filter>Fichiers d%27en-tête\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="planemodule.hpp">
       <Filter>Fichiers d%27en-tête\Plane</Filter>
     </ClInclude>
   </ItemGroup>

@@ -76,6 +76,7 @@ public:
 		case ShipVersion::CoastalDefense: return "Coastal Defense";
 		case ShipVersion::Torpedo: return "Torpedo";
 		case ShipVersion::Panzerschiff: return "Panzerschiff";
+		case ShipVersion::PreDreadnought: return "PreDreadnought";
 		default:
 			break;
 		}
