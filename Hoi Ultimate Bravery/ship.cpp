@@ -1,4 +1,5 @@
 #include "ship.hpp"
+
 Ship Ship::generateRandomShip(Hull::Type hull)
 {
     srand(time(0));
@@ -15,8 +16,8 @@ Ship Ship::generateRandomShip(Hull::Type hull)
     }
     ShipVersion::Version shipversion = Ship::getRandomVersion(hull, shipType);
 
-    std::unordered_map<Module::Type, Module> fixedModule = Ship::generateFixedModule(shipType, shipversion);
-    std::unordered_map<Module::Type, Module> customModule = Ship::generateCustomModule(shipType, shipversion);
+    std::vector<Module> fixedModule = Ship::generateFixedModule(shipType, shipversion);
+    std::vector<Module> customModule = Ship::generateCustomModule(shipType, shipversion);
 
     return Ship(hull, shipType, shipversion, customModule, fixedModule);
 }
@@ -35,459 +36,370 @@ ShipVersion::Version Ship::getRandomVersion(Hull::Type hull, ShipType::Type type
     for (auto& el : shipData.items()) {
         shipKey.push_back(el.key());
     }
-    int shipVersionInt = rand() % shipKey.size();
-    ShipVersion::Version shipVersion = ShipVersion::shipVersionStringToVersion(shipKey[shipVersionInt]);
+    std::string shipVersionInt = *Utils::select_randomly(shipKey.begin(), shipKey.end());
+    ShipVersion::Version shipVersion = ShipVersion::shipVersionStringToVersion(shipVersionInt);
     return shipVersion;
 }
 
-std::unordered_map<Module::Type, Module> Ship::generateFixedModule(ShipType::Type type, ShipVersion::Version version) {
-    std::unordered_map<Module::Type, Module> modules = {};
+std::vector<Module> Ship::generateFixedModule(ShipType::Type type, ShipVersion::Version version) {
+    std::vector<Module> modules = {};
     if (type == ShipType::Destroyer) {
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::LightBattery, Module::generateModule(Module::Type::LightBattery, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::AntiAir, Module::generateModule(Module::Type::AntiAir, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::FireControl, Module::generateModule(Module::Type::FireControl, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::RadarSonar, Module::generateModule(Module::Type::RadarSonar, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::Torpedo, Module::generateModule(Module::Type::Torpedo, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::Engine, Module::generateModule(Module::Type::Engine, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+        modules.push_back(Module::generateModule(Module::Type::LightBattery, type, version));
+        modules.push_back(Module::generateModule(Module::Type::AntiAir, type, version));
+        modules.push_back(Module::generateModule(Module::Type::FireControl, type, version));
+        modules.push_back(Module::generateModule(Module::Type::RadarSonar, type, version));
+        modules.push_back(Module::generateModule(Module::Type::Torpedo, type, version));
+        modules.push_back(Module::generateModule(Module::Type::Engine, type, version));
+        modules.push_back(Module::generateNone(Module::Type::None));
     }
     if (type == ShipType::LightCruiser) {
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::LightBattery, Module::generateModule(Module::Type::LightBattery, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::AntiAir, Module::generateModule(Module::Type::AntiAir, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::FireControl, Module::generateModule(Module::Type::FireControl, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::RadarSonar, Module::generateModule(Module::Type::RadarSonar, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::Engine, Module::generateModule(Module::Type::Engine, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::SecondaryBattery, Module::generateModule(Module::Type::SecondaryBattery, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::Armor, Module::generateModule(Module::Type::Armor, type, version)));
+        modules.push_back(Module::generateModule(Module::Type::LightBattery, type, version));
+        modules.push_back(Module::generateModule(Module::Type::AntiAir, type, version));
+        modules.push_back(Module::generateModule(Module::Type::FireControl, type, version));
+        modules.push_back(Module::generateModule(Module::Type::RadarSonar, type, version));
+        modules.push_back(Module::generateModule(Module::Type::Engine, type, version));
+        modules.push_back(Module::generateModule(Module::Type::SecondaryBattery, type, version));
+        modules.push_back(Module::generateModule(Module::Type::Armor, type, version));
     }
     if (type == ShipType::HeavyCruiser) {
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::HeavyBattery, Module::generateModule(Module::Type::HeavyBattery, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::AntiAir, Module::generateModule(Module::Type::AntiAir, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::FireControl, Module::generateModule(Module::Type::FireControl, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::RadarSonar, Module::generateModule(Module::Type::RadarSonar, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::Engine, Module::generateModule(Module::Type::Engine, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::SecondaryBattery, Module::generateModule(Module::Type::SecondaryBattery, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::Armor, Module::generateModule(Module::Type::Armor, type, version)));
+        modules.push_back(Module::generateModule(Module::Type::HeavyBattery, type, version));
+        modules.push_back(Module::generateModule(Module::Type::AntiAir, type, version));
+        modules.push_back(Module::generateModule(Module::Type::FireControl, type, version));
+        modules.push_back(Module::generateModule(Module::Type::RadarSonar, type, version));
+        modules.push_back(Module::generateModule(Module::Type::Engine, type, version));
+        modules.push_back(Module::generateModule(Module::Type::SecondaryBattery, type, version));
+        modules.push_back(Module::generateModule(Module::Type::Armor, type, version));
     }
     if (type == ShipType::Battlecruiser) {
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::HeavyBattery, Module::generateModule(Module::Type::HeavyBattery, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::AntiAir, Module::generateModule(Module::Type::AntiAir, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::FireControl, Module::generateModule(Module::Type::FireControl, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::RadarSonar, Module::generateModule(Module::Type::RadarSonar, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::Engine, Module::generateModule(Module::Type::Engine, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::SecondaryBattery, Module::generateModule(Module::Type::SecondaryBattery, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::Armor, Module::generateModule(Module::Type::Armor, type, version)));
+        modules.push_back(Module::generateModule(Module::Type::HeavyBattery, type, version));
+        modules.push_back( Module::generateModule(Module::Type::AntiAir, type, version));
+        modules.push_back(Module::generateModule(Module::Type::FireControl, type, version));
+        modules.push_back(Module::generateModule(Module::Type::RadarSonar, type, version));
+        modules.push_back(Module::generateModule(Module::Type::Engine, type, version));
+        modules.push_back(Module::generateModule(Module::Type::SecondaryBattery, type, version));
+        modules.push_back(Module::generateModule(Module::Type::Armor, type, version));
     }
     if (type == ShipType::Battleship) {
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::HeavyBattery, Module::generateModule(Module::Type::HeavyBattery, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::AntiAir, Module::generateModule(Module::Type::AntiAir, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::FireControl, Module::generateModule(Module::Type::FireControl, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::RadarSonar, Module::generateModule(Module::Type::RadarSonar, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::Engine, Module::generateModule(Module::Type::Engine, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::SecondaryBattery, Module::generateModule(Module::Type::SecondaryBattery, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::Armor, Module::generateModule(Module::Type::Armor, type, version)));
+        modules.push_back(Module::generateModule(Module::Type::HeavyBattery, type, version));
+        modules.push_back( Module::generateModule(Module::Type::AntiAir, type, version));
+        modules.push_back(Module::generateModule(Module::Type::FireControl, type, version));
+        modules.push_back(Module::generateModule(Module::Type::RadarSonar, type, version));
+        modules.push_back(Module::generateModule(Module::Type::Engine, type, version));
+        modules.push_back(Module::generateModule(Module::Type::SecondaryBattery, type, version));
+        modules.push_back(Module::generateModule(Module::Type::Armor, type, version));
     }
     if (type == ShipType::SuperHeavyBattleship) {
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::HeavyBattery, Module::generateModule(Module::Type::HeavyBattery, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::AntiAir, Module::generateModule(Module::Type::AntiAir, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::FireControl, Module::generateModule(Module::Type::FireControl, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::RadarSonar, Module::generateModule(Module::Type::RadarSonar, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::Engine, Module::generateModule(Module::Type::Engine, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::SecondaryBattery, Module::generateModule(Module::Type::SecondaryBattery, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::Armor, Module::generateModule(Module::Type::Armor, type, version)));
+        modules.push_back(Module::generateModule(Module::Type::HeavyBattery, type, version));
+        modules.push_back( Module::generateModule(Module::Type::AntiAir, type, version));
+        modules.push_back(Module::generateModule(Module::Type::FireControl, type, version));
+        modules.push_back(Module::generateModule(Module::Type::RadarSonar, type, version));
+        modules.push_back(Module::generateModule(Module::Type::Engine, type, version));
+        modules.push_back(Module::generateModule(Module::Type::SecondaryBattery, type, version));
+        modules.push_back(Module::generateModule(Module::Type::Armor, type, version));
     }
     if (type == ShipType::Carrier) {
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::Aircraft, Module::generateModule(Module::Type::Aircraft, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::Aircraft, Module::generateModule(Module::Type::Aircraft, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::AntiAir, Module::generateModule(Module::Type::AntiAir, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::RadarSonar, Module::generateModule(Module::Type::RadarSonar, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::Engine, Module::generateModule(Module::Type::Engine, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::SecondaryBattery, Module::generateModule(Module::Type::SecondaryBattery, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module::generateModule(Module::Type::Armor, type, version)));
+        modules.push_back(Module::generateModule(Module::Type::Aircraft, type, version));
+        modules.push_back(Module::generateModule(Module::Type::Aircraft, type, version));
+        modules.push_back(Module::generateModule(Module::Type::AntiAir, type, version));
+        modules.push_back(Module::generateModule(Module::Type::RadarSonar, type, version));
+        modules.push_back(Module::generateModule(Module::Type::Engine, type, version));
+        modules.push_back(Module::generateModule(Module::Type::SecondaryBattery, type, version));
+        modules.push_back(Module::generateNone(Module::Type::None));
     }
     if (type == ShipType::Submarine) {
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::Torpedo, Module::generateModule(Module::Type::Torpedo, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::Engine, Module::generateModule(Module::Type::Engine, type, version)));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-        modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+        modules.push_back(Module::generateModule(Module::Type::Torpedo, type, version));
+        modules.push_back(Module::generateModule(Module::Type::Engine, type, version));
+        modules.push_back(Module::generateNone(Module::Type::None));
+        modules.push_back(Module::generateNone(Module::Type::None));
+        modules.push_back(Module::generateNone(Module::Type::None));
+        modules.push_back(Module::generateNone(Module::Type::None));
+        modules.push_back(Module::generateNone(Module::Type::None));
     }
     return modules;
 }
 
-std::unordered_map<Module::Type, Module> Ship::generateCustomModule(ShipType::Type type, ShipVersion::Version version){
-    std::unordered_map<Module::Type, Module> modules = {};
-    auto fun = [](std::vector<Module::Type> typeList) {
+std::vector<Module> Ship::generateCustomModule(ShipType::Type type, ShipVersion::Version version){
+    std::vector<Module> modules = {};
+    auto fun = [](std::vector<Module::Type> typeList, ShipType::Type shipType, ShipVersion::Version shipVersion) {
         srand(time(0));
-        return typeList[static_cast<Module::Type>(rand() % typeList.size())];
+        auto moduleType = *Utils::select_randomly(typeList.begin(), typeList.end());
+        return Module::generateModule(moduleType, shipType, shipVersion);
     };
+
     if (type == ShipType::Destroyer) {
         if (version == ShipVersion::Early) {
-            auto module = fun({ Module::LightBattery, Module::Type::Torpedo, Module::Type::AntiAir, Module::Type::AntiSubmarine });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::LightBattery, Module::Type::Torpedo, Module::Type::AntiAir, Module::Type::AntiSubmarine });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::LightBattery, Module::Type::Torpedo, Module::Type::AntiAir, Module::Type::AntiSubmarine, Module::Type::None }, type, version));
+            modules.push_back(fun({ Module::LightBattery, Module::Type::Torpedo, Module::Type::AntiAir, Module::Type::AntiSubmarine, Module::Type::None }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         } else if (version == ShipVersion::Basic) {
-            auto module = fun({ Module::LightBattery, Module::Type::Torpedo, Module::Type::AntiAir, Module::Type::AntiSubmarine });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::LightBattery, Module::Type::Torpedo, Module::Type::AntiAir, Module::Type::AntiSubmarine });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::LightBattery, Module::Type::Torpedo, Module::Type::AntiAir, Module::Type::AntiSubmarine, Module::Type::None }, type, version));
+            modules.push_back(fun({ Module::LightBattery, Module::Type::Torpedo, Module::Type::AntiAir, Module::Type::AntiSubmarine, Module::Type::None }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         } else if (version == ShipVersion::Improved) {
-            auto module = fun({ Module::LightBattery, Module::Type::AntiAir, Module::Type::AntiSubmarine });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::LightBattery, Module::Type::Torpedo, Module::Type::Mine, Module::Type::AntiAir, Module::Type::AntiSubmarine });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::LightBattery, Module::Type::Torpedo, Module::Type::Mine, Module::Type::AntiAir, Module::Type::AntiSubmarine });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::LightBattery, Module::Type::AntiAir, Module::Type::AntiSubmarine }, type, version));
+            modules.push_back(fun({ Module::LightBattery, Module::Type::Torpedo, Module::Type::Mine, Module::Type::AntiAir, Module::Type::AntiSubmarine }, type, version));
+            modules.push_back(fun({ Module::LightBattery, Module::Type::Torpedo, Module::Type::Mine, Module::Type::AntiAir, Module::Type::AntiSubmarine }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         } else if (version == ShipVersion::Advanced) {
-            auto module = fun({ Module::LightBattery, Module::Type::AntiAir, Module::Type::AntiSubmarine });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::LightBattery, Module::Type::Torpedo, Module::Type::Mine, Module::Type::AntiAir, Module::Type::AntiSubmarine });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::LightBattery, Module::Type::Torpedo, Module::Type::Mine, Module::Type::AntiAir, Module::Type::AntiSubmarine });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::LightBattery, Module::Type::Torpedo, Module::Type::Mine, Module::Type::AntiAir, Module::Type::AntiSubmarine });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::LightBattery, Module::Type::AntiAir, Module::Type::AntiSubmarine }, type, version));
+            modules.push_back(fun({ Module::LightBattery, Module::Type::Torpedo, Module::Type::Mine, Module::Type::AntiAir, Module::Type::AntiSubmarine }, type, version));
+            modules.push_back(fun({ Module::LightBattery, Module::Type::Torpedo, Module::Type::Mine, Module::Type::AntiAir, Module::Type::AntiSubmarine }, type, version));
+            modules.push_back(fun({ Module::LightBattery, Module::Type::Torpedo, Module::Type::Mine, Module::Type::AntiAir, Module::Type::AntiSubmarine }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
     }
 
     if (type == ShipType::LightCruiser) {
         if (version == ShipVersion::Early) {
-            auto module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::LightBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::LightBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery,  Module::Type::LightBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::LightBattery }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::LightBattery }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery,  Module::Type::LightBattery }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
         else if (version == ShipVersion::Basic) {
-            auto module = fun({ Module::AntiAir, Module::Type::LightBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::LightBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::LightBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::LightBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::LightBattery }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::LightBattery }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::LightBattery }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::LightBattery }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
         else if (version == ShipVersion::Improved) {
-            auto module = fun({ Module::AntiAir, Module::Type::LightBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::LightBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::LightBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::LightBattery, Module::Type::AntiSubmarine });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::LightBattery, Module::Type::AntiSubmarine });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::LightBattery }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::LightBattery }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::LightBattery }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::LightBattery, Module::Type::AntiSubmarine }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::LightBattery, Module::Type::AntiSubmarine }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
         else if (version == ShipVersion::Advanced) {
-            auto module = fun({ Module::AntiAir, Module::Type::LightBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::LightBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::LightBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::LightBattery, Module::Type::AntiSubmarine });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::LightBattery, Module::Type::AntiSubmarine });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::LightBattery }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::LightBattery }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::LightBattery }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::LightBattery, Module::Type::AntiSubmarine }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::LightBattery, Module::Type::AntiSubmarine }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
     }
 
     if (type == ShipType::HeavyCruiser) {
         if (version == ShipVersion::Early) {
-            auto module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::HeavyBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::HeavyBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery,  Module::Type::HeavyBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::HeavyBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::HeavyBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery,  Module::Type::HeavyBattery }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
         else if (version == ShipVersion::Basic) {
-            auto module = fun({ Module::AntiAir, Module::Type::HeavyBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::HeavyBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::HeavyBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::HeavyBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::HeavyBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::HeavyBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::HeavyBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::HeavyBattery, Module::None }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
         else if (version == ShipVersion::Improved) {
-            auto module = fun({ Module::AntiAir, Module::Type::HeavyBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::HeavyBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::HeavyBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::HeavyBattery, Module::Type::AntiSubmarine });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::HeavyBattery, Module::Type::AntiSubmarine });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::HeavyBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::HeavyBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::HeavyBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::HeavyBattery, Module::None, Module::Type::AntiSubmarine }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::HeavyBattery, Module::None, Module::Type::AntiSubmarine }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
         else if (version == ShipVersion::Advanced) {
-            auto module = fun({ Module::AntiAir, Module::Type::HeavyBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::HeavyBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::HeavyBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::HeavyBattery, Module::Type::AntiSubmarine });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::HeavyBattery, Module::Type::AntiSubmarine });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::HeavyBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::HeavyBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Aircraft, Module::Type::SecondaryBattery, Module::Type::Torpedo, Module::Type::HeavyBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::HeavyBattery, Module::None, Module::Type::AntiSubmarine }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Type::Mine, Module::Type::Aircraft, Module::Type::HeavyBattery, Module::None, Module::Type::AntiSubmarine }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
     }
 
     if (type == ShipType::Battlecruiser || type == ShipType::Battleship) {
         if (version == ShipVersion::PreDreadnought) {
-            auto module = fun({ Module::AntiAir });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Aircraft, Module::SecondaryBattery, Module::Torpedo });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Aircraft, Module::SecondaryBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::AntiAir }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::SecondaryBattery, Module::None, Module::Torpedo }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::SecondaryBattery, Module::None }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
         else if (version == ShipVersion::Early) {
-            auto module = fun({ Module::AntiAir, Module::HeavyBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Aircraft, Module::SecondaryBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Aircraft, Module::SecondaryBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::HeavyBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::AntiAir, Module::HeavyBattery }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::SecondaryBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::SecondaryBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::HeavyBattery }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
         else if (version == ShipVersion::Basic) {
-            auto module = fun({ Module::AntiAir, Module::HeavyBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Aircraft, Module::HeavyBattery, Module::SecondaryBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Aircraft, Module::HeavyBattery, Module::SecondaryBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Aircraft, Module::HeavyBattery, Module::SecondaryBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::AntiAir, Module::HeavyBattery }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::HeavyBattery, Module::SecondaryBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::HeavyBattery, Module::SecondaryBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::HeavyBattery, Module::SecondaryBattery, Module::None }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
         else if (version == ShipVersion::Improved) {
-            auto module = fun({ Module::AntiAir, Module::HeavyBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Aircraft, Module::HeavyBattery, Module::SecondaryBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Aircraft, Module::HeavyBattery, Module::SecondaryBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Aircraft, Module::HeavyBattery, Module::SecondaryBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Aircraft, Module::HeavyBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::AntiAir, Module::HeavyBattery }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::HeavyBattery, Module::SecondaryBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::HeavyBattery, Module::SecondaryBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::HeavyBattery, Module::SecondaryBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::HeavyBattery }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
         else if (version == ShipVersion::Advanced) {
-            auto module = fun({ Module::AntiAir, Module::HeavyBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Aircraft, Module::HeavyBattery, Module::SecondaryBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Aircraft, Module::HeavyBattery, Module::SecondaryBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Aircraft, Module::HeavyBattery, Module::SecondaryBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::AntiAir, Module::Aircraft, Module::HeavyBattery, Module::SecondaryBattery });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::AntiAir, Module::HeavyBattery }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::HeavyBattery, Module::SecondaryBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::HeavyBattery, Module::SecondaryBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::HeavyBattery, Module::SecondaryBattery, Module::None }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::HeavyBattery, Module::SecondaryBattery, Module::None }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
     }
 
     if (type == ShipType::SuperHeavyBattleship) {
-        auto module = fun({ Module::AntiAir, Module::HeavyBattery });
-        modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-        module = fun({ Module::AntiAir, Module::HeavyBattery });
-        modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-        module = fun({ Module::AntiAir, Module::SecondaryBattery });
-        modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-        module = fun({ Module::AntiAir, Module::SecondaryBattery });
-        modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-        module = fun({ Module::AntiAir, Module::SecondaryBattery });
-        modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-        module = fun({ Module::AntiAir, Module::Aircraft, Module::SecondaryBattery, Module::HeavyBattery });
-        modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-        module = fun({ Module::AntiAir, Module::Aircraft, Module::SecondaryBattery, Module::HeavyBattery });
-        modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
+        modules.push_back(fun({ Module::AntiAir, Module::HeavyBattery }, type, version));
+        modules.push_back(fun({ Module::AntiAir, Module::HeavyBattery }, type, version));
+        modules.push_back(fun({ Module::AntiAir, Module::SecondaryBattery, Module::None }, type, version));
+        modules.push_back(fun({ Module::AntiAir, Module::SecondaryBattery, Module::None }, type, version));
+        modules.push_back(fun({ Module::AntiAir, Module::SecondaryBattery, Module::None }, type, version));
+        modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::SecondaryBattery, Module::None, Module::HeavyBattery }, type, version));
+        modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::SecondaryBattery, Module::None, Module::HeavyBattery }, type, version));
     }
 
     if (type == ShipType::Carrier) {
         if (version == ShipVersion::Basic) {
-            auto module = fun({ Module::SecondaryBattery, Module::Armor, Module::Aircraft });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::SecondaryBattery, Module::None, Module::Armor, Module::Aircraft, Module::None }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
         else if (version == ShipVersion::Improved) {
-            auto module = fun({ Module::SecondaryBattery, Module::Armor, Module::Aircraft });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::SecondaryBattery, Module::Armor, Module::Aircraft });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::SecondaryBattery, Module::None, Module::Armor, Module::Aircraft, Module::None }, type, version));
+            modules.push_back(fun({ Module::SecondaryBattery, Module::None, Module::Armor, Module::Aircraft, Module::None }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
         else if (version == ShipVersion::Advanced) {
-            auto module = fun({ Module::SecondaryBattery, Module::Armor, Module::Aircraft });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::SecondaryBattery, Module::Armor, Module::Aircraft });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::SecondaryBattery, Module::Armor, Module::Aircraft });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::SecondaryBattery, Module::None, Module::Armor, Module::Aircraft, Module::None }, type, version));
+            modules.push_back(fun({ Module::SecondaryBattery, Module::None, Module::Armor, Module::Aircraft, Module::None }, type, version));
+            modules.push_back(fun({ Module::SecondaryBattery, Module::None, Module::Armor, Module::Aircraft, Module::None }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
         else if (version == ShipVersion::ConvertedBattleship) {
-            auto module = fun({ Module::SecondaryBattery, Module::Armor, Module::Aircraft });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::SecondaryBattery, Module::None, Module::Armor, Module::Aircraft, Module::None }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
         else if (version == ShipVersion::ConvertedCruiser) {
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
     }
 
     if (type == ShipType::Submarine) {
         if (version == ShipVersion::Early) {
-            auto module = fun({ Module::Mine, Module::Torpedo });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::Mine, Module::Torpedo, Module::None }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
         else if (version == ShipVersion::Basic) {
-            auto module = fun({ Module::Mine, Module::Torpedo });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::Mine, Module::Torpedo }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
         else if (version == ShipVersion::Improved) {
-            auto module = fun({ Module::Mine, Module::Torpedo });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::Snorkel, Module::Radar });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::Mine, Module::Torpedo });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::Mine, Module::Torpedo, Module::None }, type, version));
+            modules.push_back(fun({ Module::Snorkel, Module::Radar, Module::None }, type, version));
+            modules.push_back(fun({ Module::Mine, Module::Torpedo, Module::None }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
         else if (version == ShipVersion::Advanced) {
-            auto module = fun({ Module::Mine, Module::Torpedo });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::Snorkel, Module::Radar });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::Mine, Module::Torpedo });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::Mine, Module::Torpedo, Module::None }, type, version));
+            modules.push_back(fun({ Module::Snorkel, Module::Radar, Module::None }, type, version));
+            modules.push_back(fun({ Module::Mine, Module::Torpedo, Module::None }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
         else if (version == ShipVersion::Midged) {
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
         else if (version == ShipVersion::Cruiser) {
-            auto module = fun({ Module::Mine, Module::Torpedo, Module::Aircraft, Module::Fuel });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::Snorkel, Module::Radar });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            module = fun({ Module::Mine, Module::Torpedo, Module::Aircraft, Module::Fuel });
-            modules.insert(std::pair < Module::Type, Module >(module, Module::generateModule(module, type, version)));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
-            modules.insert(std::pair < Module::Type, Module >(Module::Type::None, Module()));
+            modules.push_back(fun({ Module::Mine, Module::Torpedo, Module::Aircraft, Module::None, Module::Fuel, Module::None }, type, version));
+            modules.push_back(fun({ Module::Snorkel, Module::Radar }, type, version));
+            modules.push_back(fun({ Module::Mine, Module::Torpedo, Module::Aircraft, Module::None, Module::Fuel, Module::None }, type, version));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
+            modules.push_back(Module::generateNone(Module::Type::None));
         }
     }
     return modules;

@@ -68,20 +68,24 @@
     }
   },
   "battleship": {
-    "stats": {
-      "basic": {
+    "early": {
+      "stats": {
         "armor": 30.0,
         "hpP": 5.0,
         "maxSpeedP": -30.0,
         "surfaceVisibility": 0.0
-      },
-      "improved": {
+      }
+    },
+    "basic": {
+      "stats": {
         "armor": 36.0,
         "hpP": 10.0,
         "maxSpeedP": -30.0,
         "surfaceVisibility": 0.0
-      },
-      "advanced": {
+      }
+    },
+    "improved": {
+      "stats": {
         "armor": 40.0,
         "hpP": 15.0,
         "maxSpeedP": -30.0,
@@ -89,21 +93,25 @@
       }
     }
   },
-  "battlecruiser":{
-    "stats": {
-      "basic": {
+  "battlecruiser": {
+    "basic": {
+      "stats": {
         "armor": 22.0,
         "hpP": 5.0,
         "maxSpeedP": -15.0,
         "surfaceVisibility": 0.0
-      },
-      "improved": {
+      }
+    },
+    "improved": {
+      "stats": {
         "armor": 28.0,
         "hpP": 10.0,
         "maxSpeedP": -20.0,
         "surfaceVisibility": 0.0
-      },
-      "advanced": {
+      }
+    },
+    "advanced": {
+      "stats": {
         "armor": 34.0,
         "hpP": 15.0,
         "maxSpeedP": -25.0,
@@ -112,8 +120,8 @@
     }
   },
   "superHeavyBattleship": {
-    "stats": {
-      "basic":{
+    "basic": {
+      "stats": {
         "armor": 55.0,
         "hpP": 10.0,
         "maxSpeedP": -35.0,
@@ -123,7 +131,7 @@
   },
   "carrier": {
     "stats": {
-      "basic":{
+      "basic": {
         "armor": 5.0,
         "hp": 25.0,
         "maxSpeedP": -5.0,

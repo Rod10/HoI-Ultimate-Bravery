@@ -462,10 +462,10 @@ public:
 				ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
 				ImGuiIO& io = ImGui::GetIO();
 				for (auto& module : ship.fixedModule) {
-					if (module.first != Module::Type::None) {
-						std::cout << module.second.version << std::endl;
-						std::cout << Module::moduleTypeToStringFile(module.second.type) << std::endl;
-						Renderer::createLabelWithPosition(std::format("{0} {1}", Module::moduleTypeToStringFile(module.second.type), Module::versionToString(module.second.version)).c_str(), Constant::Position::LEFT);
+					if (module.type != Module::Type::None) {
+						std::cout << module.version << std::endl;
+						std::cout << Module::moduleTypeToStringFile(module.type) << std::endl;
+						Renderer::createLabelWithPosition(std::format("{0} {1}", Module::moduleTypeToStringFile(module.type), Module::versionToString(module.version)).c_str(), Constant::Position::LEFT);
 					}
 				}
 				posMult += 250;

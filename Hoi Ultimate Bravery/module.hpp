@@ -1,6 +1,7 @@
 #pragma once
 #include "shiptype.hpp"
 #include "shipversion.hpp"
+#include "utils.hpp"
 
 #include <time.h>
 
@@ -39,10 +40,11 @@ public:
 	};
 
 	enum Version {
-		Basic,
 		Early,
+		Basic,
 		Improved,
 		Advanced,
+		SuperHeavyBattleship
 	};
 
 	enum CustomModulePos {
@@ -56,6 +58,7 @@ public:
 	};
 
 	Module() {}
+	Module(Type type) : type(type) {}
 	Module(Type type, Version version) :
 		type(type),
 		version(version) {}
@@ -93,6 +96,14 @@ public:
 			break;
 		}
 	}
+	
+	static Module::Version stringToVersion(std::string version) {
+		if (version == "early") return Early;
+		if (version == "basic") return Basic;
+		if (version == "improved") return Improved;
+		if (version == "advanced") return Advanced;
+		if (version == "superHeavyBattleship") return SuperHeavyBattleship;
+	}
 
 	static Module::Version intToVersion(int type) {
 		switch (type)
@@ -101,6 +112,7 @@ public:
 		case 1: return Basic;
 		case 2: return Improved;
 		case 3: return Advanced;
+		case 4: return SuperHeavyBattleship;
 		default:
 			break;
 		}
@@ -195,5 +207,6 @@ public:
 	}
 
 	static Module generateModule(Type moduleType, ShipType::Type type, ShipVersion::Version version);
+	static Module generateNone(Type type);
 };
 

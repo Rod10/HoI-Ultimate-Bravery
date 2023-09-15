@@ -412,13 +412,13 @@ void Renderer::renderStats(bool windowOpen, Ship ship, std::map<Hull::Type, std:
     setIcon(ImGui::GetCursorPosY(), ImGui::GetCursorPosX() + 200, Hull::typeToString(ship.hull), shipIconNames.find(ship.hull)->second, UnitType::Type::Ship);
 
     int index = 0;
-    for (auto& module : ship.fixedModule) {
+    for (auto& module : ship.customModule) {
         std::string fileName;
-        if (module.first == Module::None) {
+        if (module.type == Module::None) {
             fileName = "none";
         }
         else {
-            fileName = std::format("{0}_{1}", Module::typeToImagesString(module.second.type, module.second.subType, ship.type), (module.second.version + 1));
+            fileName = std::format("{0}_{1}", Module::typeToImagesString(module.type, module.subType, ship.type), (module.version + 1));
         }
         std::cout << ImGui::GetCursorPosX() + 88.0f << std::endl;
         setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, getModulePos(index) + 5.0f, "modules", fileName, UnitType::Type::Ship);
@@ -427,11 +427,11 @@ void Renderer::renderStats(bool windowOpen, Ship ship, std::map<Hull::Type, std:
     index = 0;
     for (auto& module : ship.fixedModule) {
         std::string fileName;
-        if (module.first == Module::None) {
+        if (module.type == Module::None) {
             fileName = "none";
         }
         else {
-            fileName = std::format("{0}_{1}", Module::typeToImagesString(module.second.type, module.second.subType, ship.type), (module.second.version + 1));
+            fileName = std::format("{0}_{1}", Module::typeToImagesString(module.type, module.subType, ship.type), (module.version + 1));
         }
         std::cout << ImGui::GetCursorPosX() + 88.0f << std::endl;
         setImage(Constant::TextPos::TANK_MODULE_HEIGHT_2 + 2.0f, getModulePos(index), "modules", fileName, UnitType::Type::Ship);

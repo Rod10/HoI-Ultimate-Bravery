@@ -3,6 +3,11 @@
 Module Module::generateModule(Type moduleType, ShipType::Type shipType, ShipVersion::Version shipVersion)
 {
     srand(time(0));
+
+    if (moduleType == None) {
+        return generateNone(moduleType);
+    }
+
     if (moduleType == Type::RadarSonar) {
         moduleType = static_cast<Type>(rand() % (Type::Sonar - Type::Radar + 1) + Type::Radar);
     }
@@ -16,29 +21,33 @@ Module Module::generateModule(Type moduleType, ShipType::Type shipType, ShipVers
             moduleNameKey.push_back(el.key());
         }
     }
-    int moduleNameInt = rand() % moduleNameKey.size();
-    std::string moduleName = moduleNameKey[moduleNameInt];
+    std::string moduleName = *Utils::select_randomly(moduleNameKey.begin(), moduleNameKey.end());
     
     std::vector<std::string> moduleKey;
     for (auto& el : module[moduleName].items()) {
         moduleKey.push_back(el.key());
     }
 
-    if (moduleType == Type::LightBattery || moduleType == Type::SecondaryBattery) {
+    if (moduleType == Type::LightBattery || moduleType == Type::SecondaryBattery || moduleType == Type::Mine) {
         std::vector<std::string> moduleVersion;
-        int moduleSubType = rand() % moduleKey.size();
-        Module::SubType subType = Module::stringToSubType(moduleKey[moduleSubType]);
+        std::string moduleSubType = *Utils::select_randomly(moduleKey.begin(), moduleKey.end());
+        Module::SubType subType = Module::stringToSubType(moduleSubType);
 
-        for (auto& el : module[moduleName][moduleKey[moduleSubType]].items()) {
+        for (auto& el : module[moduleName][moduleSubType].items()) {
             moduleVersion.push_back(el.key());
         }
-        int moduleVersionInt = rand() % moduleVersion.size();
-        Module::Version version = Module::intToVersion(moduleVersionInt);
+        std::string moduleVersionString = *Utils::select_randomly(moduleVersion.begin(), moduleVersion.end());
+        Module::Version version = Module::stringToVersion(moduleVersionString);
 
         return Module(moduleType, subType, version);
     }
 
-    int moduleVersionInt = rand() % moduleKey.size();
-    Module::Version version = Module::intToVersion(moduleVersionInt);
+    std::string moduleVersionInt = *Utils::select_randomly(moduleKey.begin(), moduleKey.end());
+    Module::Version version = Module::stringToVersion(moduleVersionInt);
     return Module(moduleType, version);
+}
+
+Module Module::generateNone(Type type)
+{
+    return Module(type);
 }
