@@ -219,6 +219,9 @@
     <ClCompile Include="hull.cpp">
       <Filter>Fichiers sources\Ship</Filter>
     </ClCompile>
+    <ClCompile Include="coutriessettings.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Librairies\Imgui\imstb_textedit.h">
@@ -391,6 +394,9 @@
     </ClInclude>
     <ClInclude Include="planemodule.hpp">
       <Filter>Fichiers d%27en-tête\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="countriessettings.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

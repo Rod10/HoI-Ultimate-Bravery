@@ -94,7 +94,7 @@
     }
   },
   "battlecruiser": {
-    "basic": {
+    "early": {
       "stats": {
         "armor": 22.0,
         "hpP": 5.0,
@@ -102,7 +102,7 @@
         "surfaceVisibility": 0.0
       }
     },
-    "improved": {
+    "basic": {
       "stats": {
         "armor": 28.0,
         "hpP": 10.0,
@@ -110,7 +110,7 @@
         "surfaceVisibility": 0.0
       }
     },
-    "advanced": {
+    "improved": {
       "stats": {
         "armor": 34.0,
         "hpP": 15.0,
@@ -130,8 +130,8 @@
     }
   },
   "carrier": {
-    "stats": {
-      "basic": {
+    "basic": {
+      "stats": {
         "armor": 5.0,
         "hp": 25.0,
         "maxSpeedP": -5.0,

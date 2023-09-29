@@ -27,6 +27,8 @@ public:
 		VLast
 	};
 
+	std::vector<int> upgrade = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 };
+
 	Tank();
 	Tank(
 		TankType::Type type,
@@ -49,9 +51,8 @@ public:
 		engine(engine),
 		stats(stats),
 		role(role) {
-		srand(time(0));
-		engineLevel = rand() % 20;
-		armorLevel = rand() % 20;
+		engineLevel = *Utils::select_randomly(upgrade.begin(), upgrade.end());
+		armorLevel = *Utils::select_randomly(upgrade.begin(), upgrade.end());
 	}
 
 	TankType::Type type;
@@ -66,15 +67,6 @@ public:
 	Role::Type role;
 	int engineLevel;
 	int armorLevel;
-
-	/*enum Modules {
-		Turret, 
-		Gun,
-		Special,
-		Chassis,
-		Armor,
-		Engines
-	};*/
 
 	static std::string tankTypeToString(TankType::Type& type) {
 		switch (type) {

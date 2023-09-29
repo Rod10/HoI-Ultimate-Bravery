@@ -10,19 +10,30 @@ std::vector<Country> Country::generateCountryList()
     for (auto& countryData : data.items()) {
         std::string name = countryData.value().at("name");
         std::string tag = countryData.value().at("tag");
-        int countryPosIdea = countryData.value().at("countryPosIdea");
-        int linesToDeleteStart = countryData.value().at("linesToDeleteStart");
-        int linesToDeleteEnd = countryData.value().at("linesToDeleteEnd");
         int ideaPosIdea = countryData.value().at("ideaPosIdea");
+        int ideaPos = countryData.value().at("countriesSettings").at("ideaPos");
+        bool major = countryData.value().at("major");
+        std::map<std::string, DlcSettings> dlcSettings;
+        for (auto& test : data[countryData.key()]["countriesSettings"].items()) {
+            if (test.key() != "ideaPos") {
+                int linesToDeleteStart = test.value().at("linesToDeleteStart");
+                int linesToDeleteEnd = test.value().at("linesToDeleteEnd");
+                int lineToDeleteCount = linesToDeleteEnd - linesToDeleteStart;
+                DlcSettings dlcSetting = DlcSettings(linesToDeleteStart, linesToDeleteEnd, lineToDeleteCount);
+                dlcSettings.insert(std::pair <std::string, DlcSettings>(test.key(), dlcSetting));
+            }
+        }
+        CountriesSettings countriesSettings = CountriesSettings(ideaPos, dlcSettings);
         Country country = Country(
             name,
             tag,
-            countryPosIdea,
-            linesToDeleteStart,
-            linesToDeleteEnd,
-            ideaPosIdea
+            countriesSettings,
+            ideaPosIdea,
+            major
         );
-        countryList.push_back(country);
+        if (country.major) {
+            countryList.push_back(country);
+        }
     }
 
     return countryList;

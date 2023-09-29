@@ -5,7 +5,12 @@ Engine Engine::generateRandomEngine()
     srand(time(0));
     auto statsKey = Stats::getStatsKeyArray();
 
-    Engine::Type type = static_cast<Engine::Type>(rand() % Engine::Type::Last);
+    std::vector<Engine::Type> engineType;
+    for (int i = 0; i < Engine::Type::Last; i++) {
+        engineType.push_back(static_cast<Engine::Type>(i));
+    }
+
+    auto type = *Utils::select_randomly(engineType.begin(), engineType.end());
 
     std::ifstream f("Assets/Data/Tank/Engine.json");
     json armorData = json::parse(f)[Engine::typeToString(type)]["stats"];

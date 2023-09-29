@@ -22,7 +22,7 @@ public:
 		ConvertedBattleship,
 		ConvertedCruiser,
 		Cruiser,
-		Midged,
+		Midget,
 		PreDreadnought,
 		Last
 	};
@@ -39,7 +39,7 @@ public:
 		if (version == "convertedBattleship") return ConvertedBattleship;
 		if (version == "convertedCruiser") return ConvertedCruiser;
 		if (version == "cruiser") return Cruiser;
-		if (version == "midged") return Midged;
+		if (version == "midget") return Midget;
 		if (version == "preDreadnought") return PreDreadnought;
 	}
 
@@ -57,7 +57,7 @@ public:
 		case ShipVersion::ConvertedBattleship:return "Ship_hull_carrier_conversion_ca";
 		case ShipVersion::ConvertedCruiser: return "Ship_hull_carrier_conversion_ca";
 		case ShipVersion::Cruiser: return "Ship_hull_cruiser";
-		case ShipVersion::Midged: return "Ship_hull_midget";
+		case ShipVersion::Midget: return "Ship_hull_midget";
 		case ShipVersion::PreDreadnought: return "PreDreadnought";
 		case ShipVersion::Last:
 			break;
@@ -77,6 +77,10 @@ public:
 		case ShipVersion::Torpedo: return "Torpedo";
 		case ShipVersion::Panzerschiff: return "Panzerschiff";
 		case ShipVersion::PreDreadnought: return "PreDreadnought";
+		case ShipVersion::ConvertedCruiser: return "Converted Cruiser";
+		case ConvertedBattleship: return "Converted Battleship";
+		case Cruiser: return "Cruiser";
+		case Midget: return "Midget";
 		default:
 			break;
 		}

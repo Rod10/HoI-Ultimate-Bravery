@@ -151,6 +151,7 @@
     <ClCompile Include="constant.cpp" />
     <ClCompile Include="country.cpp" />
     <ClCompile Include="dlc.cpp" />
+    <ClCompile Include="coutriessettings.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="gun.cpp" />
     <ClCompile Include="gunsize.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="constant.hpp" />
     <ClInclude Include="country.hpp" />
     <ClInclude Include="dlc.hpp" />
+    <ClInclude Include="countriessettings.hpp" />
     <ClInclude Include="engine.hpp" />
     <ClInclude Include="files.hpp" />
     <ClInclude Include="gun.hpp" />

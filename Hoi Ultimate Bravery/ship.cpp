@@ -243,7 +243,7 @@ std::vector<Module> Ship::generateCustomModule(ShipType::Type type, ShipVersion:
     if (type == ShipType::Battlecruiser || type == ShipType::Battleship) {
         if (version == ShipVersion::PreDreadnought) {
             modules.push_back(fun({ Module::AntiAir }, type, version));
-            modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::SecondaryBattery, Module::None, Module::Torpedo }, type, version));
+            modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::SecondaryBattery, Module::None }, type, version));
             modules.push_back(fun({ Module::AntiAir, Module::Aircraft, Module::None, Module::SecondaryBattery, Module::None }, type, version));
             modules.push_back(Module::generateNone(Module::Type::None));
             modules.push_back(Module::generateNone(Module::Type::None));
@@ -383,7 +383,7 @@ std::vector<Module> Ship::generateCustomModule(ShipType::Type type, ShipVersion:
             modules.push_back(Module::generateNone(Module::Type::None));
             modules.push_back(Module::generateNone(Module::Type::None));
         }
-        else if (version == ShipVersion::Midged) {
+        else if (version == ShipVersion::Midget) {
             modules.push_back(Module::generateNone(Module::Type::None));
             modules.push_back(Module::generateNone(Module::Type::None));
             modules.push_back(Module::generateNone(Module::Type::None));

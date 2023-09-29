@@ -392,7 +392,7 @@ add_to_faction = GER
 
 
 add_ideas = {
-ultimate_bravery
+	ultimate_bravery
 	sour_loser
 	general_staff
 	limited_exports
@@ -559,29 +559,7 @@ if = {
 	limit = {
 		has_dlc = "No Step Back"
 	}
-	create_equipment_variant = {
-		name = Test
-		type = light_tank_chassis_1
-		parent_version = 0
-		modules = {
-			main_armament_slot =  tank_auto_cannon_2
-			turret_type_slot =  tank_light_three_man_tank_turret 
-			suspension_type_slot =  tank_torsion_bar_suspension
-			armor_type_slot =  tank_cast_armor
-			engine_type_slot =  tank_gas_turbine_engine
-			special_type_slot_1 =  extra_ammo_storage
-			special_type_slot_2 =  sloped_armor
-			special_type_slot_3 =  easy_maintenance
-			special_type_slot_4 =  squeezebore_adaptor
-		}
-		upgrades = {
-			tank_nsb_engine_upgrade = 5
-			tank_nsb_armor_upgrade = 12
-		}
-		active = yes
-		obsolete = no
-		icon = "GFX_gwtank_medium"
-	}
+tank
 }
 if = {
 	limit = { has_dlc = "Man the Guns" }

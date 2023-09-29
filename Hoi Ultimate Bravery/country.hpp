@@ -1,4 +1,5 @@
 #pragma once
+#include "countriesSettings.hpp"
 #include "json.hpp"
 #include "hull.hpp"
 #include "plane.hpp"
@@ -18,31 +19,25 @@ using json = nlohmann::json;
 class Country
 {
 public:
-	Country() {};
 	Country(std::string name,
 		std::string tag,
-		int countryPosIdea,
-		int linesToDeleteStart,
-		int linesToDeleteEnd,
-		int ideaPosIdea) :
+		CountriesSettings coutriesSettings,
+		int ideaPosIdea,
+		bool major) :
 		name(name),
 		tag(tag),
-		countryPosIdea(countryPosIdea),
-		linesToDeleteStart(linesToDeleteStart),
-		linesToDeleteEnd(linesToDeleteEnd),
 		ideaPosIdea(ideaPosIdea),
-		tankList(tankList) {
-		lineToDeleteCount = linesToDeleteEnd - linesToDeleteStart;
-	}
+		coutriesSettings(coutriesSettings),
+		tankList(tankList),
+		major(major) {}
 	static std::vector<Country> generateCountryList();
 
 	std::string name;
 	std::string tag;
-	int countryPosIdea;
-	int linesToDeleteStart;
-	int linesToDeleteEnd;
-	int lineToDeleteCount;
 	int ideaPosIdea;
+	CountriesSettings coutriesSettings;
+	bool major;
+
 	std::map<TankType::Type, Tank> tankList;
 	std::unordered_map<TankType::Type, Stats> newTankStats;
 	std::map<Hull::Type, Ship> shipList;

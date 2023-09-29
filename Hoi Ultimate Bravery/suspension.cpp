@@ -5,7 +5,12 @@ Suspension Suspension::generateRandomSuspension(TankType::Type type)
     srand(time(0));
     auto statsKey = Stats::getStatsKeyArray();
 
-    Suspension::Type suspensionType = static_cast<Suspension::Type>(rand() % Suspension::Type::Last);
+    std::vector<Suspension::Type> suspensionTypeList;
+    for (int i = 0; i < Suspension::Type::Last; i++) {
+        suspensionTypeList.push_back(static_cast<Suspension::Type>(i));
+    }
+
+    auto suspensionType = *Utils::select_randomly(suspensionTypeList.begin(), suspensionTypeList.end());
     while (type != TankType::Type::Light &&
         (static_cast<Suspension::Type>(rand() % Suspension::Type::Last) == Suspension::Type::HalfTrack
             || static_cast<Suspension::Type>(rand() % Suspension::Type::Last) == Suspension::Type::Wheeled)) {

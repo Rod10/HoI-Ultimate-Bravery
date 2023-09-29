@@ -1,0 +1,15 @@
+	create_equipment_variant = {
+		name = %name%
+		type = %type%
+		parent_version = 0
+		modules = {
+        	fixed_ship_anti_air_slot = %antiAir%
+			fixed_ship_battery_slot = %battery%
+			fixed_ship_secondaries_slot = %secondaries%
+			fixed_ship_armor_slot = %armor%
+			fixed_ship_fire_control_system_slot = %fireControl%
+			fixed_ship_engine_slot = %engine%
+			rear_1_custom_slot = %rearCustom1%
+			mid_1_custom_slot = %midCuston1%
+    	}
+	}

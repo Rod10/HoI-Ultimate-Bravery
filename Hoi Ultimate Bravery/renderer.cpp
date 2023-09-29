@@ -403,7 +403,7 @@ void Renderer::renderStats(bool windowOpen, Ship ship, std::map<Hull::Type, std:
     auto off = Utils::calculatePos(Constant::Position::MIDDLE, 1092);
     ImGui::SetNextWindowPos(ImVec2(off, 200.0f));
     ImGui::SetNextWindowSize(ImVec2(1108, 569));
-    ImGui::Begin("Light Tank", &windowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar);
+    ImGui::Begin("##", &windowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar);
     ImGui::PushFont(basicFont);
     ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
     std::string string = std::format("{0} {1}", ShipVersion::versionToYear(ship.version), ShipType::shipTypeToString(ship.type).c_str());
@@ -420,7 +420,6 @@ void Renderer::renderStats(bool windowOpen, Ship ship, std::map<Hull::Type, std:
         else {
             fileName = std::format("{0}_{1}", Module::typeToImagesString(module.type, module.subType, ship.type), (module.version + 1));
         }
-        std::cout << ImGui::GetCursorPosX() + 88.0f << std::endl;
         setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, getModulePos(index) + 5.0f, "modules", fileName, UnitType::Type::Ship);
         index++;
     }
@@ -433,7 +432,6 @@ void Renderer::renderStats(bool windowOpen, Ship ship, std::map<Hull::Type, std:
         else {
             fileName = std::format("{0}_{1}", Module::typeToImagesString(module.type, module.subType, ship.type), (module.version + 1));
         }
-        std::cout << ImGui::GetCursorPosX() + 88.0f << std::endl;
         setImage(Constant::TextPos::TANK_MODULE_HEIGHT_2 + 2.0f, getModulePos(index), "modules", fileName, UnitType::Type::Ship);
         index++;
     }

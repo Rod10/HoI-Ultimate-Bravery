@@ -201,6 +201,7 @@ public:
 		case Module::Early: return "2";
 		case Module::Improved: return "3";
 		case Module::Advanced: return "4";
+		case SuperHeavyBattleship: return "Super Heavy";
 		default:
 			break;
 		}
