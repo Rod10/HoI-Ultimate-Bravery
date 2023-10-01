@@ -115,10 +115,6 @@ public:
 				catch (std::exception& e) // Not using fs::filesystem_error since std::bad_alloc can throw too.  
 				{
 					std::cout << e.what();
-					ImGui::SetNextWindowPos(ImVec2(testMiddle, 200.0f));
-					ImGui::Begin("error", &mainMenuOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
-					Renderer::createLabelWithPosition(e.what(), Constant::Position::MIDDLE);
-					ImGui::End();
 				}
 			}
 			ImGui::PopStyleColor();

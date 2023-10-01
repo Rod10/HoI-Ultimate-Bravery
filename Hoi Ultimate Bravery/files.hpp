@@ -74,9 +74,9 @@ public:
         int startBBA = country->coutriesSettings.dlcSettings.find("bba")->second.linesToDeleteStart;
 
 
-        makeOrder(startMTG, startNSB, startBBA, "deletion", &tempFile, country);
+        makeOrder("deletion", &tempFile, country, converterToGameName);
         tempFile.insert(tempFile.begin() + country->coutriesSettings.ideaPos, "\tultimate_bravery");
-        makeOrder(startMTG, startNSB, startBBA, "addition", &tempFile, country);
+        makeOrder("addition", &tempFile, country, converterToGameName);
 
         for (int i = 0; i < tempFile.size(); i++) {
             newFile << tempFile[i] << std::endl;
@@ -137,104 +137,8 @@ public:
         };*/
     }
 
-    /*static void makeOrder(int startMTG, int startNSB, int startBBA, std::string mode, std::vector<std::string>* tempFile, Country* country) {
+    static void makeOrder(std::string mode, std::vector<std::string>* tempFile, Country* country, std::unordered_map<int, std::string> converterToGameName) {
         auto countriesSettings = country->coutriesSettings.dlcSettings;
-        auto mtgSettings = countriesSettings.find("mtg")->second;
-        auto nsbSettings = countriesSettings.find("nsb")->second;
-        auto bbaSettings = countriesSettings.find("bba")->second;
-        if ((startMTG < startNSB && startMTG < startBBA) && (startNSB < startBBA)) {
-            if (mode == "deletion") {
-                // do startMTG
-                remove(tempFile, mtgSettings.linesToDeleteStart, mtgSettings.linesToDeleteEnd, mtgSettings.lineToDeleteCount);
-                // do startNSB
-                remove(tempFile, nsbSettings.linesToDeleteStart - mtgSettings.lineToDeleteCount, nsbSettings.linesToDeleteEnd - mtgSettings.lineToDeleteCount, nsbSettings.lineToDeleteCount);
-                // do startBBA
-                remove(tempFile, bbaSettings.linesToDeleteStart - mtgSettings.lineToDeleteCount - nsbSettings.lineToDeleteCount, bbaSettings.linesToDeleteEnd - mtgSettings.lineToDeleteCount - nsbSettings.lineToDeleteCount, bbaSettings.lineToDeleteCount);
-            }
-            else if (mode == "addition") {
-
-            }
-        }
-        else if ((startMTG < startNSB || startMTG < startBBA) && (startNSB >= startBBA)) {
-            if (mode == "deletion") {
-                // do startMTG
-                remove(tempFile, mtgSettings.linesToDeleteStart, mtgSettings.linesToDeleteEnd, mtgSettings.lineToDeleteCount);
-                // do startBBA
-                remove(tempFile, bbaSettings.linesToDeleteStart - mtgSettings.lineToDeleteCount, bbaSettings.linesToDeleteEnd - mtgSettings.lineToDeleteCount, bbaSettings.lineToDeleteCount);
-                // do startNSB
-                remove(tempFile, nsbSettings.linesToDeleteStart - mtgSettings.lineToDeleteCount - bbaSettings.lineToDeleteCount, nsbSettings.linesToDeleteEnd - mtgSettings.lineToDeleteCount - bbaSettings.lineToDeleteCount, nsbSettings.lineToDeleteCount);
-            }
-            else if (mode == "addition") {
-
-            }
-        }
-        else if ((startNSB < startMTG || startNSB < startBBA) && (startMTG < startBBA)) {
-            if (mode == "deletion") {
-                // do startNSB
-                remove(tempFile, nsbSettings.linesToDeleteStart, nsbSettings.linesToDeleteEnd, nsbSettings.lineToDeleteCount);
-                // do startMTG
-                remove(tempFile, mtgSettings.linesToDeleteStart - nsbSettings.lineToDeleteCount, mtgSettings.linesToDeleteEnd - nsbSettings.lineToDeleteCount, mtgSettings.lineToDeleteCount);
-                // do startBBA
-                remove(tempFile, bbaSettings.linesToDeleteStart - mtgSettings.lineToDeleteCount - nsbSettings.lineToDeleteCount, bbaSettings.linesToDeleteEnd - mtgSettings.lineToDeleteCount - nsbSettings.lineToDeleteCount, bbaSettings.lineToDeleteCount);
-            }
-            else if (mode == "addition") {
-
-            }
-        }
-        else if ((startNSB < startMTG || startNSB < startBBA) && (startMTG >= startBBA)) {
-            if (mode == "deletion") {
-                // do startNSB
-                remove(tempFile, nsbSettings.linesToDeleteStart, nsbSettings.linesToDeleteEnd, nsbSettings.lineToDeleteCount);
-                // do startBBA
-                remove(tempFile, bbaSettings.linesToDeleteStart - nsbSettings.lineToDeleteCount, bbaSettings.linesToDeleteEnd - nsbSettings.lineToDeleteCount, bbaSettings.lineToDeleteCount);
-                // do startMTG
-                remove(tempFile, mtgSettings.linesToDeleteStart - nsbSettings.lineToDeleteCount - bbaSettings.lineToDeleteCount, mtgSettings.linesToDeleteEnd - nsbSettings.lineToDeleteCount - bbaSettings.lineToDeleteCount, mtgSettings.lineToDeleteCount);
-            }
-            else if (mode == "addition") {
-
-            }
-        }
-        else if ((startBBA < startMTG || startBBA < startNSB) && (startMTG < startNSB)) {
-            if (mode == "deletion") {
-                // do startBBA
-                remove(tempFile, bbaSettings.linesToDeleteStart, bbaSettings.linesToDeleteEnd, bbaSettings.lineToDeleteCount);
-                // do startMTG
-                remove(tempFile, mtgSettings.linesToDeleteStart - bbaSettings.lineToDeleteCount, mtgSettings.linesToDeleteEnd - bbaSettings.lineToDeleteCount, mtgSettings.lineToDeleteCount);
-               // do startNSB
-                remove(tempFile, nsbSettings.linesToDeleteStart - mtgSettings.lineToDeleteCount - bbaSettings.lineToDeleteCount, nsbSettings.linesToDeleteEnd - mtgSettings.lineToDeleteCount - bbaSettings.lineToDeleteCount, nsbSettings.lineToDeleteCount);
-            }
-            else if (mode == "addition") {
-
-            }
-        }
-        else {
-            if (mode == "deletion") {
-                // do startBBA
-                remove(tempFile, bbaSettings.linesToDeleteStart, bbaSettings.linesToDeleteEnd, bbaSettings.lineToDeleteCount);
-                // do startNSB
-                remove(tempFile, nsbSettings.linesToDeleteStart - bbaSettings.lineToDeleteCount, nsbSettings.linesToDeleteEnd - bbaSettings.lineToDeleteCount, nsbSettings.lineToDeleteCount);
-                // do startMTG
-                remove(tempFile, mtgSettings.linesToDeleteStart - nsbSettings.lineToDeleteCount - bbaSettings.lineToDeleteCount, mtgSettings.linesToDeleteEnd - nsbSettings.lineToDeleteCount - bbaSettings.lineToDeleteCount, mtgSettings.lineToDeleteCount);
-            }
-            else if (mode == "addition") {
-
-            }
-        }
-    }*/
-
-    static void makeOrder(int startMTG, int startNSB, int startBBA, std::string mode, std::vector<std::string>* tempFile, Country* country) {
-        auto countriesSettings = country->coutriesSettings.dlcSettings;
-        auto mtgSettings = countriesSettings.find("mtg")->second;
-        auto nsbSettings = countriesSettings.find("nsb")->second;
-        auto bbaSettings = countriesSettings.find("bba")->second;
-
-        std::vector<int> startOrder { startMTG, startNSB, startBBA };
-        if (mode == "deletion") {
-            std::sort(startOrder.rbegin(), startOrder.rend());
-        }
-        else if (mode == "addition") {
-            std::sort(startOrder.begin(), startOrder.end());
-        }
 
         std::map<std::string, int> test;
 
@@ -260,7 +164,7 @@ public:
             }
             else if (mode == "addition") {
                 newLinesToDeleteStart = (settings.linesToDeleteStart - previousOffset) + i;
-                insert(tempFile, country, dlc, newLinesToDeleteStart);
+                insert(tempFile, country, dlc, newLinesToDeleteStart, converterToGameName);
             }
             // Met à jour la valeur précédente
             previousOffset += settings.lineToDeleteCount;
@@ -303,12 +207,75 @@ public:
         }
     }
 
-    static void insert(std::vector<std::string>* tempFile, Country* country, std::string dlc, int newLinesToDeleteStart) {
+    static void insert(std::vector<std::string>* tempFile, Country* country, std::string dlc, int newLinesToDeleteStart, std::unordered_map<int, std::string> converterToGameName) {
         if (dlc == "mtg" && !country->shipList.empty()) {
-            tempFile->insert(tempFile->begin() + newLinesToDeleteStart, "ship");
+            for (auto& [hull, ship] : country->shipList) {
+                std::ifstream templateFile("./Assets/Data/Files/ship_equipment_template.txt", std::ios::binary);
+                int index;
+                std::string line;
+                std::vector<std::string> templateLine;
+                int counterTemplateLine = 0;
+                std::vector<std::string> replacementList{
+                    Hull::typeToString(ship.hull),
+                    ShipType::shipTypeToString(ship.type),
+                };
+
+                for (auto& module : ship.fixedModule) {
+                    Module::moduleTypeToEquipmentString(module.type);
+                }
+            }
         }
         else if (dlc == "nsb" && !country->tankList.empty()) {
-            tempFile->insert(tempFile->begin() + newLinesToDeleteStart, "tank");
+            for (auto& [type, tank] : country->tankList) {
+                std::ifstream templateFile("./Assets/Data/Files/tank_equipment_template.txt", std::ios::binary);
+                int index;
+                std::string line;        
+                std::vector<std::string> templateLine;
+                int counterTemplateLine = 0;
+                std::vector<std::string> replacementList{ Tank::tankTypeToString(tank.type),
+                    std::format("{0}_{1}_chassis_{2}", Tank::tankTypeToString(tank.type), Role::typeToString(tank.role), Tank::tankVersionToInt(tank.version)),
+                    converterToGameName.find(Utils::hash(std::format("{0}_{1}", Gun::gunNameToString(tank.gun.name), Gun::typeToString(tank.gun.type)).c_str()))->second,
+                    converterToGameName.find(Utils::hash(std::format("{0}_{1}", TurretType::turretTypeToString(tank.turret.type), tank.turret.crew).c_str()))->second,
+                    converterToGameName.find(Utils::hash(Suspension::typeToString(tank.suspension.type).c_str()))->second,
+                    converterToGameName.find(Utils::hash(Armor::typeToString(tank.armor.type).c_str()))->second,
+                    converterToGameName.find(Utils::hash(Engine::typeToString(tank.engine.type).c_str()))->second,
+                    converterToGameName.find(Utils::hash(SpecialModule::typeToString(tank.specialModules[0].type).c_str()))->second,
+                    converterToGameName.find(Utils::hash(SpecialModule::typeToString(tank.specialModules[1].type).c_str()))->second,
+                    converterToGameName.find(Utils::hash(SpecialModule::typeToString(tank.specialModules[2].type).c_str()))->second,
+                    converterToGameName.find(Utils::hash(SpecialModule::typeToString(tank.specialModules[3].type).c_str()))->second,
+                    std::to_string(tank.engineLevel),
+                    std::to_string(tank.armorLevel),
+                };
+                std::vector<std::string> tokenList{ "%tankName%",
+                    "%tankTypeVersion%",
+                    "%gunName%",
+                    "%turretName%",
+                    "%suspensionName%",
+                    "%armorName%",
+                    "%engineName%",
+                    "%specialName_1%",
+                    "%specialName_2%",
+                    "%specialName_3%",
+                    "%specialName_4%",
+                    "%engineUpgrade%",
+                    "%armorUpgrade%" };
+                while (std::getline(templateFile, line)) {
+                    for (int i = 0; i < tokenList.size(); i++) {
+                        while ((index = line.find(tokenList[i])) != std::string::npos) {
+                            //std::cout << index->c_str() << std::endl;
+                            line.replace(line.find(tokenList[i]), tokenList[i].length(), replacementList[i]);
+                        }
+                    }
+                    templateLine.push_back(line);
+                }
+
+                for (int i = 0; i < tempFile->size(); i++) {
+                    if (i >= newLinesToDeleteStart && counterTemplateLine < templateLine.size()) {
+                        tempFile->insert(tempFile->begin() + i, templateLine[counterTemplateLine]);
+                        counterTemplateLine++;
+                    }
+                }
+            }
         }
         else if (dlc == "bba" && !country->planeList.empty()) {
             tempFile->insert(tempFile->begin() + newLinesToDeleteStart, "plane");

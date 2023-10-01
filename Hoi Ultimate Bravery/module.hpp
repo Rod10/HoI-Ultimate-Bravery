@@ -96,6 +96,33 @@ public:
 			break;
 		}
 	}
+
+	static std::string moduleTypeToEquipmentString(Type type) {
+		switch (type)
+		{
+		case Module::Engine: return "fixed_ship_engine_slot";
+		case Module::Armor: return "fixed_ship_armor_slot";
+		case Module::LightBattery: return "fixed_ship_battery_slot";
+		case Module::HeavyBattery: return "fixed_ship_battery_slot";
+		case Module::SecondaryBattery: return "fixed_ship_secondaries_slot ";
+		case Module::AntiAir: return "fixed_ship_anti_air_slot";
+		case Module::Torpedo: return "fixed_ship_torpedo_slot";
+		case Module::RadarSonar: return "fixed_ship_radar_slot";
+		case Module::Snorkel: return "";
+		case Module::FireControl: return "fixed_ship_fire_control_system_slot";
+		case Module::AntiSubmarine: return "";
+		case Module::Mine: return "";
+		case Module::Aircraft: return "fixed_ship_deck_slot_";
+		case Module::Fuel: return "";
+		case Module::Radar: return "fixed_ship_radar_slot";
+		case Module::Sonar: return "fixed_ship_radar_slot";
+		case Module::None: return "";
+		case Module::Last:
+			break;
+		default:
+			break;
+		}
+	}
 	
 	static Module::Version stringToVersion(std::string version) {
 		if (version == "early") return Early;

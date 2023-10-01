@@ -11,5 +11,5 @@
 			fixed_ship_engine_slot = %engine%
 			rear_1_custom_slot = %rearCustom1%
 			mid_1_custom_slot = %midCuston1%
-    	}
+    		}
 	}
