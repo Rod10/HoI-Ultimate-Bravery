@@ -8,10 +8,10 @@ Plane Plane::generateRandomPlane(PlaneRole::Role role)
 
 	PlaneVersion::Version version = PlaneVersion::generateRandom(type);
 	PlaneEngine engine = PlaneEngine::generateRandom(type);
-	std::unordered_map<PlaneModule::Type, PlaneModule> fixed = generateFixedModule(type, role);
-	std::vector<PlaneModule> custom = generateCustomModule(type, role, version);
+	std::unordered_map<PlaneModule::Type, PlaneModule> special = generateSpecialModule(type, role);
+	std::vector<PlaneModule> fixed = generateFixedModule(type, role, version);
 
-	return Plane(role, type, version, engine, fixed, custom);
+	return Plane(role, type, version, engine, special, fixed);
 }
 
 PlaneType::Type Plane::getTypeByRole(PlaneRole::Role role) {
@@ -29,7 +29,7 @@ PlaneType::Type Plane::getTypeByRole(PlaneRole::Role role) {
 	}
 }
 
-std::unordered_map<PlaneModule::Type, PlaneModule> Plane::generateFixedModule(PlaneType::Type planeType, PlaneRole::Role role) {
+std::unordered_map<PlaneModule::Type, PlaneModule> Plane::generateSpecialModule(PlaneType::Type planeType, PlaneRole::Role role) {
 	std::unordered_map<PlaneModule::Type, PlaneModule> fixedModules;
 	/*auto fun = [](std::vector<PlaneModule::Type> typeList) {
 		srand(time(0));
@@ -45,7 +45,7 @@ std::unordered_map<PlaneModule::Type, PlaneModule> Plane::generateFixedModule(Pl
 	return fixedModules;
 }
 
-std::vector<PlaneModule> Plane::generateCustomModule(PlaneType::Type planeType, PlaneRole::Role role, PlaneVersion::Version version) {
+std::vector<PlaneModule> Plane::generateFixedModule(PlaneType::Type planeType, PlaneRole::Role role, PlaneVersion::Version version) {
 	std::vector<PlaneModule> customModules;
 	auto fun = [](std::vector<PlaneModule::Type> typeList, PlaneType::Type planeType, PlaneRole::Role role) {
 		srand(time(0));

@@ -51,3 +51,8 @@ Module Module::generateNone(Type type)
 {
     return Module(type);
 }
+
+Module Module::generateNone(Type type, SubType subType)
+{
+    return Module(type, subType);
+}

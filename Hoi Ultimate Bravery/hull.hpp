@@ -26,5 +26,19 @@ public:
 			break;
 		}
 	}
+
+	static std::string typeToEquipmentString(Type type) {
+		switch (type)
+		{
+		case Hull::Destroyer: return "light";
+		case Hull::Cruiser: return "cruiser";
+		case Hull::HeavyShip: return "heavy";
+		case Hull::SuperHeavyShip: return "heavy";
+		case Hull::Carrier: return "carrier";
+		case Hull::Submarine: return "sub";
+		default:
+			break;
+		}
+	}
 };
 

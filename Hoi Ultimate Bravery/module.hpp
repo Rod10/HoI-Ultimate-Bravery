@@ -4,6 +4,7 @@
 #include "utils.hpp"
 
 #include <time.h>
+#include <tuple>
 
 class Module
 {
@@ -36,7 +37,8 @@ public:
 		AutoLoader,
 		MineLaying,
 		MineSweeping,
-		Secondary
+		Secondary,
+		Empty
 	};
 
 	enum Version {
@@ -58,7 +60,8 @@ public:
 	};
 
 	Module() {}
-	Module(Type type) : type(type) {}
+	Module(Type type) : type(type){}
+	Module(Type type, SubType subType) : type(type), subType(subType){}
 	Module(Type type, Version version) :
 		type(type),
 		version(version) {}
@@ -155,6 +158,58 @@ public:
 		if (type == "secondary") return Secondary;
 	}
 
+	static std::string typeToEquipmentFileValue(Module module, Hull::Type hullType, ShipType::Type shipType) {
+		if (module.subType == Empty) {
+			return "empty";
+		}
+		switch (module.type)
+		{
+		case Module::Engine: return std::format("{0}_ship_engine_{1}", Hull::typeToEquipmentString(hullType), module.version + 1);
+		case Module::Armor: 
+			if (shipType == ShipType::Type::Battleship) return std::format("ship_armor_bb_{0}", module.version + 1);
+			else if (shipType == ShipType::Type::Battlecruiser) return std::format("ship_armor_bc_{0}", module.version + 1);
+			else if (shipType == ShipType::Type::SuperHeavyBattleship) return "ship_armor_shbb";
+			else if (shipType == ShipType::Type::LightCruiser || shipType == ShipType::Type::HeavyCruiser) return std::format("ship_armor_cruiser_{0}", module.version + 1);
+			else if (shipType == ShipType::Type::Carrier) return "ship_armor_carrier_deck";
+		case Module::LightBattery:
+			if (module.subType == Light) return std::format("ship_light_battery_{0}", module.version + 1);
+			else if (module.subType == LightCruiser) return std::format("ship_light_medium_battery_{0}", module.version + 1);
+			else if (module.subType == AutoLoader) "dp_ship_medium_1";
+			else if (module.subType == DualPurpose) return std::format("dp_light_battery_{0}", module.version + 1);
+		case Module::HeavyBattery:
+			if (shipType == ShipType::Type::HeavyCruiser) return std::format("ship_medium_battery_{0}", module.version + 1);
+			else if (shipType == ShipType::Battleship || shipType == ShipType::Type::Battlecruiser) return std::format("ship_heavy_battery_{0}", module.version + 1);
+			else if (shipType == ShipType::SuperHeavyBattleship) return "ship_super_heavy_battery_1";
+		case Module::SecondaryBattery:
+			if (module.subType == DualPurpose) return std::format("dp_ship_secondaries_{0}", module.version + 1);
+			else if (module.subType == Secondary) return std::format("ship_secondaries_{0}", module.version + 1);
+		case Module::AntiAir: return std::format("ship_anti_air_{0}", module.version + 1);
+		case Module::Torpedo:
+			if (shipType == ShipType::Type::Submarine) return std::format("ship_torpedo_sub_{0}", module.version + 1);
+			else return std::format("ship_torpedo_{0}", module.version + 1);
+		case Module::Snorkel: return std::format("ship_sub_snorkel_{0}", module.version + 1);
+		case Module::FireControl: return std::format("ship_fire_control_system_{0}", module.version + 1);
+		case Module::AntiSubmarine: return std::format("ship_depth_charge_{0}", module.version + 1);
+		case Module::Mine:
+			if (module.subType == MineLaying) {
+				if (shipType == ShipType::Type::Submarine) return "ship_mine_layer_sub";
+				else return "ship_mine_layer_1";
+			}
+			return "ship_mine_sweeper_1";
+		case Module::Aircraft:
+			if (shipType == ShipType::Type::Carrier) return "ship_deck_space";
+			else return std::format("ship_airplane_launcher_{0}", module.version + 1);
+		case Module::Fuel: return "ship_extra_fuel_tank";
+		case Module::Radar: return std::format("ship_radar_{0}", module.version + 1);
+		case Module::Sonar: return std::format("ship_sonar_{0}", module.version + 1);
+		case Module::None: return "empty";
+		case Module::Last:
+			break;
+		default:
+			break;
+		}
+	}
+
 	static std::string typeToImagesString(Type type, SubType subType, ShipType::Type shipType) {
 		switch (type)
 		{
@@ -216,8 +271,7 @@ public:
 		case Module::Radar: return "Radar";
 		case Module::Sonar: return "Sonar";
 		case Module::None: return "None";
-		default:
-			break;
+		default: return "None";
 		}
 	}
 
@@ -234,7 +288,163 @@ public:
 		}
 	}
 
+	static std::string customKeyEquipmentFile(ShipType::Type type, ShipVersion::Version version, int index) {
+		auto [slotPrefix, newIndex] = getSlotPrefix(type, index, version);
+
+		if (!slotPrefix.empty()) {
+			return std::format("{0}_{1}_custom_slot", slotPrefix, newIndex);
+		}
+
+		return ""; // ou une valeur par défaut en cas d'entrée inattendue
+	}
+
+	static std::tuple<std::string, int> getSlotPrefix(ShipType::Type type, int index, ShipVersion::Version version) {
+		switch (type) {
+		case ShipType::Destroyer:
+			return getDestroyerSlotPrefix(index, version);
+		case ShipType::LightCruiser:
+			return getCruiserSlotPrefix(index, version);
+		case ShipType::HeavyCruiser:
+			return getCruiserSlotPrefix(index, version);
+		case ShipType::Battlecruiser:
+			return getBattleshipSlotPrefix(index, version);
+		case ShipType::Battleship:
+			return getBattleshipSlotPrefix(index, version);
+		case ShipType::SuperHeavyBattleship:
+			// TODO: DO SUPERBATTLESHIP
+			break;
+		case ShipType::Carrier:
+			return getCarrierSlotPrefix(index, version);
+		case ShipType::Submarine: 
+			return getSubmarineSlotPrefix(index, version);
+		default:
+			return { "", 0 };
+		}
+	}
+
+	static std::tuple<std::string, int> getDestroyerSlotPrefix(int index, ShipVersion::Version version) {
+		std::string slotPrefix = "";
+		if (index == 0) {
+			slotPrefix = "rear";
+			index = index + 1;
+		}
+		else if (index == 1) {
+			slotPrefix = "mid";
+		}
+		else if (index == 2) {
+			if (version == ShipVersion::Early || version == ShipVersion::Basic || version == ShipVersion::Improved) {
+				slotPrefix = "front";
+				index = index - 1;
+			}
+			else if (version == ShipVersion::Advanced) {
+				slotPrefix = "mid";
+			}
+		}
+		else if (index == 3) {
+			slotPrefix = "front";
+			index = index - 2;
+		}
+
+		return { slotPrefix, index };
+	}
+
+	static std::tuple<std::string, int> getCruiserSlotPrefix(int index, ShipVersion::Version version) {
+		std::string slotPrefix = "";
+		if (index == 0) {
+			slotPrefix = "rear";
+			index = index + 1;
+		}
+		else if (index == 1) {
+			if (version == ShipVersion::Improved || version == ShipVersion::Advanced) {
+				slotPrefix = "rear";
+				index++;
+			}
+			else slotPrefix = "mid";
+		}
+		else if (index == 2) {
+			if (version == ShipVersion::Advanced || version == ShipVersion::Improved) {	
+				index--;
+			}
+			slotPrefix = "mid";
+		}
+		else if (index == 3) {
+			if (version == ShipVersion::Improved || version == ShipVersion::Advanced) {
+				slotPrefix = "mid";
+				index--;
+			}
+			else {
+				slotPrefix = "front";
+				index = index - 2;
+			}
+		}
+		else if (index == 4) {
+			slotPrefix = "front";
+			index = index - 3;
+		}
+		return { slotPrefix, index };
+	}
+
+	static std::tuple<std::string, int> getBattleshipSlotPrefix(int index, ShipVersion::Version version) {
+		std::string slotPrefix = "";
+		if (index == 0) {
+			slotPrefix = "front";
+			index = index + 1;
+		}
+		else if (index == 1) {
+			slotPrefix = "mid";
+		}
+		else if (index == 2) {
+			slotPrefix = "mid";
+		}
+		else if (index == 3) {
+			if (version == ShipVersion::Basic) {
+				slotPrefix = "rear";
+				index = index - 2;
+			}
+			else {
+				slotPrefix = "mid";
+			}
+		}
+		else if (index == 4) {
+			slotPrefix = "rear";
+			index = index - 3;
+		}
+		return { slotPrefix, index };
+	}
+
+	static std::tuple<std::string, int> getCarrierSlotPrefix(int index, ShipVersion::Version version) {
+		std::string slotPrefix = "";
+		if (index == 0) {
+			slotPrefix = "front";
+			index++;
+			return { slotPrefix, index };
+		}
+		if (((index == 1 && version == ShipVersion::Improved || version == ShipVersion::Advanced)
+			|| (index == 2 && version == ShipVersion::Advanced)) && index < 3 ) {
+			slotPrefix = "mid";
+		}
+		return { slotPrefix, index };
+	}
+
+	static std::tuple<std::string, int> getSubmarineSlotPrefix(int index, ShipVersion::Version version) {
+		std::string slotPrefix = "";
+		if (index == 0) {
+			slotPrefix = "front";
+			index++;
+			return { slotPrefix, index };
+		}
+		else if (index == 1) {
+			slotPrefix = "mid";
+		}
+		else if (index == 2) {
+			slotPrefix = "rear";
+			index--;
+		}
+		return { slotPrefix, index };
+	}
+
 	static Module generateModule(Type moduleType, ShipType::Type type, ShipVersion::Version version);
 	static Module generateNone(Type type);
+	static Module generateNone(Type type, SubType subType);
 };
 

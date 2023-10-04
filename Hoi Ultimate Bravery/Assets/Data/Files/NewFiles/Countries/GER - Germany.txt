@@ -560,115 +560,23 @@ if = {
 		has_dlc = "No Step Back"
 	}
 	create_equipment_variant = {
-		name = modern
-		type = modern_tank_chassis_1
+		name = light
+		type = light_tank_chassis_1
 		parent_version = 0
 		modules = {
-			main_armament_slot =  tank_auto_cannon
-			turret_type_slot =  tank_light_two_man_tank_turret 
-			suspension_type_slot =  tank_christie_suspension
-			armor_type_slot =  tank_riveted_armor
-			engine_type_slot =  tank_diesel_engine
-			special_type_slot_1 =  amphibious_drive
-			special_type_slot_2 =  armor_skirts
-			special_type_slot_3 =  extra_ammo_storage
-			special_type_slot_4 =  sloped_armor
-		}
-		upgrades = {
-			tank_nsb_engine_upgrade = 10
-			tank_nsb_armor_upgrade = 13
-		}
-		active = yes
-		obsolete = no
-		icon = "GFX_gwtank_medium"
-	}
-	create_equipment_variant = {
-		name = superHeavy
-		type = superHeavy_tank_artillery_chassis_1
-		parent_version = 0
-		modules = {
-			main_armament_slot =  tank_small_cannon_2
-			turret_type_slot =  tank_medium_one_man_tank_turret 
-			suspension_type_slot =  tank_christie_suspension
+			main_armament_slot =  flamethrower 
+			turret_type_slot =  tank_light_one_man_tank_turret 
+			suspension_type_slot =  tank_torsion_bar_suspension
 			armor_type_slot =  tank_cast_armor
 			engine_type_slot =  tank_gasoline_engine
-			special_type_slot_1 =  extra_ammo_storage
-			special_type_slot_2 =  stabilizer
-			special_type_slot_3 =  tank_radio_1
-			special_type_slot_4 =  amphibious_drive
-		}
-		upgrades = {
-			tank_nsb_engine_upgrade = 17
-			tank_nsb_armor_upgrade = 1
-		}
-		active = yes
-		obsolete = no
-		icon = "GFX_gwtank_medium"
-	}
-	create_equipment_variant = {
-		name = heavy
-		type = heavy_tank_chassis_2
-		parent_version = 0
-		modules = {
-			main_armament_slot =  tank_auto_cannon_2
-			turret_type_slot =  tank_light_three_man_tank_turret 
-			suspension_type_slot =  tank_christie_suspension
-			armor_type_slot =  tank_welded_armor
-			engine_type_slot =  tank_diesel_engine
-			special_type_slot_1 =  wet_ammo_storage
-			special_type_slot_2 =  smoke_launchers
-			special_type_slot_3 =  armor_skirts
-			special_type_slot_4 =  tank_radio_2
-		}
-		upgrades = {
-			tank_nsb_engine_upgrade = 3
-			tank_nsb_armor_upgrade = 20
-		}
-		active = yes
-		obsolete = no
-		icon = "GFX_gwtank_medium"
-	}
-	create_equipment_variant = {
-		name = medium
-		type = medium_tank_aa_chassis_2
-		parent_version = 0
-		modules = {
-			main_armament_slot =  tank_anti_air_cannon
-			turret_type_slot =  tank_light_one_man_tank_turret 
-			suspension_type_slot =  tank_christie_suspension
-			armor_type_slot =  tank_cast_armor
-			engine_type_slot =  tank_diesel_engine
-			special_type_slot_1 =  sloped_armor
-			special_type_slot_2 =  tank_radio_2
-			special_type_slot_3 =  squeezebore_adaptor
+			special_type_slot_1 =  armor_skirts
+			special_type_slot_2 =  tank_radio_3
+			special_type_slot_3 =  extra_ammo_storage
 			special_type_slot_4 =  dozer_blade
 		}
 		upgrades = {
-			tank_nsb_engine_upgrade = 19
-			tank_nsb_armor_upgrade = 8
-		}
-		active = yes
-		obsolete = no
-		icon = "GFX_gwtank_medium"
-	}
-	create_equipment_variant = {
-		name = light
-		type = light_tank_chassis_2
-		parent_version = 0
-		modules = {
-			main_armament_slot =  tank_heavy_machine_gun
-			turret_type_slot =  tank_light_one_man_tank_turret 
-			suspension_type_slot =  tank_christie_suspension
-			armor_type_slot =  tank_welded_armor
-			engine_type_slot =  tank_diesel_engine
-			special_type_slot_1 =  sloped_armor
-			special_type_slot_2 =  stabilizer
-			special_type_slot_3 =  wet_ammo_storage
-			special_type_slot_4 =  additional_machine_guns
-		}
-		upgrades = {
-			tank_nsb_engine_upgrade = 1
-			tank_nsb_armor_upgrade = 2
+			tank_nsb_engine_upgrade = 8
+			tank_nsb_armor_upgrade = 18
 		}
 		active = yes
 		obsolete = no
@@ -927,119 +835,22 @@ if = {
 	limit = {
 		has_dlc = "By Blood Alone"
 	}
-
 	create_equipment_variant = {
-		name = "Do 23"
-		type = medium_plane_airframe_0
+		name = fighter
+		type = small
 		modules = {
-			fixed_main_weapon_slot = medium_bomb_bay
-			fixed_auxiliary_weapon_slot_1 = empty
-			fixed_auxiliary_weapon_slot_2 = empty
+			fixed_main_weapon_slot = aircraft_cannon_2_1x
+			fixed_auxiliary_weapon_slot_1 = light_mg_2x
+			fixed_auxiliary_weapon_slot_2 = aircraft_cannon_1_2x
 			fixed_auxiliary_weapon_slot_3 = empty
-			engine_type_slot = engine_1_2x
-			special_type_slot_1 = empty
-			special_type_slot_2 = empty
-			special_type_slot_3 = empty
-			special_type_slot_4 = empty
+			fixed_auxiliary_weapon_slot_4 = empty
+			engine_type_slot = engine_1x
+			special_type_slot_1 = 
+			special_type_slot_2 = 
+			special_type_slot_3 = 
+			special_type_slot_4 = 
+			special_type_slot_5 = 
 		}
-		obsolete = yes
-	}
-	create_equipment_variant = {
-		name = "Ju 86"
-		type = medium_plane_airframe_0
-		modules = {
-			fixed_main_weapon_slot = medium_bomb_bay
-			fixed_auxiliary_weapon_slot_1 = empty
-			fixed_auxiliary_weapon_slot_2 = empty
-			fixed_auxiliary_weapon_slot_3 = empty
-			engine_type_slot = engine_2_2x
-			special_type_slot_1 = lmg_defense_turret_2x
-			special_type_slot_2 = fuel_tanks_medium
-			special_type_slot_3 = empty
-			special_type_slot_4 = empty
-		}
-		obsolete = yes
-	}
-
-	create_equipment_variant = {
-		name = "He 111"
-		type = medium_plane_airframe_1
-		modules = {
-			fixed_main_weapon_slot = medium_bomb_bay
-			fixed_auxiliary_weapon_slot_1 = medium_bomb_bay
-			fixed_auxiliary_weapon_slot_2 = empty
-			fixed_auxiliary_weapon_slot_3 = empty
-			engine_type_slot = engine_2_2x
-			special_type_slot_1 = lmg_defense_turret_2x
-			special_type_slot_2 = lmg_defense_turret_2x
-			special_type_slot_3 = empty
-			special_type_slot_4 = empty
-		}
-		icon = "GFX_GER_tactical_bomber1_medium"
-	}
-	
-	create_equipment_variant = {
-		name = "Do 17"
-		type = small_plane_cas_airframe_0
-		modules = {
-			fixed_main_weapon_slot = small_bomb_bay
-			engine_type_slot = engine_1_2x
-			special_type_slot_1 = lmg_defense_turret_2x
-		}
-		icon = "GFX_GER_medium_plane_1_medium"
-	}
-
-	create_equipment_variant = {
-		name = "He 51" #also covers Ar 68
-		type = small_plane_airframe_0
-		modules = {
-			fixed_main_weapon_slot = light_mg_2x
-			engine_type_slot = engine_1_1x
-			special_type_slot_1 = empty
-		}
-		obsolete = yes
-	}
-	create_equipment_variant = {
-		name = "Hs 123"
-		type = small_plane_cas_airframe_0
-		modules = {
-			fixed_main_weapon_slot = bomb_locks
-			engine_type_slot = engine_1_1x
-			special_type_slot_1 = empty
-		}
-		obsolete = yes
-	}
-	create_equipment_variant = {
-		name = "Bf 109 D"
-		type = small_plane_airframe_1
-		modules = {
-			fixed_main_weapon_slot = light_mg_4x
-			engine_type_slot = engine_2_1x
-			special_type_slot_1 = empty
-		}
-		icon = "GFX_GER_fighter1_medium"
-	}
-	create_equipment_variant = {
-		name = "Ju 87"
-		type = small_plane_cas_airframe_1
-		modules = {
-			fixed_main_weapon_slot = bomb_locks
-			engine_type_slot = engine_2_1x
-			special_type_slot_1 = lmg_defense_turret
-			special_type_slot_2 = dive_brakes_small
-		}
-		icon = "GFX_GER_CAS1_medium"
-	}
-	create_equipment_variant = {
-		name = "Do 22"
-		type = small_plane_naval_bomber_airframe_1
-		modules = {
-			fixed_main_weapon_slot = torpedo_mounting
-			engine_type_slot = engine_1_1x
-			special_type_slot_1 = lmg_defense_turret
-			special_type_slot_2 = floats
-		}
-		icon = "GFX_GER_naval_bomber1_medium"
 	}
 }
 

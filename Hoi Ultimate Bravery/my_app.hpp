@@ -402,12 +402,12 @@ public:
 				ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
 				ImGuiIO& io = ImGui::GetIO();
 				for (auto& module : ship.customModule) {
-					if (module.type != Module::Type::None) {
+					if (module.type != Module::Type::None ) {
 						Renderer::createLabelWithPosition(std::format("{0} {1}", Module::moduleTypeToStringFile(module.type), Module::versionToString(module.version)).c_str(), Constant::Position::LEFT);
 					}
 				}
 				for (auto& module : ship.fixedModule) {
-					if (module.type != Module::Type::None) {
+					if (module.subType != Module::SubType::Empty) {
 						Renderer::createLabelWithPosition(std::format("{0} {1}", Module::moduleTypeToStringFile(module.type), Module::versionToString(module.version)).c_str(), Constant::Position::LEFT);
 					}
 				}
@@ -497,7 +497,7 @@ public:
 				Renderer::createLabelWithPosition(std::format("{0} {1}", PlaneVersion::versionToYear(plane.version).c_str(), PlaneRole::roleToString(plane.role).c_str()).c_str(), Constant::Position::MIDDLE);
 				ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
 				ImGuiIO& io = ImGui::GetIO();
-				for (auto& module : plane.custom) {
+				for (auto& module : plane.fixed) {
 					if (module.type != PlaneModule::Type::None) {
 						Renderer::createLabelWithPosition(std::format("{0} {1}", PlaneModule::subTypeToString(module.subType), PlaneModule::versionToString(module.version)).c_str(), Constant::Position::LEFT);
 					}

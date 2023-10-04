@@ -49,7 +49,13 @@ public:
 		AirAirRadar,
 		AirGroundRadar,
 		BombSight,
-		RadioNavigation
+		RadioNavigation,
+		LightMGDefense,
+		HeavyMGDefense,
+		CannonDefense,
+		DropTanks, 
+		ExtraFuelTanks,
+		SelfSealingTanks
 	};
 
 	enum Version {
@@ -201,6 +207,42 @@ public:
 		case PlaneModule::AirGroundRadar: return std::format("Airplane_air_ground_radar_{0}", version + 1);
 		case PlaneModule::BombSight: return std::format("Airplane_bomb_sights_{0}", version + 1);
 		case PlaneModule::RadioNavigation: return std::format("Airplane_radio_navigation_{0}", version + 1);
+		default:
+			break;
+		}
+	}
+
+	static std::string moduleToEquipmentStringValue(PlaneModule module, PlaneType::Type planeType) {
+		switch (module.subType)
+		{
+		case PlaneModule::LMG: return std::format("light_mg_{0}x", module.number);
+		case PlaneModule::HMG: return std::format("heavy_mg_{0}x", module.number);
+		case PlaneModule::Cannon: return std::format("aircraft_cannon_{0}_{1}x", module.version + 1, module.number);
+		case PlaneModule::BombLocks: return "bomb_locks";
+		case PlaneModule::SmallBombBay: return "small_bomb_bay";
+		case PlaneModule::AntiTankCannon: return std::format("tank_buster_{0}", module.version + 1);
+		case PlaneModule::RocketRail: return "rocket_rails";
+		case PlaneModule::MediumBombBay: return "medium_bomb_bay";
+		case PlaneModule::LargeBombBay: return "large_bomb_bay";
+		case PlaneModule::TorpedoPlane: return "torpedo_mounting";
+		case PlaneModule::Missile: return "guided_anti_ship_missile";
+		case PlaneModule::DeminingCoil: return "demining_coil";
+		case PlaneModule::DiveBrakes: return std::format("dive_brakes_{0}", PlaneType::typeToString(planeType));
+		case PlaneModule::Floats: return "floats";
+		case PlaneModule::FlyingBoat: return std::format("flying_boat_{0}", PlaneType::typeToString(planeType));
+		case PlaneModule::ArmorPlate: return std::format("armor_plate_{0}", PlaneType::typeToString(planeType));
+		case PlaneModule::NonStrategicMaterial: return std::format("non_strategic_materials_{0}", PlaneType::typeToString(planeType));
+		case PlaneModule::AirAirRadar:return std::format("air_air_radar_{0}", module.version + 1);
+		case PlaneModule::AirGroundRadar:return std::format("air_ground_radar_{0}", module.version + 1);
+		case PlaneModule::BombSight: return std::format("bomb_sights_{0}", module.version + 1);
+		case PlaneModule::RadioNavigation: return std::format("radio_navigation_{0}", module.version + 1);
+		case PlaneModule::LightMGDefense: return std::format("lmg_defense_turret{0}", module.number == 2 ? "2x" : "");
+		case PlaneModule::HeavyMGDefense: return std::format("hmg_defense_turret{0}", module.number == 2 ? "2x" : "");
+		case PlaneModule::CannonDefense: return std::format("cannon_defense_turret{0}", module.number == 2 ? "2x" : "");
+		case PlaneModule::DropTanks: return "drop_tanks";
+		case PlaneModule::ExtraFuelTanks: return std::format("fuel_tanks_{0}", PlaneType::typeToString(planeType));
+		case PlaneModule::SelfSealingTanks: return std::format("self_sealing_fuel_tanks_{0}", PlaneType::typeToString(planeType));
+			break;
 		default:
 			break;
 		}

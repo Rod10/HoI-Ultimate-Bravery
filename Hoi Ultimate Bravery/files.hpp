@@ -21,7 +21,6 @@ public:
     // to value in a (key-value) pairs
     static std::vector<std::pair<std::string, int> > sort(std::map<std::string, int>& M, std::string mode)
     {
-
         // Declare vector of pairs
         std::vector<std::pair<std::string, int> > A;
 
@@ -31,28 +30,30 @@ public:
             A.push_back(it);
         }
 
-        if (mode == "addition") {
+        /*if (mode == "addition") {
             // Sort using comparator function
             std::sort(A.begin(), A.end(), cmpA);
         }
         else {
             // Sort using comparator function
             std::sort(A.begin(), A.end(), cmpD);
-        }
+        }*/
+        std::sort(A.begin(), A.end(), cmpD);
 
-        std::cout << mode << std::endl;
+        /*std::cout << mode << std::endl;
         // Print the sorted value
         for (auto& it : A) {
 
             std::cout << it.first << ' '
                 << it.second << std::endl;
-        }
+        }*/
 
         return A;
     }
 
 
     static void generateCountryFile(Country* country, std::unordered_map<int, std::string> converterToGameName, bool debugMode) {
+        Country newCountry = Country(*country);
         std::vector < std::string > tempFile;
         std::string gamePath = Settings::getInstance()->getGamepath();
         std::string fileName = std::format("{0} - {1}.txt", country->tag, country->name);
@@ -69,14 +70,9 @@ public:
         }
         src.close();
 
-        int startMTG = country->coutriesSettings.dlcSettings.find("mtg")->second.linesToDeleteStart;
-        int startNSB = country->coutriesSettings.dlcSettings.find("nsb")->second.linesToDeleteStart;
-        int startBBA = country->coutriesSettings.dlcSettings.find("bba")->second.linesToDeleteStart;
-
-
-        makeOrder("deletion", &tempFile, country, converterToGameName);
+        makeOrder("deletion", &tempFile, &newCountry, converterToGameName);
         tempFile.insert(tempFile.begin() + country->coutriesSettings.ideaPos, "\tultimate_bravery");
-        makeOrder("addition", &tempFile, country, converterToGameName);
+        makeOrder("addition", &tempFile, &newCountry, converterToGameName);
 
         for (int i = 0; i < tempFile.size(); i++) {
             newFile << tempFile[i] << std::endl;
@@ -138,7 +134,7 @@ public:
     }
 
     static void makeOrder(std::string mode, std::vector<std::string>* tempFile, Country* country, std::unordered_map<int, std::string> converterToGameName) {
-        auto countriesSettings = country->coutriesSettings.dlcSettings;
+        auto& countriesSettings = country->coutriesSettings.dlcSettings;
 
         std::map<std::string, int> test;
 
@@ -152,22 +148,21 @@ public:
         for (auto& [dlc, dlcSettings] : dlcSettingsSorted) {
             auto& settings = countriesSettings.find(dlc)->second;
 
-            // Calcule l'offset en fonction de la valeur précédente
-            int offset = previousOffset;
-
-            int newLinesToDeleteStart = settings.linesToDeleteStart - 1;
-            int newLinesToDeleteEnd = settings.linesToDeleteEnd - 1;
-
             if (mode == "deletion") {
-                // Fait l'opération pour le démarrage actuel
-                remove(tempFile, country, dlc, newLinesToDeleteStart, newLinesToDeleteEnd, settings.lineToDeleteCount);
+                bool removed = remove(tempFile, country, dlc, settings.linesToDeleteStart - 1, settings.linesToDeleteEnd, settings.lineToDeleteCount);
+                if (removed) {
+                    if (i == 1) {
+                        countriesSettings.find(dlcSettingsSorted[i - 1].first)->second.linesToDeleteStart -= settings.lineToDeleteCount;
+                    }
+                    else if (i == 2) {
+                        countriesSettings.find(dlcSettingsSorted[0].first)->second.linesToDeleteStart -= settings.lineToDeleteCount;
+                        countriesSettings.find(dlcSettingsSorted[i - 1].first)->second.linesToDeleteStart -= settings.lineToDeleteCount;
+                    }
+                }
             }
             else if (mode == "addition") {
-                newLinesToDeleteStart = (settings.linesToDeleteStart - previousOffset) + i;
-                insert(tempFile, country, dlc, newLinesToDeleteStart, converterToGameName);
+                insert(tempFile, country, dlc, settings.linesToDeleteStart, converterToGameName);
             }
-            // Met à jour la valeur précédente
-            previousOffset += settings.lineToDeleteCount;
             i++;
         }
 
@@ -194,7 +189,7 @@ public:
         }*/
     }
 
-    static void remove(std::vector<std::string>* tempFile, Country* country, std::string dlc, int start, int end, int count) {
+    static bool remove(std::vector<std::string>* tempFile, Country* country, std::string dlc, int start, int end, int count) {
         if ((dlc == "mtg" && !country->shipList.empty())
             || (dlc == "nsb" && !country->tankList.empty())
             || (dlc == "bba" && !country->planeList.empty())) {
@@ -204,24 +199,46 @@ public:
                     count--;
                 }
             }
+            return true;
         }
+        return false;
     }
 
     static void insert(std::vector<std::string>* tempFile, Country* country, std::string dlc, int newLinesToDeleteStart, std::unordered_map<int, std::string> converterToGameName) {
         if (dlc == "mtg" && !country->shipList.empty()) {
             for (auto& [hull, ship] : country->shipList) {
-                std::ifstream templateFile("./Assets/Data/Files/ship_equipment_template.txt", std::ios::binary);
-                int index;
+                int index = 0;
                 std::string line;
-                std::vector<std::string> templateLine;
                 int counterTemplateLine = 0;
                 std::vector<std::string> replacementList{
-                    Hull::typeToString(ship.hull),
-                    ShipType::shipTypeToString(ship.type),
+                    "\tcreate_equipment_variant = {",
+                    std::format("\t\tname = {0}", Hull::typeToString(ship.hull)),
+                    std::format("\t\ttype = {0}", ShipType::shipTypeToString(ship.type)),
+                    "\t\tmodules = {"
                 };
 
                 for (auto& module : ship.fixedModule) {
-                    Module::moduleTypeToEquipmentString(module.type);
+                    std::string key = Module::moduleTypeToEquipmentString(module.type);
+                    std::string value = Module::typeToEquipmentFileValue(module, ship.hull, ship.type);
+                    std::cout << std::format("\t\t\t{0} = {1}", key, value) << std::endl;
+                    replacementList.push_back(std::format("\t\t\t{0} = {1}", key, value));
+                }
+
+                for (auto& module : ship.customModule) {
+                    std::string key = Module::customKeyEquipmentFile(ship.type, ship.version, index);
+                    if (!key.empty()) {
+                        std::string value = Module::typeToEquipmentFileValue(module, ship.hull, ship.type);
+                        replacementList.push_back(std::format("\t\t\t{0} = {1}", key, value));
+                        index++;
+                    }
+                }
+                replacementList.push_back("\t\t}");
+                replacementList.push_back("\t}");
+                for (int i = 0; i < tempFile->size(); i++) {
+                    if (i >= newLinesToDeleteStart && counterTemplateLine < replacementList.size()) {
+                        tempFile->insert(tempFile->begin() + i, replacementList[counterTemplateLine]);
+                        counterTemplateLine++;
+                    }
                 }
             }
         }
@@ -278,7 +295,47 @@ public:
             }
         }
         else if (dlc == "bba" && !country->planeList.empty()) {
-            tempFile->insert(tempFile->begin() + newLinesToDeleteStart, "plane");
+            for (auto& [role, plane] : country->planeList) {
+                int index = 0;
+                std::string line;
+                int counterTemplateLine = 0;
+                std::vector<std::string> replacementList{
+                    "\tcreate_equipment_variant = {",
+                    std::format("\t\tname = {0}", PlaneRole::roleToString(plane.role)),
+                    std::format("\t\ttype = {0}", PlaneType::typeToString(plane.type)),
+                    "\t\tmodules = {",
+                };
+
+                for (auto& module : plane.fixed) {
+                    std::string key;
+                    std::string value = PlaneModule::moduleToEquipmentStringValue(module, plane.type);
+                    if (module.type == PlaneModule::None) {
+                        value = "empty";
+                    }
+                    if (index == 0) key = "fixed_main_weapon_slot";
+                    else key = std::format("fixed_auxiliary_weapon_slot_{0}", index);
+                    replacementList.push_back(std::format("\t\t\t{0} = {1}", key, value));
+                    index++;
+                }
+
+                replacementList.push_back(std::format("\t\t\tengine_type_slot = {0}", PlaneEngine::engineToEquipmentValueString(plane.engine)));
+                index = 1;
+                for (auto& module : plane.fixed) {
+                    std::string key = std::format("special_type_slot_{0}", index);
+                    std::string value;
+                    replacementList.push_back(std::format("\t\t\t{0} = {1}", key, value));
+                    index++;
+                }
+
+                replacementList.push_back("\t\t}");
+                replacementList.push_back("\t}");
+                for (int i = 0; i < tempFile->size(); i++) {
+                    if (i >= newLinesToDeleteStart && counterTemplateLine < replacementList.size()) {
+                        tempFile->insert(tempFile->begin() + i, replacementList[counterTemplateLine]);
+                        counterTemplateLine++;
+                    }
+                }
+            }
         }
     }
 };

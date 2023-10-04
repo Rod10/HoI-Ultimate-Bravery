@@ -50,7 +50,7 @@ std::vector<Module> Ship::generateFixedModule(ShipType::Type type, ShipVersion::
         modules.push_back(Module::generateModule(Module::Type::RadarSonar, type, version));
         modules.push_back(Module::generateModule(Module::Type::Torpedo, type, version));
         modules.push_back(Module::generateModule(Module::Type::Engine, type, version));
-        modules.push_back(Module::generateNone(Module::Type::None));
+        modules.push_back(Module::generateNone(Module::Type::Armor, Module::SubType::Empty));
     }
     if (type == ShipType::LightCruiser) {
         modules.push_back(Module::generateModule(Module::Type::LightBattery, type, version));
@@ -81,7 +81,7 @@ std::vector<Module> Ship::generateFixedModule(ShipType::Type type, ShipVersion::
     }
     if (type == ShipType::Battleship) {
         modules.push_back(Module::generateModule(Module::Type::HeavyBattery, type, version));
-        modules.push_back( Module::generateModule(Module::Type::AntiAir, type, version));
+        modules.push_back(Module::generateModule(Module::Type::AntiAir, type, version));
         modules.push_back(Module::generateModule(Module::Type::FireControl, type, version));
         modules.push_back(Module::generateModule(Module::Type::RadarSonar, type, version));
         modules.push_back(Module::generateModule(Module::Type::Engine, type, version));
@@ -90,7 +90,7 @@ std::vector<Module> Ship::generateFixedModule(ShipType::Type type, ShipVersion::
     }
     if (type == ShipType::SuperHeavyBattleship) {
         modules.push_back(Module::generateModule(Module::Type::HeavyBattery, type, version));
-        modules.push_back( Module::generateModule(Module::Type::AntiAir, type, version));
+        modules.push_back(Module::generateModule(Module::Type::AntiAir, type, version));
         modules.push_back(Module::generateModule(Module::Type::FireControl, type, version));
         modules.push_back(Module::generateModule(Module::Type::RadarSonar, type, version));
         modules.push_back(Module::generateModule(Module::Type::Engine, type, version));
@@ -104,16 +104,16 @@ std::vector<Module> Ship::generateFixedModule(ShipType::Type type, ShipVersion::
         modules.push_back(Module::generateModule(Module::Type::RadarSonar, type, version));
         modules.push_back(Module::generateModule(Module::Type::Engine, type, version));
         modules.push_back(Module::generateModule(Module::Type::SecondaryBattery, type, version));
-        modules.push_back(Module::generateNone(Module::Type::None));
+        modules.push_back(Module::generateNone(Module::Type::Armor, Module::SubType::Empty));
     }
     if (type == ShipType::Submarine) {
         modules.push_back(Module::generateModule(Module::Type::Torpedo, type, version));
         modules.push_back(Module::generateModule(Module::Type::Engine, type, version));
-        modules.push_back(Module::generateNone(Module::Type::None));
-        modules.push_back(Module::generateNone(Module::Type::None));
-        modules.push_back(Module::generateNone(Module::Type::None));
-        modules.push_back(Module::generateNone(Module::Type::None));
-        modules.push_back(Module::generateNone(Module::Type::None));
+        modules.push_back(Module::generateNone(Module::Type::Armor, Module::SubType::Empty));
+        modules.push_back(Module::generateNone(Module::Type::SecondaryBattery, Module::SubType::Empty));
+        modules.push_back(Module::generateNone(Module::Type::RadarSonar, Module::SubType::Empty));
+        modules.push_back(Module::generateNone(Module::Type::FireControl, Module::SubType::Empty));
+        modules.push_back(Module::generateNone(Module::Type::AntiAir, Module::SubType::Empty));
     }
     return modules;
 }

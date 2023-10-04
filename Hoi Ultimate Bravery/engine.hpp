@@ -74,6 +74,19 @@ public:
 	PlaneEngine::Version version;
 	int number;
 
+	static std::string typeToString(PlaneEngine::Type type) {
+		switch (type)
+		{
+		case PlaneEngine::Prop: return "";
+		case PlaneEngine::Jet: return "jet_";
+		case PlaneEngine::Rocket: return "rocket_";
+		case PlaneEngine::TLast:
+			break;
+		default:
+			break;
+		}
+	}
+
 	static PlaneEngine::Type stringToType(std::string type) {
 		if (type == "prop") return Prop;
 		if (type == "jet") return Jet;
@@ -96,6 +109,11 @@ public:
 		default:
 			break;
 		}
+	}
+
+	static std::string engineToEquipmentValueString(PlaneEngine engine) {
+		std::string multiple = engine.type != PlaneEngine::Rocket ? "x" : "";
+		return std::format("{0}engine_{1}{2}", PlaneEngine::typeToString(engine.type), engine.number, multiple);
 	}
 
 	static PlaneEngine generateRandom(PlaneType::Type type);

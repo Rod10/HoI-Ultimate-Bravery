@@ -426,7 +426,7 @@ void Renderer::renderStats(bool windowOpen, Ship ship, std::map<Hull::Type, std:
     index = 0;
     for (auto& module : ship.fixedModule) {
         std::string fileName;
-        if (module.type == Module::None) {
+        if (module.subType == Module::Empty) {
             fileName = "none";
         }
         else {
@@ -575,7 +575,7 @@ void Renderer::renderStats(bool windowOpen, Plane plane, std::map<PlaneType::Typ
     setIcon(ImGui::GetCursorPosY() - 20.0f, ImGui::GetCursorPosX() + 325.0f, PlaneType::typeToString(plane.type), planeIconNames.find(plane.type)->second, UnitType::Type::Plane);
 
     int index = 0;
-    for (auto& module : plane.custom) {
+    for (auto& module : plane.fixed) {
         std::string fileName;
         if (module.type == PlaneModule::Type::None) {
             fileName = "none";
