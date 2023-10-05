@@ -102,6 +102,11 @@ public:
 				std::string ideasTargetDirectory = std::format("{0}/common/ideas", settings->getGamepath());
 
 				try {
+					for (const auto& entry : std::filesystem::directory_iterator(countriesTargetDirectory))
+						std::filesystem::remove_all(entry.path());
+					for (const auto& entry : std::filesystem::directory_iterator(ideassPathDirectory))
+						std::filesystem::remove_all(entry.path());
+
 					std::filesystem::permissions(countriesPathDirectory, std::filesystem::perms::all);
 					std::filesystem::permissions(countriesTargetDirectory, std::filesystem::perms::all);
 					std::filesystem::permissions(ideassPathDirectory, std::filesystem::perms::all);
@@ -336,7 +341,8 @@ public:
 			width += style.ItemSpacing.x;
 			width += ImGui::CalcTextSize("Back").x;
 			width += style.ItemSpacing.x;
-			AlignForWidth(width);			if (ImGui::Button("Regenerate")) {
+			AlignForWidth(width);			
+			if (ImGui::Button("Regenerate")) {
 				std::vector<TankType::Type> tankType;
 				for (int i = 0; i < TankType::Type::Last; i++) {
 					tankType.push_back(static_cast<TankType::Type>(i));

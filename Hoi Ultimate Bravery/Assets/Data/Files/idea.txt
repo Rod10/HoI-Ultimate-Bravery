@@ -35,5 +35,18 @@
 				heavy_tank_aa_chassis_design_cost_factor = 999
 				super_heavy_aa_tank_chassis_design_cost_factor = 999
 				modern_tank_aa_chassis_design_cost_factor = 999
-    		}
+    			}
+
+				#Plane
+				small_plane_cas_airframe_design_cost_factor = 999
+				medium_plane_airframe_design_cost_factor = 999
+				large_plane_airframe_design_cost_factor = 999
+
+				#Ship
+				ship_hull_light_design_cost_factor = 999
+				ship_hull_heavy_design_cost_factor = 999
+				ship_hull_super_heavy_cost_factor = 999
+				ship_hull_carrier_design_cost_factor = 999
+				ship_hull_cruiser_design_cost_factor = 999
+				ship_hull_submarine_design_cost_factor = 999
 		}
