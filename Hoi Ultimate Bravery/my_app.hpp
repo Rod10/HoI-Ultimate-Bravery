@@ -104,7 +104,7 @@ public:
 				try {
 					for (const auto& entry : std::filesystem::directory_iterator(countriesTargetDirectory))
 						std::filesystem::remove_all(entry.path());
-					for (const auto& entry : std::filesystem::directory_iterator(ideassPathDirectory))
+					for (const auto& entry : std::filesystem::directory_iterator(ideasTargetDirectory))
 						std::filesystem::remove_all(entry.path());
 
 					std::filesystem::permissions(countriesPathDirectory, std::filesystem::perms::all);
@@ -191,10 +191,12 @@ public:
 				if (allCountries) {
 					for (Country country : countryList) {
 						Files::generateCountryFile(&country, converterToGameName, debugMode);
+						Files::generateIdeaFile(&country);
 					}
 				}
 				else {
 					Files::generateCountryFile(country, converterToGameName, debugMode);
+					Files::generateIdeaFile(country);
 				}
 			}
 			if (Renderer::createButtonWithPosition("Back", Constant::Position::MIDDLE)) {

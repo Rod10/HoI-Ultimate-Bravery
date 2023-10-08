@@ -72,5 +72,23 @@ public:
 		case Hull::Submarine: return Submarine;
 		}
 	}
+
+	static std::string typeToEquipmentString(ShipType::Type type) {
+		switch (type)
+		{
+		case ShipType::Destroyer: return "light";
+		case ShipType::LightCruiser: return "cruiser";
+		case ShipType::HeavyCruiser: return "cruiser";
+		case ShipType::Battlecruiser: return "heavy";
+		case ShipType::Battleship: return "heavy";
+		case ShipType::SuperHeavyBattleship: return "heavy";
+		case ShipType::Carrier: return "carrier";
+		case ShipType::Submarine: return "submarine";
+		case ShipType::Last:
+			break;
+		default:
+			break;
+		}
+	}
 };
 

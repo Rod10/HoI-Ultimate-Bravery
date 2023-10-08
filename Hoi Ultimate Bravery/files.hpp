@@ -57,18 +57,19 @@ public:
         std::vector < std::string > tempFile;
         std::string gamePath = Settings::getInstance()->getGamepath();
         std::string fileName = std::format("{0} - {1}.txt", country->tag, country->name);
+        std::string backUpFilePath = std::format("./Assets/Data/Files/Back-Up/countries/{1}", gamePath, fileName);
         std::string filePath = std::format("{0}/history/countries/{1}", gamePath, fileName);
 
         std::string newFilePath = "./Assets/Data/Files/NewFiles/countries/";
         std::ofstream newFile(std::format("{0}{1}", newFilePath, fileName), std::ios::binary);
 
-        std::ifstream src(filePath, std::ios::binary);
+        std::ifstream backUpSrc(backUpFilePath, std::ios::binary);
         std::string line;
 
-        while (std::getline(src, line)) {
+        while (std::getline(backUpSrc, line)) {
             tempFile.push_back(line);
         }
-        src.close();
+        backUpSrc.close();
 
         makeOrder("deletion", &tempFile, &newCountry, converterToGameName);
         tempFile.insert(tempFile.begin() + country->coutriesSettings.ideaPos, "\tultimate_bravery");
@@ -81,60 +82,66 @@ public:
 
         const auto copyOptions = std::filesystem::copy_options::update_existing
             | std::filesystem::copy_options::recursive;
-        //std::filesystem::copy_file(std::format("{0}{1}", newFilePath, fileName), filePath, copyOptions);
+
+        std::filesystem::remove(filePath);
+
+        std::filesystem::copy_file(std::format("{0}{1}", newFilePath, fileName), filePath, copyOptions);
     
     }
 
-    static void generateIdeaFile(Country country) {
-       /* std::vector<std::string< fileLines;
+    static void generateIdeaFile(Country* country) {
+        std::vector <std::string> tempFile;
+        std::string fileNameCountry = std::format("{0}.txt", country->name);
+        std::string fileNameTag = std::format("{0}.txt", country->tag);
+        std::string fileName;
+        if (std::filesystem::exists(fileNameCountry)) {
+            fileName = fileNameCountry;
+        }
+        else {
+            fileName = fileNameTag;
+        }
+
         std::string gamePath = Settings::getInstance()->getGamepath();
-        std::string fileName = std::format("{0}.txt", country->tag, country->name);
-        std::string filePath = std::format("{0}\\common\\ideas\\{1}", gamePath, fileName);
-        std::string backupFilePath = std::format("{0}\\history\\countries\\{1}.back", gamePath, fileName);
+        std::string filePath = std::format("{0}/common/ideas/{1}", gamePath, fileName);
+        std::string backUpFilePath = std::format("./Assets/Data/Files/Back-Up/ideas/{1}", gamePath, fileName);
 
-        std::ifstream  src(filePath, std::ios::binary);
-        std::ofstream  backUp(std::format("/Assets/Data/{0}.back", fileName), std::ios::binary);
-        std::ofstream  newFile(std::format("/Assets/Data/{0}", fileName), std::ios::binary);
+        std::string newFilePath = "./Assets/Data/Files/NewFiles/Ideas/";
+        std::ofstream newFile(std::format("{0}{1}", newFilePath, fileName), std::ios::binary);
+
+        std::ifstream src(filePath, std::ios::binary);
+        std::ifstream backUpSrc(backUpFilePath, std::ios::binary);
         std::string line;
-        while (std::getline(src, line)) {
-            fileLines.push_back(line);
-        }
-        src.close();
-        if (std::rename(filePath.c_str(),
-            backupFilePath.c_str()) != 0)
-            perror("Error moving file");
-        else
-            std::cout << "File moved successfully" << std::endl;
 
-        for (auto& line : fileLines) {
-            backUp << line << std::endl;
+        while (std::getline(backUpSrc, line)) {
+            tempFile.push_back(line);
         }
-        backUp.close();
+        backUpSrc.close();
+
         int linesToAddStart = country->ideaPosIdea;
         int counterTemplateLine = 0;
-        std::vector<std::string< newLines;
-        std::ifstream ideaFile(std::format("/Assets/Data/{0}", fileName), std::ios::binary);
+        std::vector<std::string> newLines;
+        std::ifstream ideaFile("./Assets/Data/Files/idea.txt", std::ios::binary);
         while (std::getline(ideaFile, line)) {
             newLines.push_back(line);
-        }
-        for (int i = 0; i < fileLines.size(); i++) {
-            if (i <= linesToAddStart && counterTemplateLine < newLines.size()) {
-                fileLines.insert(fileLines.begin() + i, newLines[counterTemplateLine]);
+        }        
+        for (int i = 0; i < tempFile.size(); i++) {
+            if (i >= linesToAddStart && counterTemplateLine < newLines.size()) {
+                tempFile.insert(tempFile.begin() + i, newLines[counterTemplateLine]);
                 counterTemplateLine++;
             }
         }
 
-        for (int i = 0; i < fileLines.size(); i++) {
-            newFile << fileLines[i] << std::endl;
+        for (int i = 0; i < tempFile.size(); i++) {
+            newFile << tempFile[i] << std::endl;
         }
         newFile.close();
-        if (std::rename(std::format("/Assets/Data/{0}", fileName).c_str(),
-            filePath.c_str()) != 0) {
-            perror("Error moving file");
-        }
-        else {
-            std::cout << "File moved successfully" << std::endl;
-        };*/
+
+        const auto copyOptions = std::filesystem::copy_options::update_existing
+            | std::filesystem::copy_options::recursive;
+
+        std::filesystem::remove(filePath);
+
+        std::filesystem::copy_file(std::format("{0}{1}", newFilePath, fileName), filePath, copyOptions);
     }
 
     static void makeOrder(std::string mode, std::vector<std::string>* tempFile, Country* country, std::unordered_map<int, std::string> converterToGameName) {
@@ -217,7 +224,7 @@ public:
                 std::vector<std::string> replacementList{
                     "\tcreate_equipment_variant = {",
                     std::format("\t\tname = {0}", Hull::typeToString(ship.hull)),
-                    std::format("\t\ttype = {0}", ShipType::shipTypeToString(ship.type)),
+                    std::format("\t\ttype = {0}", std::format("ship_hull_{0}_{1}", ShipType::typeToEquipmentString(ship.type), ShipVersion::versionToFileString(ship.version))),
                     "\t\tmodules = {"
                 };
 
