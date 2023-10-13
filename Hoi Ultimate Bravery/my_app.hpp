@@ -73,61 +73,36 @@ public:
 		ImGui::PopStyleColor();
 		ImGui::PopFont();
 
-		float testMiddle = ImGui::GetWindowWidth() / 2.0f;
-
-		auto off = Renderer::calculatePos(testMiddle, "generate");
+		float testMiddle = ImGui::GetWindowWidth() / 6.0f;
 
 		// Main Menu Block
 		if (mainMenuOpen) {
-			ImGui::SetNextWindowPos(ImVec2(testMiddle, 200.0f));
+			ImGui::SetNextWindowPos(ImVec2(150.0f, 200.0f));
 			ImGui::PushStyleColor(ImGuiCol_WindowBg, windowColor);
-			ImGui::Begin("generate", &mainMenuOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
+			ImGui::Begin("mainMenu", &mainMenuOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
 			ImGui::PopStyleColor();
 			ImGui::PushFont(basicFont);
 			ImGui::PushStyleColor(ImGuiCol_Button, buttonColor);
-			if (Renderer::createButtonWithPosition(getLocalizedString("generate"), Constant::Position::MIDDLE)) {
-				mainMenuOpen = false;
-				generateWindowOpen = true;
-			}
-			if (Renderer::createButtonWithPosition(getLocalizedString("options"), Constant::Position::MIDDLE)) {
-				mainMenuOpen = false;
-				optionWindowOpen = true;
-			}
-			if (Renderer::createButtonWithPosition(getLocalizedString("quit"), Constant::Position::MIDDLE)) {
-				//countries files
-				std::string countriesPathDirectory = "./Assets/Data/Files/Back-Up/countries";
-				std::string countriesTargetDirectory = std::format("{0}/history/countries", settings->getGamepath());
-				//idea files
-				std::string ideassPathDirectory = "./Assets/Data/Files/Back-Up/ideas";
-				std::string ideasTargetDirectory = std::format("{0}/common/ideas", settings->getGamepath());
-
-				try {
-					for (const auto& entry : std::filesystem::directory_iterator(countriesTargetDirectory))
-						std::filesystem::remove_all(entry.path());
-					for (const auto& entry : std::filesystem::directory_iterator(ideasTargetDirectory))
-						std::filesystem::remove_all(entry.path());
-
-					std::filesystem::permissions(countriesPathDirectory, std::filesystem::perms::all);
-					std::filesystem::permissions(countriesTargetDirectory, std::filesystem::perms::all);
-					std::filesystem::permissions(ideassPathDirectory, std::filesystem::perms::all);
-					std::filesystem::permissions(ideasTargetDirectory, std::filesystem::perms::all);
-					const auto copyOptions = std::filesystem::copy_options::update_existing
-						| std::filesystem::copy_options::recursive;
-					std::filesystem::copy(countriesPathDirectory, countriesTargetDirectory, copyOptions);
-					std::filesystem::copy(ideassPathDirectory, ideasTargetDirectory, copyOptions);
-					exit(1);
-				}
-				catch (std::exception& e) // Not using fs::filesystem_error since std::bad_alloc can throw too.  
-				{
-					std::cout << e.what();
-				}
-			}
+			Renderer::renderButtonBlock(&windowButton, &windowOpened, &subWindow, 150.0f);
 			ImGui::PopStyleColor();
 			ImGui::PopFont();
 			ImGui::End();
 		}
 		// Main Menu Block
+		
+		if (windowOpened.find("mainMenu")->second == false) {
+			ImGui::SetNextWindowPos(ImVec2(760.0f, 200.0f));
+			ImGui::PushStyleColor(ImGuiCol_WindowBg, greyWindowColor);
+			ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
+			ImGui::Begin("generate", &mainMenuOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar);
+			Renderer::renderSubWindow(&subWindow);
+			ImGui::PopStyleColor();
+			ImGui::End();
 
+		}
+		
+		
+		/*
 		// Generate Menu
 		if (generateWindowOpen) {
 			auto off = Renderer::calculatePos(
@@ -556,7 +531,7 @@ public:
 
 		// Options
 		if (optionWindowOpen) {
-			off = Renderer::calculatePos(Constant::Position::MIDDLE, 250);
+			auto off = Renderer::calculatePos(Constant::Position::MIDDLE, 250);
 			ImGui::SetNextWindowPos(ImVec2(off, 200.0f));
 			ImGui::Begin("options", &optionWindowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
 			Renderer::createLabelWithPosition("Options", Constant::Position::MIDDLE);
@@ -665,7 +640,7 @@ public:
 			ImGui::End();
 		}
 		// Options
-
+		*/
 		ImGui::End();
 	}
 
@@ -696,6 +671,13 @@ private:
 	bool modWindowOpen = false;
 	bool designerShipWindowOpen = false;
 	bool designerPlaneWindowOpen = false;
+	bool importWindowOpen = false;
+
+	std::string windowButton = "mainMenu";
+	std::string subWindow = "tank";
+	std::map < std::string, bool > windowOpened {
+		{"mainMenu", true},
+	};
 
 	bool mtg = settings->getDlcOwned("mtg");
 	bool nsb = settings->getDlcOwned("nsb");
@@ -715,6 +697,7 @@ private:
 
 	ImVec4 backgroundColor = ImVec4(0.831f, 0.902f, 0.945f, 1.00f);
 	ImVec4 windowColor = ImVec4(0.149f, 0.137f, 0.125f, 1.00f);
+	ImVec4 greyWindowColor = ImVec4(0.851f, 0.851f, 0.851f, 1.00f);
 	ImVec4 buttonColor = ImVec4(0.231f, 0.255f, 0.224f, 1.00f);
 
 	const char* getLocalizedString(std::string text) {

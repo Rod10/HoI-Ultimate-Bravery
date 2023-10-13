@@ -14,6 +14,7 @@ Icon* Icon::GetInstance()
 		std::map<std::string, std::map<std::string, Texture>> tankModulesTextures;
 		std::map<std::string, std::map<std::string, Texture>> shipModulesTextures;
 		std::map<std::string, std::map<std::string, Texture>> planeModulesTextures;
+		std::map<std::string, std::map<std::string, Texture>> othersTextures;
 
 		std::string fileName = std::format("./Assets/Images/Background/tank_designer_bg.png");
 		bool ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
@@ -443,7 +444,6 @@ Icon* Icon::GetInstance()
 			}
 		}
 
-
 		path = "./Assets/Images/Plane/Modules/";
 		for (auto& p : std::filesystem::recursive_directory_iterator(path)) {
 			if (p.is_directory()) {
@@ -470,7 +470,20 @@ Icon* Icon::GetInstance()
 
 		planeModulesTextures.insert(std::pair<std::string, std::map<std::string, Texture>>("modules", textureCategory));
 
-		icon_ = new Icon(tankIconTextures, tankModulesTextures, shipIconTextures, shipModulesTextures, planeModulesTextures, planeIconTextures);
+		path = "./Assets/Images/Button/";
+		for (const auto& entry : std::filesystem::directory_iterator(path)) {
+			const std::string imagePath = entry.path().string();
+			ret = Utils::LoadTextureFromFile(imagePath.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+			IM_ASSERT(ret);
+			texture = Texture(my_image_width, my_image_height, my_image_texture);
+			std::string base_filename = imagePath.substr(imagePath.find_last_of("/\\") + 1);
+			std::string::size_type const p(base_filename.find_last_of('.'));
+			std::string file_without_extension = base_filename.substr(0, p);
+			textureCategory.insert(std::pair<std::string, Texture>(file_without_extension, texture));
+		}
+		othersTextures.insert(std::pair<std::string, std::map<std::string, Texture>>("icons", textureCategory));
+
+		icon_ = new Icon(tankIconTextures, tankModulesTextures, shipIconTextures, shipModulesTextures, planeModulesTextures, planeIconTextures, othersTextures);
 	}
 	return icon_;
 }
@@ -540,4 +553,8 @@ Texture Icon::getPlaneModulesTextures(std::string type, std::string name)
 
 Texture Icon::getPlaneIconTextures(std::string type, std::string name) {
 	return planeIconTextures_.find(type)->second.find(name)->second;
+}
+
+Texture Icon::getOthersTextures(std::string type, std::string name) {
+	return othersTextures_.find(type)->second.find(name)->second;
 }
