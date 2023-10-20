@@ -469,6 +469,7 @@ Icon* Icon::GetInstance()
 		textureCategory.insert(std::pair<std::string, Texture>("none", texture));
 
 		planeModulesTextures.insert(std::pair<std::string, std::map<std::string, Texture>>("modules", textureCategory));
+		textureCategory.clear();
 
 		path = "./Assets/Images/Button/";
 		for (const auto& entry : std::filesystem::directory_iterator(path)) {

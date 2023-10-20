@@ -118,23 +118,28 @@ void Renderer::createTitleWithPosition(const char* label, float x, float y)
 	return ImGui::Text(label);
 }
 
-void renderMainMenuButtonBlock(std::map<std::string, bool>* windowOpened, std::string* window, float pos) {
+void renderMainMenuButtonBlock(float pos) {
+	auto windowsManagement = WindowsManagement::GetInstance();
 	Settings* settings = Settings::getInstance();
 	if (Renderer::createButtonWithSize("Generate", ImVec2(365.0f, 75.0f))) {
-		windowOpened->find("mainMenu")->second = false;
-		*window = "generate";
+		windowsManagement->setButtons("mainMenu", false);
+		windowsManagement->setButtons("generate", true);
+		windowsManagement->setSubWindow("generate", true);
 	}
 	if (Renderer::createButtonWithSize("Import", ImVec2(365.0f, 75.0f))) {
-		windowOpened->find("mainMenu")->second = false;
-		*window = "import";
+		windowsManagement->setButtons("mainMenu", false);
+		windowsManagement->setButtons("import", true);
+		windowsManagement->setSubWindow("import", true);
 	}
 	if (Renderer::createButtonWithSize("Multiplayer", ImVec2(365.0f, 75.0f))) {
-		windowOpened->find("mainMenu")->second = false;
-		*window = "multiplayer";
+		windowsManagement->setButtons("mainMenu", false);
+		windowsManagement->setButtons("multiplayer", true);
+		windowsManagement->setSubWindow("multiplayer", true);
 	}
 	if (Renderer::createButtonWithSize("Options", ImVec2(365.0f, 75.0f))) {
-		windowOpened->find("mainMenu")->second = false;
-		*window = "options";
+		windowsManagement->setButtons("mainMenu", false);
+		windowsManagement->setButtons("options", true);
+		windowsManagement->setSubWindow("options", true);
 	}
 	if (Renderer::createButtonWithSize("Quit", ImVec2(365.0f, 75.0f))) {
 		//countries files
@@ -167,64 +172,190 @@ void renderMainMenuButtonBlock(std::map<std::string, bool>* windowOpened, std::s
 	}
 }
 
-void renderGenerateButtonBlock(std::string* window, std::string* subWindow, std::map<std::string, bool>* windowOpened) {
+void renderGenerateButtonBlock() {
+	WindowsManagement* windowsManagement = WindowsManagement::GetInstance();
 	ImGuiIO& io = ImGui::GetIO();
 	float my_tex_w = (float)io.Fonts->TexWidth;
 	float my_tex_h = (float)io.Fonts->TexHeight;
 
-	Texture texture = Icon::GetInstance()->getOthersTextures("icons", "Modern_tank");
-	ImVec2 size = ImVec2(100.0f, 75.0f);                         // Size of the image we want to make visible
-	ImVec2 uv0 = ImVec2(0.0f, 0.0f);                            // UV coordinates for lower-left
-	ImVec2 uv1 = ImVec2(1.0f, 1.0f);
-	//ImVec2 uv1 = ImVec2(100.0f / my_tex_w, 75.0f / my_tex_h);    // UV coordinates for (32,32) in our texture
-	ImVec4 bg_col = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);             // Black background
-	ImVec4 tint_col = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);           // No tint
+	std::unordered_map<UnitType::Type, std::string> icons {
+		{UnitType::Tank, "Modern_tank_button"},
+		{UnitType::Plane, "Air_Support"},
+		{UnitType::Ship, "Hold"},
+		{UnitType::Infantry, "Infantry"},
+	};
+	UnitType::Type prevType = static_cast<UnitType::Type>(NULL);
+	for (auto& [type, icon] : icons) {
+		Texture texture = Icon::GetInstance()->getOthersTextures("icons", icon);
+		ImVec2 size = ImVec2(texture.my_image_width, texture.my_image_height);                         // Size of the image we want to make visible
+		ImVec2 uv0 = ImVec2(0.0f, 0.0f);                            // UV coordinates for lower-left
+		ImVec2 uv1 = ImVec2(1.0f, 1.0f);
+		//ImVec2 uv1 = ImVec2(100.0f / my_tex_w, 75.0f / my_tex_h);    // UV coordinates for (32,32) in our texture
+		ImVec4 bg_col = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);             // Black background
+		ImVec4 tint_col = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
 
-
-	if (ImGui::ImageButton("Tank", (void*)(intptr_t)texture.my_image_texture, size, uv0, uv1, bg_col, tint_col)) {
-		std::cout << "test" << std::endl;
-	}
-	
-	if (Renderer::createButtonWithSize("Tank", ImVec2(365.0f, 75.0f))) {
-		*subWindow = "tank";
-	}
-	if (Renderer::createButtonWithSize("Plane", ImVec2(365.0f, 75.0f))) {
-		*subWindow = "plane";
-	}
-	if (Renderer::createButtonWithSize("Ship", ImVec2(365.0f, 75.0f))) {
-		*subWindow = "ship";
-	}
-	if (Renderer::createButtonWithSize("Infantry", ImVec2(365.0f, 75.0f))) {
-		*subWindow = "infantry";
+		if (ImGui::ImageButton(UnitType::typeToString(type).c_str(), (void*)(intptr_t)texture.my_image_texture, size, uv0, uv1, bg_col, tint_col)) {
+			windowsManagement->setTypeSubWindow(type, true);
+			if (prevType != NULL) windowsManagement->setTypeSubWindow(prevType, true);
+			prevType = type;
+		}
 	}
 	if (Renderer::createButtonWithSize("Back", ImVec2(365.0f, 75.0f))) {
-		*subWindow = "tank";
-		*window = "mainMenu";
-		windowOpened->find("mainMenu")->second = true;
+		windowsManagement->setButtons("mainMenu", true);
+		windowsManagement->setButtons("generate", false);
+		windowsManagement->setSubWindow("generate", false);
 	}
 }
 
-void Renderer::renderButtonBlock(std::string* window, std::map<std::string, bool>* windowOpened, std::string*subWindow, float pos)
+void renderMultiplayerButtonBlock() {
+	WindowsManagement* windowsManagement = WindowsManagement::GetInstance();
+	if (Renderer::createButtonWithSize("Back", ImVec2(365.0f, 75.0f))) {
+		windowsManagement->setButtons("mainMenu", true);
+		windowsManagement->setButtons("multiplayer", false);
+		windowsManagement->setSubWindow("multiplayer", false);
+	}
+}
+
+void renderOptionsButtonBlock() {
+	WindowsManagement* windowsManagement = WindowsManagement::GetInstance();
+	if (Renderer::createButtonWithSize("Back", ImVec2(365.0f, 75.0f))) {
+		windowsManagement->setButtons("mainMenu", true);
+		windowsManagement->setButtons("options", false);
+		windowsManagement->setSubWindow("options", false);
+	}
+}
+
+void Renderer::renderButtonBlock(float pos)
 {
+	std::string window;
+	for (auto& it : WindowsManagement::GetInstance()->getButtons()) {
+		if (it.second == true) {
+			window = it.first;
+		}
+	}
 	ImGuiIO& io = ImGui::GetIO();
 	ImFont* basicFont = io.Fonts->Fonts[5];
 	ImGui::PushFont(basicFont);
-	if (*window == "mainMenu") {
-		renderMainMenuButtonBlock(windowOpened, window, pos);
+	if (window == "mainMenu") {
+		renderMainMenuButtonBlock(pos);
 	}
-	else if (*window == "generate") {
-		renderGenerateButtonBlock(window, subWindow, windowOpened);
+	else if (window == "generate" || window == "import") {
+		renderGenerateButtonBlock();
+	}
+	else if (window == "multiplayer") {
+		renderMultiplayerButtonBlock();
+	}
+	else if (window == "options") {
+		renderOptionsButtonBlock();
 	}
 	ImGui::PopFont();
 }
 
-void Renderer::renderSubWindow(std::string* subWindow) {
+void renderGenerateImportSubWindow() {
+	WindowsManagement* windowsManagement = WindowsManagement::GetInstance();
+	UnitType::Type unitType;
+	for (auto& it : windowsManagement->getTypeSubWindow()) {
+		if (it.second == true) {
+			unitType = it.first;
+		}
+	}
+	CountryList* countryList = CountryList::GetInstance();
+	Country country = countryList->getList()[0];
+	ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+	std::map<UnitType::Type, std::vector<std::string>> icons {
+		{
+			UnitType::Tank, {"Light_tank", "Medium_tank", "Heavy_tank", "Super_heavy_tank", "Modern_tank"}
+		}
+	};
+	if (ImGui::BeginTable("table1", 3))
+	{
+		for (int row = 0; row < 4; row++)
+		{
+			ImGui::TableNextRow();
+			for (int column = 0; column < 3; column++)
+			{
+				ImGui::TableSetColumnIndex(column);
+				if (row == 0) {
+					Texture texture = Icon::GetInstance()->getOthersTextures("icons", icons.find(unitType)->second[column]);
+					ImVec2 size = ImVec2(texture.my_image_width, texture.my_image_height);                         // Size of the image we want to make visible
+					ImVec2 uv0 = ImVec2(0.0f, 0.0f);                            // UV coordinates for lower-left
+					ImVec2 uv1 = ImVec2(1.0f, 1.0f);
+					//ImVec2 uv1 = ImVec2(100.0f / my_tex_w, 75.0f / my_tex_h);    // UV coordinates for (32,32) in our texture
+					ImVec4 bg_col = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);             // Black background
+					ImVec4 tint_col = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
+					if (ImGui::ImageButton(icons.find(unitType)->second[column].c_str(), (void*)(intptr_t)texture.my_image_texture, size, uv0, uv1, bg_col, tint_col)) {
+						std::any newUnit;
+						switch (unitType)
+						{
+						case UnitType::Ship: 
+							newUnit = std::make_any<Ship&>(Ship::generateRandomShip(static_cast<Hull::Type>(row)));
+							break;
+						case UnitType::Tank: 
+							newUnit = std::make_any<Tank&>(Tank::generateRandomTank(static_cast<TankType::Type>(row)));
+							break;
+						case UnitType::Plane: 
+							newUnit = std::make_any<Plane&>(Plane::generateRandomPlane(static_cast<PlaneRole::Role>(row)));
+							break;
+						default:
+							break;
+						}
+						auto test = std::any_cast<Tank>(newUnit);
+						country.setNewUnits(unitType, newUnit);
+					}
+				}
+				else {
+					ImGui::Text("Row %d Column %d", row, column);
+				}
+			}
+		}
+		ImGui::EndTable();
+	}
+	ImGui::SetCursorPosX(200.0f);
+	ImGui::SetCursorPosY(center.y / 1.5f);
+	if (ImGui::BeginTable("table2", 2))
+	{
+		for (int row = 0; row < 4; row++)
+		{
+			ImGui::TableNextRow();
+			for (int column = 0; column < 2; column++)
+			{
+				ImGui::TableSetColumnIndex(column);				
+				if (row == 0) {
+					Texture texture = Icon::GetInstance()->getOthersTextures("icons", icons.find(unitType)->second[column + 3]);
+					ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+				}
+				else {
+					ImGui::Text("Row %d Column %d", row, column);
+				}
+			}
+		}
+		ImGui::EndTable();
+	}
+}
+
+void Renderer::renderSubWindow() {
+	std::string window;
+	for (auto& it : WindowsManagement::GetInstance()->getSubWindow()) {
+		if (it.second == true) {
+			window = it.first;
+		}
+	}
 	ImGuiIO& io = ImGui::GetIO();
 	ImFont* basicFont = io.Fonts->Fonts[1];
 	ImGui::PushFont(basicFont);
 	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
-	if (*subWindow == "tank") {
-		ImGui::Text(subWindow->c_str());
+	ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+	Renderer::createLabelWithPosition(window.c_str(), (float)center.x / 2, 0.f);
+	if (window == "generate" || window == "import") {
+		renderGenerateImportSubWindow();
+	}
+	else if (window == "multiplayer") {
+		std::string text = "Not Done";
+		Renderer::createLabelWithPosition(text.c_str(), (float)center.x / 2.0f, (float)center.y / 2.0f);
+	}
+	else if (window == "options") {
+		std::string text = "Not Done";
+		Renderer::createLabelWithPosition(text.c_str(), (float)center.x / 2.0f, (float)center.y / 2.0f);
 	}
 	ImGui::PopStyleColor();
 	ImGui::PopFont();

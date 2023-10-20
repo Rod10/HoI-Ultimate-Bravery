@@ -197,6 +197,7 @@
     <ClCompile Include="unittype.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="shipversion.cpp" />
+    <ClCompile Include="windowsmanagement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app_base.hpp" />
@@ -257,6 +258,7 @@
     <ClInclude Include="unittype.hpp" />
     <ClInclude Include="utils.hpp" />
     <ClInclude Include="shipversion.hpp" />
+    <ClInclude Include="windowsmanagement.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Data\Canon.json" />

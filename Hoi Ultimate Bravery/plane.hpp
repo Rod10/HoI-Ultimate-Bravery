@@ -11,6 +11,7 @@
 class Plane
 {
 public:
+	Plane() {};
 	Plane(PlaneRole::Role role,
 		PlaneType::Type type,
 		PlaneVersion::Version version,

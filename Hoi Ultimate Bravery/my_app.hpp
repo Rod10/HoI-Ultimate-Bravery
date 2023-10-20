@@ -39,6 +39,7 @@
 #include <random>
 #include <sstream>
 #include <string>
+#include "windowsmanagement.hpp"
 
 using json = nlohmann::json;
 
@@ -74,31 +75,27 @@ public:
 		ImGui::PopFont();
 
 		float testMiddle = ImGui::GetWindowWidth() / 6.0f;
-
-		// Main Menu Block
-		if (mainMenuOpen) {
-			ImGui::SetNextWindowPos(ImVec2(150.0f, 200.0f));
-			ImGui::PushStyleColor(ImGuiCol_WindowBg, windowColor);
-			ImGui::Begin("mainMenu", &mainMenuOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
-			ImGui::PopStyleColor();
-			ImGui::PushFont(basicFont);
-			ImGui::PushStyleColor(ImGuiCol_Button, buttonColor);
-			Renderer::renderButtonBlock(&windowButton, &windowOpened, &subWindow, 150.0f);
-			ImGui::PopStyleColor();
-			ImGui::PopFont();
-			ImGui::End();
-		}
-		// Main Menu Block
+		bool opened = true;
+		ImGui::SetNextWindowPos(ImVec2(150.0f, 200.0f));
+		ImGui::PushStyleColor(ImGuiCol_WindowBg, windowColor);
+		ImGui::Begin("mainMenu", &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
+		ImGui::PopStyleColor();
+		ImGui::PushFont(basicFont);
+		ImGui::PushStyleColor(ImGuiCol_Button, buttonColor);
+		Renderer::renderButtonBlock(150.0f);
+		ImGui::PopStyleColor();
+		ImGui::PopFont();
+		ImGui::End();
 		
-		if (windowOpened.find("mainMenu")->second == false) {
+		if (windowManagement->getButtons().find("mainMenu")->second == false) {
+			bool opened = !windowManagement->getButtons().find("mainMenu")->second;
 			ImGui::SetNextWindowPos(ImVec2(760.0f, 200.0f));
 			ImGui::PushStyleColor(ImGuiCol_WindowBg, greyWindowColor);
-			ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
-			ImGui::Begin("generate", &mainMenuOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar);
-			Renderer::renderSubWindow(&subWindow);
+			ImGui::SetNextWindowSize(ImVec2(1160.f, 744.0f));
+			ImGui::Begin("generate", &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar);
+			Renderer::renderSubWindow();
 			ImGui::PopStyleColor();
 			ImGui::End();
-
 		}
 		
 		
@@ -652,32 +649,15 @@ private:
 	std::map<TankType::Type, Tank> tankList;
 	std::unordered_map<TankType::Type, Stats> newTankStats;
 	std::vector<std::string> tankModule = { "gun", "turret", "suspension", "engine", "armor" };
-	std::vector<Country> countryList = Country::generateCountryList();
+	std::vector<Country> countryList = CountryList::GetInstance()->getList();
 	Country* country = &countryList[0];
 	std::vector<Language> languageList = Language::getLanguageList();
 	Language* language;
 	Settings* settings = Settings::getInstance();
 
 	bool mainWindowOpen = true;
-	bool mainMenuOpen = true;
-	bool generateWindowOpen = false;
-	bool optionWindowOpen = false;
-	bool designerWindowOpen = false;
-	bool allGenerationWindowOpen = false;
-	bool allGenerationShipWindowOpen = false;
-	bool allGenerationPlaneWindowOpen = false;
-	bool allCountries = false;
-	bool dlcWindowOpen = false;
-	bool modWindowOpen = false;
-	bool designerShipWindowOpen = false;
-	bool designerPlaneWindowOpen = false;
-	bool importWindowOpen = false;
 
-	std::string windowButton = "mainMenu";
-	std::string subWindow = "tank";
-	std::map < std::string, bool > windowOpened {
-		{"mainMenu", true},
-	};
+	WindowsManagement* windowManagement = WindowsManagement::GetInstance();
 
 	bool mtg = settings->getDlcOwned("mtg");
 	bool nsb = settings->getDlcOwned("nsb");
@@ -713,7 +693,7 @@ private:
 			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
 	}
 
-	void renderShipGenerate() {
+	/*void renderShipGenerate() {
 		Renderer::createLabelWithPosition(std::format("{0} :", getLocalizedString("ship")).c_str(), Constant::Position::LEFT);
 		ImGui::PushStyleColor(ImGuiCol_Button, buttonColor);
 		ImGuiStyle& style = ImGui::GetStyle();
@@ -1059,5 +1039,5 @@ private:
 
 		designerPlaneWindowOpen = true;
 		generateWindowOpen = false;
-	}
+	}*/
 };

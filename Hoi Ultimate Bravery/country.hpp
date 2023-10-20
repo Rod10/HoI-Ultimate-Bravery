@@ -8,10 +8,13 @@
 #include "shipversion.hpp"
 #include "tank.hpp"
 #include "tanktype.hpp"
+#include "unittype.hpp"
 
+#include <any>
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <tuple>
 #include <vector>
 
 using json = nlohmann::json;
@@ -31,6 +34,7 @@ public:
 		tankList(tankList),
 		major(major) {}
 	static std::vector<Country> generateCountryList();
+	void setNewUnits(UnitType::Type unitType, std::any unit);
 
 	std::string name;
 	std::string tag;
@@ -44,5 +48,18 @@ public:
 	std::unordered_map<Hull::Type, Stats> newShipStats;
 	std::map < PlaneRole::Role, Plane > planeList;
 	std::unordered_map < PlaneRole::Role, Stats > newPlaneStats;
+	std::map<UnitType::Type, std::any> units;
 };
 
+class CountryList {
+protected:
+	CountryList(std::vector<Country> list) :
+		list_(list) {}
+	static CountryList* countryList_;
+	std::vector<Country> list_;
+public:
+	CountryList(CountryList& other) = delete;
+	void operator=(const CountryList&) = delete;
+	static CountryList* GetInstance();
+	std::vector<Country> getList();
+};

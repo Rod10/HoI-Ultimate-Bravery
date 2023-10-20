@@ -222,6 +222,9 @@
     <ClCompile Include="coutriessettings.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="windowsmanagement.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Librairies\Imgui\imstb_textedit.h">
@@ -396,6 +399,9 @@
       <Filter>Fichiers d%27en-tête\Plane</Filter>
     </ClInclude>
     <ClInclude Include="countriessettings.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="windowsmanagement.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
