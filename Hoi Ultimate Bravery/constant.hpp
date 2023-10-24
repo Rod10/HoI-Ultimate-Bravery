@@ -13,8 +13,8 @@ public:
     };    
     enum TextPos {
         TITLE_HEIGHT = 24,
-        TANK_NAME_HEIGHT = 63,
-        TANK_ROLE_HEIGHT = 106,
+        TANK_NAME_HEIGHT = 75,
+        TANK_ROLE_HEIGHT = 120,
         TANK_MODULE_HEIGHT = 155,
         TANK_MODULE_HEIGHT_2 = 455,
         BASE_STATS_POS = 720,

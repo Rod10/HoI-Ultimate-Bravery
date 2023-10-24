@@ -184,7 +184,7 @@ void renderGenerateButtonBlock() {
 		{UnitType::Ship, "Hold"},
 		{UnitType::Infantry, "Infantry"},
 	};
-	UnitType::Type prevType = static_cast<UnitType::Type>(NULL);
+	UnitType::Type prevType = windowsManagement->getPrevTypeSubWindow();
 	for (auto& [type, icon] : icons) {
 		Texture texture = Icon::GetInstance()->getOthersTextures("icons", icon);
 		ImVec2 size = ImVec2(texture.my_image_width, texture.my_image_height);                         // Size of the image we want to make visible
@@ -195,9 +195,9 @@ void renderGenerateButtonBlock() {
 		ImVec4 tint_col = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
 
 		if (ImGui::ImageButton(UnitType::typeToString(type).c_str(), (void*)(intptr_t)texture.my_image_texture, size, uv0, uv1, bg_col, tint_col)) {
+			if (prevType != NULL) windowsManagement->setTypeSubWindow(prevType, false);
 			windowsManagement->setTypeSubWindow(type, true);
-			if (prevType != NULL) windowsManagement->setTypeSubWindow(prevType, true);
-			prevType = type;
+			windowsManagement->setPrevTypeSubWindow(type);
 		}
 	}
 	if (Renderer::createButtonWithSize("Back", ImVec2(365.0f, 75.0f))) {
@@ -259,13 +259,13 @@ void renderGenerateImportSubWindow() {
 			unitType = it.first;
 		}
 	}
-	CountryList* countryList = CountryList::GetInstance();
-	Country country = countryList->getList()[0];
+	std::vector<Country>* countryList = CountryList::GetInstance()->getList();
+	Country* country = &countryList->at(0);
 	ImVec2 center = ImGui::GetMainViewport()->GetCenter();
 	std::map<UnitType::Type, std::vector<std::string>> icons {
-		{
-			UnitType::Tank, {"Light_tank", "Medium_tank", "Heavy_tank", "Super_heavy_tank", "Modern_tank"}
-		}
+		{UnitType::Tank, {"Light_tank", "Medium_tank", "Heavy_tank", "Super_heavy_tank", "Modern_tank"}},
+		{UnitType::Plane, {"Fighter", "CAS", "Naval_bomber", "Tactical_bomber", "Strategic_bomber"}},
+		{UnitType::Ship, {"Destroyer", "Cruiser", "Battleship", "Carrier", "Submarine"}}
 	};
 	if (ImGui::BeginTable("table1", 3))
 	{
@@ -284,23 +284,23 @@ void renderGenerateImportSubWindow() {
 					ImVec4 bg_col = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);             // Black background
 					ImVec4 tint_col = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
 					if (ImGui::ImageButton(icons.find(unitType)->second[column].c_str(), (void*)(intptr_t)texture.my_image_texture, size, uv0, uv1, bg_col, tint_col)) {
-						std::any newUnit;
 						switch (unitType)
 						{
 						case UnitType::Ship: 
-							newUnit = std::make_any<Ship&>(Ship::generateRandomShip(static_cast<Hull::Type>(row)));
+							country->setNewUnits(unitType, Ship::generateRandomShip(static_cast<Hull::Type>(column)));
 							break;
 						case UnitType::Tank: 
-							newUnit = std::make_any<Tank&>(Tank::generateRandomTank(static_cast<TankType::Type>(row)));
+							country->setNewUnits(unitType, Tank::generateRandomTank(static_cast<TankType::Type>(column)));
 							break;
 						case UnitType::Plane: 
-							newUnit = std::make_any<Plane&>(Plane::generateRandomPlane(static_cast<PlaneRole::Role>(row)));
+							country->setNewUnits(unitType, Plane::generateRandomPlane(static_cast<PlaneRole::Role>(column)));
 							break;
 						default:
 							break;
 						}
-						auto test = std::any_cast<Tank>(newUnit);
-						country.setNewUnits(unitType, newUnit);
+						windowsManagement->setTypeSubWindow(unitType, true);
+						windowsManagement->setSubWindow("generate", false);
+						windowsManagement->setSubWindow("designer", true);
 					}
 				}
 				else {
@@ -332,10 +332,37 @@ void renderGenerateImportSubWindow() {
 		ImGui::EndTable();
 	}
 }
+//Ship Designer
+void renderDesignerWindows(Ship ship) {
+
+}
+
+//Tank Designer
+void renderDesignerWindows(Tank tank) {
+	ImGuiIO& io = ImGui::GetIO();
+	ImFont* basicFont = io.Fonts->Fonts[0];
+	ImFont* titleFont = io.Fonts->Fonts[1];
+	ImFont* textFont = io.Fonts->Fonts[2];
+	ImFont* TitleStatsFont = io.Fonts->Fonts[3];
+	ImFont* statsFont = io.Fonts->Fonts[4];
+	Texture texture = Icon::GetInstance()->getTankModulesTextures("background", "tank_designer_bg");
+	ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+	setImage(Constant::TextPos::TANK_NAME_HEIGHT, ImGui::GetCursorPosX() + 20.0f, "background", "tank_name_bg", UnitType::Type::Tank);
+
+	setImage(79.8, 329, "background", "tank_icon_bg", UnitType::Type::Tank);
+
+	setImage(Constant::TextPos::TANK_ROLE_HEIGHT, ImGui::GetCursorPosX() + 20.0f, "background", "tank_role_bg", UnitType::Type::Tank);
+}
+
+//Plane Designer
+void renderDesignerWindows(Plane plane) {
+
+}
 
 void Renderer::renderSubWindow() {
 	std::string window;
-	for (auto& it : WindowsManagement::GetInstance()->getSubWindow()) {
+	WindowsManagement* windowsManagement = WindowsManagement::GetInstance();
+	for (auto& it : windowsManagement->getSubWindow()) {
 		if (it.second == true) {
 			window = it.first;
 		}
@@ -356,6 +383,32 @@ void Renderer::renderSubWindow() {
 	else if (window == "options") {
 		std::string text = "Not Done";
 		Renderer::createLabelWithPosition(text.c_str(), (float)center.x / 2.0f, (float)center.y / 2.0f);
+	}
+	else if (window == "designer") {
+		UnitType::Type unitType = UnitType::Type::Tank;
+		for (auto& it : windowsManagement->getTypeSubWindow()) {
+			if (it.second == true) {
+				unitType = it.first;
+			}
+		}
+		std::vector<Country>* countryList = CountryList::GetInstance()->getList();
+		Country* country = &countryList->at(0);
+		switch (unitType)
+		{
+		case UnitType::Ship:
+			renderDesignerWindows(country->getShipByHull(static_cast<Hull::Type>(windowsManagement->getDesignerTypeSubWindow())));
+			break;
+		case UnitType::Tank:
+			renderDesignerWindows(country->getTankByType(static_cast<TankType::Type>(windowsManagement->getDesignerTypeSubWindow())));
+			break;
+		case UnitType::Plane:
+			renderDesignerWindows(country->getPlaneByRole(static_cast<PlaneRole::Role>(windowsManagement->getDesignerTypeSubWindow())));
+			break;
+		case UnitType::Infantry:
+			break;
+		default:
+			break;
+		}
 	}
 	ImGui::PopStyleColor();
 	ImGui::PopFont();

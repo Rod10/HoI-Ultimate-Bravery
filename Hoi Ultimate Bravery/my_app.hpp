@@ -649,8 +649,6 @@ private:
 	std::map<TankType::Type, Tank> tankList;
 	std::unordered_map<TankType::Type, Stats> newTankStats;
 	std::vector<std::string> tankModule = { "gun", "turret", "suspension", "engine", "armor" };
-	std::vector<Country> countryList = CountryList::GetInstance()->getList();
-	Country* country = &countryList[0];
 	std::vector<Language> languageList = Language::getLanguageList();
 	Language* language;
 	Settings* settings = Settings::getInstance();

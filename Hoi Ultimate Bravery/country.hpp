@@ -31,10 +31,44 @@ public:
 		tag(tag),
 		ideaPosIdea(ideaPosIdea),
 		coutriesSettings(coutriesSettings),
-		tankList(tankList),
-		major(major) {}
+		major(major) {
+
+		// Insertion of UnitType
+		units.insert(std::pair<UnitType::Type, std::map<Hull::Type, std::vector<std::any>>>(
+			UnitType::Ship, {
+				{Hull::Type::Destroyer, {}},
+				{Hull::Type::Cruiser, {}},
+				{Hull::Type::HeavyShip, {}},
+				{Hull::Type::Carrier, {}},
+				{Hull::Type::Submarine, {}},
+			}
+		));
+		units.insert(std::pair<UnitType::Type, std::map<TankType::Type, std::vector<std::any>>>(
+			UnitType::Tank, {
+				{TankType::Light, {}},
+				{TankType::Medium, {}},
+				{TankType::Heavy, {}},
+				{TankType::SuperHeavy, {}},
+				{TankType::Modern, {}},
+			}
+		));
+		units.insert(std::pair<UnitType::Type, std::map<PlaneRole::Role, std::vector<std::any>>>(
+			UnitType::Plane, {
+				{PlaneRole::Fighter, {}},
+				{PlaneRole::CAS, {}},
+				{PlaneRole::NavalBombing, {}},
+				{PlaneRole::TacticalBombing, {}},
+				{PlaneRole::StrategicBombing, {}},
+			}
+		));
+	}
 	static std::vector<Country> generateCountryList();
-	void setNewUnits(UnitType::Type unitType, std::any unit);
+	void setNewUnits(UnitType::Type unitType, Ship unit);
+	void setNewUnits(UnitType::Type unitType, Tank unit);
+	void setNewUnits(UnitType::Type unitType, Plane unit);
+	Ship getShipByHull(int type);
+	Tank getTankByType(int type);
+	Plane getPlaneByRole(int type);
 
 	std::string name;
 	std::string tag;
@@ -61,5 +95,5 @@ public:
 	CountryList(CountryList& other) = delete;
 	void operator=(const CountryList&) = delete;
 	static CountryList* GetInstance();
-	std::vector<Country> getList();
+	std::vector<Country>* getList();
 };
