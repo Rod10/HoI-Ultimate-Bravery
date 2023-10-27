@@ -39,7 +39,7 @@ public:
 		Suspension suspension,
 		Armor armor,
 		Engine engine,
-		Stats stats,
+		TankStats stats,
 		Role::Type role) :
 		type(type),
 		version(version),
@@ -63,8 +63,9 @@ public:
 	Suspension suspension;
 	Armor armor;
 	Engine engine;
-	Stats stats;
+	TankStats stats;
 	Role::Type role;
+	std::string iconName;
 	int engineLevel;
 	int armorLevel;
 
@@ -123,7 +124,8 @@ public:
 	}
 
 	static Tank::Version generatingRandomVersion(TankType::Type type);
-	static Stats getStatsFromVersion(TankType::Type type, Tank::Version version);
+	static TankStats getStatsFromVersion(TankType::Type type, Tank::Version version);
+	static TankStats generateNewStats(Tank tank);
 
 	static Tank generateRandomTank();
 	static Tank generateRandomTank(TankType::Type type);

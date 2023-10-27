@@ -34,49 +34,83 @@ void setImage(float y, float x, std::string type, std::string name, UnitType::Ty
 	}
 }
 
-bool Renderer::createButtonWithPosition(const char* label, float position)
-{
+float calculatePos(Constant::Position position, std::string text) {
 	ImGuiStyle& style = ImGui::GetStyle();
 
-	float size = ImGui::CalcTextSize(label).x + style.FramePadding.x * 2.0f;
+	float size = ImGui::CalcTextSize(text.c_str()).x - style.FramePadding.x * 2.0f;
 	float avail = ImGui::GetContentRegionAvail().x;
 
 	float off = (avail - size) * (position / 1000.f);
-	if (off > 0.0f)
-		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
-
-	return ImGui::Button(label);
+	return off;
 }
 
-bool Renderer::createButtonWithSize(const char* label, ImVec2 size)
-{
+float calculatePos(Constant::Position position, int width) {
 	ImGuiStyle& style = ImGui::GetStyle();
 
-	/*float textSize = ImGui::CalcTextSize(label).x + style.FramePadding.x * 2.0f;
+	float size = width - style.FramePadding.x * 2.0f;
 	float avail = ImGui::GetContentRegionAvail().x;
 
-	float off = (avail - textSize) * (position / 1000.f);
-	if (off > 0.0f)
-		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);*/
+	float off = (avail - size) * (position / 1000.f);
+	return off;
+}
+
+bool createButtonWithSize(const char* label, ImVec2 size) {
+	ImGuiStyle& style = ImGui::GetStyle();
 
 	return ImGui::Button(label, size);
 }
 
-bool Renderer::createButtonWithPosition(const char* label, Constant::Position position)
-{
+bool createButtonWithPos(const char* label, float x, float y) {
 	ImGuiStyle& style = ImGui::GetStyle();
 
-	float size = ImGui::CalcTextSize(label).x + style.FramePadding.x * 2.0f;
-	float avail = ImGui::GetContentRegionAvail().x;
-
-	float off = (avail - size) * (position / 1000.f);
-	if (off > 0.0f)
-		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
+	ImGui::SetCursorPosX(x);
+	ImGui::SetCursorPosY(y);
 
 	return ImGui::Button(label);
 }
 
-void Renderer::createLabelWithPosition(const char* label, Constant::Position position)
+void createLabelWithPosition(const char* label, Constant::TextPos position) {
+	ImGuiStyle& style = ImGui::GetStyle();
+
+	float size = ImGui::CalcTextSize(label).x + style.FramePadding.x * 2.0f;
+	float avail = ImGui::GetContentRegionAvail().x;
+
+	float off = (avail - size) * (position / 1000.f);
+	if (off > 0.0f)
+		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
+
+	return ImGui::Text(label);
+}
+
+void createLabelWithPosition(const char* label, float position, Constant::TextPos height) {
+	ImGuiStyle& style = ImGui::GetStyle();
+
+	float size = ImGui::CalcTextSize(label).x + style.FramePadding.x * 2.0f;
+	float avail = ImGui::GetContentRegionAvail().x;
+
+	float off = (avail - size) * (position / 1000.f);
+	if (off > 0.0f)
+		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
+
+	ImGui::SetCursorPosY(height);
+	return ImGui::Text(label);
+}
+
+void createLabelWithPosition(const char* label, float position, float height) {
+	ImGuiStyle& style = ImGui::GetStyle();
+
+	float size = ImGui::CalcTextSize(label).x + style.FramePadding.x * 2.0f;
+	float avail = ImGui::GetContentRegionAvail().x;
+
+	float off = (avail - size) * (position / 1000.f);
+	if (off > 0.0f)
+		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
+
+	ImGui::SetCursorPosY(height);
+	return ImGui::Text(label);
+}
+
+void createLabelWithPosition(const char* label, float position)
 {
 	ImGuiStyle& style = ImGui::GetStyle();
 
@@ -90,28 +124,7 @@ void Renderer::createLabelWithPosition(const char* label, Constant::Position pos
 	return ImGui::Text(label);
 }
 
-void Renderer::createLabelWithPosition(const char* label, Constant::Position position, ImGuiInputTextFlags_ flag)
-{
-	ImGuiStyle& style = ImGui::GetStyle();
-
-	float size = ImGui::CalcTextSize(label).x + style.FramePadding.x * 2.0f;
-	float avail = ImGui::GetContentRegionAvail().x;
-
-	float off = (avail - size) * (position / 1000.f);
-	if (off > 0.0f)
-		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
-
-	return ImGui::Text(label, flag);
-}
-
-void Renderer::createLabelWithPosition(const char* label, float x, float y)
-{
-	ImGui::SetCursorPosY(y);
-	ImGui::SetCursorPosX(x - ImGui::CalcTextSize(label).x);
-	return ImGui::Text(label);
-}
-
-void Renderer::createTitleWithPosition(const char* label, float x, float y)
+void createTitleWithPosition(const char* label, float x, float y)
 {
 	ImGui::SetCursorPosY(y);
 	ImGui::SetCursorPosX(x);
@@ -121,27 +134,27 @@ void Renderer::createTitleWithPosition(const char* label, float x, float y)
 void renderMainMenuButtonBlock(float pos) {
 	auto windowsManagement = WindowsManagement::GetInstance();
 	Settings* settings = Settings::getInstance();
-	if (Renderer::createButtonWithSize("Generate", ImVec2(365.0f, 75.0f))) {
+	if (createButtonWithSize("Generate", ImVec2(365.0f, 75.0f))) {
 		windowsManagement->setButtons("mainMenu", false);
 		windowsManagement->setButtons("generate", true);
 		windowsManagement->setSubWindow("generate", true);
 	}
-	if (Renderer::createButtonWithSize("Import", ImVec2(365.0f, 75.0f))) {
+	if (createButtonWithSize("Import", ImVec2(365.0f, 75.0f))) {
 		windowsManagement->setButtons("mainMenu", false);
 		windowsManagement->setButtons("import", true);
 		windowsManagement->setSubWindow("import", true);
 	}
-	if (Renderer::createButtonWithSize("Multiplayer", ImVec2(365.0f, 75.0f))) {
+	if (createButtonWithSize("Multiplayer", ImVec2(365.0f, 75.0f))) {
 		windowsManagement->setButtons("mainMenu", false);
 		windowsManagement->setButtons("multiplayer", true);
 		windowsManagement->setSubWindow("multiplayer", true);
 	}
-	if (Renderer::createButtonWithSize("Options", ImVec2(365.0f, 75.0f))) {
+	if (createButtonWithSize("Options", ImVec2(365.0f, 75.0f))) {
 		windowsManagement->setButtons("mainMenu", false);
 		windowsManagement->setButtons("options", true);
 		windowsManagement->setSubWindow("options", true);
 	}
-	if (Renderer::createButtonWithSize("Quit", ImVec2(365.0f, 75.0f))) {
+	if (createButtonWithSize("Quit", ImVec2(365.0f, 75.0f))) {
 		//countries files
 		std::string countriesPathDirectory = "./Assets/Data/Files/Back-Up/countries";
 		std::string countriesTargetDirectory = std::format("{0}/history/countries", settings->getGamepath());
@@ -200,7 +213,7 @@ void renderGenerateButtonBlock() {
 			windowsManagement->setPrevTypeSubWindow(type);
 		}
 	}
-	if (Renderer::createButtonWithSize("Back", ImVec2(365.0f, 75.0f))) {
+	if (createButtonWithSize("Back", ImVec2(365.0f, 75.0f))) {
 		windowsManagement->setButtons("mainMenu", true);
 		windowsManagement->setButtons("generate", false);
 		windowsManagement->setSubWindow("generate", false);
@@ -209,7 +222,7 @@ void renderGenerateButtonBlock() {
 
 void renderMultiplayerButtonBlock() {
 	WindowsManagement* windowsManagement = WindowsManagement::GetInstance();
-	if (Renderer::createButtonWithSize("Back", ImVec2(365.0f, 75.0f))) {
+	if (createButtonWithSize("Back", ImVec2(365.0f, 75.0f))) {
 		windowsManagement->setButtons("mainMenu", true);
 		windowsManagement->setButtons("multiplayer", false);
 		windowsManagement->setSubWindow("multiplayer", false);
@@ -218,7 +231,7 @@ void renderMultiplayerButtonBlock() {
 
 void renderOptionsButtonBlock() {
 	WindowsManagement* windowsManagement = WindowsManagement::GetInstance();
-	if (Renderer::createButtonWithSize("Back", ImVec2(365.0f, 75.0f))) {
+	if (createButtonWithSize("Back", ImVec2(365.0f, 75.0f))) {
 		windowsManagement->setButtons("mainMenu", true);
 		windowsManagement->setButtons("options", false);
 		windowsManagement->setSubWindow("options", false);
@@ -252,6 +265,8 @@ void Renderer::renderButtonBlock(float pos)
 }
 
 void renderGenerateImportSubWindow() {
+	ImGuiIO& io = ImGui::GetIO();
+	ImFont* statsFont = io.Fonts->Fonts[4];
 	WindowsManagement* windowsManagement = WindowsManagement::GetInstance();
 	UnitType::Type unitType;
 	for (auto& it : windowsManagement->getTypeSubWindow()) {
@@ -259,17 +274,16 @@ void renderGenerateImportSubWindow() {
 			unitType = it.first;
 		}
 	}
-	std::vector<Country>* countryList = CountryList::GetInstance()->getList();
-	Country* country = &countryList->at(0);
 	ImVec2 center = ImGui::GetMainViewport()->GetCenter();
 	std::map<UnitType::Type, std::vector<std::string>> icons {
 		{UnitType::Tank, {"Light_tank", "Medium_tank", "Heavy_tank", "Super_heavy_tank", "Modern_tank"}},
 		{UnitType::Plane, {"Fighter", "CAS", "Naval_bomber", "Tactical_bomber", "Strategic_bomber"}},
 		{UnitType::Ship, {"Destroyer", "Cruiser", "Battleship", "Carrier", "Submarine"}}
 	};
+	ImGui::PushFont(statsFont);
 	if (ImGui::BeginTable("table1", 3))
 	{
-		for (int row = 0; row < 4; row++)
+		for (int row = 0; row < 5; row++)
 		{
 			ImGui::TableNextRow();
 			for (int column = 0; column < 3; column++)
@@ -284,19 +298,26 @@ void renderGenerateImportSubWindow() {
 					ImVec4 bg_col = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);             // Black background
 					ImVec4 tint_col = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
 					if (ImGui::ImageButton(icons.find(unitType)->second[column].c_str(), (void*)(intptr_t)texture.my_image_texture, size, uv0, uv1, bg_col, tint_col)) {
-						switch (unitType)
-						{
-						case UnitType::Ship: 
-							country->setNewUnits(unitType, Ship::generateRandomShip(static_cast<Hull::Type>(column)));
-							break;
-						case UnitType::Tank: 
-							country->setNewUnits(unitType, Tank::generateRandomTank(static_cast<TankType::Type>(column)));
-							break;
-						case UnitType::Plane: 
-							country->setNewUnits(unitType, Plane::generateRandomPlane(static_cast<PlaneRole::Role>(column)));
-							break;
-						default:
-							break;
+						if (unitType == UnitType::Ship) {
+							unitTypeSelected = unitType;
+							columnSelected = column;
+							if (countrySelected->getShipHullListSize(column) == 0) {
+								Ship ship = Ship::generateRandomShip(static_cast<Hull::Type>(column));
+								ship.iconName = Icon::GetInstance()->getShipIcon(ship);
+								countrySelected->setNewUnits(unitType, ship);
+							}
+						}
+						else if (unitType == UnitType::Tank) {
+							unitTypeSelected = unitType;
+							columnSelected = column;
+							if (countrySelected->getTankTypeListSize(column) == 0) {
+								Tank tank = Tank::generateRandomTank(static_cast<TankType::Type>(column));
+								tank.iconName = Icon::GetInstance()->getRandomIcon(tank.type);
+								countrySelected->setNewUnits(unitType, tank);
+							}
+						}
+						else if (unitType == UnitType::Plane) {
+
 						}
 						windowsManagement->setTypeSubWindow(unitType, true);
 						windowsManagement->setSubWindow("generate", false);
@@ -304,7 +325,21 @@ void renderGenerateImportSubWindow() {
 					}
 				}
 				else {
-					ImGui::Text("Row %d Column %d", row, column);
+					if (unitType == UnitType::Ship) {
+
+					}
+					else if (unitType == UnitType::Tank) {
+						if (countrySelected->getTankTypeListSize(column) == 0) {
+							ImGui::Text("Not Created", row, column);
+						}
+						else {
+							auto [tank, tankStats] = countrySelected->getTankByType(column);
+							ImGui::Text(tankStats.getShowStat(row).c_str(), row, column);
+						}
+					}
+					else if (unitType == UnitType::Plane) {
+
+					}
 				}
 			}
 		}
@@ -314,7 +349,7 @@ void renderGenerateImportSubWindow() {
 	ImGui::SetCursorPosY(center.y / 1.5f);
 	if (ImGui::BeginTable("table2", 2))
 	{
-		for (int row = 0; row < 4; row++)
+		for (int row = 0; row < 5; row++)
 		{
 			ImGui::TableNextRow();
 			for (int column = 0; column < 2; column++)
@@ -322,23 +357,63 @@ void renderGenerateImportSubWindow() {
 				ImGui::TableSetColumnIndex(column);				
 				if (row == 0) {
 					Texture texture = Icon::GetInstance()->getOthersTextures("icons", icons.find(unitType)->second[column + 3]);
-					ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+					ImVec2 size = ImVec2(texture.my_image_width, texture.my_image_height);                         // Size of the image we want to make visible
+					ImVec2 uv0 = ImVec2(0.0f, 0.0f);                            // UV coordinates for lower-left
+					ImVec2 uv1 = ImVec2(1.0f, 1.0f);
+					//ImVec2 uv1 = ImVec2(100.0f / my_tex_w, 75.0f / my_tex_h);    // UV coordinates for (32,32) in our texture
+					ImVec4 bg_col = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);             // Black background
+					ImVec4 tint_col = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
+					if (ImGui::ImageButton(icons.find(unitType)->second[column + 3].c_str(), (void*)(intptr_t)texture.my_image_texture, size, uv0, uv1, bg_col, tint_col)) {
+						if (unitType == UnitType::Ship) {
+
+						}
+						else if (unitType == UnitType::Tank) {
+							unitTypeSelected = unitType;
+							columnSelected = column + 3;
+							if (countrySelected->getTankTypeListSize(column + 3) == 0) {
+								Tank tank = Tank::generateRandomTank(static_cast<TankType::Type>(column + 3));
+								tank.iconName = Icon::GetInstance()->getRandomIcon(tank.type);
+								countrySelected->setNewUnits(unitType, tank);
+							}
+						}
+						else if (unitType == UnitType::Plane) {
+
+						}
+						windowsManagement->setTypeSubWindow(unitType, true);
+						windowsManagement->setSubWindow("generate", false);
+						windowsManagement->setSubWindow("designer", true);
+					}
 				}
-				else {
-					ImGui::Text("Row %d Column %d", row, column);
+				else {					
+					if (unitType == UnitType::Ship) {
+
+					}
+					else if (unitType == UnitType::Tank) {
+						if (countrySelected->getTankTypeListSize(column + 3) == 0) {
+							ImGui::Text("Not Created", row, column);
+						}
+						else {
+							auto [tank, tankStats] = countrySelected->getTankByType(column + 3);
+							ImGui::Text(tankStats.getShowStat(row).c_str(), row, column);
+						}
+					}
+					else if (unitType == UnitType::Plane) {
+
+					}
 				}
 			}
 		}
 		ImGui::EndTable();
 	}
+	ImGui::PopFont();
 }
 //Ship Designer
-void renderDesignerWindows(Ship ship) {
+void renderShipDesignerWindows() {
 
 }
 
 //Tank Designer
-void renderDesignerWindows(Tank tank) {
+void renderTankDesignerWindows() {
 	ImGuiIO& io = ImGui::GetIO();
 	ImFont* basicFont = io.Fonts->Fonts[0];
 	ImFont* titleFont = io.Fonts->Fonts[1];
@@ -349,137 +424,10 @@ void renderDesignerWindows(Tank tank) {
 	ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
 	setImage(Constant::TextPos::TANK_NAME_HEIGHT, ImGui::GetCursorPosX() + 20.0f, "background", "tank_name_bg", UnitType::Type::Tank);
 
-	setImage(79.8, 329, "background", "tank_icon_bg", UnitType::Type::Tank);
+	setImage(95.0f, 329, "background", "tank_icon_bg", UnitType::Type::Tank);
 
-	setImage(Constant::TextPos::TANK_ROLE_HEIGHT, ImGui::GetCursorPosX() + 20.0f, "background", "tank_role_bg", UnitType::Type::Tank);
-}
-
-//Plane Designer
-void renderDesignerWindows(Plane plane) {
-
-}
-
-void Renderer::renderSubWindow() {
-	std::string window;
-	WindowsManagement* windowsManagement = WindowsManagement::GetInstance();
-	for (auto& it : windowsManagement->getSubWindow()) {
-		if (it.second == true) {
-			window = it.first;
-		}
-	}
-	ImGuiIO& io = ImGui::GetIO();
-	ImFont* basicFont = io.Fonts->Fonts[1];
-	ImGui::PushFont(basicFont);
-	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
-	ImVec2 center = ImGui::GetMainViewport()->GetCenter();
-	Renderer::createLabelWithPosition(window.c_str(), (float)center.x / 2, 0.f);
-	if (window == "generate" || window == "import") {
-		renderGenerateImportSubWindow();
-	}
-	else if (window == "multiplayer") {
-		std::string text = "Not Done";
-		Renderer::createLabelWithPosition(text.c_str(), (float)center.x / 2.0f, (float)center.y / 2.0f);
-	}
-	else if (window == "options") {
-		std::string text = "Not Done";
-		Renderer::createLabelWithPosition(text.c_str(), (float)center.x / 2.0f, (float)center.y / 2.0f);
-	}
-	else if (window == "designer") {
-		UnitType::Type unitType = UnitType::Type::Tank;
-		for (auto& it : windowsManagement->getTypeSubWindow()) {
-			if (it.second == true) {
-				unitType = it.first;
-			}
-		}
-		std::vector<Country>* countryList = CountryList::GetInstance()->getList();
-		Country* country = &countryList->at(0);
-		switch (unitType)
-		{
-		case UnitType::Ship:
-			renderDesignerWindows(country->getShipByHull(static_cast<Hull::Type>(windowsManagement->getDesignerTypeSubWindow())));
-			break;
-		case UnitType::Tank:
-			renderDesignerWindows(country->getTankByType(static_cast<TankType::Type>(windowsManagement->getDesignerTypeSubWindow())));
-			break;
-		case UnitType::Plane:
-			renderDesignerWindows(country->getPlaneByRole(static_cast<PlaneRole::Role>(windowsManagement->getDesignerTypeSubWindow())));
-			break;
-		case UnitType::Infantry:
-			break;
-		default:
-			break;
-		}
-	}
-	ImGui::PopStyleColor();
-	ImGui::PopFont();
-}
-
-float Renderer::calculatePos(Constant::Position position, std::string text) {
-	ImGuiStyle& style = ImGui::GetStyle();
-
-	float size = ImGui::CalcTextSize(text.c_str()).x - style.FramePadding.x * 2.0f;
-	float avail = ImGui::GetContentRegionAvail().x;
-
-	float off = (avail - size) * (position / 1000.f);
-	return off;
-}
-
-float Renderer::calculatePos(Constant::Position position, int width) {
-	ImGuiStyle& style = ImGui::GetStyle();
-
-	float size = width - style.FramePadding.x * 2.0f;
-	float avail = ImGui::GetContentRegionAvail().x;
-
-	float off = (avail - size) * (position / 1000.f);
-	return off;
-}
-
-float Renderer::calculatePos(float position, std::string text) {
-	ImGuiStyle& style = ImGui::GetStyle();
-
-	float size = ImGui::CalcTextSize(text.c_str()).x - style.FramePadding.x * 2.0f;
-	float avail = ImGui::GetContentRegionAvail().x;
-
-	float off = (avail - size) * (position / 1000.f);
-	return off;
-}
-
-float Renderer::calculatePos(float position, int width) {
-	ImGuiStyle& style = ImGui::GetStyle();
-
-	float size = width - style.FramePadding.x * 2.0f;
-	float avail = ImGui::GetContentRegionAvail().x;
-
-	float off = (avail - size) * (position / 1000.f);
-	return off;
-}
-
-void Renderer::renderTankDesignerWindow(bool windowOpen, Tank tank)
-{
-	ImGuiIO& io = ImGui::GetIO();
-	ImFont* basicFont = io.Fonts->Fonts[0];
-	ImFont* titleFont = io.Fonts->Fonts[1];
-	ImFont* textFont = io.Fonts->Fonts[2];
-	ImFont* TitleStatsFont = io.Fonts->Fonts[3];
-	ImFont* statsFont = io.Fonts->Fonts[4];
-	Texture texture = Icon::GetInstance()->getTankModulesTextures("background", "tank_designer_bg");
-	auto off = calculatePos(Constant::Position::MIDDLE, texture.my_image_width);
-	ImGui::SetNextWindowPos(ImVec2(off, 200.0f));
-	ImGui::Begin(Tank::tankTypeToString(tank.type).c_str(), &windowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
-	ImGui::PushFont(titleFont);
-	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
-	ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
-	ImGui::SetCursorPosY(Constant::TextPos::TITLE_HEIGHT);
-	createLabelWithPosition("Equipment Designer", Constant::Position::MIDDLE);
-	ImGui::PopFont();
-	ImGui::PopStyleColor();
-
-	setImage(Constant::TextPos::TANK_NAME_HEIGHT, ImGui::GetCursorPosX() + 20.0f, "background", "tank_name_bg", UnitType::Type::Tank);
-
-	setImage(79.8, 329, "background", "tank_icon_bg", UnitType::Type::Tank);
-
-	setImage(Constant::TextPos::TANK_ROLE_HEIGHT, ImGui::GetCursorPosX() + 20.0f, "background", "tank_role_bg", UnitType::Type::Tank);
-
+	setImage(Constant::TextPos::TANK_ROLE_HEIGHT + 5.0f, ImGui::GetCursorPosX() + 20.0f, "background", "tank_role_bg", UnitType::Type::Tank); 
+	
 	for (int i = 0; i <= 5; i++) {
 		float x = ImGui::GetCursorPosX() + (76 * i) + (13.0f - (i * 3));
 		if (i == 0) {
@@ -500,46 +448,259 @@ void Renderer::renderTankDesignerWindow(bool windowOpen, Tank tank)
 	}
 	ImGui::PushFont(TitleStatsFont);
 	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
-	createTitleWithPosition("Base Stats", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 29.0f);
-	createTitleWithPosition("Combat Stats", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 29.0f);
-	createTitleWithPosition("Misc. Stats", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 29.0f);
+	createTitleWithPosition("Base Stats", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 45.0f);
+	createTitleWithPosition("Combat Stats", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 45.0f);
+	createTitleWithPosition("Misc. Stats", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 45.0f);
 	ImGui::PopFont();
 
 	//Base Stats 
 	ImGui::PushFont(statsFont);
-	createTitleWithPosition("Max Speed:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 60.0f);
-	createTitleWithPosition("Reliability:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 80.0f);
-	createTitleWithPosition("Supply use:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 100.0f);
+	createTitleWithPosition("Max Speed:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 75.0f);
+	createTitleWithPosition("Reliability:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 95.0f);
+	createTitleWithPosition("Supply use:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 115.0f);
 	//Base Stats 
 
 	//Combat Stats 
-	createTitleWithPosition("Soft attack:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 60.0f);
-	createTitleWithPosition("Hard attack:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 80.0f);
-	createTitleWithPosition("Piercing:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 100.0f);
-	createTitleWithPosition("Hardness:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 120.0f);
-	createTitleWithPosition("Armor:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 140.0f);
-	createTitleWithPosition("Breakthrough:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 160.0f);
-	createTitleWithPosition("Defense:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 180.0f);
-	createTitleWithPosition("Air attack:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 200.0f);
+	createTitleWithPosition("Soft attack:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 75.0f);
+	createTitleWithPosition("Hard attack:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 95.0f);
+	createTitleWithPosition("Piercing:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 115.0f);
+	createTitleWithPosition("Hardness:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 135.0f);
+	createTitleWithPosition("Armor:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 155.0f);
+	createTitleWithPosition("Breakthrough:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 175.0f);
+	createTitleWithPosition("Defense:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 195.0f);
+	createTitleWithPosition("Air attack:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 215.0f);
 	//Combat Stats
 
 	//Misc. Stats
-	createTitleWithPosition("Fuel Capacity:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 60.0f);
-	createTitleWithPosition("Fuel Usage:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 80.0f);
-	createTitleWithPosition("Suppression:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 100.0f);
-	createTitleWithPosition("Reconnaissance:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 120.0f);
-	createTitleWithPosition("Entrenchment:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 140.0f);
+	createTitleWithPosition("Fuel Capacity:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 75.0f);
+	createTitleWithPosition("Fuel Usage:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 95.0f);
+	createTitleWithPosition("Suppression:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 115.0f);
+	createTitleWithPosition("Reconnaissance:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 135.0f);
+	createTitleWithPosition("Entrenchment:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 155.0f);
 	//Misc. Stats
 
 	ImGui::PopFont();
 	ImGui::PopStyleColor();
 
+	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
 	ImGui::PushFont(textFont);
-	createTitleWithPosition("Engine", Constant::Position::MIDDLE - 100.0f, Constant::TextPos::TANK_MODULE_HEIGHT_2);
-	createTitleWithPosition("Armor", Constant::Position::MIDDLE - 20.0f, Constant::TextPos::TANK_MODULE_HEIGHT_2);
+	createTitleWithPosition("Engine", Constant::Position::MIDDLE - 110.0f, Constant::TextPos::TANK_MODULE_HEIGHT_2);
+	createTitleWithPosition("Armor", Constant::Position::MIDDLE - 30.0f, Constant::TextPos::TANK_MODULE_HEIGHT_2);
+	ImGui::PopFont();
+	ImGui::PopStyleColor();
+}
+
+//Plane Designer
+void renderPlaneDesignerWindows() {
+
+}
+
+//Ship stats
+void renderUnit(Ship ship) {
+
+}
+
+//Tank stats
+void renderUnit(std::tuple<Tank, TankStats> unit) {
+	auto& [tank, tankStats] = unit;
+	ImGuiIO& io = ImGui::GetIO();
+	ImFont* basicFont = io.Fonts->Fonts[2];
+	ImFont* statsFont = io.Fonts->Fonts[4];
+	ImGui::PushFont(basicFont);
+	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
+	ImGui::SetCursorPosY(Constant::TextPos::TANK_NAME_HEIGHT + 5.0f);
+	createLabelWithPosition(std::format("{0} {1}", Tank::tankVersionToString(tank.version).c_str(), Tank::tankTypeToString(tank.type)).c_str(), Constant::TextPos::TANK_NAME_WIDTH);
+	setIcon(ImGui::GetCursorPosY() - 15.0f, ImGui::GetCursorPosX() + 325.0f, Tank::tankTypeToString(tank.type), tank.iconName, UnitType::Type::Tank);
+	ImGui::SetCursorPosY(Constant::TextPos::TANK_ROLE_HEIGHT + 10.0f);
+	createLabelWithPosition(Role::typeToString(tank.role).c_str(), Constant::TextPos::TANK_NAME_WIDTH);
+	std::string fileName = std::format("{0}_{1}", Gun::gunNameToString(tank.gun.name), Gun::typeToString(tank.gun.type));
+	setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 22.0f, "modules", fileName, UnitType::Type::Tank);
+
+	fileName = std::format("{0}_turret_{1}", TurretType::turretTypeToString(tank.turret.type), tank.turret.crew);
+	setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 88.0f, "modules", fileName, UnitType::Type::Tank);
+
+	fileName = std::format("{0}", SpecialModule::typeToString(tank.specialModules[0].type));
+	setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 170.0f, "modules", fileName, UnitType::Type::Tank);
+
+	fileName = std::format("{0}", SpecialModule::typeToString(tank.specialModules[1].type));
+	setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 240.0f, "modules", fileName, UnitType::Type::Tank);
+
+	fileName = std::format("{0}", SpecialModule::typeToString(tank.specialModules[2].type));
+	setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 315.0f, "modules", fileName, UnitType::Type::Tank);
+
+	fileName = std::format("{0}", SpecialModule::typeToString(tank.specialModules[3].type));
+	setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 390.0f, "modules", fileName, UnitType::Type::Tank);
+
+	setImage(ImGui::GetCursorPosY() - 4.0f, ImGui::GetCursorPosX() + 16.0f, "blueprint", std::format("ger_{0}_tank_blueprint", Tank::tankTypeToString(tank.type)), UnitType::Type::Tank);
+
+	fileName = std::format("{0}", Suspension::typeToString(tank.suspension.type));
+	setImage(Constant::TextPos::TANK_MODULE_HEIGHT_2 + 2.0f, ImGui::GetCursorPosX() + 22.5f, "modules", fileName, UnitType::Type::Tank);
+
+	fileName = std::format("{0}", Armor::typeToString(tank.armor.type));
+	setImage(Constant::TextPos::TANK_MODULE_HEIGHT_2 + 2.0f, ImGui::GetCursorPosX() + 100.0f, "modules", fileName, UnitType::Type::Tank);
+
+	fileName = std::format("{0}", Engine::typeToString(tank.engine.type));
+	setImage(Constant::TextPos::TANK_MODULE_HEIGHT_2 + 2.0f, ImGui::GetCursorPosX() + 165.0f, "modules", fileName, UnitType::Type::Tank);
+
+	ImGui::SetCursorPosY(Constant::TextPos::TANK_MODULE_HEIGHT_2 + 20.0f);
+	auto off = calculatePos(Constant::Position::MIDDLE, std::to_string(tank.engineLevel).c_str());
+	off /= 1.5;
+	createLabelWithPosition(std::to_string(tank.engineLevel).c_str(), off);
+	ImGui::SetCursorPosY(Constant::TextPos::TANK_MODULE_HEIGHT_2 + 20.0f);
+	createLabelWithPosition(std::to_string(tank.armorLevel).c_str(), off + 55.0f);
+	ImGui::PopStyleColor();
 	ImGui::PopFont();
 
-	ImGui::End();
+	ImGui::PushFont(statsFont);
+	//Base stats
+	std::string speed = std::format("{:.1f} km/h", tankStats.speed);
+	createLabelWithPosition(speed.c_str(), Constant::TextPos::BASE_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 75.0f);
+
+	std::string reliability = std::format("{:.1f} %%", tankStats.reliability);
+	createLabelWithPosition(reliability.c_str(), Constant::TextPos::BASE_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 95.0f);
+
+	std::string supplyUse = std::format("{:.2f}", tankStats.supplyUse);
+	createLabelWithPosition(supplyUse.c_str(), Constant::TextPos::BASE_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 115.0f);
+	//Base stats
+
+	//Combat stats
+	std::string softAttack = std::format("{:.2f}", tankStats.softAttack);
+	createLabelWithPosition(softAttack.c_str(), Constant::TextPos::COMBAT_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 75.0f);
+
+	std::string hardAttack = std::format("{:.2f}", tankStats.hardAttack);
+	createLabelWithPosition(hardAttack.c_str(), Constant::TextPos::COMBAT_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 95.0f);
+
+	std::string piercing = std::format("{:.2f}", tankStats.piercing);
+	createLabelWithPosition(piercing.c_str(), Constant::TextPos::COMBAT_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 115.0f);
+
+	std::string hardness = std::format("{:.2f} %%", tankStats.hardness);
+	createLabelWithPosition(hardness.c_str(), Constant::TextPos::COMBAT_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 135.0f);
+
+	std::string armor = std::format("{:.2f}", tankStats.armor);
+	createLabelWithPosition(armor.c_str(), Constant::TextPos::COMBAT_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 155.0f);
+
+	std::string breakthrough = std::format("{:.2f}", tankStats.breakthrough);
+	createLabelWithPosition(breakthrough.c_str(), Constant::TextPos::COMBAT_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 175.0f);
+
+	std::string defense = std::format("{:.2f}", tankStats.defense);
+	createLabelWithPosition(defense.c_str(), Constant::TextPos::COMBAT_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 195.0f);
+
+	std::string airAttack = std::format("{:.2f}", tankStats.airAttack);
+	createLabelWithPosition(airAttack.c_str(), Constant::TextPos::COMBAT_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 215.0f);
+	//Combat stats
+
+	//Misc Stats
+	std::string fuelCapacity = std::format("{:.2f}", tankStats.fuelCapacity);
+	createLabelWithPosition(fuelCapacity.c_str(), Constant::TextPos::MISC_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 75.0f);
+
+	std::string fuelUsage = std::format("{:.2f}", tankStats.fuelUsage);
+	createLabelWithPosition(fuelUsage.c_str(), Constant::TextPos::MISC_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 95.0f);
+
+	//TODO research suppression value
+	createLabelWithPosition("???", Constant::TextPos::MISC_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 115.0f);
+
+	//TODO research reconnaissance value
+	createLabelWithPosition("???", Constant::TextPos::MISC_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 135.0f);
+
+	std::string entrenchment = std::format("{:.2f}", tankStats.entrenchment);
+	createLabelWithPosition(entrenchment.c_str(), Constant::TextPos::MISC_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 155.0f);
+	//Misc Stats
+	ImGui::PopFont();
+}
+
+//Plane stats
+void renderUnit(Plane plane) {
+
+}
+
+void Renderer::renderSubWindow() {
+	std::string window;
+	WindowsManagement* windowsManagement = WindowsManagement::GetInstance();
+	for (auto& it : windowsManagement->getSubWindow()) {
+		if (it.second == true) {
+			window = it.first;
+		}
+	}
+	ImGuiIO& io = ImGui::GetIO();
+	ImFont* basicFont = io.Fonts->Fonts[1];
+	ImGui::PushFont(basicFont);
+	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
+	ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+	createLabelWithPosition(window.c_str(), (float)center.x / 2, 0.f);
+
+	if (window != "designer") {
+		createLabelWithPosition("country", 10.0f, ImGui::GetCursorPosY() + 10.0f);
+		ImGui::SameLine();
+		static ImGuiComboFlags flags = 0;
+		static int item_current_idx = 0; // Here we store our selection data as an index.
+		std::vector<Country>* countryList = CountryList::GetInstance()->getList();
+		const char* combo_preview_value = countryList->at(item_current_idx).name.c_str();  // Pass in the preview value visible before opening the combo (it could be anything)
+		if (ImGui::BeginCombo("##", combo_preview_value, flags))
+		{
+			for (int n = 0; n < countryList->size(); n++)
+			{
+				const bool is_selected = (item_current_idx == n);
+				if (ImGui::Selectable(countryList->at(n).name.c_str(), is_selected)) {
+					item_current_idx = n;
+					countrySelected = &countryList->at(n);
+				}
+
+				// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+				if (is_selected)
+					ImGui::SetItemDefaultFocus();
+			}
+			ImGui::EndCombo();
+		}
+	}
+
+	if (window == "generate" || window == "import") {
+		renderGenerateImportSubWindow();
+	}
+	else if (window == "multiplayer") {
+		std::string text = "Not Done";
+		createLabelWithPosition(text.c_str(), (float)center.x / 2.0f, (float)center.y / 2.0f);
+	}
+	else if (window == "options") {
+		std::string text = "Not Done";
+		createLabelWithPosition(text.c_str(), (float)center.x / 2.0f, (float)center.y / 2.0f);
+	}
+	else if (window == "designer") {
+		UnitType::Type unitType = UnitType::Type::Tank;
+		for (auto& it : windowsManagement->getTypeSubWindow()) {
+			if (it.second == true) {
+				unitType = it.first;
+			}
+		}
+		switch (unitType)
+		{
+		case UnitType::Ship:
+			renderShipDesignerWindows();
+			renderUnit(countrySelected->getShipByHull(columnSelected));
+			break;
+		case UnitType::Tank:
+			renderTankDesignerWindows();
+			renderUnit(countrySelected->getTankByType(columnSelected));
+			break;
+		case UnitType::Plane:
+			renderPlaneDesignerWindows();
+			break;
+		case UnitType::Infantry:
+			break;
+		default:
+			break;
+		}
+		if (createButtonWithPos("Back", center.x / 3, 575.0f)) {
+			windowsManagement->setSubWindow("generate", true);
+			windowsManagement->setSubWindow("designer", false);
+		}
+		if (createButtonWithPos("Regenerate", center.x / 2, 575.0f)) {
+			Tank tank = Tank::generateRandomTank(static_cast<TankType::Type>(columnSelected));
+			tank.iconName = Icon::GetInstance()->getRandomIcon(tank.type);
+			countrySelected->setNewUnits(unitType, tank);
+		}
+	}
+	ImGui::PopStyleColor();
+	ImGui::PopFont();
 }
 
 void Renderer::renderShipDesignerWindow(bool windowOpen, Ship ship)
@@ -726,7 +887,7 @@ void Renderer::renderStats(bool windowOpen, Ship ship, std::map<Hull::Type, std:
 	ImFont* basicFont = io.Fonts->Fonts[2];
 	ImFont* statsFont = io.Fonts->Fonts[4];
 
-	auto off = Utils::calculatePos(Constant::Position::MIDDLE, 1092);
+	auto off = calculatePos(Constant::Position::MIDDLE, 1092);
 	ImGui::SetNextWindowPos(ImVec2(off, 200.0f));
 	ImGui::SetNextWindowSize(ImVec2(1108, 569));
 	ImGui::Begin("##", &windowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar);
@@ -765,131 +926,13 @@ void Renderer::renderStats(bool windowOpen, Ship ship, std::map<Hull::Type, std:
 	ImGui::PopFont();
 }
 
-void Renderer::renderStats(bool windowOpen, Tank tank, std::map<TankType::Type, std::string> tankIconNames, std::unordered_map<TankType::Type, Stats> newTankStats)
-{
-	ImGuiIO& io = ImGui::GetIO();
-	ImFont* basicFont = io.Fonts->Fonts[2];
-	ImFont* statsFont = io.Fonts->Fonts[4];
-
-	auto off = Utils::calculatePos(Constant::Position::MIDDLE, 1092);
-	ImGui::SetNextWindowPos(ImVec2(off, 200.0f));
-	ImGui::SetNextWindowSize(ImVec2(1108, 569));
-	ImGui::Begin("Light Tank", &windowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar);
-	ImGui::PushFont(basicFont);
-	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
-	ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 61.0f);
-	ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 30.0f);
-	ImGui::Text(Tank::tankTypeToString(tank.type).c_str());
-
-	setIcon(ImGui::GetCursorPosY() - 20.0f, ImGui::GetCursorPosX() + 325.0f, Tank::tankTypeToString(tank.type), tankIconNames.find(tank.type)->second, UnitType::Type::Tank);
-
-	ImGui::SetCursorPosY(ImGui::GetCursorPosY() - 25.0f);
-	ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 30.0f);
-	ImGui::Text(Tank::tankVersionToString(tank.version).c_str());
-
-	std::string fileName = std::format("{0}_{1}", Gun::gunNameToString(tank.gun.name), Gun::typeToString(tank.gun.type));
-	setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 22.0f, "modules", fileName, UnitType::Type::Tank);
-
-	fileName = std::format("{0}_turret_{1}", TurretType::turretTypeToString(tank.turret.type), tank.turret.crew);
-	setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 88.0f, "modules", fileName, UnitType::Type::Tank);
-
-	fileName = std::format("{0}", SpecialModule::typeToString(tank.specialModules[0].type));
-	setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 170.0f, "modules", fileName, UnitType::Type::Tank);
-
-	fileName = std::format("{0}", SpecialModule::typeToString(tank.specialModules[1].type));
-	setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 240.0f, "modules", fileName, UnitType::Type::Tank);
-
-	fileName = std::format("{0}", SpecialModule::typeToString(tank.specialModules[2].type));
-	setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 315.0f, "modules", fileName, UnitType::Type::Tank);
-
-	fileName = std::format("{0}", SpecialModule::typeToString(tank.specialModules[3].type));
-	setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 390.0f, "modules", fileName, UnitType::Type::Tank);
-
-	setImage(ImGui::GetCursorPosY() - 4.0f, ImGui::GetCursorPosX() + 16.0f, "blueprint", std::format("ger_{0}_tank_blueprint", Tank::tankTypeToString(tank.type)), UnitType::Type::Tank);
-
-	fileName = std::format("{0}", Suspension::typeToString(tank.suspension.type));
-	setImage(Constant::TextPos::TANK_MODULE_HEIGHT_2 + 2.0f - 4.0f, ImGui::GetCursorPosX() + 22.5f, "modules", fileName, UnitType::Type::Tank);
-
-	fileName = std::format("{0}", Armor::typeToString(tank.armor.type));
-	setImage(Constant::TextPos::TANK_MODULE_HEIGHT_2 + 2.0f - 4.0f, ImGui::GetCursorPosX() + 100.0f, "modules", fileName, UnitType::Type::Tank);
-
-	fileName = std::format("{0}", Engine::typeToString(tank.engine.type));
-	setImage(Constant::TextPos::TANK_MODULE_HEIGHT_2 + 2.0f - 4.0f, ImGui::GetCursorPosX() + 165.0f, "modules", fileName, UnitType::Type::Tank);
-
-	off = Utils::calculatePos(Constant::Position::MIDDLE, std::to_string(tank.engineLevel).c_str());
-	createLabelWithPosition(std::to_string(tank.engineLevel).c_str(), off - 130.0f, Constant::TextPos::TANK_MODULE_HEIGHT_2 + 20.0f);
-
-	off = calculatePos(Constant::Position::MIDDLE, std::to_string(tank.armorLevel).c_str());
-	createLabelWithPosition(std::to_string(tank.armorLevel).c_str(), off - 55.0f, Constant::TextPos::TANK_MODULE_HEIGHT_2 + 20.0f);
-
-	ImGui::PushFont(statsFont);
-	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
-
-	//Base stats
-	std::string speed = std::format("{:.1f} km/h", newTankStats.find(tank.type)->second.speed);
-	createLabelWithPosition(speed.c_str(), Constant::TextPos::BASE_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 60.0f);
-
-	std::string reliability = std::format("{:.1f}", newTankStats.find(tank.type)->second.reliability);
-	createLabelWithPosition(reliability.c_str(), Constant::TextPos::BASE_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 80.0f);
-
-	std::string supplyUse = std::format("{:.2f}", newTankStats.find(tank.type)->second.supplyUse);
-	createLabelWithPosition(supplyUse.c_str(), Constant::TextPos::BASE_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 100.0f);
-	//Base stats
-
-	//Combat stats
-	std::string softAttack = std::format("{:.2f}", newTankStats.find(tank.type)->second.softAttack);
-	createLabelWithPosition(softAttack.c_str(), Constant::TextPos::COMBAT_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 60.0f);
-
-	std::string hardAttack = std::format("{:.2f}", newTankStats.find(tank.type)->second.hardAttack);
-	createLabelWithPosition(hardAttack.c_str(), Constant::TextPos::COMBAT_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 80.0f);
-
-	std::string piercing = std::format("{:.2f}", newTankStats.find(tank.type)->second.piercing);
-	createLabelWithPosition(piercing.c_str(), Constant::TextPos::COMBAT_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 100.0f);
-
-	std::string hardness = std::format("{:.2f}", newTankStats.find(tank.type)->second.hardness);
-	createLabelWithPosition(hardness.c_str(), Constant::TextPos::COMBAT_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 120.0f);
-
-	std::string armor = std::format("{:.2f}", newTankStats.find(tank.type)->second.armor);
-	createLabelWithPosition(armor.c_str(), Constant::TextPos::COMBAT_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 140.0f);
-
-	std::string breakthrough = std::format("{:.2f}", newTankStats.find(tank.type)->second.breakthrough);
-	createLabelWithPosition(breakthrough.c_str(), Constant::TextPos::COMBAT_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 160.0f);
-
-	std::string defense = std::format("{:.2f}", newTankStats.find(tank.type)->second.defense);
-	createLabelWithPosition(defense.c_str(), Constant::TextPos::COMBAT_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 180.0f);
-
-	std::string airAttack = std::format("{:.2f}", newTankStats.find(tank.type)->second.airAttack);
-	createLabelWithPosition(airAttack.c_str(), Constant::TextPos::COMBAT_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 200.0f);
-	//Combat stats
-
-	//Misc Stats
-	std::string fuelCapacity = std::format("{:.2f}", newTankStats.find(tank.type)->second.fuelCapacity);
-	createLabelWithPosition(fuelCapacity.c_str(), 1060.0f, Constant::TextPos::TITLE_HEIGHT + 60.0f);
-
-	std::string fuelUsage = std::format("{:.2f}", newTankStats.find(tank.type)->second.fuelUsage);
-	createLabelWithPosition(fuelUsage.c_str(), 1060.0f, Constant::TextPos::TITLE_HEIGHT + 80.0f);
-
-	//TODO research suppression value
-	createLabelWithPosition("???", 1060.0f, Constant::TextPos::TITLE_HEIGHT + 100.0f);
-
-	//TODO research reconnaissance value
-	createLabelWithPosition("???", 1060.0f, Constant::TextPos::TITLE_HEIGHT + 120.0f);
-
-	std::string entrenchment = std::format("{:.2f}", newTankStats.find(tank.type)->second.entrenchment);
-	createLabelWithPosition(entrenchment.c_str(), 1060.0f, Constant::TextPos::TITLE_HEIGHT + 140.0f);
-	//Misc Stats
-
-	ImGui::PopStyleColor();
-	ImGui::PopFont();
-}
-
 void Renderer::renderStats(bool windowOpen, Plane plane, std::map<PlaneType::Type, std::string> planeIconNames, std::unordered_map<PlaneRole::Role, Stats> newPlaneStats)
 {
 	ImGuiIO& io = ImGui::GetIO();
 	ImFont* basicFont = io.Fonts->Fonts[2];
 	ImFont* statsFont = io.Fonts->Fonts[4];
 
-	auto off = Utils::calculatePos(Constant::Position::MIDDLE, 1092);
+	auto off = calculatePos(Constant::Position::MIDDLE, 1092);
 	ImGui::SetNextWindowPos(ImVec2(off, 200.0f));
 	ImGui::SetNextWindowSize(ImVec2(1108, 569));
 	ImGui::Begin("Light Tank", &windowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar);

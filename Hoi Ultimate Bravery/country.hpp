@@ -7,6 +7,7 @@
 #include "shiptype.hpp"
 #include "shipversion.hpp"
 #include "tank.hpp"
+#include "tankstats.hpp"
 #include "tanktype.hpp"
 #include "unittype.hpp"
 
@@ -67,7 +68,9 @@ public:
 	void setNewUnits(UnitType::Type unitType, Tank unit);
 	void setNewUnits(UnitType::Type unitType, Plane unit);
 	Ship getShipByHull(int type);
-	Tank getTankByType(int type);
+	std::tuple<Tank, TankStats> getTankByType(int type);
+	int getTankTypeListSize(int type);
+	int getShipHullListSize(int type);
 	Plane getPlaneByRole(int type);
 
 	std::string name;

@@ -188,6 +188,7 @@
     <ClCompile Include="shiptype.cpp" />
     <ClCompile Include="special.cpp" />
     <ClCompile Include="stats.cpp" />
+    <ClCompile Include="tankstats.cpp" />
     <ClCompile Include="suspension.cpp" />
     <ClCompile Include="tank.cpp" />
     <ClCompile Include="tanktype.cpp" />
@@ -249,6 +250,7 @@
     <ClInclude Include="shiptype.hpp" />
     <ClInclude Include="special.hpp" />
     <ClInclude Include="stats.hpp" />
+    <ClInclude Include="tankstats.hpp" />
     <ClInclude Include="suspension.hpp" />
     <ClInclude Include="tank.hpp" />
     <ClInclude Include="tanktype.hpp" />

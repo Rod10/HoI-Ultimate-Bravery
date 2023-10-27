@@ -3,7 +3,7 @@
 Engine Engine::generateRandomEngine()
 {
     srand(time(0));
-    auto statsKey = Stats::getStatsKeyArray();
+    auto statsKey = TankStats::getStatsKeyArray();
 
     std::vector<Engine::Type> engineType;
     for (int i = 0; i < Engine::Type::Last; i++) {
@@ -22,7 +22,7 @@ Engine Engine::generateRandomEngine()
         }
     }
     Ressources ressources;
-    Stats stats = Stats(ressources, armorData);
+    TankStats stats = TankStats(ressources, armorData);
     return Engine(type, stats);
 }
 

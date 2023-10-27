@@ -34,6 +34,7 @@ public:
 	std::vector<Module> customModule;
 	std::vector<Module> fixedModule;
 	Stats stats;
+	std::string iconName;
 
 	static ShipVersion::Version getRandomVersion(Hull::Type hull, ShipType::Type type);
 	static std::vector<Module> generateFixedModule(ShipType::Type type, ShipVersion::Version version);

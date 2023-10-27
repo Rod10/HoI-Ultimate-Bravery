@@ -24,13 +24,13 @@ Turret Turret::generatingRandomTurret(int tankTypeInt)
     json turretStats = turretData["stats"];
     Ressources ressources = Ressources();
 
-    auto statsKey = Stats::getStatsKeyArray();
+    auto statsKey = TankStats::getStatsKeyArray();
     for (auto& el : statsKey) {
         if (turretStats[el].is_null()) {
             turretStats[el] = 0.0f;
         }
     }
-    Stats stats = Stats(ressources, turretStats);
+    TankStats stats = TankStats(ressources, turretStats);
 
     Turret turret = Turret(turretType, std::stoi(crew), allowedGun, stats);
     return turret;

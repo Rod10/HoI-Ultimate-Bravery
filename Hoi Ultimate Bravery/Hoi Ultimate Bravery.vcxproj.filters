@@ -147,7 +147,7 @@
     <ClCompile Include="special.cpp">
       <Filter>Fichiers sources\Tank</Filter>
     </ClCompile>
-    <ClCompile Include="stats.cpp">
+    <ClCompile Include="tankstats.cpp">
       <Filter>Fichiers sources\Tank</Filter>
     </ClCompile>
     <ClCompile Include="suspension.cpp">
@@ -223,6 +223,9 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="windowsmanagement.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="stats.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -326,7 +329,7 @@
     <ClInclude Include="suspension.hpp">
       <Filter>Fichiers d%27en-tête\Tank</Filter>
     </ClInclude>
-    <ClInclude Include="stats.hpp">
+    <ClInclude Include="tankstats.hpp">
       <Filter>Fichiers d%27en-tête\Tank</Filter>
     </ClInclude>
     <ClInclude Include="special.hpp">
@@ -402,6 +405,9 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="windowsmanagement.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="stats.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

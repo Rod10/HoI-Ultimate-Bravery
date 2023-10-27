@@ -1,5 +1,5 @@
 #pragma once
-#include "stats.hpp"
+#include "tankstats.hpp"
 #include "tanktype.hpp"
 #include "utils.hpp"
 
@@ -20,7 +20,7 @@ public:
 	Suspension();
 	Suspension(
 		Type type,
-		Stats stats
+		TankStats stats
 	) :
 		type(type),
 		stats(stats){}
@@ -40,5 +40,5 @@ public:
 	static Suspension generateRandomSuspension(TankType::Type type);
 
 	Type type;
-	Stats stats;
+	TankStats stats;
 };

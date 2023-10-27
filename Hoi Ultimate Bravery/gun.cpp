@@ -2,7 +2,7 @@
 
 std::map<Gun::Category, std::vector<Gun>> Gun::generateGunList()
 {
-    auto statsKey = Stats::getStatsKeyArray();
+    auto statsKey = TankStats::getStatsKeyArray();
 
     GunSize::Size gunSize = GunSize::Size::Small;
     Gun::Category gunCategory;
@@ -12,11 +12,11 @@ std::map<Gun::Category, std::vector<Gun>> Gun::generateGunList()
     json GunData = json::parse(fC);
     fC.close();
     json gunStats;
-    Stats stats;
+    TankStats stats;
     Ressources gunRessources;
     std::vector<Gun> gunList;
     std::map<Gun::Category, std::vector<Gun>> catList;
-    std::map<Gun::Type, Stats> statsByType;
+    std::map<Gun::Type, TankStats> statsByType;
     Gun gun;
     for (int gunCategoryInt = Gun::Category::Cannon; gunCategoryInt != Gun::Category::Last; gunCategoryInt++) {
         gunList.clear();
@@ -40,9 +40,9 @@ std::map<Gun::Category, std::vector<Gun>> Gun::generateGunList()
                             }
                         }
                         gunRessources = Ressources(gunStats["ressources"]);
-                        stats = Stats(gunRessources, gunStats);
+                        stats = TankStats(gunRessources, gunStats);
                         std::string stringType = type.key();
-                        statsByType.insert(std::pair<Gun::Type, Stats>(Gun::stringToGunType(stringType), stats));
+                        statsByType.insert(std::pair<Gun::Type, TankStats>(Gun::stringToGunType(stringType), stats));
                     }
                 }
                 if (data.key() == "roleAllowed") {

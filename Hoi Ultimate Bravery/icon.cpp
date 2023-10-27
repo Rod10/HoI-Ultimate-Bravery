@@ -525,11 +525,11 @@ std::string Icon::getRandomIcon(TankType::Type type)
 	return it->first;
 }
 
-std::string Icon::getShipIcon(Hull::Type type, Country *country)
+std::string Icon::getShipIcon(Ship ship)
 {
-	std::map<std::string, Texture> icons = Icon::GetInstance()->getShipIcon(Hull::typeToString(type));
-	std::string version = ShipVersion::versionToFileString(country->shipList.find(type)->second.version);
-	std::string shipType = ShipType::shipTypeToIconString(country->shipList.find(type)->second.type);
+	std::map<std::string, Texture> icons = Icon::GetInstance()->getShipIcon(Hull::typeToString(ship.hull));
+	std::string version = ShipVersion::versionToFileString(ship.version);
+	std::string shipType = ShipType::shipTypeToIconString(ship.type);
 	std::string string = std::format("{0}_{1}", version, shipType);
 	return icons.find(string)->first;
 }

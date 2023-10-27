@@ -1,7 +1,7 @@
 #pragma once
 //#include "gun.hpp"
 #include "gunsize.hpp"
-#include "stats.hpp"
+#include "tankstats.hpp"
 #include "tanktype.hpp"
 #include "turrettype.hpp"
 #include "utils.hpp"
@@ -14,7 +14,7 @@
 class Turret
 {
 public :
-		Turret(TurretType::Type type, int crew, std::vector<GunSize::Size> allowedGun, Stats stats) :
+		Turret(TurretType::Type type, int crew, std::vector<GunSize::Size> allowedGun, TankStats stats) :
 		type(type),
 		crew(crew),
 		allowedGun(allowedGun),
@@ -25,6 +25,6 @@ public :
 	TurretType::Type type;
 	int crew;
 	std::vector<GunSize::Size> allowedGun;
-	Stats stats;
+	TankStats stats;
 };
 

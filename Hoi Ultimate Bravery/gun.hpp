@@ -1,7 +1,7 @@
 #pragma once
 #include "gunsize.hpp"
 #include "role.hpp"
-#include "stats.hpp"
+#include "tankstats.hpp"
 #include "turret.hpp"
 #include "utils.hpp"
 
@@ -53,7 +53,7 @@ public:
 	Gun(Gun::Category category,
 		Gun::Name name,
 		GunSize::Size size,
-		std::map<Gun::Type, Stats> statsByType,
+		std::map<Gun::Type, TankStats> statsByType,
 		std::vector<Role::Type> roleAllowed) :
 		category(category),
 		name(name),
@@ -65,7 +65,7 @@ public:
 		Gun::Name name,
 		GunSize::Size size,
 		Gun::Type type,
-		Stats stats,
+		TankStats TankStats,
 		std::vector<Role::Type> roleAllowed) :
 		category(category),
 		name(name),
@@ -273,7 +273,7 @@ public:
 	GunSize::Size size;
 	Gun::Type type;
 	Gun::Name name;
-	std::map<Type, Stats> statsByType;
-	Stats stats;
+	std::map<Type, TankStats> statsByType;
+	TankStats stats;
 	std::vector<Role::Type> roleAllowed;
 };

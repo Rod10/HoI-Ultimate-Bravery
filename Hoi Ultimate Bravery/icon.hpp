@@ -46,7 +46,7 @@ public:
 	std::map<std::string, Texture> getShipIcon(std::string hull);
 	std::map<std::string, Texture> getPlaneIcon(std::string type);
 	std::string getRandomIcon(TankType::Type type);
-	std::string getShipIcon(Hull::Type type, Country* country);
+	std::string getShipIcon(Ship ship);
 	std::string getPlaneIcon(PlaneType::Type type, PlaneRole::Role role, Country* country);
 	Texture getTankIconTextures(std::string type, std::string name);
 	Texture getTankModulesTextures(std::string type, std::string name);

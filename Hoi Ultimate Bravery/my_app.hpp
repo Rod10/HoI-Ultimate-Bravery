@@ -51,7 +51,6 @@ public:
 
 	virtual void StartUp() final
 	{
-		auto statsKey = Stats::getStatsKeyArray();
 		languageFile = std::format("{0}.csv", settings->getLanguage().value);
 		languageFilePath = std::format("Assets/Data/languages/{0}", languageFile);
 		localizedStrings = Utils::loadTranslation(languageFilePath);
@@ -69,7 +68,8 @@ public:
 		ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(59, 65, 57, 255));
 		ImGui::PushStyleColor(ImGuiCol_WindowBg, backgroundColor);
 		ImGui::Begin("Main Window", &mainWindowOpen, 7 | ImGuiWindowFlags_NoInputs);
-		Renderer::createLabelWithPosition("HoI Ultimate Bravery", Constant::Position::MIDDLE);
+		ImGui::SetCursorPosX(center.x);
+		ImGui::Text("HoI Ultimate Bravery");
 		ImGui::PopStyleColor();
 		ImGui::PopStyleColor();
 		ImGui::PopFont();

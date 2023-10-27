@@ -3,7 +3,7 @@
 Suspension Suspension::generateRandomSuspension(TankType::Type type)
 {
     srand(time(0));
-    auto statsKey = Stats::getStatsKeyArray();
+    auto statsKey = TankStats::getStatsKeyArray();
 
     std::vector<Suspension::Type> suspensionTypeList;
     for (int i = 0; i < Suspension::Type::Last; i++) {
@@ -29,7 +29,7 @@ Suspension Suspension::generateRandomSuspension(TankType::Type type)
         }
     }
     Ressources moduleRessources;
-    Stats stats = Stats(moduleRessources, suspensionDataStats);
+    TankStats stats = TankStats(moduleRessources, suspensionDataStats);
 
     Suspension suspension = Suspension(suspensionType, stats);
     return suspension;

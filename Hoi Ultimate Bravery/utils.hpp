@@ -142,25 +142,5 @@ class Utils
             }
             return localizedStrings;
         }
-
-        static float calculatePos(Constant::Position position, std::string text) {
-            ImGuiStyle& style = ImGui::GetStyle();
-
-            float size = ImGui::CalcTextSize(text.c_str()).x - style.FramePadding.x * 2.0f;
-            float avail = ImGui::GetContentRegionAvail().x;
-
-            float off = (avail - size) * (position / 1000.f);
-            return off;
-        }
-
-        static float calculatePos(Constant::Position position, int width) {
-            ImGuiStyle& style = ImGui::GetStyle();
-
-            float size = width - style.FramePadding.x * 2.0f;
-            float avail = ImGui::GetContentRegionAvail().x;
-
-            float off = (avail - size) * (position / 1000.f);
-            return off;
-        }
 };
 

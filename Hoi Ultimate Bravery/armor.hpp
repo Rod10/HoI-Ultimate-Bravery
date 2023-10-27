@@ -1,6 +1,7 @@
 #pragma once
 #include "ressources.hpp"
 #include "stats.hpp"
+#include "tankstats.hpp"
 #include "utils.hpp"
 
 #include <fstream>
@@ -18,7 +19,7 @@ public:
 	Armor();
 	Armor(
 		Type type,
-		Stats stats
+		TankStats stats
 	) : 
 		type(type),
 		stats(stats) {}
@@ -35,6 +36,6 @@ public:
 	static Armor generateRandomArmor();
 
 	Type type;
-	Stats stats;
+	TankStats stats;
 };
 

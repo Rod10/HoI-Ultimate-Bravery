@@ -1,7 +1,7 @@
 #include "special.hpp"
 
 std::array<SpecialModule, 4> SpecialModule::generateSpecialModule() {
-    auto statsKey = Stats::getStatsKeyArray();
+    auto statsKey = TankStats::getStatsKeyArray();
 
     std::array<SpecialModule, 4> specialModules;
 
@@ -49,7 +49,7 @@ std::array<SpecialModule, 4> SpecialModule::generateSpecialModule() {
             }
         }
         Ressources moduleRessources = Ressources(moduleStats["ressources"]);
-        specialModule.stats = Stats(moduleRessources, moduleStats);
+        specialModule.stats = TankStats(moduleRessources, moduleStats);
     }
 
     return specialModules;

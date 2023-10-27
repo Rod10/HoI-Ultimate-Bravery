@@ -1,7 +1,7 @@
 #pragma once
 #include "planetype.hpp"
 #include "ressources.hpp"
-#include "stats.hpp"
+#include "tankstats.hpp"
 #include "utils.hpp"
 
 #include <format>
@@ -22,7 +22,7 @@ public:
 	Engine();
 	Engine(
 		Type type,
-		Stats stats
+		TankStats stats
 	) : 
 		type(type),
 		stats(stats) {}
@@ -41,7 +41,7 @@ public:
 	static Engine generateRandomEngine();
 
 	Type type;
-	Stats stats;
+	TankStats stats;
 };
 
 class PlaneEngine {
