@@ -409,6 +409,20 @@ void renderGenerateImportSubWindow() {
 }
 //Ship Designer
 void renderShipDesignerWindows() {
+	ImGuiIO& io = ImGui::GetIO();
+	ImFont* basicFont = io.Fonts->Fonts[0];
+	ImFont* titleFont = io.Fonts->Fonts[1];
+	ImFont* textFont = io.Fonts->Fonts[2];
+	ImFont* TitleStatsFont = io.Fonts->Fonts[3];
+	ImFont* statsFont = io.Fonts->Fonts[4];
+	Texture texture = Icon::GetInstance()->getTankModulesTextures("background", "tank_designer_bg");
+	ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+
+	setImage(Constant::TextPos::TANK_NAME_HEIGHT, ImGui::GetCursorPosX() + 20.0f, "background", "ship_name_bg", UnitType::Type::Ship);
+
+	setImage(95, 150, "background", "ship_icon_bg", UnitType::Type::Ship);
+
+	setImage(Constant::TextPos::TANK_NAME_HEIGHT, ImGui::GetCursorPosX() + 275.0f, "background", "ship_name_bg", UnitType::Type::Ship);
 
 }
 
