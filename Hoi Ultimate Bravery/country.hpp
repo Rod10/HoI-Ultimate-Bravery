@@ -62,6 +62,34 @@ public:
 				{PlaneRole::StrategicBombing, {}},
 			}
 		));
+
+		imports.insert(std::pair<UnitType::Type, std::map<Hull::Type, bool>>(
+			UnitType::Ship, {
+				{Hull::Type::Destroyer, false},
+				{Hull::Type::Cruiser, false},
+				{Hull::Type::HeavyShip, false},
+				{Hull::Type::Carrier, false},
+				{Hull::Type::Submarine, false},
+			}
+		));
+		imports.insert(std::pair<UnitType::Type, std::map<TankType::Type, bool>>(
+			UnitType::Tank, {
+				{TankType::Light, false},
+				{TankType::Medium, false},
+				{TankType::Heavy, false},
+				{TankType::SuperHeavy, false},
+				{TankType::Modern, false},
+			}
+		));
+		imports.insert(std::pair<UnitType::Type, std::map<PlaneRole::Role, bool>>(
+			UnitType::Plane, {
+				{PlaneRole::Fighter, false},
+				{PlaneRole::CAS, false},
+				{PlaneRole::NavalBombing, false},
+				{PlaneRole::TacticalBombing, false},
+				{PlaneRole::StrategicBombing, false},
+			}
+		));
 	}
 	static std::vector<Country> generateCountryList();
 	void setNewUnits(UnitType::Type unitType, Ship unit);
@@ -69,9 +97,17 @@ public:
 	void setNewUnits(UnitType::Type unitType, Plane unit);
 	Ship getShipByHull(int type);
 	std::tuple<Tank, TankStats> getTankByType(int type);
-	int getTankTypeListSize(int type);
-	int getShipHullListSize(int type);
 	Plane getPlaneByRole(int type);
+	int getShipHullListSize(int type);
+	int getTankTypeListSize(int type);
+	int getPlaneRoleListSize(int type);
+
+	void setImport(UnitType::Type unitType, Hull::Type hull, bool value);
+	void setImport(UnitType::Type unitType, TankType::Type type, bool value);
+	void setImport(UnitType::Type unitType, PlaneRole::Role role, bool value);
+	bool getImport(UnitType::Type unitType, Hull::Type hull);
+	bool getImport(UnitType::Type unitType, TankType::Type type);
+	bool getImport(UnitType::Type unitType, PlaneRole::Role role);
 
 	std::string name;
 	std::string tag;
@@ -86,6 +122,7 @@ public:
 	std::map < PlaneRole::Role, Plane > planeList;
 	std::unordered_map < PlaneRole::Role, Stats > newPlaneStats;
 	std::map<UnitType::Type, std::any> units;
+	std::map<UnitType::Type, std::any> imports;
 };
 
 class CountryList {

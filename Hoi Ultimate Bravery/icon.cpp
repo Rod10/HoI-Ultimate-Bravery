@@ -513,8 +513,8 @@ std::map<std::string, Texture> Icon::getShipIcon(std::string hull) {
 	return shipIconTexture_.find(hull)->second;
 }
 
-std::map<std::string, Texture> Icon::getPlaneIcon(std::string hull) {
-	return planeIconTextures_.find(hull)->second;
+std::map<std::string, Texture> Icon::getPlaneIcon(std::string type) {
+	return planeIconTextures_.find(type)->second;
 }
 
 std::string Icon::getRandomIcon(TankType::Type type)
@@ -534,11 +534,11 @@ std::string Icon::getShipIcon(Ship ship)
 	return icons.find(string)->first;
 }
 
-std::string Icon::getPlaneIcon(PlaneType::Type type, PlaneRole::Role role, Country* country)
+std::string Icon::getPlaneIcon(Plane plane)
 {
-	std::map<std::string, Texture> icons = Icon::GetInstance()->getPlaneIcon(PlaneType::typeToString(type));
-	std::string version = PlaneVersion::versionToFileString(country->planeList.find(role)->second.version);
-	std::string shipType = PlaneType::typeToIconString(type);
+	std::map<std::string, Texture> icons = Icon::GetInstance()->getPlaneIcon(PlaneType::typeToString(plane.type));
+	std::string version = PlaneVersion::versionToFileString(plane.version);
+	std::string shipType = PlaneType::typeToIconString(plane.type);
 	std::string string = std::format("{0}_plane_{1}", shipType, version);
 	return icons.find(string)->first;
 }

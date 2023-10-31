@@ -47,32 +47,27 @@ std::vector<Country>* CountryList::getList() {
 
 void Country::setNewUnits(UnitType::Type unitType, Ship unit) {
     auto& shipTypeList = std::any_cast<std::map<Hull::Type, std::vector<std::any>>&>(units.find(unitType)->second);
-    if (this->getShipHullListSize((int)unit.hull) == 0) {
-        shipTypeList.find(unit.hull)->second.push_back(unit);
-        shipTypeList.find(unit.hull)->second.push_back(Stats());
-    }
-    else {
+    if (this->getShipHullListSize((int)unit.hull) > 0) {
         shipTypeList.find(unit.hull)->second.clear();
-        shipTypeList.find(unit.hull)->second.push_back(unit);
-        shipTypeList.find(unit.hull)->second.push_back(Stats());
     }
+    shipTypeList.find(unit.hull)->second.push_back(unit);
+    shipTypeList.find(unit.hull)->second.push_back(Stats());
 }
 
 void Country::setNewUnits(UnitType::Type unitType, Tank unit) {
     auto &tankTypeList = std::any_cast<std::map<TankType::Type, std::vector<std::any>>&>(units.find(unitType)->second);
-    if (this->getTankTypeListSize((int)unit.type) == 0) {
-        tankTypeList.find(unit.type)->second.push_back(unit);
-        tankTypeList.find(unit.type)->second.push_back(Tank::generateNewStats(unit));
-    }
-    else {
+    if (this->getTankTypeListSize((int)unit.type) > 0) {
         tankTypeList.find(unit.type)->second.clear();
-        tankTypeList.find(unit.type)->second.push_back(unit);
-        tankTypeList.find(unit.type)->second.push_back(Tank::generateNewStats(unit));
     }
+    tankTypeList.find(unit.type)->second.push_back(unit);
+    tankTypeList.find(unit.type)->second.push_back(Tank::generateNewStats(unit));
 }
 
 void Country::setNewUnits(UnitType::Type unitType, Plane unit) {
     auto& planeTypeList = std::any_cast<std::map<PlaneRole::Role, std::vector<std::any>>&>(units.find(unitType)->second);
+    if (this->getPlaneRoleListSize((int)unit.role) > 0) {
+        planeTypeList.find(unit.role)->second.clear();
+    }
     planeTypeList.find(unit.role)->second.push_back(unit);
     planeTypeList.find(unit.role)->second.push_back(Stats());
 }
@@ -100,10 +95,44 @@ int Country::getTankTypeListSize(int type) {
     return tankTypeList.find(static_cast<TankType::Type>(type))->second.size();
 }
 
-
 Plane Country::getPlaneByRole(int type) {
     auto& planeTypeList = std::any_cast<std::map<PlaneRole::Role, std::vector<std::any>>&>(units.find(UnitType::Plane)->second);
     return std::any_cast<Plane>(planeTypeList.find(static_cast<PlaneRole::Role>(type))->second[0]);
+}
+
+int Country::getPlaneRoleListSize(int type) {
+    auto& planeRoleList = std::any_cast<std::map<PlaneRole::Role, std::vector<std::any>>&>(units.find(UnitType::Plane)->second);
+    return planeRoleList.find(static_cast<PlaneRole::Role>(type))->second.size();
+}
+
+void Country::setImport(UnitType::Type unitType, Hull::Type hull, bool value) {
+    auto& shipTypeList = std::any_cast<std::map<Hull::Type, bool>&>(imports.find(unitType)->second);
+    shipTypeList.find(hull)->second = value;
+}
+
+void Country::setImport(UnitType::Type unitType, TankType::Type type, bool value) {
+    auto& tankTypeList = std::any_cast<std::map<TankType::Type, bool>&>(imports.find(unitType)->second);
+    tankTypeList.find(type)->second = value;
+}
+
+void Country::setImport(UnitType::Type unitType, PlaneRole::Role role, bool value) {
+    auto& planeRoleList = std::any_cast<std::map<PlaneRole::Role, bool>&>(imports.find(unitType)->second);
+    planeRoleList.find(role)->second = value;
+}
+
+bool Country::getImport(UnitType::Type unitType, Hull::Type hull) {
+    auto& shipTypeList = std::any_cast<std::map<Hull::Type, bool>&>(imports.find(unitType)->second);
+    return shipTypeList.find(hull)->second;
+}
+
+bool Country::getImport(UnitType::Type unitType, TankType::Type type) {
+    auto& tankTypeList = std::any_cast<std::map<TankType::Type, bool>&>(imports.find(unitType)->second);
+    return tankTypeList.find(type)->second;
+}
+
+bool Country::getImport(UnitType::Type unitType, PlaneRole::Role role) {
+    auto& planeRoleList = std::any_cast<std::map<PlaneRole::Role, bool>&>(imports.find(unitType)->second);
+    return planeRoleList.find(role)->second;
 }
 
 std::vector<Country> Country::generateCountryList() {

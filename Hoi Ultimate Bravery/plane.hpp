@@ -31,6 +31,7 @@ public:
 	PlaneEngine engine;
 	std::unordered_map<PlaneModule::Type, PlaneModule> special;
 	std::vector<PlaneModule> fixed;
+	std::string iconName;
 
 	static Plane generateRandomPlane(PlaneRole::Role role);
 
