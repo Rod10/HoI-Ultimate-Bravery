@@ -1,5 +1,6 @@
 #pragma once
 #include "countriesSettings.hpp"
+#include "division.hpp"
 #include "json.hpp"
 #include "hull.hpp"
 #include "plane.hpp"
@@ -62,6 +63,9 @@ public:
 				{PlaneRole::StrategicBombing, {}},
 			}
 		));
+		units.insert(std::pair<UnitType::Type, std::vector<Division>>(
+			{UnitType::Division, {}}
+		));
 
 		imports.insert(std::pair<UnitType::Type, std::map<Hull::Type, bool>>(
 			UnitType::Ship, {
@@ -95,12 +99,19 @@ public:
 	void setNewUnits(UnitType::Type unitType, Ship unit);
 	void setNewUnits(UnitType::Type unitType, Tank unit);
 	void setNewUnits(UnitType::Type unitType, Plane unit);
+	void setNewUnits(UnitType::Type unitType, Division unit);
 	Ship getShipByHull(int type);
 	std::tuple<Tank, TankStats> getTankByType(int type);
 	Plane getPlaneByRole(int type);
+
+	std::map<Hull::Type, std::vector<std::any>>& getHullList();
+	std::map<TankType::Type, std::vector<std::any>>& getTankList();
+	std::map<PlaneRole::Role, std::vector<std::any>>& getPlaneList();
+
 	int getShipHullListSize(int type);
 	int getTankTypeListSize(int type);
 	int getPlaneRoleListSize(int type);
+	int getDivisionListSize();
 
 	void setImport(UnitType::Type unitType, Hull::Type hull, bool value);
 	void setImport(UnitType::Type unitType, TankType::Type type, bool value);
@@ -109,18 +120,14 @@ public:
 	bool getImport(UnitType::Type unitType, TankType::Type type);
 	bool getImport(UnitType::Type unitType, PlaneRole::Role role);
 
+	bool checkIfListIsEmpty(UnitType::Type unitType);
+
 	std::string name;
 	std::string tag;
 	int ideaPosIdea;
 	CountriesSettings coutriesSettings;
 	bool major;
 
-	std::map<TankType::Type, Tank> tankList;
-	std::unordered_map<TankType::Type, Stats> newTankStats;
-	std::map<Hull::Type, Ship> shipList;
-	std::unordered_map<Hull::Type, Stats> newShipStats;
-	std::map < PlaneRole::Role, Plane > planeList;
-	std::unordered_map < PlaneRole::Role, Stats > newPlaneStats;
 	std::map<UnitType::Type, std::any> units;
 	std::map<UnitType::Type, std::any> imports;
 };

@@ -70,6 +70,12 @@
     <Filter Include="Fichiers sources\Plane">
       <UniqueIdentifier>{7d6dc33d-2962-4013-a7a1-f7f84680dae0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Division">
+      <UniqueIdentifier>{11a4c485-5fa3-4cd5-9a31-33db60f370b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Division">
+      <UniqueIdentifier>{01f671b6-8356-44c3-a499-333b4cc9ef45}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -226,6 +232,24 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="stats.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="division.cpp">
+      <Filter>Fichiers sources\Division</Filter>
+    </ClCompile>
+    <ClCompile Include="divisiontype.cpp">
+      <Filter>Fichiers sources\Division</Filter>
+    </ClCompile>
+    <ClCompile Include="unit.cpp">
+      <Filter>Fichiers sources\Division</Filter>
+    </ClCompile>
+    <ClCompile Include="regimenttype.cpp">
+      <Filter>Fichiers sources\Division</Filter>
+    </ClCompile>
+    <ClCompile Include="unitsubtype.cpp">
+      <Filter>Fichiers sources\Division</Filter>
+    </ClCompile>
+    <ClCompile Include="support.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -408,6 +432,24 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="stats.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="division.hpp">
+      <Filter>Fichiers d%27en-tête\Division</Filter>
+    </ClInclude>
+    <ClInclude Include="divisiontype.hpp">
+      <Filter>Fichiers d%27en-tête\Division</Filter>
+    </ClInclude>
+    <ClInclude Include="unit.hpp">
+      <Filter>Fichiers d%27en-tête\Division</Filter>
+    </ClInclude>
+    <ClInclude Include="regimenttype.hpp">
+      <Filter>Fichiers d%27en-tête\Division</Filter>
+    </ClInclude>
+    <ClInclude Include="unitsubtype.hpp">
+      <Filter>Fichiers d%27en-tête\Division</Filter>
+    </ClInclude>
+    <ClInclude Include="support.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

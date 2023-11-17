@@ -60,9 +60,9 @@ WindowsManagement* WindowsManagement::GetInstance()
 		};
 		std::map<UnitType::Type, bool> typeSubWindow {
 			{UnitType::Tank, true},
-			{ UnitType::Plane, false },
-			{ UnitType::Ship, false },
-			{ UnitType::Infantry, false },
+			{UnitType::Plane, false},
+			{UnitType::Ship, false},
+			{UnitType::Division, false},
 		};
 		windowsManagement_ = new WindowsManagement(buttons, subWindow, typeSubWindow, UnitType::Type::Tank);
 	}

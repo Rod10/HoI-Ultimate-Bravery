@@ -1,0 +1,72 @@
+{
+  "antiTank": {
+    "name": "Anti-Tank",
+    "width": 0.0,
+    "stats": {}
+  },
+  "antiAir": {
+    "name": "Anti-Air",
+    "width": 0.0,
+    "stats": {}
+  },
+  "artillery": {
+    "name": "Artillery",
+    "width": 0.0,
+    "stats": {}
+  },
+  "rocketArtillery": {
+    "name": "Rocket Artillery",
+    "width": 0.0,
+    "stats": {}
+  },
+  "cavalryReconCompany": {
+    "name": "Cavalry Recon Company",
+    "width": 0.0,
+    "stats": {}
+  },
+  "motorizedReconCompany": {
+    "name": "Motorized Recon Company",
+    "width": 0.0,
+    "stats": {}
+  },
+  "armoredCarReconCompany": {
+    "name": "Armored Car Recon Company",
+    "width": 0.0,
+    "stats": {}
+  },
+  "engineerCompany": {
+    "name": "Engineer Company",
+    "width": 0.0,
+    "stats": {}
+  },
+  "maintenanceCompany": {
+    "name": "Maintenance Company",
+    "width": 0.0,
+    "stats": {}
+  },
+  "militaryPolice": {
+    "name": "Military Police",
+    "width": 0.0,
+    "stats": {}
+  },
+  "signalCompany": {
+    "name": "Signal Company",
+    "width": 0.0,
+    "stats": {}
+  },
+  "logisticsCompany": {
+    "name": "Logistics Company",
+    "width": 0.0,
+    "stats": {}
+  },
+  "winterLogisticsCompany": {
+    "name": "Winter Logistics Company",
+    "width": 0.0,
+    "stats": {}
+  },
+  "fieldHospital": {
+    "name": "Field Hospital",
+    "width": 0.0,
+    "stats": {}
+  }
+}

@@ -8,7 +8,7 @@ public:
 		Ship,
 		Tank,
 		Plane,
-		Infantry
+		Division
 	};
 
 	static std::string typeToString(Type type) {
@@ -17,7 +17,7 @@ public:
 		case UnitType::Ship: return "ship";
 		case UnitType::Tank: return "tank";
 		case UnitType::Plane: return "plane";
-		case UnitType::Infantry: return "infantry";
+		case UnitType::Division: return "division";
 		default:
 			break;
 		}

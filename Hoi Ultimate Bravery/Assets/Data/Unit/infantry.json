@@ -1,0 +1,32 @@
+{
+  "infantry": {
+    "name": "Infantry",
+    "width": 2.0,
+    "stats": {}
+  },
+  "bicycle": {
+    "name": "Bicycle",
+    "width": 2.0,
+    "stats": {}
+  },
+  "penalBattalion": {
+    "name": "Penal-Battalion",
+    "width": 2.0,
+    "stats": {}
+  },
+  "moutain": {
+    "name": "Moutain",
+    "width": 2.0,
+    "stats": {}
+  },
+  "marines": {
+    "name": "Marines",
+    "width": 2.0,
+    "stats": {}
+  },
+  "paratrooper": {
+    "name": "Paratrooper",
+    "width": 2.0,
+    "stats": {}
+  }
+}

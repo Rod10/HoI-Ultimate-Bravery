@@ -72,6 +72,31 @@ void Country::setNewUnits(UnitType::Type unitType, Plane unit) {
     planeTypeList.find(unit.role)->second.push_back(Stats());
 }
 
+void Country::setNewUnits(UnitType::Type unitType, Division unit) {
+    auto& divisionList = std::any_cast<std::vector<Division>&>(units.find(unitType)->second);
+    divisionList.push_back(unit);
+}
+
+int Country::getDivisionListSize() {
+    auto& divisionList = std::any_cast<std::vector<Division>&>(units.find(UnitType::Division)->second);
+    return divisionList.size();
+}
+
+std::map<Hull::Type, std::vector<std::any>>& Country::getHullList() {
+    auto& shipTypeList = std::any_cast<std::map<Hull::Type, std::vector<std::any>>&>(units.find(UnitType::Ship)->second);
+    return shipTypeList;
+}
+
+std::map<TankType::Type, std::vector<std::any>>& Country::getTankList() {
+    auto& tankTypeList = std::any_cast<std::map<TankType::Type, std::vector<std::any>>&>(units.find(UnitType::Tank)->second);
+    return tankTypeList;
+}
+
+std::map<PlaneRole::Role, std::vector<std::any>>& Country::getPlaneList() {
+    auto& planeRoleList = std::any_cast<std::map<PlaneRole::Role, std::vector<std::any>>&>(units.find(UnitType::Plane)->second);
+    return planeRoleList;
+}
+
 Ship Country::getShipByHull(int type) {
     auto& shipTypeList = std::any_cast<std::map<Hull::Type, std::vector<std::any>>&>(units.find(UnitType::Ship)->second);
     return std::any_cast<Ship>(shipTypeList.find(static_cast<Hull::Type>(type))->second[0]);
@@ -133,6 +158,33 @@ bool Country::getImport(UnitType::Type unitType, TankType::Type type) {
 bool Country::getImport(UnitType::Type unitType, PlaneRole::Role role) {
     auto& planeRoleList = std::any_cast<std::map<PlaneRole::Role, bool>&>(imports.find(unitType)->second);
     return planeRoleList.find(role)->second;
+}
+
+bool Country::checkIfListIsEmpty(UnitType::Type unitType) {
+    if (unitType == UnitType::Ship) {
+        for (int hullInt = Hull::Destroyer; hullInt != Hull::Last; hullInt++) {
+            if (hullInt != Hull::Type::SuperHeavyShip) {
+                if (getShipHullListSize(hullInt) > 0) {
+                    return false;
+                }
+            }
+        }
+    }
+    else if (unitType == UnitType::Tank) {
+        for (int tankTypeInt = TankType::Light; tankTypeInt != TankType::Last; tankTypeInt++) {
+            if (getTankTypeListSize(tankTypeInt) > 0) {
+                return false;
+            }
+        }
+    }
+    else if (unitType == UnitType::Plane) {
+        for (int planeRoleInt = PlaneRole::Fighter; planeRoleInt != PlaneRole::Last; planeRoleInt++) {
+            if (getPlaneRoleListSize(planeRoleInt) > 0) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 std::vector<Country> Country::generateCountryList() {

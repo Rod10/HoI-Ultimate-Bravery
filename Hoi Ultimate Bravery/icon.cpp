@@ -15,6 +15,7 @@ Icon* Icon::GetInstance()
 		std::map<std::string, std::map<std::string, Texture>> shipModulesTextures;
 		std::map<std::string, std::map<std::string, Texture>> planeModulesTextures;
 		std::map<std::string, std::map<std::string, Texture>> othersTextures;
+		std::map<std::string, std::map<std::string, Texture>> unitsTextures;
 
 		std::string fileName = std::format("./Assets/Images/Background/tank_designer_bg.png");
 		bool ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
@@ -483,8 +484,29 @@ Icon* Icon::GetInstance()
 			textureCategory.insert(std::pair<std::string, Texture>(file_without_extension, texture));
 		}
 		othersTextures.insert(std::pair<std::string, std::map<std::string, Texture>>("icons", textureCategory));
+		textureCategory.clear();
 
-		icon_ = new Icon(tankIconTextures, tankModulesTextures, shipIconTextures, shipModulesTextures, planeModulesTextures, planeIconTextures, othersTextures);
+		path = "./Assets/Images/Units/";
+		for (auto& p : std::filesystem::recursive_directory_iterator(path)) {
+			if (p.is_directory()) {
+				for (const auto& entry : std::filesystem::directory_iterator(p)) {
+					const std::string imagePath = entry.path().string();
+					ret = Utils::LoadTextureFromFile(imagePath.c_str(), &my_image_texture, &my_image_width, &my_image_height);
+					IM_ASSERT(ret);
+					texture = Texture(my_image_width, my_image_height, my_image_texture);
+
+					std::string base_filename = imagePath.substr(imagePath.find_last_of("/\\") + 1);
+					std::string::size_type const p(base_filename.find_last_of('.'));
+					std::string file_without_extension = base_filename.substr(0, p);
+
+					textureCategory.insert(std::pair<std::string, Texture>(file_without_extension, texture));
+				}
+				std::string base_folder = p.path().string().substr(p.path().string().find_last_of("/\\") + 1);
+				unitsTextures.insert(std::pair<std::string, std::map<std::string, Texture>>(base_folder, textureCategory));
+				textureCategory.clear();
+			}
+		}
+		icon_ = new Icon(tankIconTextures, tankModulesTextures, shipIconTextures, shipModulesTextures, planeModulesTextures, planeIconTextures, othersTextures, unitsTextures);
 	}
 	return icon_;
 }

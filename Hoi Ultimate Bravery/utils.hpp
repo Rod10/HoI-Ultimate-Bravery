@@ -44,6 +44,13 @@ class Utils
             return select_randomly(start, end, gen);
         }
 
+        static int getRandomInt(int min, int max) {
+            std::random_device rd;
+            std::mt19937 rng(rd());
+            std::uniform_int_distribution<int> uni(min, max);
+            return uni(rng);
+        }
+
         static constexpr int hash(const char* string) {
             unsigned long hash = 5381;
             int c;

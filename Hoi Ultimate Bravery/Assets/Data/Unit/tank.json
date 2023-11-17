@@ -1,0 +1,107 @@
+{
+  "lightTank": {
+    "name": "Light Tank",
+    "width": 2.0,
+    "stats": {}
+  },
+  "mediumTank": {
+    "name": "Medium Tank",
+    "width": 2.0,
+    "stats": {}
+  },
+  "heavyTank": {
+    "name": "Heavy Tank",
+    "width": 2.0,
+    "stats": {}
+  },
+  "superHeavyTank": {
+    "name": "Super Heavy Tank",
+    "width": 2.0,
+    "stats": {}
+  },
+  "modernTank": {
+    "name": "Modern Tank",
+    "width": 2.0,
+    "stats": {}
+  },
+  "amphibiousTank": {
+    "name": "Amphibious Tank",
+    "width": 2.0,
+    "stats": {}
+  },
+  "lightTankDestroyer": {
+    "name": "Light Tank Destroyer",
+    "width": 2.0,
+    "stats": {}
+  },
+  "mediumTankDestroyer": {
+    "name": "Medium Tank Destroyer",
+    "width": 2.0,
+    "stats": {}
+  },
+  "heavyTankDestroyer": {
+    "name": "Heavy Tank Destroyer",
+    "width": 0.0,
+    "stats": {}
+  },
+  "superHeavyTankDestroyer": {
+    "name": "Super Heavy Tank Destroyer",
+    "width": 2.0,
+    "stats": {}
+  },
+  "modernTankDestroyer": {
+    "name": "Modern Tank Destroyer",
+    "width": 2.0,
+    "stats": {}
+  },
+  "lightSPArtillery": {
+    "name": "Light SP Artillery",
+    "width": 3.0,
+    "stats": {}
+  },
+  "mediumSPArtillery": {
+    "name": "Medium SP Artillery",
+    "width": 3.0,
+    "stats": {}
+  },
+  "heavySPArtillery": {
+    "name": "Heavy SP Artillery",
+    "width": 3.0,
+    "stats": {}
+  },
+  "superHeavySPArtillery": {
+    "name": "Super Heavy SP Artillery",
+    "width": 3.0,
+    "stats": {}
+  },
+  "modernSPArtillery": {
+    "name": "Modern SP Artillery",
+    "width": 3.0,
+    "stats": {}
+  },
+  "lightSPAntiAir": {
+    "name": "Light SP Anti-Air",
+    "width": 2.0,
+    "stats": {}
+  },
+  "mediumSPAntiAir": {
+    "name": "Medium SP Anti-Air",
+    "width": 2.0,
+    "stats": {}
+  },
+  "heavySPAntiAir": {
+    "name": "Heavy SP Anti-Air",
+    "width": 2.0,
+    "stats": {}
+  },
+  "superHeavySPAntiAir": {
+    "name": "Super Heavy SP Anti-Air",
+    "width": 2.0,
+    "stats": {}
+  },
+  "modernSPAntiAir": {
+    "name": "Modern SP Anti-Air",
+    "width": 2.0,
+    "stats": {}
+  }
+}

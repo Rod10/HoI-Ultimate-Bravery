@@ -1,0 +1,27 @@
+{
+  "motorizedAntiTank": {
+    "name": "Motorized Anti-Tank",
+    "width": 0.0,
+    "stats": {}
+  },
+  "motorizedAntiAir": {
+    "name": "Motorized Anti-Air",
+    "width": 1.0,
+    "stats": {}
+  },
+  "motorizedArtillery": {
+    "name": "Motorized Artillery",
+    "width": 3.0,
+    "stats": {}
+  },
+  "truckDrawnRocketArtillery": {
+    "name": "Truck Drawn Rocket Artillery",
+    "width": 3.0,
+    "stats": {}
+  },
+  "motorizedRocketArtillery": {
+    "name": "Motorized Rocket Artillery",
+    "width": 3.0,
+    "stats": {}
+  }
+}

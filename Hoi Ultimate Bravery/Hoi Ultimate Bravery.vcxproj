@@ -150,6 +150,8 @@
     <ClCompile Include="armor.cpp" />
     <ClCompile Include="constant.cpp" />
     <ClCompile Include="country.cpp" />
+    <ClCompile Include="division.cpp" />
+    <ClCompile Include="divisiontype.cpp" />
     <ClCompile Include="dlc.cpp" />
     <ClCompile Include="coutriessettings.cpp" />
     <ClCompile Include="engine.cpp" />
@@ -180,6 +182,7 @@
     <ClCompile Include="planerole.cpp" />
     <ClCompile Include="planetype.cpp" />
     <ClCompile Include="planeversion.cpp" />
+    <ClCompile Include="regimenttype.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="ressources.cpp" />
     <ClCompile Include="role.cpp" />
@@ -188,6 +191,7 @@
     <ClCompile Include="shiptype.cpp" />
     <ClCompile Include="special.cpp" />
     <ClCompile Include="stats.cpp" />
+    <ClCompile Include="support.cpp" />
     <ClCompile Include="tankstats.cpp" />
     <ClCompile Include="suspension.cpp" />
     <ClCompile Include="tank.cpp" />
@@ -195,6 +199,8 @@
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="turret.cpp" />
     <ClCompile Include="turrettype.cpp" />
+    <ClCompile Include="unit.cpp" />
+    <ClCompile Include="unitsubtype.cpp" />
     <ClCompile Include="unittype.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="shipversion.cpp" />
@@ -205,6 +211,8 @@
     <ClInclude Include="armor.hpp" />
     <ClInclude Include="constant.hpp" />
     <ClInclude Include="country.hpp" />
+    <ClInclude Include="division.hpp" />
+    <ClInclude Include="divisiontype.hpp" />
     <ClInclude Include="dlc.hpp" />
     <ClInclude Include="countriessettings.hpp" />
     <ClInclude Include="engine.hpp" />
@@ -242,6 +250,7 @@
     <ClInclude Include="planerole.hpp" />
     <ClInclude Include="planetype.hpp" />
     <ClInclude Include="planeversion.hpp" />
+    <ClInclude Include="regimenttype.hpp" />
     <ClInclude Include="renderer.hpp" />
     <ClInclude Include="ressources.hpp" />
     <ClInclude Include="role.hpp" />
@@ -250,6 +259,7 @@
     <ClInclude Include="shiptype.hpp" />
     <ClInclude Include="special.hpp" />
     <ClInclude Include="stats.hpp" />
+    <ClInclude Include="support.hpp" />
     <ClInclude Include="tankstats.hpp" />
     <ClInclude Include="suspension.hpp" />
     <ClInclude Include="tank.hpp" />
@@ -257,6 +267,8 @@
     <ClInclude Include="texture.hpp" />
     <ClInclude Include="turret.hpp" />
     <ClInclude Include="turrettype.hpp" />
+    <ClInclude Include="unit.hpp" />
+    <ClInclude Include="unitsubtype.hpp" />
     <ClInclude Include="unittype.hpp" />
     <ClInclude Include="utils.hpp" />
     <ClInclude Include="shipversion.hpp" />

@@ -21,14 +21,16 @@ protected:
 		std::map<std::string, std::map<std::string, Texture>> shipModulesTextures,
 		std::map<std::string, std::map<std::string, Texture>> planeModulesTextures,
 		std::map<std::string, std::map<std::string, Texture>> planeIconTextures,
-		std::map<std::string, std::map<std::string, Texture>> othersTextures) :
+		std::map<std::string, std::map<std::string, Texture>> othersTextures,
+		std::map<std::string, std::map<std::string, Texture>> unitsTextures) :
 		tankIconTextures_(tankIconTextures),
 		tankModulesTextures_(tankModulesTextures),
 		shipIconTexture_(shipIconTexture),
 		shipModulesTextures_(shipModulesTextures),
 		planeModulesTextures_(planeModulesTextures),
 		planeIconTextures_(planeIconTextures),
-		othersTextures_(othersTextures) {}
+		othersTextures_(othersTextures),
+		unitsTextures_(unitsTextures) {}
 	static Icon* icon_;
 	std::map<std::string, std::map<std::string, Texture>> tankIconTextures_;
 	std::map<std::string, std::map<std::string, Texture>> shipIconTexture_;
@@ -37,6 +39,7 @@ protected:
 	std::map<std::string, std::map<std::string, Texture>> planeModulesTextures_;
 	std::map<std::string, std::map<std::string, Texture>> planeIconTextures_;
 	std::map<std::string, std::map<std::string, Texture>> othersTextures_;
+	std::map<std::string, std::map<std::string, Texture>> unitsTextures_;
 
 public:
 	Icon(Icon& other) = delete;

@@ -1,13 +1,17 @@
 #pragma once
 #include "country.hpp"
+#include "division.hpp"
+#include "files.hpp"
 #include "hull.hpp"
 #include "icon.hpp"
+#include "imgui_stdlib.h"
 #include "plane.hpp"
 #include "planerole.hpp"
 #include "settings.hpp"
 #include "ship.hpp"
 #include "tank.hpp"
 #include "tanktype.hpp"
+#include "texture.hpp"
 #include "unittype.hpp"
 #include "utils.hpp"
 #include "windowsmanagement.hpp"
@@ -34,12 +38,13 @@ class Renderer
 public:
 	static void renderButtonBlock(float pos);
 	static void renderSubWindow();
-	static void renderShipDesignerWindow(bool windowOpen, Ship ship);
-	static void renderPlaneDesignerWindow(bool windowOpen, Plane plane);
-	static void renderStats(bool windowOpen, Ship ship, std::map<Hull::Type, std::string> shipIconNames, std::unordered_map<Hull::Type, Stats> newShipStats);
-	static void renderStats(bool windowOpen, Plane plane, std::map<PlaneType::Type, std::string> planeIconNames, std::unordered_map<PlaneRole::Role, Stats> newPlaneStats);
 };
 
-static Country* countrySelected = &CountryList::GetInstance()->getList()->at(0);
+static std::vector<Country>* countryList = CountryList::GetInstance()->getList();
+static Country* countrySelected = &countryList->at(0);
 static int columnSelected;
 static UnitType::Type unitTypeSelected;
+static bool allCountries;
+static std::unordered_map<int, std::string> converterToGameName = Utils::loadConverter();
+static std::vector<Language> languageList = Language::getLanguageList();
+static Language* language;

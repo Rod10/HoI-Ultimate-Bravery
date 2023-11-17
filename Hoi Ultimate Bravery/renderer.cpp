@@ -129,6 +129,14 @@ void createTitleWithPosition(const char* label, float x, float y)
 	ImGui::SetCursorPosY(y);
 	ImGui::SetCursorPosX(x);
 	return ImGui::Text(label);
+}	
+
+void AlignForWidth(float width, float alignment = 0.5f) {
+	ImGuiStyle& style = ImGui::GetStyle();
+	float avail = ImGui::GetContentRegionAvail().x;
+	float off = (avail - width) * alignment;
+	if (off > 0.0f)
+		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
 }
 
 void renderMainMenuButtonBlock(float pos) {
@@ -195,7 +203,7 @@ void renderGenerateButtonBlock() {
 		{UnitType::Tank, "Modern_tank_button"},
 		{UnitType::Plane, "Air_Support"},
 		{UnitType::Ship, "Hold"},
-		{UnitType::Infantry, "Infantry"},
+		{UnitType::Division, "Infantry"},
 	};
 	UnitType::Type prevType = windowsManagement->getPrevTypeSubWindow();
 	for (auto& [type, icon] : icons) {
@@ -266,6 +274,199 @@ void Renderer::renderButtonBlock(float pos)
 	ImGui::PopFont();
 }
 
+void renderImportWindow(UnitType::Type unitType) {
+	ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+	std::map<UnitType::Type, std::vector<std::string>> icons {
+		{UnitType::Tank, { "Light_tank", "Medium_tank", "Heavy_tank", "Super_heavy_tank", "Modern_tank"}},
+		{UnitType::Plane, {"Fighter", "CAS", "Naval_bomber", "Tactical_bomber", "Strategic_bomber"}},
+		{UnitType::Ship, {"Destroyer", "Cruiser", "Battleship", "Carrier", "Submarine"}}
+	};
+	if (ImGui::BeginTable("table1", 3))
+	{
+		for (int row = 0; row < 5; row++)
+		{
+			ImGui::TableNextRow();
+			for (int column = 0; column < 3; column++)
+			{
+				ImGui::TableSetColumnIndex(column);
+				if (row == 0) {
+					Texture texture = Icon::GetInstance()->getOthersTextures("icons", icons.find(unitType)->second[column]);
+					ImVec2 size = ImVec2(texture.my_image_width, texture.my_image_height);
+					ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+				}
+				else if (row == 1) {
+					/*std::string name = std::format("Import##{0}", column);
+					if (ImGui::Button(name.c_str())) {
+						switch (unitType)
+						{
+						case UnitType::Ship:
+							countrySelected->setImport(unitType, static_cast<Hull::Type>(column), true);
+							break;
+						case UnitType::Tank:
+							countrySelected->setImport(unitType, static_cast<TankType::Type>(column), true);
+							break;
+						case UnitType::Plane:
+							countrySelected->setImport(unitType, static_cast<PlaneRole::Role>(column), true);
+							break;
+						case UnitType::Infantry:
+							break;
+						default:
+							break;
+						}
+					}*/
+				}
+				else if (row == 2) {
+					std::string icon;
+					if (unitType == UnitType::Ship) {
+						if (countrySelected->getImport(unitType, static_cast<Hull::Type>(column))) {
+							icon = "check";
+						} else {
+							icon = "xmark";
+						}
+					}
+					else if (unitType == UnitType::Tank) {
+						if (countrySelected->getImport(unitType, static_cast<TankType::Type>(column))) {
+							icon = "check";
+						}
+						else {
+							icon = "xmark";
+						}
+					}
+					else if (unitType == UnitType::Plane) {
+						if (countrySelected->getImport(unitType, static_cast<PlaneRole::Role>(column))) {
+							icon = "check";
+						}
+						else {
+							icon = "xmark";
+						}
+					}
+					Texture texture = Icon::GetInstance()->getOthersTextures("icons", icon);
+					ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width / 7, texture.my_image_height / 7));
+				}
+			}
+		}
+		ImGui::EndTable();
+	}
+	ImGui::SetCursorPosX(200.0f);
+	ImGui::SetCursorPosY(center.y / 1.5f);
+	if (ImGui::BeginTable("table2", 2))
+	{
+		for (int row = 0; row < 5; row++)
+		{
+			ImGui::TableNextRow();
+			for (int column = 0; column < 2; column++)
+			{
+				ImGui::TableSetColumnIndex(column);
+				if (row == 0) {
+					Texture texture = Icon::GetInstance()->getOthersTextures("icons", icons.find(unitType)->second[column + 3]);
+					ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+				}
+				else if (row == 1) {
+					/*std::string name = std::format("Import##{0}", column);
+					if (ImGui::Button(name.c_str())) {
+						switch (unitType)
+						{
+						case UnitType::Ship:
+							countrySelected->setImport(unitType, static_cast<Hull::Type>(column + 4), true);
+							break;
+						case UnitType::Tank:
+							countrySelected->setImport(unitType, static_cast<TankType::Type>(column + 3), true);
+							break;
+						case UnitType::Plane:
+							countrySelected->setImport(unitType, static_cast<PlaneRole::Role>(column + 3), true);
+							break;
+						case UnitType::Infantry:
+							break;
+						default:
+							break;
+						}
+					}*/
+				}
+				else if (row == 2) {
+					std::string icon;
+					if (unitType == UnitType::Ship) {
+						if (countrySelected->getImport(unitType, static_cast<Hull::Type>(column + 4))) {
+							icon = "check";
+						}
+						else {
+							icon = "xmark";
+						}
+					}
+					else if (unitType == UnitType::Tank) {
+						if (countrySelected->getImport(unitType, static_cast<TankType::Type>(column + 3))) {
+							icon = "check";
+						}
+						else {
+							icon = "xmark";
+						}
+					}
+					else if (unitType == UnitType::Plane) {
+						if (countrySelected->getImport(unitType, static_cast<PlaneRole::Role>(column + 3))) {
+							icon = "check";
+						}
+						else {
+							icon = "xmark";
+						}
+					}
+					Texture texture = Icon::GetInstance()->getOthersTextures("icons", icon);
+					ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width / 7, texture.my_image_height / 7));
+				}
+			}
+		}
+		ImGui::EndTable();
+	}
+	ImGui::SetCursorPosX(center.x / 2);
+	ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 50.0f);
+	if (ImGui::Button("Reset File")) {
+		if (unitType == UnitType::Ship) {
+			for (int hull = Hull::Type::Destroyer; hull != Hull::Type::Last; hull++) {
+				countrySelected->setImport(unitType, static_cast<Hull::Type>(hull), false);
+			}
+		}
+		else if (unitType == UnitType::Tank) {
+			for (int type = TankType::Type::Light; type != TankType::Type::Last; type++) {
+				countrySelected->setImport(unitType, static_cast<TankType::Type>(type), false);
+			}
+		}
+		else if (unitType == UnitType::Plane) {
+			for (int role = PlaneRole::Role::Fighter; role != PlaneRole::Role::Last; role++) {
+				countrySelected->setImport(unitType, static_cast<PlaneRole::Role>(role), false);
+			}
+		}
+	}
+	ImGui::SetCursorPosX(center.x / 2);
+	ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 50.0f);
+	if (ImGui::Button("Import all")) {
+		if (unitType == UnitType::Ship) {
+			for (int hull = Hull::Type::Destroyer; hull != Hull::Type::Last; hull++) {
+				if (hull != Hull::Type::SuperHeavyShip) {
+					countrySelected->setImport(unitType, static_cast<Hull::Type>(hull), true);
+				}
+			}
+		}
+		else if (unitType == UnitType::Tank) {
+			for (int type = TankType::Type::Light; type != TankType::Type::Last; type++) {
+				countrySelected->setImport(unitType, static_cast<TankType::Type>(type), true);
+			}
+		}
+		else if (unitType == UnitType::Plane) {
+			for (int role = PlaneRole::Role::Fighter; role != PlaneRole::Role::Last; role++) {
+				countrySelected->setImport(unitType, static_cast<PlaneRole::Role>(role), true);
+			}
+		}
+		if (allCountries) {
+			for (auto& country : *countryList) {
+				Files::generateCountryFile(&country, converterToGameName);
+				Files::generateIdeaFile(&country);
+			}
+		}
+		else {
+			Files::generateCountryFile(countrySelected, converterToGameName);
+			Files::generateIdeaFile(countrySelected);
+		}
+	}
+}
+
 void renderGenerateImportSubWindow() {
 	ImGuiIO& io = ImGui::GetIO();
 	ImFont* statsFont = io.Fonts->Fonts[4];
@@ -286,7 +487,14 @@ void renderGenerateImportSubWindow() {
 	std::map<UnitType::Type, std::vector<std::string>> icons {
 		{UnitType::Tank, {"Light_tank", "Medium_tank", "Heavy_tank", "Super_heavy_tank", "Modern_tank"}},
 		{UnitType::Plane, {"Fighter", "CAS", "Naval_bomber", "Tactical_bomber", "Strategic_bomber"}},
-		{UnitType::Ship, {"Destroyer", "Cruiser", "Battleship", "Carrier", "Submarine"}}
+		{UnitType::Ship, {"Destroyer", "Cruiser", "Battleship", "Carrier", "Submarine"}},
+		{UnitType::Division, {"Infantry"}}
+	};
+	std::map<UnitType::Type, int> iconsColNumber{
+		{UnitType::Tank, 3},
+		{UnitType::Plane, 3},
+		{UnitType::Ship, 3},
+		{UnitType::Division, countrySelected->getDivisionListSize()}
 	};
 	if (window == "generate") {
 		ImGui::PushFont(statsFont);
@@ -295,7 +503,7 @@ void renderGenerateImportSubWindow() {
 			for (int row = 0; row < 5; row++)
 			{
 				ImGui::TableNextRow();
-				for (int column = 0; column < 3; column++)
+				for (int column = 0; column < iconsColNumber.find(unitType)->second; column++)
 				{
 					ImGui::TableSetColumnIndex(column);
 					if (row == 0) {
@@ -311,27 +519,71 @@ void renderGenerateImportSubWindow() {
 								unitTypeSelected = unitType;
 								columnSelected = column;
 								if (countrySelected->getShipHullListSize(column) == 0) {
-									Ship ship = Ship::generateRandomShip(static_cast<Hull::Type>(column));
-									ship.iconName = Icon::GetInstance()->getShipIcon(ship);
-									countrySelected->setNewUnits(unitType, ship);
+									if (allCountries) {
+										for (auto& country : *countryList) {
+											Ship ship = Ship::generateRandomShip(static_cast<Hull::Type>(column));
+											ship.iconName = Icon::GetInstance()->getShipIcon(ship);
+											country.setNewUnits(unitType, ship);
+										}
+									} else {
+										Ship ship = Ship::generateRandomShip(static_cast<Hull::Type>(column));
+										ship.iconName = Icon::GetInstance()->getShipIcon(ship);
+										countrySelected->setNewUnits(unitType, ship);
+									}
 								}
 							}
 							else if (unitType == UnitType::Tank) {
 								unitTypeSelected = unitType;
 								columnSelected = column;
 								if (countrySelected->getTankTypeListSize(column) == 0) {
-									Tank tank = Tank::generateRandomTank(static_cast<TankType::Type>(column));
-									tank.iconName = Icon::GetInstance()->getRandomIcon(tank.type);
-									countrySelected->setNewUnits(unitType, tank);
+									if (allCountries) {
+										for (auto& country : *countryList) {
+											Tank tank = Tank::generateRandomTank(static_cast<TankType::Type>(column));
+											tank.iconName = Icon::GetInstance()->getRandomIcon(tank.type);
+											country.setNewUnits(unitType, tank);
+										}
+									}
+									else {
+										Tank tank = Tank::generateRandomTank(static_cast<TankType::Type>(column));
+										tank.iconName = Icon::GetInstance()->getRandomIcon(tank.type);
+										countrySelected->setNewUnits(unitType, tank);
+									}
 								}
 							}
 							else if (unitType == UnitType::Plane) {
 								unitTypeSelected = unitType;
 								columnSelected = column;
 								if (countrySelected->getPlaneRoleListSize(column) == 0) {
-									Plane plane = Plane::generateRandomPlane(static_cast<PlaneRole::Role>(column));
-									plane.iconName = Icon::GetInstance()->getPlaneIcon(plane);
-									countrySelected->setNewUnits(unitType, plane);
+									if (allCountries) {
+										for (auto& country : *countryList) {
+											Plane plane = Plane::generateRandomPlane(static_cast<PlaneRole::Role>(column));
+											plane.iconName = Icon::GetInstance()->getPlaneIcon(plane);
+											country.setNewUnits(unitType, plane);
+										}
+									}
+									else {
+										Plane plane = Plane::generateRandomPlane(static_cast<PlaneRole::Role>(column));
+										plane.iconName = Icon::GetInstance()->getPlaneIcon(plane);
+										countrySelected->setNewUnits(unitType, plane);
+									}
+								}
+							}
+							else if (unitType == UnitType::Division) {
+								unitTypeSelected = unitType;
+								columnSelected = column;
+								if (ImGui::Button("Add a division")) {
+									if (allCountries) {
+										for (auto& country : *countryList) {
+											if (country.getDivisionListSize() == 0) {
+												Division division = Division::generateRandom();
+												country.setNewUnits(unitType, division);
+											}
+										}
+									}
+									else if (countrySelected->getDivisionListSize() == 0) {
+										Division division = Division::generateRandom();
+										countrySelected->setNewUnits(unitType, division);
+									}
 								}
 							}
 							windowsManagement->setTypeSubWindow(unitType, true);
@@ -367,221 +619,119 @@ void renderGenerateImportSubWindow() {
 						}
 					}
 				}
-			}
-			ImGui::EndTable();
-		}
-		ImGui::SetCursorPosX(200.0f);
-		ImGui::SetCursorPosY(center.y / 1.5f);
-		if (ImGui::BeginTable("table2", 2))
-		{
-			for (int row = 0; row < 5; row++)
-			{
-				ImGui::TableNextRow();
-				for (int column = 0; column < 2; column++)
-				{
-					ImGui::TableSetColumnIndex(column);
+				if (unitType == UnitType::Division) {
+					ImGui::TableSetColumnIndex(iconsColNumber.find(unitType)->second);
 					if (row == 0) {
-						Texture texture = Icon::GetInstance()->getOthersTextures("icons", icons.find(unitType)->second[column + 3]);
-						ImVec2 size = ImVec2(texture.my_image_width, texture.my_image_height);                         // Size of the image we want to make visible
-						ImVec2 uv0 = ImVec2(0.0f, 0.0f);                            // UV coordinates for lower-left
-						ImVec2 uv1 = ImVec2(1.0f, 1.0f);
-						//ImVec2 uv1 = ImVec2(100.0f / my_tex_w, 75.0f / my_tex_h);    // UV coordinates for (32,32) in our texture
-						ImVec4 bg_col = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);             // Black background
-						ImVec4 tint_col = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
-						if (ImGui::ImageButton(icons.find(unitType)->second[column + 3].c_str(), (void*)(intptr_t)texture.my_image_texture, size, uv0, uv1, bg_col, tint_col)) {
-							if (unitType == UnitType::Ship) {
-								unitTypeSelected = unitType;
-								columnSelected = column + 4;
-								if (countrySelected->getShipHullListSize(column + 4) == 0) {
-									Ship ship = Ship::generateRandomShip(static_cast<Hull::Type>(column + 4));
-									ship.iconName = Icon::GetInstance()->getShipIcon(ship);
-									countrySelected->setNewUnits(unitType, ship);
+						if (ImGui::Button("Add a division")) {
+							if (allCountries) {
+								for (auto& country : *countryList) {
+									if (country.getDivisionListSize() == 0) {
+										Division division = Division::generateRandom();
+										country.setNewUnits(unitType, division);
+									}
 								}
 							}
-							else if (unitType == UnitType::Tank) {
-								unitTypeSelected = unitType;
-								columnSelected = column + 3;
-								if (countrySelected->getTankTypeListSize(column + 3) == 0) {
-									Tank tank = Tank::generateRandomTank(static_cast<TankType::Type>(column + 3));
-									tank.iconName = Icon::GetInstance()->getRandomIcon(tank.type);
-									countrySelected->setNewUnits(unitType, tank);
-								}
-							}
-							else if (unitType == UnitType::Plane) {
-								unitTypeSelected = unitType;
-								columnSelected = column + 3;
-								if (countrySelected->getPlaneRoleListSize(column + 3) == 0) {
-									Plane plane = Plane::generateRandomPlane(static_cast<PlaneRole::Role>(column + 3));
-									plane.iconName = Icon::GetInstance()->getPlaneIcon(plane);
-									countrySelected->setNewUnits(unitType, plane);
-								}
+							else if (countrySelected->getDivisionListSize() == 0) {
+								Division division = Division::generateRandom();
+								countrySelected->setNewUnits(unitType, division);
 							}
 							windowsManagement->setTypeSubWindow(unitType, true);
 							windowsManagement->setSubWindow("generate", false);
 							windowsManagement->setSubWindow("designer", true);
 						}
 					}
-					else {
-						if (unitType == UnitType::Ship) {
-							if (countrySelected->getShipHullListSize(column + 4) == 0) {
-								ImGui::Text("Not Created", row, column);
-							}
-							else {
-								ImGui::Text("Not Implemented", row, column);
-							}
-						}
-						else if (unitType == UnitType::Tank) {
-							if (countrySelected->getTankTypeListSize(column + 3) == 0) {
-								ImGui::Text("Not Created", row, column);
-							}
-							else {
-								auto [tank, tankStats] = countrySelected->getTankByType(column + 3);
-								ImGui::Text(tankStats.getShowStat(row).c_str(), row, column);
-							}
-						}
-						else if (unitType == UnitType::Plane) {
-							if (countrySelected->getPlaneRoleListSize(column + 3) == 0) {
-								ImGui::Text("Not Created", row, column);
-							}
-							else {
-								ImGui::Text("Not Implemented", row, column);
-							}
-						}
-					}
-				}
-			}
-			ImGui::EndTable();
-		}
-		ImGui::PopFont();
-	}
-	else if (window == "import") {
-		if (ImGui::BeginTable("table1", 3))
-		{
-			for (int row = 0; row < 5; row++)
-			{
-				ImGui::TableNextRow();
-				for (int column = 0; column < 3; column++)
-				{
-					ImGui::TableSetColumnIndex(column);
-					if (row == 0) {
-						Texture texture = Icon::GetInstance()->getOthersTextures("icons", icons.find(unitType)->second[column]);
-						ImVec2 size = ImVec2(texture.my_image_width, texture.my_image_height);
-						ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
-					}
-					else if (row == 1){
-						std::string name = std::format("Import##{0}", column);
-						if (ImGui::Button(name.c_str())) {
-							switch (unitType)
-							{
-							case UnitType::Ship:
-								countrySelected->setImport(unitType, static_cast<Hull::Type>(column), true);
-								break;
-							case UnitType::Tank:
-								countrySelected->setImport(unitType, static_cast<TankType::Type>(column), true);
-								break;
-							case UnitType::Plane:
-								countrySelected->setImport(unitType, static_cast<PlaneRole::Role>(column), true);
-								break;
-							case UnitType::Infantry:
-								break;
-							default:
-								break;
-							}
-						}
-					}
-					else if (row == 2) {
-						if (unitType == UnitType::Ship) {
-							if (countrySelected->getImport(unitType, static_cast<Hull::Type>(column))) {
-								ImGui::Text("Imported", row, column);
-							}
-						} else if (unitType == UnitType::Tank) {
-							if (countrySelected->getImport(unitType, static_cast<TankType::Type>(column))) {
-								ImGui::Text("Imported", row, column);
-							}
-						} else if (unitType == UnitType::Plane) {
-							if (countrySelected->getImport(unitType, static_cast<PlaneRole::Role>(column))) {
-								ImGui::Text("Imported", row, column);
-							}
-						}
-					}
 				}
 			}
 			ImGui::EndTable();
 		}
 		ImGui::SetCursorPosX(200.0f);
 		ImGui::SetCursorPosY(center.y / 1.5f);
-		if (ImGui::BeginTable("table2", 2))
-		{
-			for (int row = 0; row < 5; row++)
+		if(unitType != UnitType::Division) {
+			if (ImGui::BeginTable("table2", 2))
 			{
-				ImGui::TableNextRow();
-				for (int column = 0; column < 2; column++)
+				for (int row = 0; row < 5; row++)
 				{
-					ImGui::TableSetColumnIndex(column);
-					if (row == 0) {
-						Texture texture = Icon::GetInstance()->getOthersTextures("icons", icons.find(unitType)->second[column + 3]);
-						ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
-					} else if (row == 1) {
-					std::string name = std::format("Import##{0}", column);
-						if (ImGui::Button(name.c_str())) {
-							switch (unitType)
-							{
-							case UnitType::Ship:
-								countrySelected->setImport(unitType, static_cast<Hull::Type>(column + 4), true);
-								break;
-							case UnitType::Tank:
-								countrySelected->setImport(unitType, static_cast<TankType::Type>(column + 3), true);
-								break;
-							case UnitType::Plane:
-								countrySelected->setImport(unitType, static_cast<PlaneRole::Role>(column + 3), true);
-								break;
-							case UnitType::Infantry:
-								break;
-							default:
-								break;
+					ImGui::TableNextRow();
+					for (int column = 0; column < 2; column++)
+					{
+						ImGui::TableSetColumnIndex(column);
+						if (row == 0) {
+							Texture texture = Icon::GetInstance()->getOthersTextures("icons", icons.find(unitType)->second[column + 3]);
+							ImVec2 size = ImVec2(texture.my_image_width, texture.my_image_height);                         // Size of the image we want to make visible
+							ImVec2 uv0 = ImVec2(0.0f, 0.0f);                            // UV coordinates for lower-left
+							ImVec2 uv1 = ImVec2(1.0f, 1.0f);
+							//ImVec2 uv1 = ImVec2(100.0f / my_tex_w, 75.0f / my_tex_h);    // UV coordinates for (32,32) in our texture
+							ImVec4 bg_col = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);             // Black background
+							ImVec4 tint_col = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
+							if (ImGui::ImageButton(icons.find(unitType)->second[column + 3].c_str(), (void*)(intptr_t)texture.my_image_texture, size, uv0, uv1, bg_col, tint_col)) {
+								if (unitType == UnitType::Ship) {
+									unitTypeSelected = unitType;
+									columnSelected = column + 4;
+									if (countrySelected->getShipHullListSize(column + 4) == 0) {
+										Ship ship = Ship::generateRandomShip(static_cast<Hull::Type>(column + 4));
+										ship.iconName = Icon::GetInstance()->getShipIcon(ship);
+										countrySelected->setNewUnits(unitType, ship);
+									}
+								}
+								else if (unitType == UnitType::Tank) {
+									unitTypeSelected = unitType;
+									columnSelected = column + 3;
+									if (countrySelected->getTankTypeListSize(column + 3) == 0) {
+										Tank tank = Tank::generateRandomTank(static_cast<TankType::Type>(column + 3));
+										tank.iconName = Icon::GetInstance()->getRandomIcon(tank.type);
+										countrySelected->setNewUnits(unitType, tank);
+									}
+								}
+								else if (unitType == UnitType::Plane) {
+									unitTypeSelected = unitType;
+									columnSelected = column + 3;
+									if (countrySelected->getPlaneRoleListSize(column + 3) == 0) {
+										Plane plane = Plane::generateRandomPlane(static_cast<PlaneRole::Role>(column + 3));
+										plane.iconName = Icon::GetInstance()->getPlaneIcon(plane);
+										countrySelected->setNewUnits(unitType, plane);
+									}
+								}
+								windowsManagement->setTypeSubWindow(unitType, true);
+								windowsManagement->setSubWindow("generate", false);
+								windowsManagement->setSubWindow("designer", true);
+							}
+						}
+						else {
+							if (unitType == UnitType::Ship) {
+								if (countrySelected->getShipHullListSize(column + 4) == 0) {
+									ImGui::Text("Not Created", row, column);
+								}
+								else {
+									ImGui::Text("Not Implemented", row, column);
+								}
+							}
+							else if (unitType == UnitType::Tank) {
+								if (countrySelected->getTankTypeListSize(column + 3) == 0) {
+									ImGui::Text("Not Created", row, column);
+								}
+								else {
+									auto [tank, tankStats] = countrySelected->getTankByType(column + 3);
+									ImGui::Text(tankStats.getShowStat(row).c_str(), row, column);
+								}
+							}
+							else if (unitType == UnitType::Plane) {
+								if (countrySelected->getPlaneRoleListSize(column + 3) == 0) {
+									ImGui::Text("Not Created", row, column);
+								}
+								else {
+									ImGui::Text("Not Implemented", row, column);
+								}
 							}
 						}
 					}
-					else if (row == 2) {
-						if (unitType == UnitType::Ship) {
-							if (countrySelected->getImport(unitType, static_cast<Hull::Type>(column + 4))) {
-								ImGui::Text("Imported", row, column);
-							}
-						}
-						else if (unitType == UnitType::Tank) {
-							if (countrySelected->getImport(unitType, static_cast<TankType::Type>(column + 3))) {
-								ImGui::Text("Imported", row, column);
-							}
-						}
-						else if (unitType == UnitType::Plane) {
-							if (countrySelected->getImport(unitType, static_cast<PlaneRole::Role>(column + 3))) {
-								ImGui::Text("Imported", row, column);
-							}
-						}
-					}
 				}
-			}
-			ImGui::EndTable();
-		}
-		ImGui::SetCursorPosX(center.x / 2);
-		ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 50.0f);
-		if (ImGui::Button("Reset File")) {
-			if (unitType == UnitType::Ship) {
-				for (int hull = Hull::Type::Destroyer; hull != Hull::Type::Last; hull++) {
-					countrySelected->setImport(unitType, static_cast<Hull::Type>(hull), false);
-				}
-			}
-			else if (unitType == UnitType::Tank) {
-				for (int type = TankType::Type::Light; type != TankType::Type::Last; type++) {
-					countrySelected->setImport(unitType, static_cast<TankType::Type>(type), false);
-				}
-			}
-			else if (unitType == UnitType::Plane) {
-				for (int role = PlaneRole::Role::Fighter; role != PlaneRole::Role::Last; role++) {
-					countrySelected->setImport(unitType, static_cast<PlaneRole::Role>(role), false);
-				}
+				ImGui::EndTable();
 			}
 		}
+		ImGui::PopFont();
+	}
+	else if (window == "import") {
+		renderImportWindow(unitType);
 	}
 }
 
@@ -834,6 +984,15 @@ void renderPlaneDesignerWindows() {
 	ImGui::PopStyleColor();
 }
 
+void renderUnitDesignerWindows() {
+	ImGuiIO& io = ImGui::GetIO();
+	ImFont* basicFont = io.Fonts->Fonts[0];
+	ImFont* titleFont = io.Fonts->Fonts[1];
+	ImFont* textFont = io.Fonts->Fonts[2];
+	ImFont* TitleStatsFont = io.Fonts->Fonts[3];
+	ImFont* statsFont = io.Fonts->Fonts[4];
+}
+
 //Ship stats
 void renderUnit(Ship ship) {
 	ImGuiIO& io = ImGui::GetIO();
@@ -1030,6 +1189,45 @@ void renderUnit(Plane plane) {
 	ImGui::PopFont();
 }
 
+void renderOptionsSubWindow() {
+	Settings *settings = Settings::getInstance();
+	ImGui::Text("Game Path: ");
+	ImGuiStyle& style = ImGui::GetStyle();
+	float width = 0.0f;
+	width += ImGui::CalcTextSize("Game Path: ").x;
+	width += style.ItemSpacing.x;
+	width += ImGui::CalcTextSize(settings->getGamepath().data()).x;
+	width += style.ItemSpacing.x;
+	AlignForWidth(width);
+	ImGui::SameLine();
+	std::string gamePathT = settings->getGamepath();
+	std::string* gamePath = &gamePathT;
+	ImGui::InputText("##", gamePath);
+
+	ImGui::Text("Language: ");
+	ImGui::SameLine();
+	static ImGuiComboFlags flags = 0;
+	static int languageIndex = settings->getLanguage().index;
+	static int nameIndex = 0;// Here we store our selection data as an index.
+	const char* combo_preview_value = languageList[languageIndex].name[nameIndex].c_str();  // Pass in the preview value visible before opening the combo (it could be anything)
+	if (ImGui::BeginCombo("###", combo_preview_value, flags))
+	{
+		for (int n = 0; n < languageList[languageIndex].name.size(); n++)
+		{
+			const bool is_selected = (nameIndex == n);
+			if (ImGui::Selectable(languageList[languageIndex].name[n].c_str(), is_selected)) {
+				nameIndex = n;
+				language = &languageList[n];
+			}
+
+			// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+			if (is_selected)
+				ImGui::SetItemDefaultFocus();
+		}
+		ImGui::EndCombo();
+	}
+}
+
 void Renderer::renderSubWindow() {
 	std::string window;
 	WindowsManagement* windowsManagement = WindowsManagement::GetInstance();
@@ -1044,8 +1242,9 @@ void Renderer::renderSubWindow() {
 	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
 	ImVec2 center = ImGui::GetMainViewport()->GetCenter();
 	createLabelWithPosition(window.c_str(), (float)center.x / 2, 0.f);
+	ImGui::PopFont();
 
-	if (window != "designer") {
+	if (window == "generate" || window == "import") {
 		createLabelWithPosition("country", 10.0f, ImGui::GetCursorPosY() + 10.0f);
 		ImGui::SameLine();
 		static ImGuiComboFlags flags = 0;
@@ -1068,6 +1267,8 @@ void Renderer::renderSubWindow() {
 			}
 			ImGui::EndCombo();
 		}
+		ImGui::SameLine();
+		ImGui::Checkbox("All Countries", &allCountries);
 	}
 
 	if (window == "generate" || window == "import") {
@@ -1078,8 +1279,7 @@ void Renderer::renderSubWindow() {
 		createLabelWithPosition(text.c_str(), (float)center.x / 2.0f, (float)center.y / 2.0f);
 	}
 	else if (window == "options") {
-		std::string text = "Not Done";
-		createLabelWithPosition(text.c_str(), (float)center.x / 2.0f, (float)center.y / 2.0f);
+		renderOptionsSubWindow();
 	}
 	else if (window == "designer") {
 		UnitType::Type unitType = UnitType::Type::Tank;
@@ -1102,8 +1302,8 @@ void Renderer::renderSubWindow() {
 			renderPlaneDesignerWindows();
 			renderUnit(countrySelected->getPlaneByRole(columnSelected));
 			break;
-		case UnitType::Infantry:
-			break;
+		case UnitType::Division:
+			renderUnitDesignerWindows();
 		default:
 			break;
 		}
@@ -1130,5 +1330,4 @@ void Renderer::renderSubWindow() {
 		}
 	}
 	ImGui::PopStyleColor();
-	ImGui::PopFont();
 }

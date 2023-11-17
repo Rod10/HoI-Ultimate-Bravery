@@ -1,0 +1,22 @@
+{
+  "antiTank": {
+    "name": "Anti-Tank",
+    "width": 1.0,
+    "stats": {}
+  },
+  "antiAir": {
+    "name": "Anti-Air",
+    "width": 1.0,
+    "stats": {}
+  },
+  "artillery": {
+    "name": "Artillery",
+    "width": 3.0,
+    "stats": {}
+  },
+  "rocketArtillery": {
+    "name": "Rocket-Artillery",
+    "width": 3.0,
+    "stats": {}
+  }
+}

@@ -23,6 +23,9 @@ public:
         MISC_STATS_POS = 935,
     };
 
+    static const int MIN_COMBAT_WIDTH;
+    static const int MAX_COMBAT_WIDTH;
+
     static const std::vector<std::string> DLC;
 };
 

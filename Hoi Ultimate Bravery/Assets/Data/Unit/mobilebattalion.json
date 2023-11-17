@@ -1,0 +1,32 @@
+{
+  "cavalry": {
+    "name": "Cavalry",
+    "width": 2.0,
+    "stats": {}
+  },
+  "camelry": {
+    "name": "Camelry",
+    "width": 2.0,
+    "stats": {}
+  },
+  "motorizedInfantry": {
+    "name": "Motorized-Infantry",
+    "width": 2.0,
+    "stats": {}
+  },
+  "mechanizedInfantry": {
+    "name": "Mechanized-Infantry",
+    "width": 2.0,
+    "stats": {}
+  },
+  "amtracBattalion": {
+    "name": "Amtrac-Battalion",
+    "width": 2.0,
+    "stats": {}
+  },
+  "armoredCar": {
+    "name": "Armored-Car",
+    "width": 2.0,
+    "stats": {}
+  }
+}

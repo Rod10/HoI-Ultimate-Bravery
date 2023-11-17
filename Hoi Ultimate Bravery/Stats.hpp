@@ -8,11 +8,5 @@
 #include <string>
 class Stats
 {
-public :
-	Stats() {};
-
-	int maxSpeed;
-	int reliability;
-	int fuelUsage;
 };
 
