@@ -33,10 +33,10 @@ Division Division::generateRandom()
 	}
 
 	std::vector<std::vector<Unit>> regimentList;
-	for (int regimentNumber = 0; regimentNumber < 4; regimentNumber++ && actualWidth != width) {
+	for (int regimentNumber = 0; regimentNumber <= 4; regimentNumber++ && actualWidth <= width) {
 		RegimentType::Type regimentType = *Utils::select_randomly(regimentTypeVector.begin(), regimentTypeVector.end());
 		std::vector<Unit> regiment;
-		for (int unitNumber = 0; unitNumber < 4; unitNumber++) {
+		for (int unitNumber = 0; unitNumber <= 4; unitNumber++) {
 			srand(time(0));
 			std::ifstream f(std::format("Assets/Data/Unit/{0}.json", RegimentType::regimentTypeToFileString(regimentType)));
 			json file = json::parse(f);
@@ -49,9 +49,9 @@ Division Division::generateRandom()
 			UnitSubType::Type unitType = UnitSubType::stringToType(unitTypeName);
 			std::string name = file[unitTypeName]["name"];
 			int unitWidth = file[unitTypeName]["width"];
-			regiment.push_back(Unit(regimentType, name, unitType, unitWidth));
 			if (actualWidth + unitWidth <= width) {
 				actualWidth += unitWidth;
+				regiment.push_back(Unit(regimentType, name, unitType, unitWidth));
 			}
 		}
 		regimentList.push_back(regiment);

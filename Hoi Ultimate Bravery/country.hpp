@@ -94,15 +94,20 @@ public:
 				{PlaneRole::StrategicBombing, false},
 			}
 		));
+		imports.insert(std::pair<UnitType::Type, std::vector<bool>>(
+			{ UnitType::Division, {false} }
+		));
 	}
 	static std::vector<Country> generateCountryList();
 	void setNewUnits(UnitType::Type unitType, Ship unit);
 	void setNewUnits(UnitType::Type unitType, Tank unit);
 	void setNewUnits(UnitType::Type unitType, Plane unit);
 	void setNewUnits(UnitType::Type unitType, Division unit);
+	void setNewUnits(UnitType::Type unitType, Division unit, int column);
 	Ship getShipByHull(int type);
 	std::tuple<Tank, TankStats> getTankByType(int type);
 	Plane getPlaneByRole(int type);
+	Division* getDivisionByIndex(int column);
 
 	std::map<Hull::Type, std::vector<std::any>>& getHullList();
 	std::map<TankType::Type, std::vector<std::any>>& getTankList();
@@ -116,9 +121,11 @@ public:
 	void setImport(UnitType::Type unitType, Hull::Type hull, bool value);
 	void setImport(UnitType::Type unitType, TankType::Type type, bool value);
 	void setImport(UnitType::Type unitType, PlaneRole::Role role, bool value);
+	void setImport(UnitType::Type unitType, int index, bool value);
 	bool getImport(UnitType::Type unitType, Hull::Type hull);
 	bool getImport(UnitType::Type unitType, TankType::Type type);
 	bool getImport(UnitType::Type unitType, PlaneRole::Role role);
+	bool getImport(UnitType::Type unitType, int number);
 
 	bool checkIfListIsEmpty(UnitType::Type unitType);
 

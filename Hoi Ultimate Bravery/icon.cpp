@@ -581,3 +581,7 @@ Texture Icon::getPlaneIconTextures(std::string type, std::string name) {
 Texture Icon::getOthersTextures(std::string type, std::string name) {
 	return othersTextures_.find(type)->second.find(name)->second;
 }
+
+Texture Icon::getUnitsTextures(std::string type, std::string name) {
+	return unitsTextures_.find(type)->second.find(name)->second;
+}

@@ -450,7 +450,7 @@
       <Filter>Fichiers d%27en-tête\Division</Filter>
     </ClInclude>
     <ClInclude Include="support.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Division</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

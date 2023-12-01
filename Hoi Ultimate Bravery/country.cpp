@@ -77,6 +77,11 @@ void Country::setNewUnits(UnitType::Type unitType, Division unit) {
     divisionList.push_back(unit);
 }
 
+void Country::setNewUnits(UnitType::Type unitType, Division unit, int column) {
+    auto& divisionList = std::any_cast<std::vector<Division>&>(units.find(unitType)->second);
+    divisionList[column] = unit;
+}
+
 int Country::getDivisionListSize() {
     auto& divisionList = std::any_cast<std::vector<Division>&>(units.find(UnitType::Division)->second);
     return divisionList.size();
@@ -125,6 +130,11 @@ Plane Country::getPlaneByRole(int type) {
     return std::any_cast<Plane>(planeTypeList.find(static_cast<PlaneRole::Role>(type))->second[0]);
 }
 
+Division* Country::getDivisionByIndex(int column) {
+    auto& divisionList = std::any_cast<std::vector<Division>&>(units.find(UnitType::Division)->second);
+    return &divisionList[column];
+}
+
 int Country::getPlaneRoleListSize(int type) {
     auto& planeRoleList = std::any_cast<std::map<PlaneRole::Role, std::vector<std::any>>&>(units.find(UnitType::Plane)->second);
     return planeRoleList.find(static_cast<PlaneRole::Role>(type))->second.size();
@@ -145,6 +155,11 @@ void Country::setImport(UnitType::Type unitType, PlaneRole::Role role, bool valu
     planeRoleList.find(role)->second = value;
 }
 
+void Country::setImport(UnitType::Type unitType, int index, bool value) {
+    auto& planeRoleList = std::any_cast<std::vector<bool>&>(imports.find(unitType)->second);
+    planeRoleList[index] = value;
+}
+
 bool Country::getImport(UnitType::Type unitType, Hull::Type hull) {
     auto& shipTypeList = std::any_cast<std::map<Hull::Type, bool>&>(imports.find(unitType)->second);
     return shipTypeList.find(hull)->second;
@@ -158,6 +173,11 @@ bool Country::getImport(UnitType::Type unitType, TankType::Type type) {
 bool Country::getImport(UnitType::Type unitType, PlaneRole::Role role) {
     auto& planeRoleList = std::any_cast<std::map<PlaneRole::Role, bool>&>(imports.find(unitType)->second);
     return planeRoleList.find(role)->second;
+}
+
+bool Country::getImport(UnitType::Type unitType, int number) {
+    auto& divisionList = std::any_cast<std::vector<bool>&>(imports.find(UnitType::Division)->second);
+    return divisionList[number];
 }
 
 bool Country::checkIfListIsEmpty(UnitType::Type unitType) {

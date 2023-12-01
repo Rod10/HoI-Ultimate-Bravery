@@ -58,5 +58,6 @@ public:
 	Texture getPlaneModulesTextures(std::string type, std::string name);
 	Texture getPlaneIconTextures(std::string type, std::string name);
 	Texture getOthersTextures(std::string type, std::string name);
+	Texture getUnitsTextures(std::string type, std::string name);
 };
 

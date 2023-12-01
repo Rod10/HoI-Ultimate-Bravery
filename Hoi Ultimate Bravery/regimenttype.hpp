@@ -27,5 +27,21 @@ public:
 			break;
 		}
 	}
+
+	static std::string regimentTypeToFolderString(Type type) {
+		switch (type)
+		{
+		case RegimentType::Infantry: return "Infantry";
+		case RegimentType::MobileBattalions: return "MobileBattalions";
+		case RegimentType::CombatSupportBattalions: return "CombatSupportBattalions";
+		case RegimentType::MobileCombatSupportBattalions: return "MobileCombatSupportBattalions";
+		case RegimentType::Tank: return "Tank";
+		case RegimentType::Support: return "Supports";
+		case RegimentType::Last:
+			break;
+		default:
+			break;
+		}
+	}
 };
 

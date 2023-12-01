@@ -2,7 +2,9 @@
 #include "country.hpp"
 #include "tank.hpp"
 #include "settings.hpp"
+#include "unitsubtype.hpp"
 
+#include <format>
 class Files {
 public:
 
@@ -53,7 +55,7 @@ public:
 
     static void generateCountryFile(Country* country, std::unordered_map<int, std::string> converterToGameName) {
         Country newCountry = Country(*country);
-        std::vector < std::string > tempFile;
+        std::vector <std::string> tempFile;
         std::string gamePath = Settings::getInstance()->getGamepath();
         std::string fileName = std::format("{0} - {1}.txt", country->tag, country->name);
         std::string backUpFilePath = std::format("./Assets/Data/Files/Back-Up/countries/{1}", gamePath, fileName);
@@ -342,5 +344,88 @@ public:
                 }
             }
         }
+    }
+
+    static void generateUnitsFiles(Country* country) {
+        //std::vector <std::string> tempFile;
+        std::string gamePath = Settings::getInstance()->getGamepath();
+        std::string fileName = std::format("{0} - {1}.txt", country->tag, country->name);
+        //std::string backUpFilePath = std::format("./Assets/Data/Files/Back-Up/units/{1}", gamePath, fileName);
+        //std::string filePath = std::format("{0}/common/units/{1}", gamePath, fileName);
+
+        std::string newFilePath = "./Assets/Data/Files/NewFiles/units/";
+        std::ofstream newFile(std::format("{0}{1}", newFilePath, fileName), std::ios::binary);
+
+        //std::ifstream backUpSrc(backUpFilePath, std::ios::binary);
+        //std::string line;
+
+        //while (std::getline(backUpSrc, line)) {
+        //    tempFile.push_back(line);
+        //}
+        //backUpSrc.close();
+
+        std::vector<std::string> regimentTextList;
+        std::vector<std::string> supportTextList;
+        auto& division = std::any_cast<std::vector<Division>&>(country->units.find(UnitType::Division)->second);
+        auto& supportList = division[0].support;
+        for (int i = 0; i < supportList.size(); i++) {
+            std::string subTypeString = UnitSubType::supportTypeToExportString(supportList[i].unitSubType);
+            std::string matrix = "{ x = 0, y = " + std::to_string(i) + "}";
+            std::string string = std::vformat("\t\t{0} = {1}", std::make_format_args(subTypeString, matrix));
+            supportTextList.push_back(string);
+        }
+
+        auto& regimentList = division[0].regimentList;
+        for (int column = 0; column < regimentList.size(); column++) {
+            for (int row = 0; row < regimentList[column].size(); row++) {
+                std::string subTypeString = UnitSubType::typeToExortString(regimentList[column][row].unitSubType);
+                std::string matrix = "{ x = " + std::to_string(column) + ", y = " + std::to_string(row) + " }";
+                std::string string = std::vformat("\t\t{0} = {1}", std::make_format_args(subTypeString, matrix));
+                regimentTextList.push_back(string);
+            }
+        }
+
+        std::string regimentString;
+        for (auto& line : regimentTextList) {
+            regimentString += (line + "\r\n");
+        }
+
+        std::string supportString;
+        for (auto& line : supportTextList) {
+            supportString += (line + "\r\n");
+        }
+
+        std::vector<std::string> replacementList {
+            division[0].name,
+            regimentString,
+            supportString
+        };
+
+        std::vector<std::string> tokenList{ "%name%",
+            "%regimentList%",
+            "%supportList%",
+        };
+
+
+        std::ifstream templateFile("./Assets/Data/Files/division_template.txt", std::ios::binary);
+        int index;
+        std::string line;
+        std::vector<std::string> templateLine;
+        int counterTemplateLine = 0;
+
+        while (std::getline(templateFile, line)) {
+            for (int i = 0; i < tokenList.size(); i++) {
+                while ((index = line.find(tokenList[i])) != std::string::npos) {
+                    std::cout << line << std::endl;
+                    line.replace(line.find(tokenList[i]), tokenList[i].length(), replacementList[i]);
+                }
+            }
+            templateLine.push_back(line);
+        }
+
+        for (int i = 0; i < templateLine.size(); i++) {
+            newFile << templateLine[i] << std::endl;
+        }
+        newFile.close();
     }
 };

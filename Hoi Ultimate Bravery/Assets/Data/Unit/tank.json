@@ -24,11 +24,6 @@
     "width": 2.0,
     "stats": {}
   },
-  "amphibiousTank": {
-    "name": "Amphibious Tank",
-    "width": 2.0,
-    "stats": {}
-  },
   "lightTankDestroyer": {
     "name": "Light Tank Destroyer",
     "width": 2.0,
