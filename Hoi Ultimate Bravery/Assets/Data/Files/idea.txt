@@ -35,7 +35,6 @@
 				heavy_tank_aa_chassis_design_cost_factor = 999
 				super_heavy_aa_tank_chassis_design_cost_factor = 999
 				modern_tank_aa_chassis_design_cost_factor = 999
-    			}
 
 				#Plane
 				small_plane_cas_airframe_design_cost_factor = 999
@@ -49,4 +48,35 @@
 				ship_hull_carrier_design_cost_factor = 999
 				ship_hull_cruiser_design_cost_factor = 999
 				ship_hull_submarine_design_cost_factor = 999
+
+				#Unit
+				unit_amphibious_armor_design_cost_factor = 999999
+				unit_amphibious_mech_design_cost_factor = 999999
+				unit_anti_tank_design_cost_factor = 999999
+				unit_anti_tank_brigade_design_cost_factor = 999999
+				unit_anti-air_design_cost_factor = 999999
+				unit_anti-air_brigade_design_cost_factor = 999999
+				unit_amored_car_battalion_design_cost_factor = 999999
+				unit_artillery_design_cost_factor = 999999
+				unit_artillery_brigade_design_cost_factor = 999999
+				unit_bus_design_cost_factor = 999999
+				unit_cavalery_design_cost_factor = 999999
+				unit_engineer_design_cost_factor = 999999
+				unit_field_hospital_design_cost_factor = 999999
+				unit_flame_tank_design_cost_factor = 999999
+				unit_heavy_armor_design_cost_factor = 999999
+				unit_infantry_design_cost_factor = 999999
+				unit_light_armor_design_cost_factor = 999999
+				unit_logistics_design_cost_factor = 999999
+				unit_maintenance_design_cost_factor = 999999
+				unit_medium_armor_design_cost_factor = 999999
+				unit_military_police_design_cost_factor = 999999
+				unit_modern_armor_design_cost_factor = 999999
+				unit_recon_design_cost_factor = 999999
+				unit_signal_design_cost_factor = 999999
+				unit_sp_anti-air_brigade_design_cost_factor = 999999
+				unit_sp_artillery_brigade_design_cost_factor = 999999
+				unit_super_heavy_armor_design_cost_factor = 999999
+				unit_tank_destroyer_brigade_design_cost_factor = 999999
+    			}
 		}
