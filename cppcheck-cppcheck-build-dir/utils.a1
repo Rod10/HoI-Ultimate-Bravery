@@ -1,0 +1,414 @@
+<?xml version="1.0"?>
+<analyzerinfo hash="4002188705087648701">
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;iostream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;iostream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\constant.hpp" line="2" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;cstdlib&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;cstdlib&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\constant.hpp" line="3" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\constant.hpp" line="4" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;vector&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;vector&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\constant.hpp" line="5" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;float.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;float.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui.h" line="65" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdarg.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdarg.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui.h" line="66" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stddef.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stddef.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui.h" line="67" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;string.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;string.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui.h" line="68" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;assert.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;assert.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui.h" line="82" column="0"/>
+        </error>
+        <error id="missingInclude" severity="information" msg="Include file: &quot;implot.h&quot; not found." verbose="Include file: &quot;implot.h&quot; not found.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="6" column="0"/>
+        </error>
+        <error id="missingInclude" severity="information" msg="Include file: &quot;SOIL.h&quot; not found." verbose="Include file: &quot;SOIL.h&quot; not found.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="7" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;iostream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;iostream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="11" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;random&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;random&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="12" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stddef.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stddef.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\GLFW\glfw3.h" line="103" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdint.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdint.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\GLFW\glfw3.h" line="108" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;GL/gl.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;GL/gl.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\GLFW\glfw3.h" line="241" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stb_image_aug.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stb_image_aug.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="14" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;filesystem&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;filesystem&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="16" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;fstream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;fstream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="17" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;iostream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;iostream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="18" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;map&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;map&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="19" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sstream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sstream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="20" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;string&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;string&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="21" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;unordered_map&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;unordered_map&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="22" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;cstdlib&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;cstdlib&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="24" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="25" column="0"/>
+        </error>
+        <error id="memsetClassFloat" severity="portability" msg="Using memset() on struct which contains a floating point number." verbose="Using memset() on struct which contains a floating point number. This is not portable because memset() sets each byte of a block of memory to a specific value and the actual representation of a floating-point value is implementation defined. Note: In case of an IEEE754-1985 compatible implementation setting all bits to zero results in the value 0.0." cwe="758" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui.h" line="2347" column="76"/>
+        </error>
+        <error id="memsetClassFloat" severity="portability" msg="Using memset() on struct which contains a floating point number." verbose="Using memset() on struct which contains a floating point number. This is not portable because memset() sets each byte of a block of memory to a specific value and the actual representation of a floating-point value is implementation defined. Note: In case of an IEEE754-1985 compatible implementation setting all bits to zero results in the value 0.0." cwe="758" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui.h" line="2462" column="19"/>
+        </error>
+        <error id="memsetClassFloat" severity="portability" msg="Using memset() on struct which contains a floating point number." verbose="Using memset() on struct which contains a floating point number. This is not portable because memset() sets each byte of a block of memory to a specific value and the actual representation of a floating-point value is implementation defined. Note: In case of an IEEE754-1985 compatible implementation setting all bits to zero results in the value 0.0." cwe="758" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui.h" line="2579" column="53"/>
+        </error>
+        <error id="memsetClassFloat" severity="portability" msg="Using memset() on struct which contains a floating point number." verbose="Using memset() on struct which contains a floating point number. This is not portable because memset() sets each byte of a block of memory to a specific value and the actual representation of a floating-point value is implementation defined. Note: In case of an IEEE754-1985 compatible implementation setting all bits to zero results in the value 0.0." cwe="758" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui.h" line="3005" column="30"/>
+        </error>
+        <error id="useInitializationList" severity="performance" msg="Variable &apos;GlyphOffset&apos; is assigned in constructor body. Consider performing initialization in initialization list." verbose="When an object of a class is created, the constructors of all member variables are called consecutively in the order the variables are declared, even if you don&apos;t explicitly write them to the initialization list. You could avoid assigning &apos;GlyphOffset&apos; a value by passing the value to the constructor in the initialization list." cwe="398" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui.h" line="2770" column="110"/>
+            <symbol>GlyphOffset</symbol>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Struct &apos;ImGuiTextFilter&apos; has a constructor with 1 argument that is not explicit." verbose="Struct &apos;ImGuiTextFilter&apos; has a constructor with 1 argument that is not explicit. Such, so called &quot;Converting constructors&quot;, should in general be explicit for type safety reasons as that prevents unintended implicit conversions." cwe="398" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui.h" line="2210" column="25"/>
+            <symbol>ImGuiTextFilter</symbol>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Struct &apos;ImGuiListClipper&apos; has a constructor with 1 argument that is not explicit." verbose="Struct &apos;ImGuiListClipper&apos; has a constructor with 1 argument that is not explicit. Such, so called &quot;Converting constructors&quot;, should in general be explicit for type safety reasons as that prevents unintended implicit conversions." cwe="398" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui.h" line="2347" column="12"/>
+            <symbol>ImGuiListClipper</symbol>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Struct &apos;ImColor&apos; has a constructor with 1 argument that is not explicit." verbose="Struct &apos;ImColor&apos; has a constructor with 1 argument that is not explicit. Such, so called &quot;Converting constructors&quot;, should in general be explicit for type safety reasons as that prevents unintended implicit conversions." cwe="398" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui.h" line="2409" column="15"/>
+            <symbol>ImColor</symbol>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Struct &apos;ImColor&apos; has a constructor with 1 argument that is not explicit." verbose="Struct &apos;ImColor&apos; has a constructor with 1 argument that is not explicit. Such, so called &quot;Converting constructors&quot;, should in general be explicit for type safety reasons as that prevents unintended implicit conversions." cwe="398" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui.h" line="2411" column="5"/>
+            <symbol>ImColor</symbol>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Struct &apos;ImDrawList&apos; has a constructor with 1 argument that is not explicit." verbose="Struct &apos;ImDrawList&apos; has a constructor with 1 argument that is not explicit. Such, so called &quot;Converting constructors&quot;, should in general be explicit for type safety reasons as that prevents unintended implicit conversions." cwe="398" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui.h" line="2579" column="5"/>
+            <symbol>ImDrawList</symbol>
+        </error>
+        <error id="cstyleCast" severity="style" msg="C-style pointer casting" verbose="C-style pointer casting detected. C++ offers four different kinds of casts as replacements: static_cast, const_cast, dynamic_cast and reinterpret_cast. A C-style cast could evaluate to any of those automatically, thus it is considered safer if the programmer explicitly states which kind of cast is expected." cwe="398" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui.h" line="259" column="88"/>
+        </error>
+        <error id="cstyleCast" severity="style" msg="C-style pointer casting" verbose="C-style pointer casting detected. C++ offers four different kinds of casts as replacements: static_cast, const_cast, dynamic_cast and reinterpret_cast. A C-style cast could evaluate to any of those automatically, thus it is considered safer if the programmer explicitly states which kind of cast is expected." cwe="398" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui.h" line="260" column="89"/>
+        </error>
+        <error id="cstyleCast" severity="style" msg="C-style pointer casting" verbose="C-style pointer casting detected. C++ offers four different kinds of casts as replacements: static_cast, const_cast, dynamic_cast and reinterpret_cast. A C-style cast could evaluate to any of those automatically, thus it is considered safer if the programmer explicitly states which kind of cast is expected." cwe="398" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui.h" line="1818" column="115"/>
+        </error>
+        <error id="cstyleCast" severity="style" msg="C-style pointer casting" verbose="C-style pointer casting detected. C++ offers four different kinds of casts as replacements: static_cast, const_cast, dynamic_cast and reinterpret_cast. A C-style cast could evaluate to any of those automatically, thus it is considered safer if the programmer explicitly states which kind of cast is expected." cwe="398" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Librairies\Imgui\imgui.h" line="1819" column="133"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;delimiter&apos; is assigned a value that is never used." verbose="Variable &apos;delimiter&apos; is assigned a value that is never used." cwe="563" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="110" column="32"/>
+            <symbol>delimiter</symbol>
+        </error>
+        <error id="unusedVariable" severity="style" msg="Unused variable: token" verbose="Unused variable: token" cwe="563" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="109" column="29"/>
+            <symbol>token</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;delimiter&apos; is assigned a value that is never used." verbose="Variable &apos;delimiter&apos; is assigned a value that is never used." cwe="563" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="137" column="36"/>
+            <symbol>delimiter</symbol>
+        </error>
+        <error id="unusedVariable" severity="style" msg="Unused variable: token" verbose="Unused variable: token" cwe="563" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="136" column="33"/>
+            <symbol>token</symbol>
+        </error>
+  <FileInfo check="ctu">
+<function-call call-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:2611:21" call-funcname="AddPolyline" call-argnr="4" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2630" col="103" call-argexpr="flags" call-argvaluetype="0" call-argvalue="0" warning="true"/><function-call call-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:258:15" call-funcname="ImVec2" call-argnr="1" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2770" col="130" call-argexpr="0" call-argvaluetype="0" call-argvalue="0"/><function-call call-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:258:15" call-funcname="ImVec2" call-argnr="2" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2770" col="130" call-argexpr="0" call-argvaluetype="0" call-argvalue="0"/><function-call call-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:634:29" call-funcname="BeginListBox" call-argnr="1" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="3040" col="102" my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:3040:25" my-argnr="1"/>
+<function-call call-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1822:25" call-funcname="push_back" call-argnr="1" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1824" col="78" my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1824:25" my-argnr="1"/>
+<function-call call-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1830:25" call-funcname="find" call-argnr="1" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1832" col="77" my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1832:25" my-argnr="1"/>
+<function-call call-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1830:25" call-funcname="find" call-argnr="1" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1833" col="77" my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1833:25" my-argnr="1"/>
+<function-call call-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1822:25" call-funcname="push_back" call-argnr="1" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1824" col="78" my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1824:25" my-argnr="1"/>
+<function-call call-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1830:25" call-funcname="find" call-argnr="1" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1832" col="77" my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1832:25" my-argnr="1"/>
+<function-call call-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1830:25" call-funcname="find" call-argnr="1" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1833" col="77" my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1833:25" my-argnr="1"/>
+  </FileInfo>
+  <FileInfo check="Class">
+<class name="Constant" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/constant.hpp" line="6" col="1" hash="15650056011355964019"/>
+<class name="ImVec4" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="267" col="1" hash="2638745889090663251"/>
+<class name="ImNewWrapper" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1753" col="1" hash="3019713718933798540"/>
+<class name="ImGuiKeyData" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1906" col="1" hash="13198916508763683467"/>
+<class name="ImGuiSizeCallbackData" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2132" col="1" hash="3836992928234533740"/>
+<class name="ImGuiPayload" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2141" col="1" hash="9896330161713859034"/>
+<class name="ImGuiTableColumnSortSpecs" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2163" col="1" hash="3930973637895948143"/>
+<class name="ImGuiTableSortSpecs" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2177" col="1" hash="16935686469706441589"/>
+<class name="ImGuiOnceUponAFrame" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2200" col="1" hash="17061671302169700533"/>
+<class name="ImGuiStorage::ImGuiStoragePair" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2265" col="5" hash="5271627044329041000"/>
+<class name="ImColor" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2403" col="1" hash="13051590499666680115"/>
+<class name="ImDrawCmd" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2452" col="1" hash="4864978836936839542"/>
+<class name="ImDrawVert" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2470" col="1" hash="5985319611615192797"/>
+<class name="ImDrawCmdHeader" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2485" col="1" hash="11544910580545660781"/>
+<class name="ImDrawChannel" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2493" col="1" hash="1150667561009341972"/>
+<class name="ImFontGlyph" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2735" col="1" hash="6479738750517622594"/>
+<class name="ImFontAtlasCustomRect" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2762" col="1" hash="4888973743524531770"/>
+<class name="ImGuiViewport" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2976" col="1" hash="10023343918970712498"/>
+<class name="ImGuiPlatformImeData" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2999" col="1" hash="10601168594280413856"/>
+<class name="GLFWvidmode" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/GLFW/glfw3.h" line="1988" col="9" hash="5014978948604091791"/>
+<class name="GLFWgammaramp" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/GLFW/glfw3.h" line="2022" col="9" hash="15759332869564605894"/>
+<class name="GLFWimage" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/GLFW/glfw3.h" line="2051" col="9" hash="18229993221891273149"/>
+<class name="GLFWgamepadstate" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/GLFW/glfw3.h" line="2075" col="9" hash="15865163930354674965"/>
+<class name="GLFWallocator" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/GLFW/glfw3.h" line="2096" col="9" hash="1200025269306264198"/>
+<class name="Utils" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.hpp" line="30" col="1" hash="17275797083415349895"/>
+<class name="ImVector &lt; unsigned short &gt;" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1775" col="1" hash="12650648868636218799"/>
+<class name="ImVector &lt; ImGuiTextRange &gt;" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1775" col="1" hash="8506981380086400184"/>
+<class name="ImVector &lt; char &gt;" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1775" col="1" hash="13313406011819381079"/>
+<class name="ImVector &lt; ImGuiStoragePair &gt;" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1775" col="1" hash="13017870620643687829"/>
+<class name="ImVector &lt; ImDrawCmd &gt;" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1775" col="1" hash="16083958328287423947"/>
+<class name="ImVector &lt; ImDrawChannel &gt;" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1775" col="1" hash="17298438143083522782"/>
+<class name="ImVector &lt; ImDrawVert &gt;" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1775" col="1" hash="14026541391614686308"/>
+<class name="ImVector &lt; ImVec4 &gt;" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1775" col="1" hash="17827566428466821359"/>
+<class name="ImVector &lt; void * &gt;" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1775" col="1" hash="17077371190216624595"/>
+<class name="ImVector &lt; ImVec2 &gt;" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1775" col="1" hash="11233110547936139633"/>
+<class name="ImVector &lt; unsigned int &gt;" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1775" col="1" hash="8852964763228345686"/>
+<class name="ImVector &lt; ImFont * &gt;" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1775" col="1" hash="3470169584555241714"/>
+<class name="ImVector &lt; ImFontAtlasCustomRect &gt;" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1775" col="1" hash="11786517650844415190"/>
+<class name="ImVector &lt; ImFontConfig &gt;" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1775" col="1" hash="11888291917378146654"/>
+<class name="ImVector &lt; float &gt;" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1775" col="1" hash="17137487868639360837"/>
+<class name="ImVector &lt; ImFontGlyph &gt;" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1775" col="1" hash="270853757466726594"/>
+  </FileInfo>
+  <FileInfo check="Uninitialized variables">
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:2627:21" my-argnr="1" my-argname="pos" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2627" col="99" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:2662:21" my-argnr="1" my-argname="pos" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2662" col="141" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:2662:21" my-argnr="2" my-argname="uv" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="2662" col="146" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.hpp:54:30" my-argnr="1" my-argname="string" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.hpp" line="58" col="25" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1789:25" my-argnr="1" my-argname="src" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1789" col="79" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1812:25" my-argnr="1" my-argname="rhs" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1812" col="78" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1822:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1822" col="141" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1828:25" my-argnr="2" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1828" col="317" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1832:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1832" col="82" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1833:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1833" col="82" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1789:25" my-argnr="1" my-argname="src" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1789" col="79" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1812:25" my-argnr="1" my-argname="rhs" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1812" col="78" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1822:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1822" col="141" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1828:25" my-argnr="2" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1828" col="317" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1832:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1832" col="82" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1833:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1833" col="82" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1789:25" my-argnr="1" my-argname="src" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1789" col="79" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1812:25" my-argnr="1" my-argname="rhs" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1812" col="78" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1822:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1822" col="141" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1828:25" my-argnr="2" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1828" col="317" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1832:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1832" col="82" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1833:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1833" col="82" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1789:25" my-argnr="1" my-argname="src" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1789" col="79" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1812:25" my-argnr="1" my-argname="rhs" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1812" col="78" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1822:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1822" col="141" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1828:25" my-argnr="2" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1828" col="317" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1832:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1832" col="82" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1833:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1833" col="82" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1789:25" my-argnr="1" my-argname="src" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1789" col="79" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1812:25" my-argnr="1" my-argname="rhs" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1812" col="78" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1822:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1822" col="141" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1828:25" my-argnr="2" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1828" col="317" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1789:25" my-argnr="1" my-argname="src" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1789" col="79" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1812:25" my-argnr="1" my-argname="rhs" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1812" col="78" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1822:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1822" col="141" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1828:25" my-argnr="2" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1828" col="317" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1789:25" my-argnr="1" my-argname="src" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1789" col="79" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1812:25" my-argnr="1" my-argname="rhs" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1812" col="78" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1822:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1822" col="141" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1828:25" my-argnr="2" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1828" col="317" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1789:25" my-argnr="1" my-argname="src" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1789" col="79" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1812:25" my-argnr="1" my-argname="rhs" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1812" col="78" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1822:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1822" col="141" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1828:25" my-argnr="2" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1828" col="317" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1789:25" my-argnr="1" my-argname="src" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1789" col="79" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1812:25" my-argnr="1" my-argname="rhs" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1812" col="78" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1822:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1822" col="141" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1828:25" my-argnr="2" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1828" col="317" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1789:25" my-argnr="1" my-argname="src" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1789" col="79" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1812:25" my-argnr="1" my-argname="rhs" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1812" col="78" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1822:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1822" col="141" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1828:25" my-argnr="2" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1828" col="317" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1832:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1832" col="82" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1833:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1833" col="82" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1789:25" my-argnr="1" my-argname="src" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1789" col="79" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1812:25" my-argnr="1" my-argname="rhs" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1812" col="78" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1822:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1822" col="141" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1828:25" my-argnr="2" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1828" col="317" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1832:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1832" col="82" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1833:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1833" col="82" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1789:25" my-argnr="1" my-argname="src" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1789" col="79" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1812:25" my-argnr="1" my-argname="rhs" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1812" col="78" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1822:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1822" col="141" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1828:25" my-argnr="2" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1828" col="317" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1789:25" my-argnr="1" my-argname="src" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1789" col="79" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1812:25" my-argnr="1" my-argname="rhs" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1812" col="78" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1822:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1822" col="141" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1828:25" my-argnr="2" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1828" col="317" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1789:25" my-argnr="1" my-argname="src" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1789" col="79" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1812:25" my-argnr="1" my-argname="rhs" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1812" col="78" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1822:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1822" col="141" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1828:25" my-argnr="2" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1828" col="317" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1789:25" my-argnr="1" my-argname="src" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1789" col="79" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1812:25" my-argnr="1" my-argname="rhs" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1812" col="78" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1822:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1822" col="141" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1828:25" my-argnr="2" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1828" col="317" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1832:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1832" col="82" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1833:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1833" col="82" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1789:25" my-argnr="1" my-argname="src" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1789" col="79" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1812:25" my-argnr="1" my-argname="rhs" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1812" col="78" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1822:25" my-argnr="1" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1822" col="141" value="0"/>
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h:1828:25" my-argnr="2" my-argname="v" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Librairies/Imgui/imgui.h" line="1828" col="317" value="0"/>
+  </FileInfo>
+  <FileInfo check="CheckUnusedFunctions">
+    <functioncall functionName="AddConvexPolyFilled"/>
+    <functioncall functionName="AddPolyline"/>
+    <functioncall functionName="Begin"/>
+    <functioncall functionName="BeginListBox"/>
+    <functioncall functionName="Build"/>
+    <functioncall functionName="Clear"/>
+    <functioncall functionName="ClearFreeMemory"/>
+    <functioncall functionName="ColorConvertFloat4ToU32"/>
+    <functioncall functionName="ColorConvertHSVtoRGB"/>
+    <functioncall functionName="EndListBox"/>
+    <functioncall functionName="FLT_MAX"/>
+    <functioncall functionName="FLT_MIN"/>
+    <functioncall functionName="GL_LINEAR"/>
+    <functioncall functionName="GL_RGBA"/>
+    <functioncall functionName="GL_TEXTURE_2D"/>
+    <functioncall functionName="GL_TEXTURE_MAG_FILTER"/>
+    <functioncall functionName="GL_TEXTURE_MIN_FILTER"/>
+    <functioncall functionName="GL_TEXTURE_WRAP_S"/>
+    <functioncall functionName="GL_TEXTURE_WRAP_T"/>
+    <functioncall functionName="GL_UNSIGNED_BYTE"/>
+    <functioncall functionName="GetFrameCount"/>
+    <functioncall functionName="GetWindowContentRegionMax"/>
+    <functioncall functionName="GetWindowContentRegionMin"/>
+    <functioncall functionName="IM_DELETE"/>
+    <functioncall functionName="ImColor"/>
+    <functioncall functionName="ImDrawChannel"/>
+    <functioncall functionName="ImDrawCmd"/>
+    <functioncall functionName="ImDrawData"/>
+    <functioncall functionName="ImDrawList"/>
+    <functioncall functionName="ImDrawListSplitter"/>
+    <functioncall functionName="ImDrawVert"/>
+    <functioncall functionName="ImFont"/>
+    <functioncall functionName="ImFontAtlas"/>
+    <functioncall functionName="ImFontAtlasCustomRect"/>
+    <functioncall functionName="ImFontConfig"/>
+    <functioncall functionName="ImFontGlyph"/>
+    <functioncall functionName="ImFontGlyphRangesBuilder"/>
+    <functioncall functionName="ImGuiCol_COUNT"/>
+    <functioncall functionName="ImGuiIO"/>
+    <functioncall functionName="ImGuiInputTextCallbackData"/>
+    <functioncall functionName="ImGuiKey_COUNT"/>
+    <functioncall functionName="ImGuiKey_KeysData_SIZE"/>
+    <functioncall functionName="ImGuiListClipper"/>
+    <functioncall functionName="ImGuiNavInput_COUNT"/>
+    <functioncall functionName="ImGuiOnceUponAFrame"/>
+    <functioncall functionName="ImGuiPayload"/>
+    <functioncall functionName="ImGuiPlatformImeData"/>
+    <functioncall functionName="ImGuiStoragePair"/>
+    <functioncall functionName="ImGuiStyle"/>
+    <functioncall functionName="ImGuiTableColumnSortSpecs"/>
+    <functioncall functionName="ImGuiTableSortSpecs"/>
+    <functioncall functionName="ImGuiTextBuffer"/>
+    <functioncall functionName="ImGuiTextFilter"/>
+    <functioncall functionName="ImGuiTextRange"/>
+    <functioncall functionName="ImGuiViewport"/>
+    <functioncall functionName="ImNewWrapper"/>
+    <functioncall functionName="ImVec2"/>
+    <functioncall functionName="ImVec4"/>
+    <functioncall functionName="ImVector"/>
+    <functioncall functionName="MemAlloc"/>
+    <functioncall functionName="MemFree"/>
+    <functioncall functionName="Merge"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="PopTabStop"/>
+    <functioncall functionName="PrimWriteIdx"/>
+    <functioncall functionName="PrimWriteVtx"/>
+    <functioncall functionName="PushTabStop"/>
+    <functioncall functionName="SetBit"/>
+    <functioncall functionName="SetCurrentChannel"/>
+    <functioncall functionName="SetNextFrameWantCaptureKeyboard"/>
+    <functioncall functionName="SetNextFrameWantCaptureMouse"/>
+    <functioncall functionName="Split"/>
+    <functioncall functionName="T"/>
+    <functioncall functionName="_ClearFreeMemory"/>
+    <functioncall functionName="__pragma"/>
+    <functioncall functionName="_grow_capacity"/>
+    <functioncall functionName="advance"/>
+    <functioncall functionName="assert"/>
+    <functioncall functionName="back"/>
+    <functioncall functionName="c_str"/>
+    <functioncall functionName="check_stack"/>
+    <functioncall functionName="clear"/>
+    <functioncall functionName="directory_iterator"/>
+    <functioncall functionName="dis"/>
+    <functioncall functionName="distance"/>
+    <functioncall functionName="empty"/>
+    <functioncall functionName="erase"/>
+    <functioncall functionName="erase_unsorted"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="find"/>
+    <functioncall functionName="front"/>
+    <functioncall functionName="gen"/>
+    <functioncall functionName="getline"/>
+    <functioncall functionName="glBindTexture"/>
+    <functioncall functionName="glGenTextures"/>
+    <functioncall functionName="glTexImage2D"/>
+    <functioncall functionName="glTexParameteri"/>
+    <functioncall functionName="hash"/>
+    <functioncall functionName="infile"/>
+    <functioncall functionName="insert"/>
+    <functioncall functionName="iss"/>
+    <functioncall functionName="memcmp"/>
+    <functioncall functionName="memcpy"/>
+    <functioncall functionName="memmove"/>
+    <functioncall functionName="memset"/>
+    <functioncall functionName="off"/>
+    <functioncall functionName="operator="/>
+    <functioncall functionName="operatorImU32"/>
+    <functioncall functionName="operatorImVec4"/>
+    <functioncall functionName="operatorbool"/>
+    <functioncall functionName="pair"/>
+    <functioncall functionName="path"/>
+    <functioncall functionName="pop"/>
+    <functioncall functionName="push"/>
+    <functioncall functionName="push_back"/>
+    <functioncall functionName="rd"/>
+    <functioncall functionName="reserve"/>
+    <functioncall functionName="resize"/>
+    <functioncall functionName="restore"/>
+    <functioncall functionName="rng"/>
+    <functioncall functionName="runtime_checks"/>
+    <functioncall functionName="select_randomly"/>
+    <functioncall functionName="stbi_image_free"/>
+    <functioncall functionName="stbi_load"/>
+    <functioncall functionName="strcmp"/>
+    <functioncall functionName="strict_gs_check"/>
+    <functioncall functionName="string"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="uni"/>
+    <functioncall functionName="vector"/>
+    <functioncall functionName="x"/>
+  </FileInfo>
+</analyzerinfo>

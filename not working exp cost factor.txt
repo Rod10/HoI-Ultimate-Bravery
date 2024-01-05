@@ -1,0 +1,6 @@
+light flame tank
+medium flame tank
+heavy flame tank
+amphibious tank
+heavy amphibious module
+super heavy anti tank

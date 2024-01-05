@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<analyzerinfo hash="12480955363257441258">
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;json.hpp&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;json.hpp&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Ressources.hpp" line="2" column="0"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;Ressources&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;Ressources&apos; has a constructor with 1 argument that is not explicit. Such, so called &quot;Converting constructors&quot;, should in general be explicit for type safety reasons as that prevents unintended implicit conversions." cwe="398" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/ressources.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Ressources.hpp" line="7" column="2"/>
+            <symbol>Ressources</symbol>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;Ressources&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;Ressources&apos; has a constructor with 1 argument that is not explicit. Such, so called &quot;Converting constructors&quot;, should in general be explicit for type safety reasons as that prevents unintended implicit conversions." cwe="398" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/ressources.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\Ressources.hpp" line="15" column="2"/>
+            <symbol>Ressources</symbol>
+        </error>
+  <FileInfo check="Class">
+<class name="Ressources" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Ressources.hpp" line="4" col="1" hash="6639784895476346364"/>
+  </FileInfo>
+  <FileInfo check="Uninitialized variables">
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Ressources.hpp:24:14" my-argnr="1" my-argname="rhs" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/Ressources.hpp" line="25" col="18" value="0"/>
+  </FileInfo>
+  <FileInfo check="CheckUnusedFunctions">
+    <functioncall functionName="Ressources"/>
+  </FileInfo>
+</analyzerinfo>

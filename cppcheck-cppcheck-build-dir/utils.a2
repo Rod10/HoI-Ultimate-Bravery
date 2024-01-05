@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<analyzerinfo hash="9716843636419180784">
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;iostream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;iostream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\constant.hpp" line="2" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;cstdlib&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;cstdlib&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\constant.hpp" line="3" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\constant.hpp" line="4" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;vector&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;vector&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\constant.hpp" line="5" column="0"/>
+        </error>
+        <error id="missingInclude" severity="information" msg="Include file: &quot;imgui.h&quot; not found." verbose="Include file: &quot;imgui.h&quot; not found.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="3" column="0"/>
+        </error>
+        <error id="missingInclude" severity="information" msg="Include file: &quot;imgui_impl_glfw.h&quot; not found." verbose="Include file: &quot;imgui_impl_glfw.h&quot; not found.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="4" column="0"/>
+        </error>
+        <error id="missingInclude" severity="information" msg="Include file: &quot;imgui_impl_opengl3.h&quot; not found." verbose="Include file: &quot;imgui_impl_opengl3.h&quot; not found.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="5" column="0"/>
+        </error>
+        <error id="missingInclude" severity="information" msg="Include file: &quot;implot.h&quot; not found." verbose="Include file: &quot;implot.h&quot; not found.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="6" column="0"/>
+        </error>
+        <error id="missingInclude" severity="information" msg="Include file: &quot;SOIL.h&quot; not found." verbose="Include file: &quot;SOIL.h&quot; not found.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="7" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;iostream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;iostream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="11" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;random&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;random&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="12" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;glfw3.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;glfw3.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="13" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stb_image_aug.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stb_image_aug.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="14" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;filesystem&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;filesystem&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="16" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;fstream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;fstream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="17" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;iostream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;iostream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="18" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;map&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;map&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="19" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;sstream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;sstream&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="20" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;string&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;string&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="21" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;unordered_map&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;unordered_map&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="22" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;cstdlib&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;cstdlib&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="24" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="25" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;GLFW/glfw3.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;GLFW/glfw3.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="29" column="0"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;delimiter&apos; is assigned a value that is never used." verbose="Variable &apos;delimiter&apos; is assigned a value that is never used." cwe="563" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="110" column="32"/>
+            <symbol>delimiter</symbol>
+        </error>
+        <error id="unusedVariable" severity="style" msg="Unused variable: token" verbose="Unused variable: token" cwe="563" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="109" column="29"/>
+            <symbol>token</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;delimiter&apos; is assigned a value that is never used." verbose="Variable &apos;delimiter&apos; is assigned a value that is never used." cwe="563" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="137" column="36"/>
+            <symbol>delimiter</symbol>
+        </error>
+        <error id="unusedVariable" severity="style" msg="Unused variable: token" verbose="Unused variable: token" cwe="563" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\utils.hpp" line="136" column="33"/>
+            <symbol>token</symbol>
+        </error>
+  <FileInfo check="Class">
+<class name="Constant" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/constant.hpp" line="6" col="1" hash="15650056011355964019"/>
+<class name="Utils" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.hpp" line="30" col="1" hash="17275797083415349895"/>
+  </FileInfo>
+  <FileInfo check="Uninitialized variables">
+    <unsafe-usage my-id="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.hpp:54:30" my-argnr="1" my-argname="string" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/utils.hpp" line="58" col="25" value="0"/>
+  </FileInfo>
+  <FileInfo check="CheckUnusedFunctions">
+    <functioncall functionName="GL_LINEAR"/>
+    <functioncall functionName="GL_RGBA"/>
+    <functioncall functionName="GL_TEXTURE_2D"/>
+    <functioncall functionName="GL_TEXTURE_MAG_FILTER"/>
+    <functioncall functionName="GL_TEXTURE_MIN_FILTER"/>
+    <functioncall functionName="GL_TEXTURE_WRAP_S"/>
+    <functioncall functionName="GL_TEXTURE_WRAP_T"/>
+    <functioncall functionName="GL_UNSIGNED_BYTE"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="advance"/>
+    <functioncall functionName="c_str"/>
+    <functioncall functionName="clear"/>
+    <functioncall functionName="directory_iterator"/>
+    <functioncall functionName="dis"/>
+    <functioncall functionName="distance"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="gen"/>
+    <functioncall functionName="getline"/>
+    <functioncall functionName="glBindTexture"/>
+    <functioncall functionName="glGenTextures"/>
+    <functioncall functionName="glTexImage2D"/>
+    <functioncall functionName="glTexParameteri"/>
+    <functioncall functionName="hash"/>
+    <functioncall functionName="infile"/>
+    <functioncall functionName="insert"/>
+    <functioncall functionName="iss"/>
+    <functioncall functionName="pair"/>
+    <functioncall functionName="path"/>
+    <functioncall functionName="push_back"/>
+    <functioncall functionName="rd"/>
+    <functioncall functionName="rng"/>
+    <functioncall functionName="select_randomly"/>
+    <functioncall functionName="stbi_image_free"/>
+    <functioncall functionName="stbi_load"/>
+    <functioncall functionName="string"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="uni"/>
+    <functioncall functionName="vector"/>
+  </FileInfo>
+</analyzerinfo>

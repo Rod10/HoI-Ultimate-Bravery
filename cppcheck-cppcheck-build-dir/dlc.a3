@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<analyzerinfo hash="7638197226567839464">
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;string&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;string&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\dlc.hpp" line="2" column="0"/>
+        </error>
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;stdio.h&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\dlc.hpp" line="3" column="0"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;name&apos; should be passed by const reference." verbose="Parameter &apos;name&apos; is passed by value. It could be passed as a const reference which is usually faster and recommended in C++." cwe="398" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/dlc.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\dlc.hpp" line="7" column="18"/>
+            <symbol>name</symbol>
+        </error>
+  <FileInfo check="Class">
+<class name="Dlc" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/dlc.hpp" line="4" col="1" hash="5848773713579771700"/>
+  </FileInfo>
+</analyzerinfo>

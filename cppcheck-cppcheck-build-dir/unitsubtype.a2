@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<analyzerinfo hash="14367003998224589073">
+        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;string&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;string&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\unitsubtype.hpp" line="2" column="0"/>
+        </error>
+        <error id="missingReturn" severity="error" msg="Found an exit path from function with non-void return type that has missing return statement" verbose="Found an exit path from function with non-void return type that has missing return statement" cwe="758" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/unitsubtype.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\unitsubtype.hpp" line="177" column="0"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;type&apos; should be passed by const reference." verbose="Parameter &apos;type&apos; is passed by value. It could be passed as a const reference which is usually faster and recommended in C++." cwe="398" file0="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/unitsubtype.cpp">
+            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\unitsubtype.hpp" line="136" column="52"/>
+            <symbol>type</symbol>
+        </error>
+  <FileInfo check="Class">
+<class name="UnitSubType" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/unitsubtype.hpp" line="3" col="1" hash="8923611380068752763"/>
+  </FileInfo>
+  <FileInfo check="CheckUnusedFunctions">
+    <functioncall functionName="AmtracBattalion"/>
+    <functioncall functionName="AntiAir"/>
+    <functioncall functionName="AntiTank"/>
+    <functioncall functionName="ArmoredCar"/>
+    <functioncall functionName="Artillery"/>
+    <functioncall functionName="Bicycle"/>
+    <functioncall functionName="Camelry"/>
+    <functioncall functionName="Cavalry"/>
+    <functioncall functionName="HeavySPAntiAir"/>
+    <functioncall functionName="HeavySPArtillery"/>
+    <functioncall functionName="HeavyTank"/>
+    <functioncall functionName="HeavyTankDestroyer"/>
+    <functioncall functionName="Infantry"/>
+    <functioncall functionName="LightSPAntiAir"/>
+    <functioncall functionName="LightSPArtillery"/>
+    <functioncall functionName="LightTank"/>
+    <functioncall functionName="LightTankDestroyer"/>
+    <functioncall functionName="Marines"/>
+    <functioncall functionName="MechanizedInfantry"/>
+    <functioncall functionName="MediumSPAntiAir"/>
+    <functioncall functionName="MediumSPArtillery"/>
+    <functioncall functionName="MediumTank"/>
+    <functioncall functionName="MediumTankDestroyer"/>
+    <functioncall functionName="ModernSPAntiAir"/>
+    <functioncall functionName="ModernSPArtillery"/>
+    <functioncall functionName="ModernTank"/>
+    <functioncall functionName="ModernTankDestroyer"/>
+    <functioncall functionName="MotorizedAntiAir"/>
+    <functioncall functionName="MotorizedAntiTank"/>
+    <functioncall functionName="MotorizedArtillery"/>
+    <functioncall functionName="MotorizedInfantry"/>
+    <functioncall functionName="MotorizedRocketArtillery"/>
+    <functioncall functionName="Moutain"/>
+    <functioncall functionName="Paratrooper"/>
+    <functioncall functionName="PenalBattalion"/>
+    <functioncall functionName="RocketArtillery"/>
+    <functioncall functionName="SuperHeavySPAntiAir"/>
+    <functioncall functionName="SuperHeavySPArtillery"/>
+    <functioncall functionName="SuperHeavyTank"/>
+    <functioncall functionName="SuperHeavyTankDestroyer"/>
+    <functioncall functionName="TruckDrawnRocketArtillery"/>
+  </FileInfo>
+</analyzerinfo>

@@ -1,0 +1,13 @@
+typeToString
+WindowsManagement
+getButtons
+getSubWindow
+getTypeSubWindow
+setButtons call:[find]
+setSubWindow call:[find]
+setTypeSubWindow call:[find]
+getPrevTypeSubWindow
+setPrevTypeSubWindow
+getDesignerTypeSubWindow
+setDesignerTypeSubWindow
+GetInstance call:[WindowsManagement] noreturn:[WindowsManagement]

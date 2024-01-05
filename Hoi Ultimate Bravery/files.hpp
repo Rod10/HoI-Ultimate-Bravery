@@ -349,7 +349,7 @@ public:
     static void generateUnitsFiles(Country* country) {
         //std::vector <std::string> tempFile;
         std::string gamePath = Settings::getInstance()->getGamepath();
-        std::string fileName = std::format("{0} - {1}.txt", country->tag, country->name);
+        std::string fileName = std::format("{0}_1936_nsb.txt", country->tag);
         //std::string backUpFilePath = std::format("./Assets/Data/Files/Back-Up/units/{1}", gamePath, fileName);
         //std::string filePath = std::format("{0}/common/units/{1}", gamePath, fileName);
 
