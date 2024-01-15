@@ -54,7 +54,6 @@ public:
 		ImGui::PopStyleColor();
 		ImGui::PopFont();
 
-		float testMiddle = ImGui::GetWindowWidth() / 6.0f;
 		bool opened = true;
 		ImGui::SetNextWindowPos(ImVec2(150.0f, 200.0f));
 		ImGui::PushStyleColor(ImGuiCol_WindowBg, windowColor);
