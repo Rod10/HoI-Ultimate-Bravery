@@ -113,7 +113,7 @@ You can choose the nations which will have the right to have these units but the
    (with ssh) git clone git@github.com:Rod10/HoI-Ultimate-Bravery.git
    (w/o ssh)  git clone https://github.com/Rod10/HoI-Ultimate-Bravery.git
    ```
-2. Launching the app with the .exe or in your IDE
+2. Launching, with administator, the app with the .exe or with compilation in your IDE 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -122,8 +122,23 @@ You can choose the nations which will have the right to have these units but the
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+The UI is divided in two part:
+On the left you have the buttons to navigate through the different menus
+On the right you have a box where the different elements are located to generate your units
+
 The first thing you'll need to do is to set the game path in the options
 (don't mind the language options, it can broke the whole thing)
+
+You can now go to Generate, you can choose the unit type on the left and the unit subtype
+![Generate Menu](https://cdn.discordapp.com/attachments/1212383699191070801/1212383709949337650/image.png?ex=65f1a351&is=65df2e51&hm=44e1a92d8abb06023981a8c12b01d831972a195573761bca7a38c8af2f666af2&)You can choose the nation you want to play and generate the units you want or do it for all the nations present in the selection by checking the box
+
+When you click on the type you want to generate you get this
+![Generation Window](https://cdn.discordapp.com/attachments/1212383699191070801/1212385916405026816/image.png?ex=65f1a55f&is=65df305f&hm=b0541a15a101d0f66dc6c02b869436cf4fdae04733740798569b5d316224bf6e&)
+You can go back or regenerate
+
+When you are on import page you can select wich countries you want to import or just click the checkbox for all countries.
+![Import Menu](https://cdn.discordapp.com/attachments/1212383699191070801/1212401969868574810/image.png?ex=65f1b452&is=65df3f52&hm=db81a0f9ca403ba2884cff33eb50d026637955120a99c232712bccf9cbd3a9ab&)
+You'll need to import before starting the game and be ultra careful reset file before quitting the program else you are good to do a steam verif of your game.
 
 <!--_For more examples, please refer to the [Documentation](https://example.com)_-->
 
