@@ -1,3 +1,0 @@
-typeToString
-stringToInt
-stringToType call:[stringToInt]
