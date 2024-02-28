@@ -147,7 +147,7 @@ You'll need to import before starting the game and be ultra careful reset file b
 
 
 <!-- ROADMAP -->
-## Roadmap
+## Roadmap (Not in order)
 
 - [ ] Learn math do show the right base stats*
 - [ ] Choose the type of division to generate (infantry/motorised/full random)
