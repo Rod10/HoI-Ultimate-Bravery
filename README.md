@@ -113,7 +113,7 @@ You can choose the nations which will have the right to have these units but the
    (with ssh) git clone git@github.com:Rod10/HoI-Ultimate-Bravery.git
    (w/o ssh)  git clone https://github.com/Rod10/HoI-Ultimate-Bravery.git
    ```
-2. Launching the app with the .exe or in your IDE
+2. Launching, with administator, the app with the .exe or with compilation in your IDE 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
