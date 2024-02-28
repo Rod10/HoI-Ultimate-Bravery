@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<analyzerinfo hash="11230880617251775662">
-        <error id="missingIncludeSystem" severity="information" msg="Include file: &lt;string&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results." verbose="Include file: &lt;string&gt; not found. Please note: Cppcheck does not need standard library headers to get proper results.">
-            <location file="C:\Users\Erwan\Documents\Doc Erwan\HoI Ultimate Bravery\Hoi Ultimate Bravery\regimenttype.hpp" line="2" column="0"/>
-        </error>
-  <FileInfo check="Class">
-<class name="RegimentType" file="C:/Users/Erwan/Documents/Doc Erwan/HoI Ultimate Bravery/Hoi Ultimate Bravery/regimenttype.hpp" line="3" col="1" hash="8226642177709021685"/>
-  </FileInfo>
-</analyzerinfo>
