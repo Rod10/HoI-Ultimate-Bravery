@@ -9,8 +9,6 @@
 *** Thanks again! Now go create something AMAZING! :D
 -->
 
-
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -19,15 +17,11 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-![Contributors][contributors-shield]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://github.com/Rod10/HoI-Ultimate-Bravery">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -36,14 +30,14 @@
   <p align="center">
     An external program for Heart Of Iron IV
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Rod10/HoI-Ultimate-Bravery"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://github.com/Rod10/HoI-Ultimate-Bravery">View Demo</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    <a href="https://github.com/Rod10/HoI-Ultimate-Bravery/issues">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://github.com/Rod10/HoI-Ultimate-Bravery/issues">Request Feature</a>
   </p>
 </div>
 
@@ -137,7 +131,8 @@ The first thing you'll need to do is to set the game path in the options
 
 - [ ] Learn math do show the right base stats*
 - [ ] Choose the type of division to generate (infantry/motorised/full random)
-- [ ]  The possibility of not having all the DLC
+- [ ] The possibility of not having all the DLC
+- [ ] Add multiplayer support 
 - [ ] Mod integration
 	- [ ] Infantry Equipment
 	- [ ] Expanded Designers Combined
@@ -157,6 +152,7 @@ The first thing you'll need to do is to set the game path in the options
 		- [ ] Tanks
 		- [ ] Planes
 		- [ ] Ships
+
 *Without doctrine/research/...
 
 See the [open issues](https://github.com/Rod10/HoI-Ultimate-Bravery/issues) for a full list of proposed features (and known issues).
@@ -185,8 +181,6 @@ Don't forget to give the project a star! Thanks again!
 
 <!-- LICENSE -->
 ## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
