@@ -18,6 +18,11 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-raw/Rod10/HoI-Ultimate-Bravery?style=for-the-badge)
+![GitHub Release](https://img.shields.io/github/v/release/Rod10/HoI-Ultimate-Bravery?style=for-the-badge)
+
+
+
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
