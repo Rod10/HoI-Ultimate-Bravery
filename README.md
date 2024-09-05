@@ -79,10 +79,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![Main Menu](https://cdn.discordapp.com/attachments/388277885099704321/1212336755051864064/image.png?ex=65f17796&is=65df0296&hm=19876ea60b637541917c85060f72bc299edecb1ea1b42ac0eb00a7ab161db029&)
+![Main Menu](https://cdn.discordapp.com/attachments/1212383699191070801/1281173605517885463/image.png?ex=66dac166&is=66d96fe6&hm=9a0d0bd1c4bc712195acf1c25a912c46ec0e1f99212f4f46c45eb1671e59248f&)
 
-HoI Ultimate Bravery is an external program allowing you to randomly generate unit types such as tanks/planes/boats as well as the divisions themselves. 
-You can choose the nations which will have the right to have these units but there is a small catch: you cannot, inside the game, change/edit the units already present.
+HoI Ultimate Bravery is an external program allowing you to randomly generate unit types such as tanks/planes/boats as well as the divisions themselves. For now it only work with the base game (will all the DLC, maybe ?) and in the futur i will include the support of generating unit for mod.
+You can choose the nations which will have the right to have these units but there is a small catch: you cannot, inside the game, change/edit the units or divisions you have generated.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -138,7 +138,7 @@ You can go back or regenerate
 
 When you are on import page you can select wich countries you want to import or just click the checkbox for all countries.
 ![Import Menu](https://cdn.discordapp.com/attachments/1212383699191070801/1212401969868574810/image.png?ex=66d91392&is=66d7c212&hm=dd0e1b6bc3cca909f1a9fc0a1591cc2ac9fab5f3afb6212b010c529e35acd990&)
-You'll need to import before starting the game and be ultra careful reset file before quitting the program else you are good to do a steam verif of your game.
+You'll need to import before starting the game and be ultra careful to reset file before quitting the program else you are good to do a steam verif of your game.
 
 <!--_For more examples, please refer to the [Documentation](https://example.com)_-->
 
@@ -147,14 +147,16 @@ You'll need to import before starting the game and be ultra careful reset file b
 
 
 <!-- ROADMAP -->
-## Roadmap (Not in order)
+## Roadmap
 
+- [ ] look on how i can make this thing responsive 😑 (WIP)
+- [ ] Find good color that make the thing better
 - [ ] Learn math to show the right base stats*
-- [ ] Sort on how i can make this responsive 😑
+- [ ] Look if we can reset file while exiting the program
 - [ ] Choose the type of division to generate (infantry/motorised/full random)
 - [ ] The possibility of not having all the DLC
 - [ ] Add multiplayer support 
-- [ ] Mod integration
+- [ ] Mod integration (Not in order for overhaul mod)
 	- [ ] Infantry Equipment
 	- [ ] Expanded Designers Combined
 	- [ ] RoadTo56
@@ -223,7 +225,7 @@ You'll need to import before starting the game and be ultra careful reset file b
 			- [ ] Ship
 			- [ ] Plane
 			- [ ] Special
-	- [ ] Equestria at War (Yes i know)
+	- [ ] Equestria at War (Yes i know but why not ?)
 
 *Without doctrine/research/...
 
