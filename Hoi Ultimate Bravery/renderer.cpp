@@ -1,5 +1,21 @@
 #include "renderer.hpp"
 
+ImVec2 Renderer::getBlockSize() {
+	const int windowHeightSize = ImGui::GetIO().DisplaySize.y;
+	const int windowWidthSize = ImGui::GetIO().DisplaySize.x;
+
+	const float mainBlocHeightSize = windowHeightSize - (20 * windowHeightSize) / 100;
+	const float mainBlocWidthtSize = windowWidthSize - (15 * windowWidthSize) / 100;
+	return ImVec2(mainBlocWidthtSize, mainBlocHeightSize);
+}
+
+ImVec2 Renderer::getButtonSize() {
+	const ImVec2 blocSize = getBlockSize();
+	const float buttonHeight = (blocSize.y / 5) - ((5 * ((0.5 * blocSize.y) / 100)));
+	const float buttonWidth = blocSize.x / 3;
+	return ImVec2(buttonWidth, buttonHeight);
+}
+
 void setIcon(float y, float x, std::string type, std::string name, UnitType::Type unitType) {
 	ImGui::SetCursorPosY(y);
 	ImGui::SetCursorPosX(x);
@@ -64,7 +80,13 @@ float calculatePos(Constant::Position position, int width) {
 
 bool createButtonWithSize(const char* label, ImVec2 size) {
 	ImGuiStyle& style = ImGui::GetStyle();
+	const auto test = Renderer::getButtonSize();
+	return ImGui::Button(label, test);
+}
 
+bool createButtonWithoutSize(const char* label) {
+	ImGuiStyle& style = ImGui::GetStyle();
+	const auto size = Renderer::getButtonSize();
 	return ImGui::Button(label, size);
 }
 
@@ -150,27 +172,27 @@ void AlignForWidth(float width, float alignment = 0.5f) {
 void renderMainMenuButtonBlock(float pos) {
 	auto windowsManagement = WindowsManagement::GetInstance();
 	Settings* settings = Settings::getInstance();
-	if (createButtonWithSize("Generate", ImVec2(365.0f, 75.0f))) {
+	if (createButtonWithoutSize("Generate")) {
 		windowsManagement->setButtons("mainMenu", false);
 		windowsManagement->setButtons("generate", true);
 		windowsManagement->setSubWindow("generate", true);
 	}
-	if (createButtonWithSize("Import", ImVec2(365.0f, 75.0f))) {
+	if (createButtonWithoutSize("Import")) {
 		windowsManagement->setButtons("mainMenu", false);
 		windowsManagement->setButtons("import", true);
 		windowsManagement->setSubWindow("import", true);
 	}
-	if (createButtonWithSize("Multiplayer", ImVec2(365.0f, 75.0f))) {
+	if (createButtonWithoutSize("Multiplayer")) {
 		windowsManagement->setButtons("mainMenu", false);
 		windowsManagement->setButtons("multiplayer", true);
 		windowsManagement->setSubWindow("multiplayer", true);
 	}
-	if (createButtonWithSize("Options", ImVec2(365.0f, 75.0f))) {
+	if (createButtonWithoutSize("Options")) {
 		windowsManagement->setButtons("mainMenu", false);
 		windowsManagement->setButtons("options", true);
 		windowsManagement->setSubWindow("options", true);
 	}
-	if (createButtonWithSize("Quit", ImVec2(365.0f, 75.0f))) {
+	if (createButtonWithoutSize("Quit")) {
 		//countries files
 		std::string countriesPathDirectory = "./Assets/Data/Files/Back-Up/countries";
 		std::string countriesTargetDirectory = std::format("{0}/history/countries", settings->getGamepath());

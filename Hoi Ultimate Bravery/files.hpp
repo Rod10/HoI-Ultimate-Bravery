@@ -91,7 +91,7 @@ public:
             std::cout << error.what() << std::endl;
         }
 
-        std::filesystem::copy_file(std::format("{0}{1}", newFilePath, fileName), filePath, copyOptions);
+        //std::filesystem::copy_file(std::format("{0}{1}", newFilePath, fileName), filePath, copyOptions);
     }
 
     static void generateIdeaFile(Country* country) {
@@ -150,7 +150,7 @@ public:
             std::cout << error.what() << std::endl;
         }
 
-        std::filesystem::copy_file(std::format("{0}{1}", newFilePath, fileName), filePath, copyOptions);
+        //std::filesystem::copy_file(std::format("{0}{1}", newFilePath, fileName), filePath, copyOptions);
     }
 
     static void makeOrder(std::string mode, std::vector<std::string>* tempFile, Country* country, std::unordered_map<int, std::string> converterToGameName) {

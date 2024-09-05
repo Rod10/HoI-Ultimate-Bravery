@@ -38,6 +38,8 @@ class Renderer
 public:
 	static void renderButtonBlock(float pos);
 	static void renderSubWindow();
+	static ImVec2 getBlockSize();
+	static ImVec2 getButtonSize();
 };
 
 static std::vector<Country>* countryList = CountryList::GetInstance()->getList();

@@ -66,6 +66,7 @@ public:
         // GLFWmonitor* monitor = glfwGetPrimaryMonitor();
         window = glfwCreateWindow(1280, 720, "HoI Ultimate Bravery", nullptr, nullptr);
         glfwSetWindowSize(window, 1920, 1080);
+        glfwSetWindowSizeLimits(window, 1280, 720, GLFW_DONT_CARE, GLFW_DONT_CARE);
 
         GLFWimage icons[1];
         icons[0].pixels = SOIL_load_image("Assets/Images/game_icon.png", &icons[0].width, &icons[0].height, 0, SOIL_LOAD_RGBA);
@@ -149,6 +150,7 @@ public:
         style.ItemSpacing = ImVec2(6.00f, 6.00f);
         style.ItemInnerSpacing = ImVec2(6.00f, 6.00f);
         style.TouchExtraPadding = ImVec2(0.00f, 0.00f);
+        style.WindowMinSize = ImVec2(1024.0f, 768.0f);
         style.IndentSpacing = 25;
         style.ScrollbarSize = 15;
         style.GrabMinSize = 10;

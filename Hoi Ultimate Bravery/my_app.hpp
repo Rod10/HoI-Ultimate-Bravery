@@ -54,10 +54,20 @@ public:
 		ImGui::PopStyleColor();
 		ImGui::PopFont();
 
+		const ImVec2 mainBlockSize = Renderer::getBlockSize();
+
+		const float mainBlocHeightMargin = (10 * mainBlockSize.y) / 100;
+		const float mainBlocWidthtMargin = (5 * mainBlockSize.x) / 100;
+
+		const ImVec2 buttonBlockSize = Renderer::getButtonSize();
+		
+		const float generateBlockXPos = ((10 * mainBlockSize.x) / 100) + buttonBlockSize.x;
+
 		bool opened = true;
-		ImGui::SetNextWindowPos(ImVec2(150.0f, 200.0f));
 		ImGui::PushStyleColor(ImGuiCol_WindowBg, windowColor);
-		ImGui::Begin("mainMenu", &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
+		ImGui::SetNextWindowPos(ImVec2(mainBlocWidthtMargin, mainBlocHeightMargin));
+		ImGui::SetNextWindowSize(ImVec2(buttonBlockSize.x, mainBlockSize.y));
+		ImGui::Begin("buttonBlock", &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
 		ImGui::PopStyleColor();
 		ImGui::PushFont(basicFont);
 		ImGui::PushStyleColor(ImGuiCol_Button, buttonColor);
@@ -67,11 +77,12 @@ public:
 		ImGui::End();
 		
 		if (windowManagement->getButtons().find("mainMenu")->second == false) {
+			const float test = mainBlockSize.x - buttonBlockSize.x;
 			bool opened = !windowManagement->getButtons().find("mainMenu")->second;
-			ImGui::SetNextWindowPos(ImVec2(760.0f, 200.0f));
+			ImGui::SetNextWindowPos(ImVec2(generateBlockXPos, mainBlocHeightMargin));
 			ImGui::PushStyleColor(ImGuiCol_WindowBg, greyWindowColor);
-			ImGui::SetNextWindowSize(ImVec2(1160.f, 744.0f));
-			ImGui::Begin("generate", &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar);
+			ImGui::SetNextWindowSize(ImVec2(mainBlockSize.x - buttonBlockSize.x, mainBlockSize.y));
+			ImGui::Begin("generate", &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
 			Renderer::renderSubWindow();
 			ImGui::PopStyleColor();
 			ImGui::End();
