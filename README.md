@@ -79,10 +79,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![Main Menu](https://cdn.discordapp.com/attachments/388277885099704321/1212336755051864064/image.png?ex=65f17796&is=65df0296&hm=19876ea60b637541917c85060f72bc299edecb1ea1b42ac0eb00a7ab161db029&)
+![Main Menu](https://cdn.discordapp.com/attachments/1212383699191070801/1281173605517885463/image.png?ex=66dac166&is=66d96fe6&hm=9a0d0bd1c4bc712195acf1c25a912c46ec0e1f99212f4f46c45eb1671e59248f&)
 
-HoI Ultimate Bravery is an external program allowing you to randomly generate unit types such as tanks/planes/boats as well as the divisions themselves. 
-You can choose the nations which will have the right to have these units but there is a small catch: you cannot, inside the game, change/edit the units already present.
+HoI Ultimate Bravery is an external program allowing you to randomly generate unit types such as tanks/planes/boats as well as the divisions themselves. For now it only work with the base game (will all the DLC, maybe ?) and in the futur i will include the support of generating unit for mod.
+You can choose the nations which will have the right to have these units but there is a small catch: you cannot, inside the game, change/edit the units or divisions you have generated.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -130,15 +130,15 @@ The first thing you'll need to do is to set the game path in the options
 (don't mind the language options, it can broke the whole thing)
 
 You can now go to Generate, you can choose the unit type on the left and the unit subtype
-![Generate Menu](https://cdn.discordapp.com/attachments/1212383699191070801/1212383709949337650/image.png?ex=65f1a351&is=65df2e51&hm=44e1a92d8abb06023981a8c12b01d831972a195573761bca7a38c8af2f666af2&)You can choose the nation you want to play and generate the units you want or do it for all the nations present in the selection by checking the box
+![Generate Menu](https://cdn.discordapp.com/attachments/1212383699191070801/1212383709949337650/image.png?ex=66d9ab51&is=66d859d1&hm=83f43d4f345a73fcbf175f4708a8bd823332c7a9ac93e4f7e6a320ee3be3f189&)You can choose the nation you want to play and generate the units you want or do it for all the nations present in the selection by checking the box
 
 When you click on the type you want to generate you get this
-![Generation Window](https://cdn.discordapp.com/attachments/1212383699191070801/1212385916405026816/image.png?ex=65f1a55f&is=65df305f&hm=b0541a15a101d0f66dc6c02b869436cf4fdae04733740798569b5d316224bf6e&)
+![Generation Window](https://cdn.discordapp.com/attachments/1212383699191070801/1212385828504997888/image.png?ex=66d9ad4a&is=66d85bca&hm=15b023aa03eee74c2c5c8ce2d7107faf885a336b708dddb40011d286acde2379&)
 You can go back or regenerate
 
 When you are on import page you can select wich countries you want to import or just click the checkbox for all countries.
-![Import Menu](https://cdn.discordapp.com/attachments/1212383699191070801/1212401969868574810/image.png?ex=65f1b452&is=65df3f52&hm=db81a0f9ca403ba2884cff33eb50d026637955120a99c232712bccf9cbd3a9ab&)
-You'll need to import before starting the game and be ultra careful reset file before quitting the program else you are good to do a steam verif of your game.
+![Import Menu](https://cdn.discordapp.com/attachments/1212383699191070801/1212401969868574810/image.png?ex=66d91392&is=66d7c212&hm=dd0e1b6bc3cca909f1a9fc0a1591cc2ac9fab5f3afb6212b010c529e35acd990&)
+You'll need to import before starting the game and be ultra careful to reset file before quitting the program else you are good to do a steam verif of your game.
 
 <!--_For more examples, please refer to the [Documentation](https://example.com)_-->
 
@@ -149,29 +149,83 @@ You'll need to import before starting the game and be ultra careful reset file b
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Learn math do show the right base stats*
+- [ ] look on how i can make this thing responsive 😑 (WIP)
+- [ ] Find good color that make the thing better
+- [ ] Learn math to show the right base stats*
+- [ ] Look if we can reset file while exiting the program
 - [ ] Choose the type of division to generate (infantry/motorised/full random)
 - [ ] The possibility of not having all the DLC
 - [ ] Add multiplayer support 
-- [ ] Mod integration
+- [ ] Mod integration (Not in order for overhaul mod)
 	- [ ] Infantry Equipment
 	- [ ] Expanded Designers Combined
 	- [ ] RoadTo56
 		- [ ] Tanks
 		- [ ] Planes
 		- [ ] Ships
+		- [ ] Divisions
+		- [ ] Doctrines
+			- [ ] Infantry
+			- [ ] Ship
+			- [ ] Plane
+			- [ ] Special
 	- [ ] Millenium Dawn
 		- [ ] Tanks
 		- [ ] Planes
 		- [ ] Ships
+		- [ ] Divisions
+		- [ ] Doctrines
+			- [ ] Infantry
+			- [ ] Ship
+			- [ ] Plane
+			- [ ] Special
 	- [ ] KaiserReich
 		- [ ] Tanks
 		- [ ] Planes
 		- [ ] Ships
+		- [ ] Divisions
+		- [ ] Doctrines
+			- [ ] Infantry
+			- [ ] Ship
+			- [ ] Plane
+			- [ ] Special
 	- [ ] KaiserReichRedux
 		- [ ] Tanks
 		- [ ] Planes
 		- [ ] Ships
+		- [ ] Divisions
+		- [ ] Doctrines
+			- [ ] Infantry
+			- [ ] Ship
+			- [ ] Plane
+			- [ ] Special
+	- [ ] Darkest Hour
+		- [ ] Divisions
+		- [ ] Doctrines
+			- [ ] Infantry
+			- [ ] Ship
+			- [ ] Plane
+	- [ ] World Ablaze (☠️)
+		- [ ] Tanks
+		- [ ] Planes
+		- [ ] Ships
+		- [ ] Divisions
+		- [ ] Doctrines
+			- [ ] Infantry
+			- [ ] Ship
+			- [ ] Plane
+			- [ ] Special
+	- [ ] Black Ice (☠️)
+		- [ ] Tanks
+		- [ ] Planes
+		- [ ] Ships
+		- [ ] Divisions
+		- [ ] Doctrines
+			- [ ] Infantry
+			- [ ] Ship
+			- [ ] Plane
+			- [ ] Special
+	- [ ] Equestria at War (Yes i know but why not ?)
 
 *Without doctrine/research/...
 
