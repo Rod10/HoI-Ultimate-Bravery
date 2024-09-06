@@ -1297,6 +1297,8 @@ void renderOptionsSubWindow() {
 }
 
 void Renderer::renderSubWindow() {
+	const ImVec2 mainBlockSize = Renderer::getBlockSize();
+	const ImVec2 buttonBlockSize = Renderer::getButtonSize();
 	std::string window;
 	WindowsManagement* windowsManagement = WindowsManagement::GetInstance();
 	for (auto& it : windowsManagement->getSubWindow()) {
@@ -1309,11 +1311,15 @@ void Renderer::renderSubWindow() {
 	ImGui::PushFont(basicFont);
 	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
 	ImVec2 center = ImGui::GetMainViewport()->GetCenter();
-	createLabelWithPosition(window.c_str(), (float)center.x / 2, 0.f);
+	//createLabelWithPosition(window.c_str(), (float)center.x / 2, 0.f);
+	const float mainBlocWidthtMargin = (50 * mainBlockSize.x) / 100;
+	createLabelWithPosition(window.c_str(), ImGui::GetCursorPosX() + mainBlocWidthtMargin);
 	ImGui::PopFont();
 
 	if (window == "generate" || window == "import") {
-		createLabelWithPosition("country", 10.0f, ImGui::GetCursorPosY() + 10.0f);
+		const float mainBlocHeightMargin = (5 * mainBlockSize.y) / 100;
+		const float mainBlocWidthtMargin = (5 * mainBlockSize.x) / 100;
+		createLabelWithPosition("country", ImGui::GetCursorPosX() + mainBlocWidthtMargin, ImGui::GetCursorPosY() + mainBlocHeightMargin);
 		ImGui::SameLine();
 		static ImGuiComboFlags flags = 0;
 		static int item_current_idx = 0; // Here we store our selection data as an index.
