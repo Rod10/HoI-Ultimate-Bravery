@@ -40,6 +40,7 @@ public:
 	static void renderSubWindow();
 	static ImVec2 getBlockSize();
 	static ImVec2 getButtonSize();
+	static ImVec2 getGenerateBlockSize();
 };
 
 static std::vector<Country>* countryList = CountryList::GetInstance()->getList();

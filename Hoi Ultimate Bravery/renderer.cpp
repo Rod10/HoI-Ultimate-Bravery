@@ -4,16 +4,22 @@ ImVec2 Renderer::getBlockSize() {
 	const int windowHeightSize = ImGui::GetIO().DisplaySize.y;
 	const int windowWidthSize = ImGui::GetIO().DisplaySize.x;
 
-	const float mainBlocHeightSize = windowHeightSize - (20 * windowHeightSize) / 100;
-	const float mainBlocWidthtSize = windowWidthSize - (15 * windowWidthSize) / 100;
+	const float mainBlocHeightSize = windowHeightSize - ((20 * windowHeightSize) / 100);
+	const float mainBlocWidthtSize = windowWidthSize - ((10 * windowWidthSize) / 100);
 	return ImVec2(mainBlocWidthtSize, mainBlocHeightSize);
 }
 
 ImVec2 Renderer::getButtonSize() {
 	const ImVec2 blocSize = getBlockSize();
 	const float buttonHeight = (blocSize.y / 5) - ((5 * ((0.5 * blocSize.y) / 100)));
-	const float buttonWidth = blocSize.x / 3;
+	const float buttonWidth = (blocSize.x / 3) - ((5 * blocSize.x) / 100);
 	return ImVec2(buttonWidth, buttonHeight);
+}
+
+ImVec2 Renderer::getGenerateBlockSize() {
+	const ImVec2 mainBlockSize = Renderer::getBlockSize();
+	const ImVec2 buttonBlockSize = Renderer::getButtonSize();
+	return ImVec2(mainBlockSize.x - buttonBlockSize.x, mainBlockSize.y);
 }
 
 void setIcon(float y, float x, std::string type, std::string name, UnitType::Type unitType) {
@@ -78,6 +84,13 @@ float calculatePos(Constant::Position position, int width) {
 	return off;
 }
 
+float calculateTextLenght(const char* label) {
+	ImGuiStyle& style = ImGui::GetStyle();
+
+	float size = ImGui::CalcTextSize(label).x / 2.0f;
+	return size;
+}
+
 bool createButtonWithSize(const char* label, ImVec2 size) {
 	ImGuiStyle& style = ImGui::GetStyle();
 	const auto test = Renderer::getButtonSize();
@@ -126,7 +139,7 @@ void createLabelWithPosition(const char* label, float position, Constant::TextPo
 	return ImGui::Text(label);
 }
 
-void createLabelWithPosition(const char* label, float position, float height) {
+/* void createLabelWithPosition(const char* label, float position, float height) {
 	ImGuiStyle& style = ImGui::GetStyle();
 
 	float size = ImGui::CalcTextSize(label).x + style.FramePadding.x * 2.0f;
@@ -138,9 +151,22 @@ void createLabelWithPosition(const char* label, float position, float height) {
 
 	ImGui::SetCursorPosY(height);
 	return ImGui::Text(label);
+}*/
+
+void createLabelWithPosition(const char* label, float position, float height) {
+	ImGuiStyle& style = ImGui::GetStyle();
+
+	float size = ImGui::CalcTextSize(label).x / 2.0f;
+
+	float off = position - size;
+	if (off > 0.0f)
+		ImGui::SetCursorPosX(off);
+
+	ImGui::SetCursorPosY(height);
+	return ImGui::Text(label);
 }
 
-void createLabelWithPosition(const char* label, float position)
+/* void createLabelWithPosition(const char* label, float position)
 {
 	ImGuiStyle& style = ImGui::GetStyle();
 
@@ -150,6 +176,19 @@ void createLabelWithPosition(const char* label, float position)
 	float off = (avail - size) * (position / 1000.f);
 	if (off > 0.0f)
 		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
+
+	return ImGui::Text(label);
+}*/
+
+void createLabelWithPosition(const char* label, float position)
+{
+	ImGuiStyle& style = ImGui::GetStyle();
+
+	float size = ImGui::CalcTextSize(label).x / 2.0f;
+
+	float off = position - size;
+	if (off > 0.0f)
+		ImGui::SetCursorPosX(off);
 
 	return ImGui::Text(label);
 }
@@ -289,6 +328,7 @@ void Renderer::renderButtonBlock(float pos)
 	ImGuiIO& io = ImGui::GetIO();
 	ImFont* basicFont = io.Fonts->Fonts[5];
 	ImGui::PushFont(basicFont);
+	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
 	if (window == "mainMenu") {
 		renderMainMenuButtonBlock(pos);
 	}
@@ -301,6 +341,7 @@ void Renderer::renderButtonBlock(float pos)
 	else if (window == "options") {
 		renderOptionsButtonBlock();
 	}
+	ImGui::PopStyleColor();
 	ImGui::PopFont();
 }
 
@@ -1297,8 +1338,7 @@ void renderOptionsSubWindow() {
 }
 
 void Renderer::renderSubWindow() {
-	const ImVec2 mainBlockSize = Renderer::getBlockSize();
-	const ImVec2 buttonBlockSize = Renderer::getButtonSize();
+	const ImVec2 generateBlockSize = Renderer::getGenerateBlockSize();
 	std::string window;
 	WindowsManagement* windowsManagement = WindowsManagement::GetInstance();
 	for (auto& it : windowsManagement->getSubWindow()) {
@@ -1306,20 +1346,46 @@ void Renderer::renderSubWindow() {
 			window = it.first;
 		}
 	}
+
+	///// TEST
+
+	const ImVec4 testButtonColor = ImVec4(0.453f, 0.874f, 0.652f, 0.50f);
+	const ImVec2 mainBlockSize = Renderer::getBlockSize();
+
+	const ImVec2 buttonBlockSize = Renderer::getButtonSize();
+
+	const float generateBlockXPos = ((10 * mainBlockSize.x) / 100) + buttonBlockSize.x;
+
+	const float mainBlocHeightMargin = (10 * mainBlockSize.y) / 100;
+	//const float mainBlocWidthtMargin = (5 * mainBlockSize.x) / 100;
+
+	const float testGenerateBlocHeightMargin = ((5 * generateBlockSize.y) / 100) + mainBlocHeightMargin;
+	const float testGenerateBlocWidthtMargin = (5 * mainBlockSize.x) / 100;
+
+	bool opened = !windowsManagement->getButtons().find("mainMenu")->second;
+	ImGui::SetNextWindowPos(ImVec2(testGenerateBlocWidthtMargin + generateBlockXPos, testGenerateBlocHeightMargin));
+	ImGui::SetNextWindowSize(ImVec2(generateBlockSize.x - ((20 * (generateBlockSize.x)) / 100), mainBlockSize.y - (10 * generateBlockSize.y) / 100));
+	ImGui::PushStyleColor(ImGuiCol_WindowBg, testButtonColor);
+	ImGui::Begin("generateTest", &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
+	ImGui::End();
+	ImGui::PopStyleColor();
+
+	///// TEST
+
 	ImGuiIO& io = ImGui::GetIO();
 	ImFont* basicFont = io.Fonts->Fonts[1];
 	ImGui::PushFont(basicFont);
 	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
-	ImVec2 center = ImGui::GetMainViewport()->GetCenter();
-	//createLabelWithPosition(window.c_str(), (float)center.x / 2, 0.f);
-	const float mainBlocWidthtMargin = (50 * mainBlockSize.x) / 100;
-	createLabelWithPosition(window.c_str(), ImGui::GetCursorPosX() + mainBlocWidthtMargin);
+	const float generateBlockWidthtMargin = (50 * (generateBlockSize.x)) / 100;
+	const float generateBlockHeightMargin = (5 * (generateBlockSize.x)) / 100;
+	const float centerTextX = generateBlockWidthtMargin - calculateTextLenght(window.c_str());
+	createLabelWithPosition(window.c_str(), generateBlockWidthtMargin);
+	//ImGui::SetCursorPosX(centerTextX);
+	//ImGui::Text(window.c_str());
 	ImGui::PopFont();
 
 	if (window == "generate" || window == "import") {
-		const float mainBlocHeightMargin = (5 * mainBlockSize.y) / 100;
-		const float mainBlocWidthtMargin = (5 * mainBlockSize.x) / 100;
-		createLabelWithPosition("country", ImGui::GetCursorPosX() + mainBlocWidthtMargin, ImGui::GetCursorPosY() + mainBlocHeightMargin);
+		createLabelWithPosition("Country: ", generateBlockWidthtMargin, generateBlockHeightMargin);
 		ImGui::SameLine();
 		static ImGuiComboFlags flags = 0;
 		static int item_current_idx = 0; // Here we store our selection data as an index.
@@ -1350,7 +1416,7 @@ void Renderer::renderSubWindow() {
 	}
 	else if (window == "multiplayer") {
 		std::string text = "Not Done";
-		createLabelWithPosition(text.c_str(), (float)center.x / 2.0f, (float)center.y / 2.0f);
+		createLabelWithPosition(text.c_str(), centerTextX, ImGui::GetCursorPosY() + (5 * generateBlockSize.y) / 100);
 	}
 	else if (window == "options") {
 		renderOptionsSubWindow();
@@ -1382,11 +1448,11 @@ void Renderer::renderSubWindow() {
 		default:
 			break;
 		}
-		if (createButtonWithPos("Back", center.x / 3, 575.0f)) {
+		if (createButtonWithPos("Back", centerTextX / 3, 575.0f)) {
 			windowsManagement->setSubWindow("generate", true);
 			windowsManagement->setSubWindow("designer", false);
 		}
-		if (createButtonWithPos("Regenerate", center.x / 2, 575.0f)) {
+		if (createButtonWithPos("Regenerate", centerTextX / 3, 575.0f)) {
 			if (unitType == UnitType::Ship) {
 				Ship ship = Ship::generateRandomShip(static_cast<Hull::Type>(columnSelected));
 				ship.iconName = Icon::GetInstance()->getShipIcon(ship);

@@ -167,6 +167,7 @@ public:
         style.GrabRounding = 3;
         style.LogSliderDeadzone = 4;
         style.TabRounding = 4;
+        ImGui::StyleColorsLight(&style);
 
         // Setup Platform/Renderer backends
         ImGui_ImplGlfw_InitForOpenGL(window, true);

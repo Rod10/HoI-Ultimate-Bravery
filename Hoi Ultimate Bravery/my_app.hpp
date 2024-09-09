@@ -59,6 +59,13 @@ public:
 		const float mainBlocHeightMargin = (10 * mainBlockSize.y) / 100;
 		const float mainBlocWidthtMargin = (5 * mainBlockSize.x) / 100;
 
+
+		ImGui::PushStyleColor(ImGuiCol_WindowBg, testMainBlockColor);
+		ImGui::SetNextWindowSize(ImVec2(mainBlockSize.x, mainBlockSize.y));
+		ImGui::SetNextWindowPos(ImVec2(mainBlocWidthtMargin, mainBlocHeightMargin));
+		ImGui::Begin("Main Block", &mainWindowOpen, 7 | ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
+		ImGui::PopStyleColor();
+
 		const ImVec2 buttonBlockSize = Renderer::getButtonSize();
 		
 		const float generateBlockXPos = ((10 * mainBlockSize.x) / 100) + buttonBlockSize.x;
@@ -67,7 +74,9 @@ public:
 		ImGui::PushStyleColor(ImGuiCol_WindowBg, windowColor);
 		ImGui::SetNextWindowPos(ImVec2(mainBlocWidthtMargin, mainBlocHeightMargin));
 		ImGui::SetNextWindowSize(ImVec2(buttonBlockSize.x, mainBlockSize.y));
-		ImGui::Begin("buttonBlock", &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
+		ImGui::PushStyleColor(ImGuiCol_WindowBg, testButtonColor);
+		ImGui::Begin("buttonBlock", &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
+		ImGui::PopStyleColor();
 		ImGui::PopStyleColor();
 		ImGui::PushFont(basicFont);
 		ImGui::PushStyleColor(ImGuiCol_Button, buttonColor);
@@ -77,16 +86,16 @@ public:
 		ImGui::End();
 		
 		if (windowManagement->getButtons().find("mainMenu")->second == false) {
-			const float test = mainBlockSize.x - buttonBlockSize.x;
 			bool opened = !windowManagement->getButtons().find("mainMenu")->second;
 			ImGui::SetNextWindowPos(ImVec2(generateBlockXPos, mainBlocHeightMargin));
 			ImGui::PushStyleColor(ImGuiCol_WindowBg, greyWindowColor);
-			ImGui::SetNextWindowSize(ImVec2(mainBlockSize.x - buttonBlockSize.x, mainBlockSize.y));
-			ImGui::Begin("generate", &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
+			ImGui::SetNextWindowSize(ImVec2(mainBlockSize.x - buttonBlockSize.x - mainBlocWidthtMargin, mainBlockSize.y));
+			ImGui::Begin("generate", &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
 			Renderer::renderSubWindow();
 			ImGui::PopStyleColor();
 			ImGui::End();
 		}
+		ImGui::End();
 		ImGui::End();
 	}
 
@@ -107,6 +116,8 @@ private:
 	ImVec4 backgroundColor = ImVec4(0.831f, 0.902f, 0.945f, 1.00f);
 	ImVec4 windowColor = ImVec4(0.149f, 0.137f, 0.125f, 1.00f);
 	ImVec4 greyWindowColor = ImVec4(0.851f, 0.851f, 0.851f, 1.00f);
+	ImVec4 testMainBlockColor = ImVec4(0.951f, 0.851f, 0.751f, 1.00f);
+	ImVec4 testButtonColor = ImVec4(0.451f, 0.651f, 0.851f, 1.00f);
 	ImVec4 buttonColor = ImVec4(0.231f, 0.255f, 0.224f, 1.00f);
 
 	const char* getLocalizedString(std::string text) {
