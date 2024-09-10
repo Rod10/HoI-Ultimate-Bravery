@@ -80,7 +80,7 @@ public:
 		ImGui::PopStyleColor();
 		ImGui::PushFont(basicFont);
 		ImGui::PushStyleColor(ImGuiCol_Button, buttonColor);
-		Renderer::renderButtonBlock(150.0f);
+		Renderer::renderButtonBlock();
 		ImGui::PopStyleColor();
 		ImGui::PopFont();
 		ImGui::End();

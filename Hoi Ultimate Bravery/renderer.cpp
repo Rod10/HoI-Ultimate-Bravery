@@ -208,7 +208,7 @@ void AlignForWidth(float width, float alignment = 0.5f) {
 		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
 }
 
-void renderMainMenuButtonBlock(float pos) {
+void renderMainMenuButtonBlock() {
 	auto windowsManagement = WindowsManagement::GetInstance();
 	Settings* settings = Settings::getInstance();
 	if (createButtonWithoutSize("Generate")) {
@@ -317,7 +317,7 @@ void renderOptionsButtonBlock() {
 	}
 }
 
-void Renderer::renderButtonBlock(float pos)
+void Renderer::renderButtonBlock()
 {
 	std::string window;
 	for (auto& it : WindowsManagement::GetInstance()->getButtons()) {
@@ -330,7 +330,7 @@ void Renderer::renderButtonBlock(float pos)
 	ImGui::PushFont(basicFont);
 	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
 	if (window == "mainMenu") {
-		renderMainMenuButtonBlock(pos);
+		renderMainMenuButtonBlock();
 	}
 	else if (window == "generate" || window == "import") {
 		renderGenerateButtonBlock();
@@ -566,7 +566,7 @@ void renderImportWindow(UnitType::Type unitType) {
 	}
 }
 
-void renderGenerateImportSubWindow() {
+/*void renderGenerateImportSubWindow() {
 	ImGuiIO& io = ImGui::GetIO();
 	ImFont* statsFont = io.Fonts->Fonts[4];
 	WindowsManagement* windowsManagement = WindowsManagement::GetInstance();
@@ -597,6 +597,7 @@ void renderGenerateImportSubWindow() {
 	};
 	if (window == "generate") {
 		ImGui::PushFont(statsFont);
+		ImGui::PushItemWidth(1500.0f);
 		if (ImGui::BeginTable("table1", 3)) {
 			for (int row = 0; row < 5; row++) {
 				ImGui::TableNextRow();
@@ -725,6 +726,7 @@ void renderGenerateImportSubWindow() {
 			}
 			ImGui::EndTable();
 		}
+		ImGui::PopItemWidth();
 		ImGui::SetCursorPosX(200.0f);
 		ImGui::SetCursorPosY(center.y / 1.5f);
 		if(unitType != UnitType::Division) {
@@ -810,6 +812,52 @@ void renderGenerateImportSubWindow() {
 	}
 	else if (window == "import") {
 		renderImportWindow(unitType);
+	}
+}*/
+
+void renderGenerateImportSubWindow() {
+	ImGuiIO& io = ImGui::GetIO();
+	ImFont* statsFont = io.Fonts->Fonts[4];
+	WindowsManagement* windowsManagement = WindowsManagement::GetInstance();
+	std::string window;
+	for (auto& it : windowsManagement->getSubWindow()) {
+		if (it.second == true) {
+			window = it.first;
+		}
+	}
+	UnitType::Type unitType;
+	for (auto& it : windowsManagement->getTypeSubWindow()) {
+		if (it.second == true) {
+			unitType = it.first;
+		}
+	}
+	ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+	std::map<UnitType::Type, std::vector<std::string>> icons {
+		{UnitType::Tank, { "Light_tank", "Medium_tank", "Heavy_tank", "Super_heavy_tank", "Modern_tank" }},
+		{ UnitType::Plane, {"Fighter", "CAS", "Naval_bomber", "Tactical_bomber", "Strategic_bomber"} },
+		{ UnitType::Ship, {"Destroyer", "Cruiser", "Battleship", "Carrier", "Submarine"} },
+		{ UnitType::Division, {"Infantry"} }
+	};
+	std::map<UnitType::Type, int> iconsColNumber{
+		{UnitType::Tank, 3},
+		{ UnitType::Plane, 3 },
+		{ UnitType::Ship, 3 },
+		{ UnitType::Division, countrySelected->getDivisionListSize() }
+	};
+	if (window == "generate") {
+		ImGui::PushFont(statsFont);
+
+		Texture texture = Icon::GetInstance()->getOthersTextures("icons", icons.find(unitType)->second[0]);
+		ImVec2 size = ImVec2(texture.my_image_width, texture.my_image_height);                         // Size of the image we want to make visible
+		ImVec2 uv0 = ImVec2(0.0f, 0.0f);                            // UV coordinates for lower-left
+		ImVec2 uv1 = ImVec2(1.0f, 1.0f);
+		//ImVec2 uv1 = ImVec2(100.0f / my_tex_w, 75.0f / my_tex_h);    // UV coordinates for (32,32) in our texture
+		ImVec4 bg_col = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);             // Black background
+		ImVec4 tint_col = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
+		if (ImGui::ImageButton(icons.find(unitType)->second[0].c_str(), (void*)(intptr_t)texture.my_image_texture, size, uv0, uv1, bg_col, tint_col)) {
+		}
+
+		ImGui::PopFont();
 	}
 }
 
@@ -1338,6 +1386,7 @@ void renderOptionsSubWindow() {
 }
 
 void Renderer::renderSubWindow() {
+	ImGuiStyle& style = ImGui::GetStyle();
 	const ImVec2 generateBlockSize = Renderer::getGenerateBlockSize();
 	std::string window;
 	WindowsManagement* windowsManagement = WindowsManagement::GetInstance();
@@ -1363,8 +1412,8 @@ void Renderer::renderSubWindow() {
 	const float testGenerateBlocWidthtMargin = (5 * mainBlockSize.x) / 100;
 
 	bool opened = !windowsManagement->getButtons().find("mainMenu")->second;
-	ImGui::SetNextWindowPos(ImVec2(testGenerateBlocWidthtMargin + generateBlockXPos, testGenerateBlocHeightMargin));
-	ImGui::SetNextWindowSize(ImVec2(generateBlockSize.x - ((20 * (generateBlockSize.x)) / 100), mainBlockSize.y - (10 * generateBlockSize.y) / 100));
+	ImGui::SetNextWindowPos(ImVec2(buttonBlockSize.x + (testGenerateBlocWidthtMargin * 2), mainBlocHeightMargin));
+	ImGui::SetNextWindowSize(ImVec2(50 * (generateBlockSize.x) / 100, generateBlockSize.y));
 	ImGui::PushStyleColor(ImGuiCol_WindowBg, testButtonColor);
 	ImGui::Begin("generateTest", &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
 	ImGui::End();
@@ -1376,21 +1425,29 @@ void Renderer::renderSubWindow() {
 	ImFont* basicFont = io.Fonts->Fonts[1];
 	ImGui::PushFont(basicFont);
 	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
-	const float generateBlockWidthtMargin = (50 * (generateBlockSize.x)) / 100;
+	const float center = (50 * (generateBlockSize.x)) / 100;
 	const float generateBlockHeightMargin = (5 * (generateBlockSize.x)) / 100;
-	const float centerTextX = generateBlockWidthtMargin - calculateTextLenght(window.c_str());
-	createLabelWithPosition(window.c_str(), generateBlockWidthtMargin);
+	const float centerTextX = center - calculateTextLenght(window.c_str());
+	createLabelWithPosition(window.c_str(), center);
 	//ImGui::SetCursorPosX(centerTextX);
 	//ImGui::Text(window.c_str());
 	ImGui::PopFont();
 
 	if (window == "generate" || window == "import") {
-		createLabelWithPosition("Country: ", generateBlockWidthtMargin, generateBlockHeightMargin);
+		const float countryListWidth = generateBlockSize.x - ((20 * generateBlockSize.x) / 100);
+		const ImVec2 textSize = ImGui::CalcTextSize("Country: ");
+		const float comboSize = (countryListWidth - textSize.x - (style.ItemInnerSpacing.x * 2)) / 2;
+		//ImGui::SetCursorPosX((10 * (generateBlockSize.x)) / 100);
+		AlignForWidth(comboSize);
+		ImGui::SetCursorPosY(generateBlockHeightMargin);
+		//createLabelWithPosition("Country: ", (countryListWidth - textSize.x), generateBlockHeightMargin);
+		ImGui::Text("County :");
 		ImGui::SameLine();
 		static ImGuiComboFlags flags = 0;
 		static int item_current_idx = 0; // Here we store our selection data as an index.
 		std::vector<Country>* countryList = CountryList::GetInstance()->getList();
 		const char* combo_preview_value = countryList->at(item_current_idx).name.c_str();  // Pass in the preview value visible before opening the combo (it could be anything)
+		ImGui::PushItemWidth(comboSize);
 		if (ImGui::BeginCombo("##", combo_preview_value, flags))
 		{
 			for (int n = 0; n < countryList->size(); n++)
@@ -1407,7 +1464,9 @@ void Renderer::renderSubWindow() {
 			}
 			ImGui::EndCombo();
 		}
-		ImGui::SameLine();
+		ImGui::PopItemWidth();
+		//ImGui::SameLine();
+		ImGui::SetCursorPosX(center - calculateTextLenght("All Countries") - style.ItemInnerSpacing.x);
 		ImGui::Checkbox("All Countries", &allCountries);
 	}
 

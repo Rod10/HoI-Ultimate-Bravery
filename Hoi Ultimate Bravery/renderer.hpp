@@ -36,7 +36,7 @@
 class Renderer
 {
 public:
-	static void renderButtonBlock(float pos);
+	static void renderButtonBlock();
 	static void renderSubWindow();
 	static ImVec2 getBlockSize();
 	static ImVec2 getButtonSize();
