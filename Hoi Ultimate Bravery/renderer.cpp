@@ -19,7 +19,18 @@ ImVec2 Renderer::getButtonSize() {
 ImVec2 Renderer::getGenerateBlockSize() {
 	const ImVec2 mainBlockSize = Renderer::getBlockSize();
 	const ImVec2 buttonBlockSize = Renderer::getButtonSize();
-	return ImVec2(mainBlockSize.x - buttonBlockSize.x, mainBlockSize.y);
+	const float mainBlocWidthtMargin = (5 * mainBlockSize.x) / 100;
+	return ImVec2(mainBlockSize.x - buttonBlockSize.x - mainBlocWidthtMargin, mainBlockSize.y);
+}
+
+ImVec2 getGenerateMargin() {
+	const ImVec2 buttonBlockSize = Renderer::getButtonSize();
+	const ImVec2 mainBlockSize = Renderer::getBlockSize();
+	const ImVec2 generateBlockSize = Renderer::getGenerateBlockSize();
+	const float testGenerateBlocWidthtMargin = (5 * mainBlockSize.x) / 100;
+	const float mainBlocHeightMargin = (10 * mainBlockSize.y) / 100;
+	const float testGenerateBlocHeightMargin = ((5 * generateBlockSize.y) / 100) + mainBlocHeightMargin;
+	return ImVec2(buttonBlockSize.x + (testGenerateBlocWidthtMargin * 2), testGenerateBlocHeightMargin);
 }
 
 void setIcon(float y, float x, std::string type, std::string name, UnitType::Type unitType) {
@@ -817,8 +828,11 @@ void renderImportWindow(UnitType::Type unitType) {
 
 void renderGenerateImportSubWindow() {
 	ImGuiIO& io = ImGui::GetIO();
+	ImGuiStyle& style = ImGui::GetStyle();
+	const ImVec2 padding = style.FramePadding;
 	ImFont* statsFont = io.Fonts->Fonts[4];
 	WindowsManagement* windowsManagement = WindowsManagement::GetInstance();
+	bool opened = !windowsManagement->getSubWindow().find("generate")->second;
 	std::string window;
 	for (auto& it : windowsManagement->getSubWindow()) {
 		if (it.second == true) {
@@ -831,32 +845,82 @@ void renderGenerateImportSubWindow() {
 			unitType = it.first;
 		}
 	}
-	ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+
 	std::map<UnitType::Type, std::vector<std::string>> icons {
-		{UnitType::Tank, { "Light_tank", "Medium_tank", "Heavy_tank", "Super_heavy_tank", "Modern_tank" }},
+		{ UnitType::Tank, {"Light_tank", "Medium_tank", "Heavy_tank", "Super_heavy_tank", "Modern_tank"} },
 		{ UnitType::Plane, {"Fighter", "CAS", "Naval_bomber", "Tactical_bomber", "Strategic_bomber"} },
 		{ UnitType::Ship, {"Destroyer", "Cruiser", "Battleship", "Carrier", "Submarine"} },
 		{ UnitType::Division, {"Infantry"} }
 	};
 	std::map<UnitType::Type, int> iconsColNumber{
-		{UnitType::Tank, 3},
+		{ UnitType::Tank, 3 },
 		{ UnitType::Plane, 3 },
 		{ UnitType::Ship, 3 },
 		{ UnitType::Division, countrySelected->getDivisionListSize() }
 	};
+
+	const ImVec2 mainBlockSize = Renderer::getBlockSize();
+	const ImVec2 generateBlockSize = Renderer::getGenerateBlockSize();
+	const ImVec2 generateMargin = getGenerateMargin();
+	const float mainBlocHeightMargin = (10 * mainBlockSize.y) / 100;
+	const float firstRowWidth = generateBlockSize.x - ((10 * generateBlockSize.x) / 100);
+	const float firstRowMargin = (5 * generateBlockSize.x) / 100;
+	const float firstRowHeightMargin = (10 * generateBlockSize.x) / 100;
+	const float firstRowCenter = (50 * generateBlockSize.x) / 100;
+
+	const float firstRowPosition[3] = { firstRowMargin, firstRowCenter, generateBlockSize.x - ((5 * generateBlockSize.x) / 100) };
+
+	//ImGui::SetCursorPosY(firstRowHeightMargin);
 	if (window == "generate") {
 		ImGui::PushFont(statsFont);
-
-		Texture texture = Icon::GetInstance()->getOthersTextures("icons", icons.find(unitType)->second[0]);
-		ImVec2 size = ImVec2(texture.my_image_width, texture.my_image_height);                         // Size of the image we want to make visible
-		ImVec2 uv0 = ImVec2(0.0f, 0.0f);                            // UV coordinates for lower-left
-		ImVec2 uv1 = ImVec2(1.0f, 1.0f);
-		//ImVec2 uv1 = ImVec2(100.0f / my_tex_w, 75.0f / my_tex_h);    // UV coordinates for (32,32) in our texture
-		ImVec4 bg_col = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);             // Black background
-		ImVec4 tint_col = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
-		if (ImGui::ImageButton(icons.find(unitType)->second[0].c_str(), (void*)(intptr_t)texture.my_image_texture, size, uv0, uv1, bg_col, tint_col)) {
+		for (int column = 0; column <= 2; column++) {
+			Texture texture = Icon::GetInstance()->getOthersTextures("icons", icons.find(unitType)->second[column]);	
+			ImVec2 size = ImVec2(texture.my_image_width, texture.my_image_height);                         // Size of the image we want to make visible
+			ImVec2 uv0 = ImVec2(0.0f, 0.0f);                            // UV coordinates for lower-left
+			ImVec2 uv1 = ImVec2(1.0f, 1.0f);
+			//ImVec2 uv1 = ImVec2(100.0f / my_tex_w, 75.0f / my_tex_h);    // UV coordinates for (32,32) in our texture
+			ImVec4 bg_col = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);             // Black background
+			ImVec4 tint_col = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
+			float pos = firstRowPosition[column];
+			if (column != 0) {
+				pos -= size.x + (padding.x * 2.0f) + (style.WindowPadding.x * 2);
+			}
+			ImGui::SetNextWindowPos(ImVec2(generateMargin.x + pos, generateMargin.y + firstRowMargin));
+			//ImGui::SetNextWindowPos(ImVec2(buttonBlockSize.x + (testGenerateBlocWidthtMargin * 2) + firstRowMargin, ((5 * generateBlockSize.y) / 100) + mainBlocHeightMargin));
+			ImGui::SetNextWindowSize(ImVec2(100.0f, 200.0f));
+			ImGui::Begin(icons.find(unitType)->second[column].c_str(), &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoInputs);
+			//ImGui::SetCursorPosX(pos);
+			if (ImGui::ImageButton(icons.find(unitType)->second[0].c_str(), (void*)(intptr_t)texture.my_image_texture, size, uv0, uv1, bg_col, tint_col)) {
+			}
+			for (int statRow = 0; statRow <= 5; statRow++) {
+				if (unitType == UnitType::Ship) {
+					if (countrySelected->getShipHullListSize(column) == 0) {
+						ImGui::Text("Not Created");
+					}
+					else {
+						ImGui::Text("Not Implemented");
+					}
+				}
+				else if (unitType == UnitType::Tank) {
+					if (countrySelected->getTankTypeListSize(column) == 0) {
+						ImGui::Text("Not Created");
+					}
+					else {
+						auto [tank, tankStats] = countrySelected->getTankByType(column);
+						ImGui::Text(tankStats.getShowStat(column).c_str());
+					}
+				}
+				else if (unitType == UnitType::Plane) {
+					if (countrySelected->getPlaneRoleListSize(column) == 0) {
+						ImGui::Text("Not Created");
+					}
+					else {
+						ImGui::Text("Not Implemented");
+					}
+				}
+			}
+			ImGui::End();
 		}
-
 		ImGui::PopFont();
 	}
 }
@@ -1411,9 +1475,13 @@ void Renderer::renderSubWindow() {
 	const float testGenerateBlocHeightMargin = ((5 * generateBlockSize.y) / 100) + mainBlocHeightMargin;
 	const float testGenerateBlocWidthtMargin = (5 * mainBlockSize.x) / 100;
 
+	const float firstRowWidth = generateBlockSize.x - ((10 * generateBlockSize.x) / 100);
+	const float firstRowMargin = (5 * generateBlockSize.x) / 100;
+	const float firstRowCenter = (50 * generateBlockSize.x) / 100;
+
 	bool opened = !windowsManagement->getButtons().find("mainMenu")->second;
-	ImGui::SetNextWindowPos(ImVec2(buttonBlockSize.x + (testGenerateBlocWidthtMargin * 2), mainBlocHeightMargin));
-	ImGui::SetNextWindowSize(ImVec2(50 * (generateBlockSize.x) / 100, generateBlockSize.y));
+	ImGui::SetNextWindowPos(ImVec2(buttonBlockSize.x + (testGenerateBlocWidthtMargin * 2) + firstRowMargin, testGenerateBlocHeightMargin));
+	ImGui::SetNextWindowSize(ImVec2(firstRowWidth, generateBlockSize.y - ((10 * generateBlockSize.y) / 100)));
 	ImGui::PushStyleColor(ImGuiCol_WindowBg, testButtonColor);
 	ImGui::Begin("generateTest", &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
 	ImGui::End();
