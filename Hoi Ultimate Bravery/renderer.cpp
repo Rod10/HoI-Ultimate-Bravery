@@ -50,12 +50,37 @@ void setIcon(float y, float x, std::string type, std::string name, UnitType::Typ
 	}
 }
 
-void setImage(float y, float x, std::string type, std::string name, UnitType::Type unitType) {
+void setImage(float x, float y, std::string type, std::string name, UnitType::Type unitType) {
 	ImGui::SetCursorPosY(y);
 	ImGui::SetCursorPosX(x);
 	if (unitType == UnitType::Type::Tank) {
 		Texture texture = Icon::GetInstance()->getTankModulesTextures(type, name);
 		ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+	}
+	else if (unitType == UnitType::Type::Ship) {
+		Texture texture = Icon::GetInstance()->getShipModulesTextures(type, name);
+		ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+	}
+	else if (unitType == UnitType::Type::Plane) {
+		Texture texture = Icon::GetInstance()->getPlaneModulesTextures(type, name);
+		ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+	}
+	else if (unitType == UnitType::Type::Division) {
+		Texture texture = Icon::GetInstance()->getUnitsTextures(type, name);
+		if (type != "Background") {
+			texture.my_image_height = texture.my_image_height * 0.95;
+			texture.my_image_width = texture.my_image_width * 0.95;
+		}
+		ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+	}
+}
+
+void setImage(float x, float y, ImVec2 ratio, std::string type, std::string name, UnitType::Type unitType) {
+	ImGui::SetCursorPosY(y);
+	ImGui::SetCursorPosX(x);
+	if (unitType == UnitType::Type::Tank) {
+		Texture texture = Icon::GetInstance()->getTankModulesTextures(type, name);
+		ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width * ratio.x, texture.my_image_height * ratio.y));
 	}
 	else if (unitType == UnitType::Type::Ship) {
 		Texture texture = Icon::GetInstance()->getShipModulesTextures(type, name);
@@ -888,13 +913,43 @@ void renderGenerateImportSubWindow() {
 			ImGui::SetNextWindowPos(ImVec2(generateMargin.x + pos, generateMargin.y + firstRowMargin));
 			//ImGui::SetNextWindowPos(ImVec2(buttonBlockSize.x + (testGenerateBlocWidthtMargin * 2) + firstRowMargin, ((5 * generateBlockSize.y) / 100) + mainBlocHeightMargin));
 			ImGui::SetNextWindowSize(ImVec2(100.0f, 200.0f));
-			ImGui::Begin(icons.find(unitType)->second[column].c_str(), &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoInputs);
+			ImGui::Begin(icons.find(unitType)->second[column].c_str(), &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
 			//ImGui::SetCursorPosX(pos);
-			if (ImGui::ImageButton(icons.find(unitType)->second[0].c_str(), (void*)(intptr_t)texture.my_image_texture, size, uv0, uv1, bg_col, tint_col)) {
-			}
-			for (int statRow = 0; statRow <= 5; statRow++) {
+			if (ImGui::ImageButton(icons.find(unitType)->second[column].c_str(), (void*)(intptr_t)texture.my_image_texture, size, uv0, uv1, bg_col, tint_col)) {
 				if (unitType == UnitType::Ship) {
+					unitTypeSelected = unitType;
+					columnSelected = column;
 					if (countrySelected->getShipHullListSize(column) == 0) {
+						Ship ship = Ship::generateRandomShip(static_cast<Hull::Type>(column));
+						ship.iconName = Icon::GetInstance()->getShipIcon(ship);
+						countrySelected->setNewUnits(unitType, ship);
+					}
+				}
+				else if (unitType == UnitType::Tank) {
+					unitTypeSelected = unitType;
+					columnSelected = column;
+					if (countrySelected->getTankTypeListSize(column) == 0) {
+						Tank tank = Tank::generateRandomTank(static_cast<TankType::Type>(column));
+						tank.iconName = Icon::GetInstance()->getRandomIcon(tank.type);
+						countrySelected->setNewUnits(unitType, tank);
+					}
+				}
+				else if (unitType == UnitType::Plane) {
+					unitTypeSelected = unitType;
+					columnSelected = column;
+					if (countrySelected->getPlaneRoleListSize(column) == 0) {
+						Plane plane = Plane::generateRandomPlane(static_cast<PlaneRole::Role>(column));
+						plane.iconName = Icon::GetInstance()->getPlaneIcon(plane);
+						countrySelected->setNewUnits(unitType, plane);
+					}
+				}
+				windowsManagement->setTypeSubWindow(unitType, true);
+				windowsManagement->setSubWindow("generate", false);
+				windowsManagement->setSubWindow("designer", true);
+			}
+			for (int statRow = 0; statRow <= 4; statRow++) {
+				if (unitType == UnitType::Ship) {
+					if (countrySelected->getShipHullListSize(statRow) == 0) {
 						ImGui::Text("Not Created");
 					}
 					else {
@@ -902,16 +957,16 @@ void renderGenerateImportSubWindow() {
 					}
 				}
 				else if (unitType == UnitType::Tank) {
-					if (countrySelected->getTankTypeListSize(column) == 0) {
+					if (countrySelected->getTankTypeListSize(statRow) == 0) {
 						ImGui::Text("Not Created");
 					}
 					else {
-						auto [tank, tankStats] = countrySelected->getTankByType(column);
-						ImGui::Text(tankStats.getShowStat(column).c_str());
+						auto [tank, tankStats] = countrySelected->getTankByType(statRow);
+						ImGui::Text(tankStats.getShowStat(statRow).c_str());
 					}
 				}
 				else if (unitType == UnitType::Plane) {
-					if (countrySelected->getPlaneRoleListSize(column) == 0) {
+					if (countrySelected->getPlaneRoleListSize(statRow) == 0) {
 						ImGui::Text("Not Created");
 					}
 					else {
@@ -1021,6 +1076,15 @@ void renderShipDesignerWindows() {
 
 //Tank Designer
 void renderTankDesignerWindows() {
+	const ImVec2 mainBlockSize = Renderer::getBlockSize();
+	const ImVec2 generateBlockSize = Renderer::getGenerateBlockSize();
+	const auto generateBlockMargin = getGenerateMargin();
+
+	const float backgroundWidth = generateBlockSize.x - ((10.0f * generateBlockSize.x) / 100);
+	const float backgroundHeight = generateBlockSize.y - ((10.0f * generateBlockSize.y) / 100);
+	const float backgroundXMargin = (5.0f * generateBlockSize.x) / 100;
+	const float backgroundYMargin = (5.0f * generateBlockSize.y) / 100;
+
 	ImGuiIO& io = ImGui::GetIO();
 	ImFont* basicFont = io.Fonts->Fonts[0];
 	ImFont* titleFont = io.Fonts->Fonts[1];
@@ -1028,46 +1092,48 @@ void renderTankDesignerWindows() {
 	ImFont* TitleStatsFont = io.Fonts->Fonts[3];
 	ImFont* statsFont = io.Fonts->Fonts[4];
 	Texture texture = Icon::GetInstance()->getTankModulesTextures("background", "tank_designer_bg");
-	ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
-	setImage(Constant::TextPos::TANK_NAME_HEIGHT, ImGui::GetCursorPosX() + 20.0f, "background", "tank_name_bg", UnitType::Type::Tank);
+	const float newRatioWidth = backgroundWidth / texture.my_image_width;
+	const float newRatioHeight = backgroundHeight / texture.my_image_height;
+	const ImVec2 newRatio = ImVec2(newRatioWidth, newRatioHeight);
 
-	setImage(95.0f, 329, "background", "tank_icon_bg", UnitType::Type::Tank);
+	ImGui::SetCursorPosX(backgroundXMargin);
+	ImGui::SetCursorPosY(backgroundYMargin);
+	ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(backgroundWidth, backgroundHeight));
 
-	setImage(Constant::TextPos::TANK_ROLE_HEIGHT + 5.0f, ImGui::GetCursorPosX() + 20.0f, "background", "tank_role_bg", UnitType::Type::Tank);
+	setImage((6.2f * generateBlockSize.x) / 100, (13.5f * generateBlockSize.y) / 100, newRatio, "background", "tank_name_bg", UnitType::Type::Tank);
 
-	for (int i = 0; i <= 5; i++) {
-		float x = ImGui::GetCursorPosX() + (76 * i) + (13.0f - (i * 3));
-		if (i == 0) {
-			x = 23.0f;
-		}
-		setImage(Constant::TextPos::TANK_MODULE_HEIGHT, x, "background", "equipment_icon_bg", UnitType::Type::Tank);
+	setImage((32.5f * generateBlockSize.x) / 100, (16.5f * generateBlockSize.y) / 100, newRatio, "background", "tank_icon_bg", UnitType::Type::Tank);
+
+	setImage((6.2f * generateBlockSize.x) / 100, (21.0f * generateBlockSize.y) / 100, newRatio, "background", "tank_role_bg", UnitType::Type::Tank);
+
+	for (int i = 1; i <= 6; i++) {
+		//float x = ((6.5f * generateBlockSize.x) / 100) * i;
+		float x = ((6.2f * generateBlockSize.x) / 100) * i;
+		setImage(x, (29.0f * generateBlockSize.y) / 100, newRatio, "background", "equipment_icon_bg", UnitType::Type::Tank);
 	}
 
-	setImage(ImGui::GetCursorPosY() - 4.0f, ImGui::GetCursorPosX() + 16.0f, "background", "tank_blueprint_background", UnitType::Type::Tank);
+	setImage((6.2f * generateBlockSize.x) / 100, (37.0f * generateBlockSize.y) / 100, newRatio, "background", "tank_blueprint_background", UnitType::Type::Tank);
 
-	texture = Icon::GetInstance()->getTankModulesTextures("background", "equipment_icon_bg");;
-	for (int i = 0; i <= 2; i++) {
-		float x = ImGui::GetCursorPosX() + (76 * i) + (12.0f - (i * 3));
-		if (i == 0) {
-			x = 23.0f;
-		}
-		setImage(Constant::TextPos::TANK_MODULE_HEIGHT_2, x, "background", "equipment_icon_bg", UnitType::Type::Tank);
+	for (int i = 1; i <= 3; i++) {
+		float x = ((6.2f * generateBlockSize.x) / 100) * i;
+		setImage(x, (77.6f * generateBlockSize.y) / 100, newRatio, "background", "equipment_icon_bg", UnitType::Type::Tank);
 	}
+
 	ImGui::PushFont(TitleStatsFont);
 	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
-	createTitleWithPosition("Base Stats", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 45.0f);
-	createTitleWithPosition("Combat Stats", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 45.0f);
-	createTitleWithPosition("Misc. Stats", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 45.0f);
+	createTitleWithPosition("Base Stats", (51.0f * generateBlockSize.x) / 100, (13.0f * generateBlockSize.y) / 100);
+	createTitleWithPosition("Combat Stats", (65.0f * generateBlockSize.x) / 100, (13.0f * generateBlockSize.y) / 100);
+	createTitleWithPosition("Misc. Stats", (79.0f * generateBlockSize.x) / 100, (13.0f * generateBlockSize.y) / 100);
 	ImGui::PopFont();
 
 	//Base Stats 
 	ImGui::PushFont(statsFont);
-	createTitleWithPosition("Max Speed:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 75.0f);
-	createTitleWithPosition("Reliability:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 95.0f);
-	createTitleWithPosition("Supply use:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 115.0f);
+	createTitleWithPosition("Max Speed:", (51.0f * generateBlockSize.x) / 100, (18.0f * generateBlockSize.y) / 100);
+	//createTitleWithPosition("Reliability:", (51.0f * generateBlockSize.x) / 100, Constant::TextPos::TITLE_HEIGHT + 95.0f);
+	//createTitleWithPosition("Supply use:", (51.0f * generateBlockSize.x) / 100, Constant::TextPos::TITLE_HEIGHT + 115.0f);
 	//Base Stats 
 
-	//Combat Stats 
+	/*//Combat Stats 
 	createTitleWithPosition("Soft attack:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 75.0f);
 	createTitleWithPosition("Hard attack:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 95.0f);
 	createTitleWithPosition("Piercing:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 115.0f);
@@ -1092,7 +1158,7 @@ void renderTankDesignerWindows() {
 	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
 	ImGui::PushFont(textFont);
 	createTitleWithPosition("Engine", Constant::Position::MIDDLE - 110.0f, Constant::TextPos::TANK_MODULE_HEIGHT_2);
-	createTitleWithPosition("Armor", Constant::Position::MIDDLE - 30.0f, Constant::TextPos::TANK_MODULE_HEIGHT_2);
+	createTitleWithPosition("Armor", Constant::Position::MIDDLE - 30.0f, Constant::TextPos::TANK_MODULE_HEIGHT_2);*/
 	ImGui::PopFont();
 	ImGui::PopStyleColor();
 }
@@ -1462,7 +1528,7 @@ void Renderer::renderSubWindow() {
 
 	///// TEST
 
-	const ImVec4 testButtonColor = ImVec4(0.453f, 0.874f, 0.652f, 0.50f);
+	/*const ImVec4 testButtonColor = ImVec4(0.453f, 0.874f, 0.652f, 0.50f);
 	const ImVec2 mainBlockSize = Renderer::getBlockSize();
 
 	const ImVec2 buttonBlockSize = Renderer::getButtonSize();
@@ -1483,9 +1549,9 @@ void Renderer::renderSubWindow() {
 	ImGui::SetNextWindowPos(ImVec2(buttonBlockSize.x + (testGenerateBlocWidthtMargin * 2) + firstRowMargin, testGenerateBlocHeightMargin));
 	ImGui::SetNextWindowSize(ImVec2(firstRowWidth, generateBlockSize.y - ((10 * generateBlockSize.y) / 100)));
 	ImGui::PushStyleColor(ImGuiCol_WindowBg, testButtonColor);
-	ImGui::Begin("generateTest", &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
+	ImGui::Begin("generateTest", &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoInputs);
 	ImGui::End();
-	ImGui::PopStyleColor();
+	ImGui::PopStyleColor();*/
 
 	///// TEST
 
@@ -1563,7 +1629,7 @@ void Renderer::renderSubWindow() {
 			break;
 		case UnitType::Tank:
 			renderTankDesignerWindows();
-			renderUnit(countrySelected->getTankByType(columnSelected));
+			//renderUnit(countrySelected->getTankByType(columnSelected));
 			break;
 		case UnitType::Plane:
 			renderPlaneDesignerWindows();

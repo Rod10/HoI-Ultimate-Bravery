@@ -47,7 +47,7 @@ public:
 		ImGui::PushFont(titleFont);
 		ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(59, 65, 57, 255));
 		ImGui::PushStyleColor(ImGuiCol_WindowBg, backgroundColor);
-		ImGui::Begin("Main Window", &mainWindowOpen, 7 | ImGuiWindowFlags_NoInputs);
+		ImGui::Begin("Main Window", &mainWindowOpen, 7 | ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_NoBringToFrontOnFocus);
 		ImGui::SetCursorPosX(center.x);
 		ImGui::Text("HoI Ultimate Bravery");
 		ImGui::PopStyleColor();
@@ -63,7 +63,7 @@ public:
 		ImGui::PushStyleColor(ImGuiCol_WindowBg, testMainBlockColor);
 		ImGui::SetNextWindowSize(ImVec2(mainBlockSize.x, mainBlockSize.y));
 		ImGui::SetNextWindowPos(ImVec2(mainBlocWidthtMargin, mainBlocHeightMargin));
-		ImGui::Begin("Main Block", &mainWindowOpen, 7 | ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
+		ImGui::Begin("Main Block", &mainWindowOpen, 7 | ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground);
 		ImGui::PopStyleColor();
 
 		const ImVec2 buttonBlockSize = Renderer::getButtonSize();

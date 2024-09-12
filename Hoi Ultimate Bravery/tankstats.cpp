@@ -40,10 +40,11 @@ std::string TankStats::getShowStat(int row)
 {
 	switch (row)
 	{
-	case 1: return std::format("Speed: {0} Km/h", speed);
-	case 2: return std::format("Reliability: {0} %%", reliability);
-	case 3: return std::format("Soft Attack: {0}", softAttack);
-	case 4: return std::format("Hard Attack: {0}", hardAttack);
+	case 0: return std::format("Speed: {0} Km/h", speed);
+	case 1: return std::format("Reliability: {0} %%", reliability);
+	case 2: return std::format("Soft Attack: {0}", softAttack);
+	case 3: return std::format("Hard Attack: {0}", hardAttack);
+	case 4: return std::format("Armor: {0}", armor);
 	default:
 		break;
 	}
