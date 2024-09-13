@@ -51,3 +51,4 @@ static bool allCountries;
 static std::unordered_map<int, std::string> converterToGameName = Utils::loadConverter();
 static std::vector<Language> languageList = Language::getLanguageList();
 static Language* language;
+static ImVec2 newRatio;

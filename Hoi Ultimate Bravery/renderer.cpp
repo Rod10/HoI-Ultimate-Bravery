@@ -50,6 +50,23 @@ void setIcon(float y, float x, std::string type, std::string name, UnitType::Typ
 	}
 }
 
+void setIcon(float x, float y, ImVec2 ratio, std::string type, std::string name, UnitType::Type unitType) {
+	ImGui::SetCursorPosY(y);
+	ImGui::SetCursorPosX(x);
+	if (unitType == UnitType::Type::Tank) {
+		Texture texture = Icon::GetInstance()->getTankIconTextures(type, name);
+		ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width * ratio.x, texture.my_image_height * ratio.y));
+	}
+	else if (unitType == UnitType::Type::Ship) {
+		Texture texture = Icon::GetInstance()->getShipIconTextures(type, name);
+		ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width * ratio.x, texture.my_image_height * ratio.y));
+	}
+	else if (unitType == UnitType::Type::Plane) {
+		Texture texture = Icon::GetInstance()->getPlaneIconTextures(type, name);
+		ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width * ratio.x, texture.my_image_height * ratio.y));
+	}
+}
+
 void setImage(float x, float y, std::string type, std::string name, UnitType::Type unitType) {
 	ImGui::SetCursorPosY(y);
 	ImGui::SetCursorPosX(x);
@@ -189,16 +206,22 @@ void createLabelWithPosition(const char* label, float position, Constant::TextPo
 	return ImGui::Text(label);
 }*/
 
-void createLabelWithPosition(const char* label, float position, float height) {
+void createLabelWithPosition(const char* label, float x, float y, bool center = false) {
 	ImGuiStyle& style = ImGui::GetStyle();
 
-	float size = ImGui::CalcTextSize(label).x / 2.0f;
+	float size = ImGui::CalcTextSize(label).x;
+	if (center) {
+		size = ImGui::CalcTextSize(label).x / 2.0f;
 
-	float off = position - size;
-	if (off > 0.0f)
-		ImGui::SetCursorPosX(off);
+		float off = x - size;
+		if (off > 0.0f)
+			ImGui::SetCursorPosX(off);
+	}
+	else {
+		ImGui::SetCursorPosX(x);
+	}
 
-	ImGui::SetCursorPosY(height);
+	ImGui::SetCursorPosY(y);
 	return ImGui::Text(label);
 }
 
@@ -602,7 +625,8 @@ void renderImportWindow(UnitType::Type unitType) {
 	}
 }
 
-/*void renderGenerateImportSubWindow() {
+void renderGenerateImportSubWindow() {
+	// TODO: Center column content
 	ImGuiIO& io = ImGui::GetIO();
 	ImFont* statsFont = io.Fonts->Fonts[4];
 	WindowsManagement* windowsManagement = WindowsManagement::GetInstance();
@@ -631,10 +655,22 @@ void renderImportWindow(UnitType::Type unitType) {
 		{UnitType::Ship, 3},
 		{UnitType::Division, countrySelected->getDivisionListSize()}
 	};
+
+	const ImVec2 mainBlockSize = Renderer::getBlockSize();
+	const ImVec2 generateBlockSize = Renderer::getGenerateBlockSize();
+	const ImVec2 generateMargin = getGenerateMargin();
+	const float mainBlocHeightMargin = (10 * mainBlockSize.y) / 100;
+	const float firstRowWidth = generateBlockSize.x - ((10 * generateBlockSize.x) / 100);
+	const float firstRowMargin = (5 * generateBlockSize.x) / 100;
+	const float firstRowHeightMargin = (10 * generateBlockSize.x) / 100;
+	const float firstRowCenter = (50 * generateBlockSize.x) / 100;
+
+	ImGui::SetCursorPosX(firstRowMargin);
+
 	if (window == "generate") {
 		ImGui::PushFont(statsFont);
-		ImGui::PushItemWidth(1500.0f);
-		if (ImGui::BeginTable("table1", 3)) {
+		ImGui::PushItemWidth(firstRowWidth);
+		if (ImGui::BeginTable("table1", 3, ImGuiTableFlags_SizingStretchSame)) {
 			for (int row = 0; row < 5; row++) {
 				ImGui::TableNextRow();
 				for (int column = 0; column < iconsColNumber.find(unitType)->second; column++) {
@@ -763,10 +799,10 @@ void renderImportWindow(UnitType::Type unitType) {
 			ImGui::EndTable();
 		}
 		ImGui::PopItemWidth();
-		ImGui::SetCursorPosX(200.0f);
+		ImGui::SetCursorPosX((50 * firstRowCenter) / 100);
 		ImGui::SetCursorPosY(center.y / 1.5f);
 		if(unitType != UnitType::Division) {
-			if (ImGui::BeginTable("table2", 2)) {
+			if (ImGui::BeginTable("table2", 2, ImGuiTableFlags_SizingStretchSame)) {
 				for (int row = 0; row < 5; row++) {
 					ImGui::TableNextRow();
 					for (int column = 0; column < 2; column++) {
@@ -849,9 +885,9 @@ void renderImportWindow(UnitType::Type unitType) {
 	else if (window == "import") {
 		renderImportWindow(unitType);
 	}
-}*/
+}
 
-void renderGenerateImportSubWindow() {
+/*void renderGenerateImportSubWindow() {
 	ImGuiIO& io = ImGui::GetIO();
 	ImGuiStyle& style = ImGui::GetStyle();
 	const ImVec2 padding = style.FramePadding;
@@ -978,7 +1014,7 @@ void renderGenerateImportSubWindow() {
 		}
 		ImGui::PopFont();
 	}
-}
+}*/
 
 int getModulePos(int index) {
 	switch (index) {
@@ -1094,7 +1130,7 @@ void renderTankDesignerWindows() {
 	Texture texture = Icon::GetInstance()->getTankModulesTextures("background", "tank_designer_bg");
 	const float newRatioWidth = backgroundWidth / texture.my_image_width;
 	const float newRatioHeight = backgroundHeight / texture.my_image_height;
-	const ImVec2 newRatio = ImVec2(newRatioWidth, newRatioHeight);
+	newRatio = ImVec2(newRatioWidth, newRatioHeight);
 
 	ImGui::SetCursorPosX(backgroundXMargin);
 	ImGui::SetCursorPosY(backgroundYMargin);
@@ -1129,27 +1165,27 @@ void renderTankDesignerWindows() {
 	//Base Stats 
 	ImGui::PushFont(statsFont);
 	createTitleWithPosition("Max Speed:", (51.0f * generateBlockSize.x) / 100, (18.0f * generateBlockSize.y) / 100);
-	//createTitleWithPosition("Reliability:", (51.0f * generateBlockSize.x) / 100, Constant::TextPos::TITLE_HEIGHT + 95.0f);
-	//createTitleWithPosition("Supply use:", (51.0f * generateBlockSize.x) / 100, Constant::TextPos::TITLE_HEIGHT + 115.0f);
+	createTitleWithPosition("Reliability:", (51.0f * generateBlockSize.x) / 100, (21.2f * generateBlockSize.y) / 100);
+	createTitleWithPosition("Supply use:", (51.0f * generateBlockSize.x) / 100, (24.3f * generateBlockSize.y) / 100);
 	//Base Stats 
 
-	/*//Combat Stats 
-	createTitleWithPosition("Soft attack:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 75.0f);
-	createTitleWithPosition("Hard attack:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 95.0f);
-	createTitleWithPosition("Piercing:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 115.0f);
-	createTitleWithPosition("Hardness:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 135.0f);
-	createTitleWithPosition("Armor:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 155.0f);
-	createTitleWithPosition("Breakthrough:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 175.0f);
-	createTitleWithPosition("Defense:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 195.0f);
-	createTitleWithPosition("Air attack:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 215.0f);
+	//Combat Stats 
+	createTitleWithPosition("Soft attack:", (65.0f * generateBlockSize.x) / 100, (18.0f * generateBlockSize.y) / 100);
+	createTitleWithPosition("Hard attack:", (65.0f * generateBlockSize.x) / 100, (21.2f * generateBlockSize.y) / 100);
+	createTitleWithPosition("Piercing:", (65.0f * generateBlockSize.x) / 100, (24.3f * generateBlockSize.y) / 100);
+	createTitleWithPosition("Hardness:", (65.0f * generateBlockSize.x) / 100, (27.4f * generateBlockSize.y) / 100);
+	createTitleWithPosition("Armor:", (65.0f * generateBlockSize.x) / 100, (30.5f * generateBlockSize.y) / 100);
+	createTitleWithPosition("Breakthrough:", (65.0f * generateBlockSize.x) / 100, (33.6f * generateBlockSize.y) / 100);
+	createTitleWithPosition("Defense:", (65.0f * generateBlockSize.x) / 100, (36.7f * generateBlockSize.y) / 100);
+	createTitleWithPosition("Air attack:", (65.0f * generateBlockSize.x) / 100, (39.8f * generateBlockSize.y) / 100);
 	//Combat Stats
 
 	//Misc. Stats
-	createTitleWithPosition("Fuel Capacity:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 75.0f);
-	createTitleWithPosition("Fuel Usage:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 95.0f);
-	createTitleWithPosition("Suppression:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 115.0f);
-	createTitleWithPosition("Reconnaissance:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 135.0f);
-	createTitleWithPosition("Entrenchment:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 155.0f);
+	createTitleWithPosition("Fuel Capacity:", (79.0f * generateBlockSize.x) / 100, (18.0f * generateBlockSize.y) / 100);
+	createTitleWithPosition("Fuel Usage:", (79.0f * generateBlockSize.x) / 100, (21.2f * generateBlockSize.y) / 100);
+	createTitleWithPosition("Suppression:", (79.0f * generateBlockSize.x) / 100, (24.3f * generateBlockSize.y) / 100);
+	createTitleWithPosition("Reconnaissance:", (79.0f * generateBlockSize.x) / 100, (27.4f * generateBlockSize.y) / 100);
+	createTitleWithPosition("Entrenchment:", (79.0f * generateBlockSize.x) / 100, (30.5f * generateBlockSize.y) / 100);
 	//Misc. Stats
 
 	ImGui::PopFont();
@@ -1157,8 +1193,8 @@ void renderTankDesignerWindows() {
 
 	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
 	ImGui::PushFont(textFont);
-	createTitleWithPosition("Engine", Constant::Position::MIDDLE - 110.0f, Constant::TextPos::TANK_MODULE_HEIGHT_2);
-	createTitleWithPosition("Armor", Constant::Position::MIDDLE - 30.0f, Constant::TextPos::TANK_MODULE_HEIGHT_2);*/
+	createTitleWithPosition("Engine", (30.0f * generateBlockSize.x) / 100, (77.6f * generateBlockSize.y) / 100);
+	createTitleWithPosition("Armor", (40.0f * generateBlockSize.x) / 100, (77.6f * generateBlockSize.y) / 100);
 	ImGui::PopFont();
 	ImGui::PopStyleColor();
 }
@@ -1304,32 +1340,41 @@ void renderUnit(Ship ship) {
 
 //Tank stats
 void renderUnit(std::tuple<Tank, TankStats> unit) {
+	const ImVec2 mainBlockSize = Renderer::getBlockSize();
+	const ImVec2 generateBlockSize = Renderer::getGenerateBlockSize();
+	const auto generateBlockMargin = getGenerateMargin();
+
 	auto& [tank, tankStats] = unit;
 	ImGuiIO& io = ImGui::GetIO();
 	ImFont* basicFont = io.Fonts->Fonts[2];
 	ImFont* statsFont = io.Fonts->Fonts[4];
 	ImGui::PushFont(basicFont);
+	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
+	ImGui::SetCursorPosX((7.0f * generateBlockSize.x) / 100);
+	ImGui::SetCursorPosY((15.5f * generateBlockSize.y) / 100);
+	std::string tankName = std::format("{0} {1}", Tank::tankVersionToString(tank.version).c_str(), Tank::tankTypeToString(tank.type).c_str());
+	ImGui::InputText("##", &tankName);
+	ImGui::PopStyleColor();
+	
 	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
-	ImGui::SetCursorPosY(Constant::TextPos::TANK_NAME_HEIGHT + 5.0f);
-	createLabelWithPosition(std::format("{0} {1}", Tank::tankVersionToString(tank.version).c_str(), Tank::tankTypeToString(tank.type)).c_str(), Constant::TextPos::TANK_NAME_WIDTH);
 
-	setIcon(ImGui::GetCursorPosY() - 15.0f, ImGui::GetCursorPosX() + 325.0f, Tank::tankTypeToString(tank.type), tank.iconName, UnitType::Type::Tank);
+	createLabelWithPosition(Role::typeToString(tank.role).c_str(), (7.0f * generateBlockSize.x) / 100, (23.0f * generateBlockSize.y) / 100);
 
-	ImGui::SetCursorPosY(Constant::TextPos::TANK_ROLE_HEIGHT + 10.0f);
-	createLabelWithPosition(Role::typeToString(tank.role).c_str(), Constant::TextPos::TANK_NAME_WIDTH);
+	setIcon((32.5f * generateBlockSize.x) / 100, (16.5f * generateBlockSize.y) / 100, newRatio, Tank::tankTypeToString(tank.type), tank.iconName, UnitType::Type::Tank);
+
 	std::string fileName = std::format("{0}_{1}", Gun::gunNameToString(tank.gun.name), Gun::typeToString(tank.gun.type));
-	setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 22.0f, "modules", fileName, UnitType::Type::Tank);
+	setImage((7.0f * generateBlockSize.x) / 100, (29.0f * generateBlockSize.y) / 100, newRatio, "modules", fileName, UnitType::Type::Tank);
 
 	fileName = std::format("{0}_turret_{1}", TurretType::turretTypeToString(tank.turret.type), tank.turret.crew);
-	setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 88.0f, "modules", fileName, UnitType::Type::Tank);
+	setImage((12.7f * generateBlockSize.x) / 100, (29.0f * generateBlockSize.y) / 100, newRatio, "modules", fileName, UnitType::Type::Tank);
 
 	fileName = std::format("{0}", SpecialModule::typeToString(tank.specialModules[0].type));
-	setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 170.0f, "modules", fileName, UnitType::Type::Tank);
+	setImage((19.25f * generateBlockSize.x) / 100, (29.0f * generateBlockSize.y) / 100, newRatio, "modules", fileName, UnitType::Type::Tank);
 
 	fileName = std::format("{0}", SpecialModule::typeToString(tank.specialModules[1].type));
-	setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 240.0f, "modules", fileName, UnitType::Type::Tank);
+	setImage((25.75f * generateBlockSize.x) / 100, (29.0f * generateBlockSize.y) / 100, newRatio, "modules", fileName, UnitType::Type::Tank);
 
-	fileName = std::format("{0}", SpecialModule::typeToString(tank.specialModules[2].type));
+	/*fileName = std::format("{0}", SpecialModule::typeToString(tank.specialModules[2].type));
 	setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, ImGui::GetCursorPosX() + 315.0f, "modules", fileName, UnitType::Type::Tank);
 
 	fileName = std::format("{0}", SpecialModule::typeToString(tank.specialModules[3].type));
@@ -1351,11 +1396,11 @@ void renderUnit(std::tuple<Tank, TankStats> unit) {
 	off /= 1.5;
 	createLabelWithPosition(std::to_string(tank.engineLevel).c_str(), off);
 	ImGui::SetCursorPosY(Constant::TextPos::TANK_MODULE_HEIGHT_2 + 20.0f);
-	createLabelWithPosition(std::to_string(tank.armorLevel).c_str(), off + 55.0f);
+	createLabelWithPosition(std::to_string(tank.armorLevel).c_str(), off + 55.0f);*/
 	ImGui::PopStyleColor();
 	ImGui::PopFont();
 
-	ImGui::PushFont(statsFont);
+	/*ImGui::PushFont(statsFont);
 	//Base stats
 	std::string speed = std::format("{:.1f} km/h", tankStats.speed);
 	createLabelWithPosition(speed.c_str(), Constant::TextPos::BASE_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 75.0f);
@@ -1409,7 +1454,7 @@ void renderUnit(std::tuple<Tank, TankStats> unit) {
 	std::string entrenchment = std::format("{:.2f}", tankStats.entrenchment);
 	createLabelWithPosition(entrenchment.c_str(), Constant::TextPos::MISC_STATS_POS, Constant::TextPos::TITLE_HEIGHT + 155.0f);
 	//Misc Stats
-	ImGui::PopFont();
+	ImGui::PopFont*/
 }
 
 //Plane stats
@@ -1562,7 +1607,7 @@ void Renderer::renderSubWindow() {
 	const float center = (50 * (generateBlockSize.x)) / 100;
 	const float generateBlockHeightMargin = (5 * (generateBlockSize.x)) / 100;
 	const float centerTextX = center - calculateTextLenght(window.c_str());
-	createLabelWithPosition(window.c_str(), center);
+	createLabelWithPosition(window.c_str(), center, ImGui::GetCursorPosY(), true);
 	//ImGui::SetCursorPosX(centerTextX);
 	//ImGui::Text(window.c_str());
 	ImGui::PopFont();
@@ -1575,7 +1620,7 @@ void Renderer::renderSubWindow() {
 		AlignForWidth(comboSize);
 		ImGui::SetCursorPosY(generateBlockHeightMargin);
 		//createLabelWithPosition("Country: ", (countryListWidth - textSize.x), generateBlockHeightMargin);
-		ImGui::Text("County :");
+		ImGui::Text("Country :");
 		ImGui::SameLine();
 		static ImGuiComboFlags flags = 0;
 		static int item_current_idx = 0; // Here we store our selection data as an index.
@@ -1629,7 +1674,7 @@ void Renderer::renderSubWindow() {
 			break;
 		case UnitType::Tank:
 			renderTankDesignerWindows();
-			//renderUnit(countrySelected->getTankByType(columnSelected));
+			renderUnit(countrySelected->getTankByType(columnSelected));
 			break;
 		case UnitType::Plane:
 			renderPlaneDesignerWindows();

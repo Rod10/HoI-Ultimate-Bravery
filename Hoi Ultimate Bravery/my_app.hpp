@@ -90,7 +90,7 @@ public:
 			ImGui::SetNextWindowPos(ImVec2(generateBlockXPos, mainBlocHeightMargin));
 			ImGui::PushStyleColor(ImGuiCol_WindowBg, greyWindowColor);
 			ImGui::SetNextWindowSize(ImVec2(mainBlockSize.x - buttonBlockSize.x - mainBlocWidthtMargin, mainBlockSize.y));
-			ImGui::Begin("generate", &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
+			ImGui::Begin("generate", &opened, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoFocusOnAppearing);
 			Renderer::renderSubWindow();
 			ImGui::PopStyleColor();
 			ImGui::End();
