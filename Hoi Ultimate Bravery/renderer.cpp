@@ -1273,6 +1273,8 @@ void renderUnit(std::tuple<Tank, TankStats> unit) {
 	createLabelWithPosition(speed.c_str(), (59.0f * generateBlockSize.x) / 100, (18.0f * generateBlockSize.y) / 100);
 
 	// TEST TOOLTIP
+	float engineLevel = tank.engineLevel * 0.1f;
+	float armorLevel = tank.armorLevel * -0.1f;
 	std::string testTooltip;
 	std::string tankVersionAndType = std::format("{0} {1}", Tank::tankVersionToString(tank.version).c_str(), Tank::tankTypeToString(tank.type).c_str());
 	testTooltip = std::format("{0}: {1} Km/h\r\n", tankVersionAndType, tank.stats.speed);
@@ -1302,7 +1304,7 @@ void renderUnit(std::tuple<Tank, TankStats> unit) {
 		testTooltip.append(stringT);
 	}
 	if (tank.engine.stats.speedP != 0.0f) {
-		float engineSpeed = ((tank.stats.speed + (tank.engineLevel * 0.1f) + (tank.armorLevel * -0.1f) + tank.engine.stats.speed) * tank.engine.stats.speedP) / 100;
+		float engineSpeed = ((tank.stats.speed + engineLevel + armorLevel + tank.engine.stats.speed) * tank.engine.stats.speedP) / 100;
 		std::string speedE = std::format("{:.1f} km/h", tank.suspension.stats.speed);
 		std::string stringT = std::format("{0} suspension: {1}\r\n", Engine::typeToString(tank.engine.type), speedE.c_str());
 		testTooltip.append(stringT);
