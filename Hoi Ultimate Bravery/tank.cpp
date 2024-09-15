@@ -62,13 +62,18 @@ TankStats Tank::generateNewStats(Tank tank)
 	//Add Stats of special modules
 
 	// Base Stats
-	float totalSpeedP = newStats.speedP + ((tank.engineLevel * 10) + (tank.armorLevel * -5.0));
-	float reliabilityP = newStats.reliabilityP + ((tank.engineLevel * -1.5) + (tank.armorLevel * 1.5));
-	float speedf = newStats.speed + (newStats.speed * (totalSpeedP / 100));
+	float totalSpeedP = newStats.speedP;
+	float speedf = newStats.speed + (tank.engineLevel * 0.1f) + (tank.armorLevel * -0.1f);
+	speedf = speedf + ((speedf * totalSpeedP) / 100);
 	newStats.speed = speedf;
 
-	float reliabilityf = newStats.reliability + reliabilityP;
-	newStats.reliability = reliabilityf;
+	//float reliabilityf = newStats.reliability + ((newStats.reliability * reliabilityP) / 100);
+	float engineP = tank.engineLevel * -1.5f;
+	float armorP = tank.armorLevel * -1.5f;
+	float testEngine = (engineP * newStats.reliabilityP);
+	float testArmor = (armorP * newStats.reliabilityP);
+	float reliabilityP = newStats.reliabilityP + (((engineP * newStats.reliabilityP) / 100) + ((armorP * newStats.reliabilityP) / 100));
+	newStats.reliability = reliabilityP;
 	//Base Stats
 
 	//Combat Stats
@@ -81,7 +86,7 @@ TankStats Tank::generateNewStats(Tank tank)
 	float piercingF = newStats.piercing + (newStats.piercing * (newStats.piercingP / 100));
 	newStats.piercing = piercingF;
 
-	float hardnessF = newStats.hardness + (newStats.hardness * (newStats.hardnessP / 100));
+	float hardnessF = newStats.hardnessP + ((newStats.hardnessP * newStats.hardnessP) / 100);
 	newStats.hardness = hardnessF;
 
 	float totalArmorP = newStats.armorP + (tank.armorLevel * 8.5);

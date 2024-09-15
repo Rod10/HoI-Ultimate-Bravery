@@ -5,6 +5,7 @@
                 "speed": 4.0,
                 "reliabilityP": 80.0,
                 "armor": 5.0,
+                "hardnessP": 80.0,
                 "productionCost": 1.0,
                 "supplyUse": 0.22,
                 "ressources": {
@@ -16,9 +17,10 @@
         },
         "basic": {
             "stats": {
-                "speed": 4.0,
+                "speed": 5.0,
                 "reliabilityP": 95.0,
                 "armor": 10.0,
+                "hardnessP": 80,
                 "productionCost": 1.25,
                 "supplyUse": 0.22,
                 "ressources": {
@@ -30,9 +32,10 @@
         },
         "improved": {
             "stats": {
-                "speed": 4.5,
+                "speed": 6.0,
                 "reliabilityP": 110.0,
                 "armor": 15.0,
+                "hardnessP": 80,
                 "productionCost": 1.60,
                 "supplyUse": 0.22,
                 "ressources": {
@@ -44,9 +47,10 @@
         },
         "advanced": { 
             "stats": {
-                "speed": 5.0,
+                "speed": 7.0,
                 "reliabilityP": 130.0,
                 "armor": 20.0,
+                "hardnessP": 80,
                 "productionCost": 2.0,
                 "supplyUse": 0.22,
                 "ressources": {
@@ -60,9 +64,10 @@
     "amphibious": {
         "basic": {
             "stats": {
-                "speed": 4.0,
+                "speed": 5,
                 "reliabilityP": 110.0,
                 "armor": 15.0,
+                "hardnessP": 85,
                 "productionCost": 4.50,
                 "ressources": {
                     "steel": 1,
@@ -78,6 +83,7 @@
                 "speed": 4.0,
                 "reliabilityP": 75.0,
                 "armor": 25.0,
+                "hardnessP": 85,
                 "productionCost": 2.50,
                 "supplyUse": 0.25,
                 "ressources": {
@@ -89,9 +95,10 @@
         },
         "basic": {
             "stats": {
-                "speed": 4.0,
+                "speed": 5.0,
                 "reliabilityP": 100.0,
                 "armor": 35.0,
+                "hardnessP": 85,
                 "productionCost": 2.50,
                 "supplyUse": 0.25,
                 "ressources": {
@@ -103,9 +110,10 @@
         },
         "improved": {
             "stats": {
-                "speed": 4.0,
+                "speed": 6.0,
                 "reliabilityP": 130.0,
                 "armor": 45.0,
+                "hardnessP": 85,
                 "productionCost": 3.20,
                 "supplyUse": 0.25,
                 "ressources": {
@@ -117,9 +125,10 @@
         },
         "advanced": {
             "stats": {
-                "speed": 4.5,
+                "speed": 6,
                 "reliabilityP": 160.0,
                 "armor": 50.0,
+                "hardnessP": 85,
                 "productionCost": 4.0,
                 "supplyUse": 0.25,
                 "ressources": {
@@ -133,9 +142,10 @@
     "heavy": {
         "interWar": {
             "stats": {
-                "speed": 4.0,
+                "speed": 3.0,
                 "reliabilityP": 100.0,
                 "armor": 30.0,
+                "hardnessP": 95,
                 "productionCost": 10.0,
                 "supplyUse": 0.32,
                 "ressources": {
@@ -147,9 +157,10 @@
         },
         "basic": {
             "stats": {
-                "speed": 3.5,
+                "speed": 5.0,
                 "reliabilityP": 100.0,
                 "armor": 35.0,
+                "hardnessP": 95,
                 "productionCost": 10.0,
                 "supplyUse": 0.32,
                 "ressources": {
@@ -161,9 +172,10 @@
         },
         "improved": {
             "stats": {
-                "speed": 4.0,
+                "speed": 5.0,
                 "reliabilityP": 115.0,
                 "armor": 55.0,
+                "hardnessP": 95,
                 "productionCost": 10.0,
                 "supplyUse": 0.32,
                 "ressources": {
@@ -175,9 +187,10 @@
         },
         "advanced": {
             "stats": {
-                "speed": 4.0,
+                "speed": 6.0,
                 "reliabilityP": 130.0,
                 "armor": 75.0,
+                "hardnessP": 95,
                 "productionCost": 12.0,
                 "supplyUse": 0.32,
                 "ressources": {
@@ -191,9 +204,10 @@
     "superHeavy": {
         "basic": {
             "stats": {
-                "speed": 2.5,
+                "speed": 4,
                 "reliabilityP": 130.0,
                 "armor": 85.0,
+                "hardnessP": 95,
                 "productionCost": 24.0,
                 "supplyUse": 0.40,
                 "ressources": {
@@ -207,9 +221,10 @@
     "modern": {
         "basic": {
             "stats": {
-                "speed": 4.5,
+                "speed": 7,
                 "reliabilityP": 160.0,
                 "armor": 75.0,
+                "hardnessP": 95,
                 "productionCost": 6.0,
                 "supplyUse": 0.25,
                 "ressources": {

@@ -271,7 +271,7 @@
     },
     "fuelDrum": {
         "stats": {
-            "speed": -0.25,
+            "speed": -0.2,
             "fuelCapacity": 100.0,
             "productionCost": 1.0
         }
