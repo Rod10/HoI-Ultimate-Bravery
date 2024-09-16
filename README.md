@@ -159,6 +159,7 @@ You'll need to import before starting the game and be ultra careful to reset fil
 - [ ] Mod integration (Not in order for overhaul mod)
 	- [ ] Infantry Equipment
 	- [ ] Expanded Designers Combined
+	- [ ] Extended Support Company (10 slots)
 	- [ ] RoadTo56
 		- [ ] Tanks
 		- [ ] Planes
