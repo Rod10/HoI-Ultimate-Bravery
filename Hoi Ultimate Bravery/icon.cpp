@@ -67,8 +67,8 @@ Icon* Icon::GetInstance()
 		ret = Utils::LoadTextureFromFile(fileName.c_str(), &my_image_texture, &my_image_width, &my_image_height);
 		IM_ASSERT(ret);
 		texture = Texture(my_image_width, my_image_height, my_image_texture);
-		texture.my_image_width = 375;
-		texture.my_image_height = 60;
+		//texture.my_image_width = 375;
+		//texture.my_image_height = 60;
 		textureCategory.insert(std::pair<std::string, Texture>("ship_icon_bg", texture));
 
 		fileName = std::format("./Assets/Images/Background/tank_name_bg.png");

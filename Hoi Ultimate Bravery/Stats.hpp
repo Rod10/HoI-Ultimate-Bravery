@@ -8,5 +8,11 @@
 #include <string>
 class Stats
 {
-};
+public:
+	enum Type {
+		Base,
+		Combat,
+		Misc,
+	};
 
+};

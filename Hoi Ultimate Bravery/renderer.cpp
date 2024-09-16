@@ -101,19 +101,19 @@ void setImage(float x, float y, ImVec2 ratio, std::string type, std::string name
 	}
 	else if (unitType == UnitType::Type::Ship) {
 		Texture texture = Icon::GetInstance()->getShipModulesTextures(type, name);
-		ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+		ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width * ratio.x, texture.my_image_height * ratio.y));
 	}
 	else if (unitType == UnitType::Type::Plane) {
 		Texture texture = Icon::GetInstance()->getPlaneModulesTextures(type, name);
-		ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+		ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width * ratio.x, texture.my_image_height * ratio.y));
 	}
 	else if (unitType == UnitType::Type::Division) {
 		Texture texture = Icon::GetInstance()->getUnitsTextures(type, name);
 		if (type != "Background") {
-			texture.my_image_height = texture.my_image_height * 0.95;
-			texture.my_image_width = texture.my_image_width * 0.95;
+			texture.my_image_height = texture.my_image_height * 0.90;
+			texture.my_image_width = texture.my_image_width * 0.90;
 		}
-		ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
+		ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width * ratio.x, texture.my_image_height * ratio.y));
 	}
 }
 
@@ -899,86 +899,130 @@ int getModulePos(int index) {
 	}
 }
 
-//Ship Designer
-void renderShipDesignerWindows() {
+void renderStat(UnitType::Type type) {
 	ImGuiIO& io = ImGui::GetIO();
 	ImFont* basicFont = io.Fonts->Fonts[0];
 	ImFont* titleFont = io.Fonts->Fonts[1];
 	ImFont* textFont = io.Fonts->Fonts[2];
 	ImFont* TitleStatsFont = io.Fonts->Fonts[3];
 	ImFont* statsFont = io.Fonts->Fonts[4];
-	//TODO Set Proper Ship background
-	Texture texture = Icon::GetInstance()->getTankModulesTextures("background", "tank_designer_bg");
-	ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
 
-	setImage(Constant::TextPos::TANK_NAME_HEIGHT, ImGui::GetCursorPosX() + 20.0f, "background", "ship_name_bg", UnitType::Type::Ship);
+	const ImVec2 mainBlockSize = Renderer::getBlockSize();
+	const ImVec2 generateBlockSize = Renderer::getGenerateBlockSize();
+	const auto generateBlockMargin = getGenerateMargin();
 
-	setImage(105, 90, "background", "ship_icon_bg", UnitType::Type::Ship);
+	const float backgroundWidth = generateBlockSize.x - ((10.0f * generateBlockSize.x) / 100);
+	const float backgroundHeight = generateBlockSize.y - ((10.0f * generateBlockSize.y) / 100);
+	const float backgroundXMargin = (5.0f * generateBlockSize.x) / 100;
+	const float backgroundYMargin = (5.0f * generateBlockSize.y) / 100;
 
-	setImage(Constant::TextPos::TANK_NAME_HEIGHT, ImGui::GetCursorPosX() + 275.0f, "background", "ship_name_bg", UnitType::Type::Ship);
+	std::vector < std::string > baseShipStatsList = { "Max Speed:", "Max Range:", "Organization:", "HP:", "Reliability:", "Supply Use:", "Manpower:" };
+	std::vector < std::string > combatShipStatsList = { "Light attack:", "Light Piercing:", "Hard Attack:", "Hard Piercing:", "Torpedo Attack:", "Breakthrough:", "Depth Charges:", "Armor:", "Anti-Air:" };
+	std::vector < std::string > miscShipStatsList = { "Fuel Usage:", "Surface Visibility:", "Surface Detection:", "Sub Visibility:", "Sub Detection:", "Minelaying:", "Minesweeping:" };
+	std::vector < std::string > baseTankStatsList = { "Max Speed:", "Reliability:", "Supply Use:"};
+	std::vector < std::string > combaTankStatsList = { "Soft attack:", "Hard attack:", "Piercing:", "Hardness:", "Armor:", "Breakthrough:", "Defense:", "Air attack:", };
+	std::vector < std::string > miscTankStatsList = { "Fuel Capacity:", "Fuel Usage:", "Suppression:", "Reconnaissance:", "Entrenchment:", };
+	std::vector < std::string > basePlaneStatsList = { "Max Speed:", "Range:", "Supply Use:", "Weight:", "Thrust:", };
+	std::vector < std::string > combatPlaneStatsList = { "Air Defense:", "Air Attack:", "Agility:", "Air Supperiority:", "Naval Attack:", "Naval Targeting:", "Ground Attack:", "Strat. Bombing:", };
+	std::vector < std::string > miscPlaneStatsList = { "Reliability:", "Fuel Usage:", "Surface Detection:", "Sub Detection:", "Night Penalty:", "Minelaying:", "Minesweeping:", };
 
-	for (int i = 0; i <= 6; i++) {
-		float x = ImGui::GetCursorPosX() + (76 * i) + (12.0f - (i * 3));
-		if (i == 0) {
-			x = 21.0f;
-		}
-		setImage(Constant::TextPos::TANK_MODULE_HEIGHT, x, "background", "equipment_icon_bg", UnitType::Type::Ship);
-	}
+	std::map <Stats::Type, std::vector < std::string >> shipStat = {
+		{Stats::Type::Base, baseShipStatsList},
+		{Stats::Type::Combat, combatShipStatsList},
+		{Stats::Type::Misc, miscShipStatsList},
+	};
 
-	setImage(ImGui::GetCursorPosY() - 4.0f, ImGui::GetCursorPosX() + 15.0f, "background", "ship_view_bg", UnitType::Type::Ship);
+	std::map <Stats::Type, std::vector < std::string >> tankStat = {
+		{Stats::Type::Base, baseTankStatsList},
+		{Stats::Type::Combat, combaTankStatsList},
+		{Stats::Type::Misc, miscTankStatsList},
+	};
 
-	texture = Icon::GetInstance()->getTankModulesTextures("background", "equipment_icon_bg");;
-	for (int i = 0; i <= 6; i++) {
-		float x = ImGui::GetCursorPosX() + (76 * i) + (12.0f - (i * 3));
-		if (i == 0) {
-			x = 23.0f;
-		}
-		setImage(Constant::TextPos::TANK_MODULE_HEIGHT_2, x, "background", "equipment_icon_bg", UnitType::Type::Ship);
-	}
+	std::map <Stats::Type, std::vector < std::string >> planeStat = {
+		{Stats::Type::Base, basePlaneStatsList},
+		{Stats::Type::Combat, combatPlaneStatsList},
+		{Stats::Type::Misc, miscPlaneStatsList},
+	};
+
+	std::map < UnitType::Type, std::map <Stats::Type, std::vector < std::string >> > unitStats = {
+		{UnitType::Ship, shipStat},
+		{UnitType::Tank, tankStat},
+		{UnitType::Plane, planeStat},
+	};
 
 	ImGui::PushFont(TitleStatsFont);
-	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
-	createTitleWithPosition("Base Stats", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 45.0f);
-	createTitleWithPosition("Combat Stats", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 45.0f);
-	createTitleWithPosition("Misc. Stats", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 45.0f);
+	createTitleWithPosition("Base Stats", (51.0f * generateBlockSize.x) / 100, (13.0f * generateBlockSize.y) / 100);
+	createTitleWithPosition("Combat Stats", (65.0f * generateBlockSize.x) / 100, (13.0f * generateBlockSize.y) / 100);
+	createTitleWithPosition("Misc. Stats", (79.0f * generateBlockSize.x) / 100, (13.0f * generateBlockSize.y) / 100);
 	ImGui::PopFont();
 
-	//Base Stats 
 	ImGui::PushFont(statsFont);
-	createTitleWithPosition("Max Speed:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 75.0f);
-	createTitleWithPosition("Max Range:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 95.0f);
-	createTitleWithPosition("Organization:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 115.0f);
-	createTitleWithPosition("HP:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 135.0f);
-	createTitleWithPosition("Reliability:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 155.0f);
-	createTitleWithPosition("Supply Use:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 175.0f);
-	createTitleWithPosition("Manpower:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 195.0f);
-	//Base Stats 
-
-	//Combat Stats 
-	createTitleWithPosition("Light attack:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 75.0f);
-	createTitleWithPosition("Light Piercing:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 95.0f);
-	createTitleWithPosition("Hard Attack:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 115.0f);
-	createTitleWithPosition("Hard Piercing:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 135.0f);
-	createTitleWithPosition("Torpedo Attack:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 155.0f);
-	createTitleWithPosition("Breakthrough:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 175.0f);
-	createTitleWithPosition("Depth Charges:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 195.0f);
-	createTitleWithPosition("Armor:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 215.0f);
-	createTitleWithPosition("Anti-Air:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 235.0f);
-	//Combat Stats
-
-	//Misc. Stats
-	createTitleWithPosition("Fuel Usage:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 75.0f);
-	createTitleWithPosition("Surface Visibility:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 95.0f);
-	createTitleWithPosition("Surface Detection:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 115.0f);
-	createTitleWithPosition("Sub Visibility:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 135.0f);
-	createTitleWithPosition("Sub Detection:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 155.0f);
-	createTitleWithPosition("Minelaying:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 175.0f);
-	createTitleWithPosition("Minesweeping:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 195.0f);
-	//Misc. Stats
-
+	for (auto& [type, stats] : unitStats.find(type)->second) {
+		float baseYPos = 18.0f;
+		float baseXPos;
+		for (auto& stat : stats) {
+			if (type == Stats::Type::Base) {
+				baseXPos = 51.0f;
+			}
+			else if (type == Stats::Type::Combat) {
+				baseXPos = 65.0f;
+			}
+			else if (type == Stats::Type::Misc) {
+				baseXPos = 79.0f;
+			}
+			createTitleWithPosition(stat.c_str(), (baseXPos * generateBlockSize.x) / 100, (baseYPos * generateBlockSize.y) / 100);
+			baseYPos += 3.1f;
+		}
+	}
 	ImGui::PopFont();
-	ImGui::PopStyleColor();
 
+}
+
+//Ship Designer
+void renderShipDesignerWindows() {
+	const ImVec2 mainBlockSize = Renderer::getBlockSize();
+	const ImVec2 generateBlockSize = Renderer::getGenerateBlockSize();
+	const auto generateBlockMargin = getGenerateMargin();
+
+	const float backgroundWidth = generateBlockSize.x - ((10.0f * generateBlockSize.x) / 100);
+	const float backgroundHeight = generateBlockSize.y - ((10.0f * generateBlockSize.y) / 100);
+	const float backgroundXMargin = (5.0f * generateBlockSize.x) / 100;
+	const float backgroundYMargin = (5.0f * generateBlockSize.y) / 100;
+
+	ImGuiIO& io = ImGui::GetIO();
+	ImFont* basicFont = io.Fonts->Fonts[0];
+	ImFont* titleFont = io.Fonts->Fonts[1];
+	ImFont* textFont = io.Fonts->Fonts[2];
+	ImFont* TitleStatsFont = io.Fonts->Fonts[3];
+	ImFont* statsFont = io.Fonts->Fonts[4];
+	Texture texture = Icon::GetInstance()->getTankModulesTextures("background", "tank_designer_bg");
+	const float newRatioWidth = backgroundWidth / texture.my_image_width;
+	const float newRatioHeight = backgroundHeight / texture.my_image_height;
+	newRatio = ImVec2(newRatioWidth, newRatioHeight);
+
+	ImGui::SetCursorPosX(backgroundXMargin);
+	ImGui::SetCursorPosY(backgroundYMargin);
+	ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(backgroundWidth, backgroundHeight));
+
+	setImage((6.2f * generateBlockSize.x) / 100, (13.5f * generateBlockSize.y) / 100, newRatio, "background", "ship_name_bg", UnitType::Type::Ship);
+
+	setImage((32.5f * generateBlockSize.x) / 100, (16.5f * generateBlockSize.y) / 100, newRatio, "background", "ship_icon_bg", UnitType::Type::Ship);
+
+	setImage((6.2f * generateBlockSize.x) / 100, (21.0f * generateBlockSize.y) / 100, newRatio, "background", "ship_name_bg", UnitType::Type::Ship);
+
+	for (int i = 1; i <= 7; i++) {
+		float x = ((6.2f * generateBlockSize.x) / 100) * i;
+		setImage(x, (29.0f * generateBlockSize.y) / 100, newRatio, "background", "equipment_icon_bg", UnitType::Type::Ship);
+	}
+
+	setImage((6.2f * generateBlockSize.x) / 100, (37.0f * generateBlockSize.y) / 100, newRatio, "background", "ship_view_bg", UnitType::Type::Ship);
+
+	for (int i = 1; i <= 7; i++) {
+		float x = ((6.2f * generateBlockSize.x) / 100) * i;
+		setImage(x, (77.6f * generateBlockSize.y) / 100, newRatio, "background", "equipment_icon_bg", UnitType::Type::Ship);
+	}
+
+	renderStat(UnitType::Ship);
 }
 
 //Tank Designer
@@ -1014,7 +1058,6 @@ void renderTankDesignerWindows() {
 	setImage((6.2f * generateBlockSize.x) / 100, (21.0f * generateBlockSize.y) / 100, newRatio, "background", "tank_role_bg", UnitType::Type::Tank);
 
 	for (int i = 1; i <= 6; i++) {
-		//float x = ((6.5f * generateBlockSize.x) / 100) * i;
 		float x = ((6.2f * generateBlockSize.x) / 100) * i;
 		setImage(x, (29.0f * generateBlockSize.y) / 100, newRatio, "background", "equipment_icon_bg", UnitType::Type::Tank);
 	}
@@ -1026,41 +1069,7 @@ void renderTankDesignerWindows() {
 		setImage(x, (77.6f * generateBlockSize.y) / 100, newRatio, "background", "equipment_icon_bg", UnitType::Type::Tank);
 	}
 
-	ImGui::PushFont(TitleStatsFont);
-	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
-	createTitleWithPosition("Base Stats", (51.0f * generateBlockSize.x) / 100, (13.0f * generateBlockSize.y) / 100);
-	createTitleWithPosition("Combat Stats", (65.0f * generateBlockSize.x) / 100, (13.0f * generateBlockSize.y) / 100);
-	createTitleWithPosition("Misc. Stats", (79.0f * generateBlockSize.x) / 100, (13.0f * generateBlockSize.y) / 100);
-	ImGui::PopFont();
-
-	//Base Stats 
-	ImGui::PushFont(statsFont);
-	createTitleWithPosition("Max Speed:", (51.0f * generateBlockSize.x) / 100, (18.0f * generateBlockSize.y) / 100);
-	createTitleWithPosition("Reliability:", (51.0f * generateBlockSize.x) / 100, (21.2f * generateBlockSize.y) / 100);
-	createTitleWithPosition("Supply use:", (51.0f * generateBlockSize.x) / 100, (24.3f * generateBlockSize.y) / 100);
-	//Base Stats 
-
-	//Combat Stats 
-	createTitleWithPosition("Soft attack:", (65.0f * generateBlockSize.x) / 100, (18.0f * generateBlockSize.y) / 100);
-	createTitleWithPosition("Hard attack:", (65.0f * generateBlockSize.x) / 100, (21.2f * generateBlockSize.y) / 100);
-	createTitleWithPosition("Piercing:", (65.0f * generateBlockSize.x) / 100, (24.3f * generateBlockSize.y) / 100);
-	createTitleWithPosition("Hardness:", (65.0f * generateBlockSize.x) / 100, (27.4f * generateBlockSize.y) / 100);
-	createTitleWithPosition("Armor:", (65.0f * generateBlockSize.x) / 100, (30.5f * generateBlockSize.y) / 100);
-	createTitleWithPosition("Breakthrough:", (65.0f * generateBlockSize.x) / 100, (33.6f * generateBlockSize.y) / 100);
-	createTitleWithPosition("Defense:", (65.0f * generateBlockSize.x) / 100, (36.7f * generateBlockSize.y) / 100);
-	createTitleWithPosition("Air attack:", (65.0f * generateBlockSize.x) / 100, (39.8f * generateBlockSize.y) / 100);
-	//Combat Stats
-
-	//Misc. Stats
-	createTitleWithPosition("Fuel Capacity:", (79.0f * generateBlockSize.x) / 100, (18.0f * generateBlockSize.y) / 100);
-	createTitleWithPosition("Fuel Usage:", (79.0f * generateBlockSize.x) / 100, (21.2f * generateBlockSize.y) / 100);
-	createTitleWithPosition("Suppression:", (79.0f * generateBlockSize.x) / 100, (24.3f * generateBlockSize.y) / 100);
-	createTitleWithPosition("Reconnaissance:", (79.0f * generateBlockSize.x) / 100, (27.4f * generateBlockSize.y) / 100);
-	createTitleWithPosition("Entrenchment:", (79.0f * generateBlockSize.x) / 100, (30.5f * generateBlockSize.y) / 100);
-	//Misc. Stats
-
-	ImGui::PopFont();
-	ImGui::PopStyleColor();
+	renderStat(UnitType::Tank);
 
 	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
 	ImGui::PushFont(textFont);
@@ -1072,113 +1081,108 @@ void renderTankDesignerWindows() {
 
 //Plane Designer
 void renderPlaneDesignerWindows() {
+	const ImVec2 mainBlockSize = Renderer::getBlockSize();
+	const ImVec2 generateBlockSize = Renderer::getGenerateBlockSize();
+	const auto generateBlockMargin = getGenerateMargin();
+
+	const float backgroundWidth = generateBlockSize.x - ((10.0f * generateBlockSize.x) / 100);
+	const float backgroundHeight = generateBlockSize.y - ((10.0f * generateBlockSize.y) / 100);
+	const float backgroundXMargin = (5.0f * generateBlockSize.x) / 100;
+	const float backgroundYMargin = (5.0f * generateBlockSize.y) / 100;
+
 	ImGuiIO& io = ImGui::GetIO();
 	ImFont* basicFont = io.Fonts->Fonts[0];
 	ImFont* titleFont = io.Fonts->Fonts[1];
 	ImFont* textFont = io.Fonts->Fonts[2];
 	ImFont* TitleStatsFont = io.Fonts->Fonts[3];
 	ImFont* statsFont = io.Fonts->Fonts[4];
-	//TODO Get proper plane background
 	Texture texture = Icon::GetInstance()->getTankModulesTextures("background", "tank_designer_bg");
-	ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(texture.my_image_width, texture.my_image_height));
-	setImage(Constant::TextPos::TANK_NAME_HEIGHT, ImGui::GetCursorPosX() + 20.0f, "background", "tank_name_bg", UnitType::Type::Plane);
+	const float newRatioWidth = backgroundWidth / texture.my_image_width;
+	const float newRatioHeight = backgroundHeight / texture.my_image_height;
+	newRatio = ImVec2(newRatioWidth, newRatioHeight);
 
-	setImage(95.0f, 329, "background", "tank_icon_bg", UnitType::Type::Tank);
+	ImGui::SetCursorPosX(backgroundXMargin);
+	ImGui::SetCursorPosY(backgroundYMargin);
+	ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(backgroundWidth, backgroundHeight));
 
-	setImage(Constant::TextPos::TANK_ROLE_HEIGHT + 5.0f, ImGui::GetCursorPosX() + 20.0f, "background", "tank_role_bg", UnitType::Type::Plane);
+	setImage((6.2f * generateBlockSize.x) / 100, (13.5f * generateBlockSize.y) / 100, newRatio, "background", "tank_name_bg", UnitType::Type::Plane);
 
-	for (int i = 0; i <= 4; i++) {
-		float x = ImGui::GetCursorPosX() + (76 * i) + (12.0f - (i * 3));
-		if (i == 0) {
-			x = 21.0f;
-		}
-		setImage(Constant::TextPos::TANK_MODULE_HEIGHT, x, "background", "equipment_icon_bg", UnitType::Type::Plane);
+	setImage((32.5f * generateBlockSize.x) / 100, (16.5f * generateBlockSize.y) / 100, newRatio, "background", "tank_icon_bg", UnitType::Type::Plane);
+
+	setImage((6.2f * generateBlockSize.x) / 100, (21.0f * generateBlockSize.y) / 100, newRatio, "background", "tank_role_bg", UnitType::Type::Plane);
+
+	for (int i = 1; i <= 5; i++) {
+		float x = ((6.2f * generateBlockSize.x) / 100) * i;
+		setImage(x, (29.0f * generateBlockSize.y) / 100, newRatio, "background", "equipment_icon_bg", UnitType::Type::Plane);
 	}
 
-	setImage(ImGui::GetCursorPosY() - 4.0f, ImGui::GetCursorPosX() + 16.0f, "background", "plane_view_bg", UnitType::Type::Plane);
+	setImage((6.2f * generateBlockSize.x) / 100, (37.0f * generateBlockSize.y) / 100, newRatio, "background", "plane_view_bg", UnitType::Type::Plane);
 
-	texture = Icon::GetInstance()->getTankModulesTextures("background", "equipment_icon_bg");;
-	for (int i = 0; i <= 6; i++) {
-		float x = ImGui::GetCursorPosX() + (76 * i) + (12.0f - (i * 3));
-		if (i == 0) {
-			x = 23.0f;
-		}
-		setImage(Constant::TextPos::TANK_MODULE_HEIGHT_2, x, "background", "equipment_icon_bg", UnitType::Type::Plane);
+	for (int i = 1; i <= 7; i++) {
+		float x = ((6.2f * generateBlockSize.x) / 100) * i;
+		setImage(x, (77.6f * generateBlockSize.y) / 100, newRatio, "background", "equipment_icon_bg", UnitType::Type::Plane);
 	}
 
-	ImGui::PushFont(TitleStatsFont);
-	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
-	createTitleWithPosition("Base Stats", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 45.0f);
-	createTitleWithPosition("Combat Stats", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 45.0f);
-	createTitleWithPosition("Misc. Stats", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 45.0f);
-	ImGui::PopFont();
-
-	//Base Stats 
-	ImGui::PushFont(statsFont);
-	createTitleWithPosition("Max Speed:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 75.0f);
-	createTitleWithPosition("Range:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 95.0f);
-	createTitleWithPosition("Supply Use:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 115.0f);
-	createTitleWithPosition("Weight:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 135.0f);
-	createTitleWithPosition("Thrust:", Constant::Position::MIDDLE + 60.0f, Constant::TextPos::TITLE_HEIGHT + 155.0f);
-	//Base Stats 
-
-	//Combat Stats 
-	createTitleWithPosition("Air Defense:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 75.0f);
-	createTitleWithPosition("Air Attack:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 95.0f);
-	createTitleWithPosition("Agility:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 115.0f);
-	createTitleWithPosition("Air Supperiority:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 135.0f);
-	createTitleWithPosition("Naval Attack:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 155.0f);
-	createTitleWithPosition("Naval Targeting:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 175.0f);
-	createTitleWithPosition("Ground Attack:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 195.0f);
-	createTitleWithPosition("Strat. Bombing:", Constant::Position::MIDDLE + 235.0f, Constant::TextPos::TITLE_HEIGHT + 215.0f);
-	//Combat Stats
-
-	//Misc. Stats
-	createTitleWithPosition("Reliability:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 75.0f);
-	createTitleWithPosition("Fuel Usage:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 95.0f);
-	createTitleWithPosition("Surface Detection:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 115.0f);
-	createTitleWithPosition("Sub Detection:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 135.0f);
-	createTitleWithPosition("Night Penalty:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 155.0f);
-	createTitleWithPosition("Minelaying:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 175.0f);
-	createTitleWithPosition("Minesweeping:", Constant::Position::MIDDLE + 410.0f, Constant::TextPos::TITLE_HEIGHT + 195.0f);
-	//Misc. Stats
-
-	ImGui::PopFont();
-	ImGui::PopStyleColor();
+	renderStat(UnitType::Plane);
 }
 
 void renderUnitDesignerWindows() {
+	const ImVec2 mainBlockSize = Renderer::getBlockSize();
+	const ImVec2 generateBlockSize = Renderer::getGenerateBlockSize();
+	const auto generateBlockMargin = getGenerateMargin();
+
+	const float backgroundWidth = generateBlockSize.x - ((10.0f * generateBlockSize.x) / 100);
+	const float backgroundHeight = generateBlockSize.y - ((10.0f * generateBlockSize.y) / 100);
+	const float backgroundXMargin = (5.0f * generateBlockSize.x) / 100;
+	const float backgroundYMargin = (5.0f * generateBlockSize.y) / 100;
+
 	ImGuiIO& io = ImGui::GetIO();
 	ImFont* basicFont = io.Fonts->Fonts[0];
 	ImFont* titleFont = io.Fonts->Fonts[1];
 	ImFont* textFont = io.Fonts->Fonts[2];
 	ImFont* TitleStatsFont = io.Fonts->Fonts[3];
 	ImFont* statsFont = io.Fonts->Fonts[4];
-	setImage(ImGui::GetCursorPosY(), ImGui::GetCursorPosX(), "Background", "division_designer_popup_bg", UnitType::Type::Division);
+	Texture texture = Icon::GetInstance()->getUnitsTextures("Background", "division_designer_popup_bg");
+	const float newRatioWidth = backgroundWidth / texture.my_image_width;
+	const float newRatioHeight = backgroundHeight / texture.my_image_height;
+	newRatio = ImVec2(newRatioWidth, newRatioHeight);
+
+	ImGui::SetCursorPosX(backgroundXMargin);
+	ImGui::SetCursorPosY(backgroundYMargin);
+	ImGui::Image((void*)(intptr_t)texture.my_image_texture, ImVec2(backgroundWidth, backgroundHeight));
 
 	for (int i = 0; i <= 4; i++) {
-		setImage(250 + (i * 51), 32, "Background", "div_subunit_item_bg", UnitType::Type::Division);
+		setImage((7.0f * generateBlockSize.x) / 100, ((42.0f + (i * 8.1f)) * generateBlockSize.y) / 100, newRatio, "Background", "div_subunit_item_bg", UnitType::Type::Division);
 	}
 
 	for (int col = 0; col <= 4; col++) {
 		for (int row = 0; row <= 4; row++) {
-			setImage(250 + (row * 51), 111 + (86 * col), "Background", "div_unit_item_bg", UnitType::Type::Division);
+			setImage(((14.0f + (col * 6.9f)) * generateBlockSize.x) / 100, ((42.0f + (row * 8.1f)) * generateBlockSize.y) / 100, newRatio, "Background", "div_unit_item_bg", UnitType::Type::Division);
 		}
 	}
 }
 
 //Ship stats
 void renderUnit(Ship ship) {
+	const ImVec2 mainBlockSize = Renderer::getBlockSize();
+	const ImVec2 generateBlockSize = Renderer::getGenerateBlockSize();
+	const auto generateBlockMargin = getGenerateMargin();
+
+	//auto& [tank, tankStats] = unit;
 	ImGuiIO& io = ImGui::GetIO();
 	ImFont* basicFont = io.Fonts->Fonts[2];
 	ImFont* statsFont = io.Fonts->Fonts[4];
 
 	ImGui::PushFont(basicFont);
-	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
+	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
+	ImGui::SetCursorPosX((7.0f * generateBlockSize.x) / 100);
+	ImGui::SetCursorPosY((15.5f * generateBlockSize.y) / 100);
 	std::string string = std::format("{0} {1}", ShipVersion::versionToYear(ship.version), ShipType::shipTypeToString(ship.type).c_str());
-	createTitleWithPosition(string.c_str(), ImGui::GetCursorPosX() + 30.0f, 75);
+	ImGui::InputText("##", &string);
+	ImGui::PopStyleColor();
+	ImGui::PopFont();
 
-	setIcon(ImGui::GetCursorPosY(), ImGui::GetCursorPosX() + 100.0f, Hull::typeToString(ship.hull), ship.iconName, UnitType::Type::Ship);
+	setIcon((15.0f * generateBlockSize.x) / 100, (7.0f * generateBlockSize.y) / 100, Hull::typeToString(ship.hull), ship.iconName, UnitType::Type::Ship);
 
 	int index = 0;
 	for (auto& module : ship.customModule) {
@@ -1189,7 +1193,7 @@ void renderUnit(Ship ship) {
 		else {
 			fileName = std::format("{0}_{1}", Module::typeToImagesString(module.type, module.subType, ship.type), (module.version + 1));
 		}
-		setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, getModulePos(index) + 5.0f, "modules", fileName, UnitType::Type::Ship);
+		setImage(((6.0f + (6.0f * index)) * generateBlockSize.x) / 100, (29.25f * generateBlockSize.y) / 100, newRatio, "modules", fileName, UnitType::Type::Ship);
 		index++;
 	}
 	index = 0;
@@ -1201,12 +1205,9 @@ void renderUnit(Ship ship) {
 		else {
 			fileName = std::format("{0}_{1}", Module::typeToImagesString(module.type, module.subType, ship.type), (module.version + 1));
 		}
-		setImage(Constant::TextPos::TANK_MODULE_HEIGHT_2 + 2.0f, getModulePos(index), "modules", fileName, UnitType::Type::Ship);
+		setImage(((6.0f + (6.0f * index)) * generateBlockSize.x) / 100, (77.6f * generateBlockSize.y) / 100, newRatio, "modules", fileName, UnitType::Type::Ship);
 		index++;
 	}
-
-	ImGui::PopFont();
-	ImGui::PopStyleColor();
 }
 
 //Tank stats
@@ -1219,6 +1220,7 @@ void renderUnit(std::tuple<Tank, TankStats> unit) {
 	ImGuiIO& io = ImGui::GetIO();
 	ImFont* basicFont = io.Fonts->Fonts[2];
 	ImFont* statsFont = io.Fonts->Fonts[4];
+
 	ImGui::PushFont(basicFont);
 	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
 	ImGui::SetCursorPosX((7.0f * generateBlockSize.x) / 100);
@@ -1278,11 +1280,13 @@ void renderUnit(std::tuple<Tank, TankStats> unit) {
 	std::string testTooltip;
 	std::string tankVersionAndType = std::format("{0} {1}", Tank::tankVersionToString(tank.version).c_str(), Tank::tankTypeToString(tank.type).c_str());
 	testTooltip = std::format("{0}: {1} Km/h\r\n", tankVersionAndType, tank.stats.speed);
+
 	if (tank.turret.stats.speed != 0.0f) {
 		std::string speedT = std::format("{:.1f} km/h", tank.turret.stats.speed);
 		std::string stringT = std::format("{0} man turret: {1}\r\n", tank.turret.crew, speedT.c_str());
 		testTooltip.append(stringT);
 	}
+
 	if (tank.gun.stats.speed != 0.0f) {
 		std::string gunNameAndVersion = std::format("{0} {1}", Gun::typeToString(tank.gun.type), Gun::gunNameToString(tank.gun.name));
 		std::string speedG = std::format("{:.1f} km/h", tank.gun.stats.speed);
@@ -1299,16 +1303,30 @@ void renderUnit(std::tuple<Tank, TankStats> unit) {
 	}
 
 	if (tank.suspension.stats.speedP != 0.0f) {
-		std::string speedS = std::format("{:.1f} km/h", tank.suspension.stats.speed);
+		std::string speedS = std::format("{:.1f} km/h", ((tank.stats.speed + engineLevel + armorLevel + tank.suspension.stats.speed) * tank.suspension.stats.speedP) / 100 );
 		std::string stringT = std::format("{0} suspension: {1}\r\n", Suspension::typeToString(tank.suspension.type), speedS.c_str());
 		testTooltip.append(stringT);
 	}
+
 	if (tank.engine.stats.speedP != 0.0f) {
 		float engineSpeed = ((tank.stats.speed + engineLevel + armorLevel + tank.engine.stats.speed) * tank.engine.stats.speedP) / 100;
-		std::string speedE = std::format("{:.1f} km/h", tank.suspension.stats.speed);
-		std::string stringT = std::format("{0} suspension: {1}\r\n", Engine::typeToString(tank.engine.type), speedE.c_str());
+		std::string speedE = std::format("{:.1f} km/h", engineSpeed);
+		std::string stringT = std::format("{0} : {1}\r\n", Engine::typeToString(tank.engine.type), speedE.c_str());
 		testTooltip.append(stringT);
 	}
+	
+	if (tank.engineLevel != 0) {
+		std::string speedE = std::format("{:.1f} km/h", engineLevel);
+		std::string stringT = std::format("Engine Level : {0}\r\n", speedE.c_str());
+		testTooltip.append(stringT);
+	}
+	
+	if (tank.armorLevel != 0) {
+		std::string speedE = std::format("{:.1f} km/h", armorLevel);
+		std::string stringT = std::format("Armor Level : {0}\r\n", speedE.c_str());
+		testTooltip.append(stringT);
+	}
+	
 	ImGui::SetItemTooltip(testTooltip.c_str());
 
 	// TEST TOOLTIP
@@ -1367,14 +1385,23 @@ void renderUnit(std::tuple<Tank, TankStats> unit) {
 
 //Plane stats
 void renderUnit(Plane plane) {
+	const ImVec2 mainBlockSize = Renderer::getBlockSize();
+	const ImVec2 generateBlockSize = Renderer::getGenerateBlockSize();
+	const auto generateBlockMargin = getGenerateMargin();
+
+	//auto& [tank, tankStats] = unit;
 	ImGuiIO& io = ImGui::GetIO();
 	ImFont* basicFont = io.Fonts->Fonts[2];
 	ImFont* statsFont = io.Fonts->Fonts[4];
 
 	ImGui::PushFont(basicFont);
-	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
+	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
+	ImGui::SetCursorPosX((7.0f * generateBlockSize.x) / 100);
+	ImGui::SetCursorPosY((15.5f * generateBlockSize.y) / 100);
 	std::string string = std::format("{0} {1}", PlaneVersion::versionToYear(plane.version), PlaneRole::roleToString(plane.role).c_str());
-	createTitleWithPosition(string.c_str(), 35.0f, Constant::TextPos::TANK_NAME_HEIGHT + 5.0f);
+	ImGui::InputText("##", &string);
+	ImGui::PopStyleColor();
+	ImGui::PopFont();
 
 	setIcon(ImGui::GetCursorPosY() - 20.0f, ImGui::GetCursorPosX() + 325.0f, PlaneType::typeToString(plane.type), plane.iconName, UnitType::Type::Plane);
 
@@ -1387,7 +1414,7 @@ void renderUnit(Plane plane) {
 		else {
 			fileName = PlaneModule::typeToImagesString(plane.type, module.subType, module.version, module.number);
 		}
-		setImage(Constant::TextPos::TANK_MODULE_HEIGHT + 2.0f, getModulePos(index) + 10.0f, "modules", fileName, UnitType::Type::Plane);
+		setImage(((6.0f + (6.0f * index)) * generateBlockSize.x) / 100, (29.25f * generateBlockSize.y) / 100, newRatio, "modules", fileName, UnitType::Type::Plane);
 		index++;
 	}
 
@@ -1405,26 +1432,35 @@ void renderUnit(Plane plane) {
 		setImage(Constant::TextPos::TANK_MODULE_HEIGHT_2 + 2.0f, getModulePos(index) + 10.0f, "modules", fileName, UnitType::Type::Plane);
 		index++;
 	}*/
-	ImGui::PopStyleColor();
-	ImGui::PopFont();
 }
 
 void renderUnit(Division* division) {
-	ImGui::SetCursorPosY(80);
-	ImGui::SetCursorPosX(32);
-	std::cout << division->name << std::endl;
-	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
+	const ImVec2 mainBlockSize = Renderer::getBlockSize();
+	const ImVec2 generateBlockSize = Renderer::getGenerateBlockSize();
+	const auto generateBlockMargin = getGenerateMargin();
+
+	//auto& [tank, tankStats] = unit;
+	ImGuiIO& io = ImGui::GetIO();
+	ImFont* basicFont = io.Fonts->Fonts[2];
+	ImFont* statsFont = io.Fonts->Fonts[4];
+
+	ImGui::PushFont(basicFont);
+	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
+	ImGui::SetCursorPosX((7.0f * generateBlockSize.x) / 100);
+	ImGui::SetCursorPosY((15.5f * generateBlockSize.y) / 100);
 	ImGui::InputText("##", &division->name);
 	ImGui::PopStyleColor();
+	ImGui::PopFont();
+	
 	if (division->support.size() >= 1) {
 		for (int i = 0; i < division->support.size(); i++) {
-			setImage(265 + (i * 51), 32, "Supports", UnitSubType::supportTypeToImageString(division->support[i].unitSubType), UnitType::Type::Division);
+			setImage((7.0f * generateBlockSize.x) / 100, ((45.0f + (i * 8.1f)) * generateBlockSize.y) / 100, newRatio, "Supports", UnitSubType::supportTypeToImageString(division->support[i].unitSubType), UnitType::Type::Division);
 		}
 	}
 
 	for (int col = 0; col < division->regimentList.size(); col++) {
 		for (int row = 0; row < division->regimentList[col].size(); row++) {
-			setImage(260 + (row * 51), 111 + (86 * col), RegimentType::regimentTypeToFolderString(division->regimentList[col][row].regimentType), UnitSubType::typeToImageString(division->regimentList[col][row].unitSubType), UnitType::Type::Division);
+			setImage(((14.0f + (col * 6.9f)) * generateBlockSize.x) / 100, ((44.75f + (row * 8.1f)) * generateBlockSize.y) / 100, newRatio, RegimentType::regimentTypeToFolderString(division->regimentList[col][row].regimentType), UnitSubType::typeToImageString(division->regimentList[col][row].unitSubType), UnitType::Type::Division);
 		}
 	}
 }
