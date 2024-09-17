@@ -109,7 +109,6 @@ TankStats Tank::generateNewStats(Tank tank)
 Tank Tank::generateRandomTank()
 {
 	TankType::Type tankType = static_cast<TankType::Type>(rand() % TankType::Type::Last);
-	std::cout << "Tank Type: " << Tank::tankTypeToString(tankType) << std::endl;
 
 	Tank::Version tankVersion = Tank::generatingRandomVersion(tankType);
 	TankStats tankStats = Tank::getStatsFromVersion(tankType, tankVersion);
@@ -126,7 +125,7 @@ Tank Tank::generateRandomTank()
 
 	Armor armor = Armor::generateRandomArmor();
 	Engine engine = Engine::generateRandomEngine();
-	return Tank(tankType, tankVersion, turret, gun, specialModules, suspension, armor, engine, tankStats, role);
+	return Tank(tankType, tankVersion, turret, gun, specialModules, suspension, armor, engine, tankStats, role, std::format("{0} {1}", Tank::tankVersionToString(tankVersion).c_str(), Tank::tankTypeToString(tankType).c_str()));
 }
 
 Tank Tank::generateRandomTank(TankType::Type type)
@@ -145,5 +144,5 @@ Tank Tank::generateRandomTank(TankType::Type type)
 
 	Armor armor = Armor::generateRandomArmor();
 	Engine engine = Engine::generateRandomEngine();
-	return Tank(type, tankVersion, turret, gun, specialModules, suspension, armor, engine, tankStats, role);
+	return Tank(type, tankVersion, turret, gun, specialModules, suspension, armor, engine, tankStats, role, std::format("{0} {1}", Tank::tankVersionToString(tankVersion).c_str(), Tank::tankTypeToString(type).c_str()));
 }

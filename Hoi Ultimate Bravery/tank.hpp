@@ -40,7 +40,8 @@ public:
 		Armor armor,
 		Engine engine,
 		TankStats stats,
-		Role::Type role) :
+		Role::Type role,
+		std::string name) :
 		type(type),
 		version(version),
 		turret(turret),
@@ -50,7 +51,8 @@ public:
 		armor(armor),
 		engine(engine),
 		stats(stats),
-		role(role) {
+		role(role),
+		name(name){
 		engineLevel = *Utils::select_randomly(upgrade.begin(), upgrade.end());
 		armorLevel = *Utils::select_randomly(upgrade.begin(), upgrade.end());
 	}
@@ -68,6 +70,7 @@ public:
 	std::string iconName;
 	int engineLevel;
 	int armorLevel;
+	std::string name;
 
 	static std::string tankTypeToString(TankType::Type& type) {
 		switch (type) {

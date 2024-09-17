@@ -1226,7 +1226,9 @@ void renderUnit(std::tuple<Tank, TankStats> unit) {
 	ImGui::SetCursorPosX((7.0f * generateBlockSize.x) / 100);
 	ImGui::SetCursorPosY((15.5f * generateBlockSize.y) / 100);
 	std::string tankName = std::format("{0} {1}", Tank::tankVersionToString(tank.version).c_str(), Tank::tankTypeToString(tank.type).c_str());
-	ImGui::InputText("##", &tankName);
+	if (ImGui::InputText("##", &tank.name)) {
+		std::cout << tank.name << std::endl;
+	}
 	ImGui::PopStyleColor();
 	
 	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 255, 255, 255));
