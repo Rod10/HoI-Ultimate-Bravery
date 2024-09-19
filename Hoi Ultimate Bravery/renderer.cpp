@@ -1228,6 +1228,7 @@ void renderUnit(std::tuple<Tank, TankStats> unit) {
 	std::string tankName = std::format("{0} {1}", Tank::tankVersionToString(tank.version).c_str(), Tank::tankTypeToString(tank.type).c_str());
 	if (ImGui::InputText("##", &tank.name)) {
 		std::cout << tank.name << std::endl;
+		countrySelected->setTankName(tank.type, tank.name);
 	}
 	ImGui::PopStyleColor();
 	
@@ -1272,106 +1273,62 @@ void renderUnit(std::tuple<Tank, TankStats> unit) {
 	ImGui::PopFont();
 
 	ImGui::PushFont(statsFont);
-	//Base stats²²
+	//Base stats
 	std::string speed = std::format("{:.1f} km/h", tankStats.speed);
 	createLabelWithPosition(speed.c_str(), (59.0f * generateBlockSize.x) / 100, (18.0f * generateBlockSize.y) / 100);
-
-	// TEST TOOLTIP
-	float engineLevel = tank.engineLevel * 0.1f;
-	float armorLevel = tank.armorLevel * -0.1f;
-	std::string testTooltip;
-	std::string tankVersionAndType = std::format("{0} {1}", Tank::tankVersionToString(tank.version).c_str(), Tank::tankTypeToString(tank.type).c_str());
-	testTooltip = std::format("{0}: {1} Km/h\r\n", tankVersionAndType, tank.stats.speed);
-
-	if (tank.turret.stats.speed != 0.0f) {
-		std::string speedT = std::format("{:.1f} km/h", tank.turret.stats.speed);
-		std::string stringT = std::format("{0} man turret: {1}\r\n", tank.turret.crew, speedT.c_str());
-		testTooltip.append(stringT);
-	}
-
-	if (tank.gun.stats.speed != 0.0f) {
-		std::string gunNameAndVersion = std::format("{0} {1}", Gun::typeToString(tank.gun.type), Gun::gunNameToString(tank.gun.name));
-		std::string speedG = std::format("{:.1f} km/h", tank.gun.stats.speed);
-		std::string stringT = std::format("{0}: {1}\r\n", gunNameAndVersion, speedG);
-		testTooltip.append(stringT);
-	}
-
-	for (SpecialModule& module : tank.specialModules) {
-		if (module.stats.speed != 0.0f) {
-			std::string speedM = std::format("{:.1f} km/h", module.stats.speed);
-			std::string stringT = std::format("{0}: {1}\r\n", module.typeToString(module.type), speedM);
-			testTooltip.append(stringT);
-		}
-	}
-
-	if (tank.suspension.stats.speedP != 0.0f) {
-		std::string speedS = std::format("{:.1f} km/h", ((tank.stats.speed + engineLevel + armorLevel + tank.suspension.stats.speed) * tank.suspension.stats.speedP) / 100 );
-		std::string stringT = std::format("{0} suspension: {1}\r\n", Suspension::typeToString(tank.suspension.type), speedS.c_str());
-		testTooltip.append(stringT);
-	}
-
-	if (tank.engine.stats.speedP != 0.0f) {
-		float engineSpeed = ((tank.stats.speed + engineLevel + armorLevel + tank.engine.stats.speed) * tank.engine.stats.speedP) / 100;
-		std::string speedE = std::format("{:.1f} km/h", engineSpeed);
-		std::string stringT = std::format("{0} : {1}\r\n", Engine::typeToString(tank.engine.type), speedE.c_str());
-		testTooltip.append(stringT);
-	}
-	
-	if (tank.engineLevel != 0) {
-		std::string speedE = std::format("{:.1f} km/h", engineLevel);
-		std::string stringT = std::format("Engine Level : {0}\r\n", speedE.c_str());
-		testTooltip.append(stringT);
-	}
-	
-	if (tank.armorLevel != 0) {
-		std::string speedE = std::format("{:.1f} km/h", armorLevel);
-		std::string stringT = std::format("Armor Level : {0}\r\n", speedE.c_str());
-		testTooltip.append(stringT);
-	}
-	
-	ImGui::SetItemTooltip(testTooltip.c_str());
-
-	// TEST TOOLTIP
+	Tooltip::renderTankTooltip(tank, "speed");
 
 	std::string reliability = std::format("{:.1f} %%", tankStats.reliability);
 	createLabelWithPosition(reliability.c_str(), (60.5f * generateBlockSize.x) / 100, (21.2f * generateBlockSize.y) / 100);
+	Tooltip::renderTankTooltip(tank, "reliability");
 
 	std::string supplyUse = std::format("{:.2f}", tankStats.supplyUse);
 	createLabelWithPosition(supplyUse.c_str(), (61.5f * generateBlockSize.x) / 100, (24.3f * generateBlockSize.y) / 100);
+	Tooltip::renderTankTooltip(tank, "supplyUse");
 	//Base stats
 
 	//Combat stats
 	std::string softAttack = std::format("{:.2f}", tankStats.softAttack);
 	createLabelWithPosition(softAttack.c_str(), (75.75f * generateBlockSize.x) / 100, (18.0f * generateBlockSize.y) / 100);
+	Tooltip::renderTankTooltip(tank, "softAttack");
 
 	std::string hardAttack = std::format("{:.2f}", tankStats.hardAttack);
 	createLabelWithPosition(hardAttack.c_str(), (75.75f * generateBlockSize.x) / 100, (21.2f * generateBlockSize.y) / 100);
+	Tooltip::renderTankTooltip(tank, "hardAttack");
 
 	std::string piercing = std::format("{:.2f}", tankStats.piercing);
 	createLabelWithPosition(piercing.c_str(), (75.75f * generateBlockSize.x) / 100, (24.3f * generateBlockSize.y) / 100);
+	Tooltip::renderTankTooltip(tank, "piercing");
 
-	std::string hardness = std::format("{:.2f} %%", tankStats.hardness);
+	std::string hardness = std::format("{:.2f} %%", tankStats.hardnessP);
 	createLabelWithPosition(hardness.c_str(), (75.0f * generateBlockSize.x) / 100, (27.4f * generateBlockSize.y) / 100);
+	Tooltip::renderTankTooltip(tank, "hardness");
 
 	std::string armor = std::format("{:.2f}", tankStats.armor);
 	createLabelWithPosition(armor.c_str(), (75.75f * generateBlockSize.x) / 100, (30.5f * generateBlockSize.y) / 100);
+	Tooltip::renderTankTooltip(tank, "armor");
 
 	std::string breakthrough = std::format("{:.2f}", tankStats.breakthrough);
 	createLabelWithPosition(breakthrough.c_str(), (75.75f * generateBlockSize.x) / 100, (33.6f * generateBlockSize.y) / 100);
+	Tooltip::renderTankTooltip(tank, "breakthrough");
 
 	std::string defense = std::format("{:.2f}", tankStats.defense);
 	createLabelWithPosition(defense.c_str(), (75.75f * generateBlockSize.x) / 100, (36.7f * generateBlockSize.y) / 100);
+	Tooltip::renderTankTooltip(tank, "defense");
 
 	std::string airAttack = std::format("{:.2f}", tankStats.airAttack);
 	createLabelWithPosition(airAttack.c_str(), (75.75f * generateBlockSize.x) / 100, (39.8f * generateBlockSize.y) / 100);
+	Tooltip::renderTankTooltip(tank, "airAttack");
 	//Combat stats
 
 	//Misc Stats
 	std::string fuelCapacity = std::format("{:.2f}", tankStats.fuelCapacity);
 	createLabelWithPosition(fuelCapacity.c_str(), (90.5f * generateBlockSize.x) / 100, (18.0f * generateBlockSize.y) / 100);
+	Tooltip::renderTankTooltip(tank, "fuelCapacity");
 
 	std::string fuelUsage = std::format("{:.2f}", tankStats.fuelUsage);
 	createLabelWithPosition(fuelUsage.c_str(), (90.25f * generateBlockSize.x) / 100, (21.2f * generateBlockSize.y) / 100);
+	Tooltip::renderTankTooltip(tank, "fuelUsage");
 
 	//TODO research suppression value
 	createLabelWithPosition("???", (90.25f * generateBlockSize.x) / 100, (24.3f * generateBlockSize.y) / 100);
@@ -1551,7 +1508,7 @@ void Renderer::renderSubWindow() {
 	ImGui::PushFont(basicFont);
 	ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
 	const float center = (50 * (generateBlockSize.x)) / 100;
-	const float generateBlockHeightMargin = (5 * (generateBlockSize.x)) / 100;
+	const float generateBlockHeightMargin = (5 * (generateBlockSize.y)) / 100;
 	const float centerTextX = center - calculateTextLenght(window.c_str());
 	createLabelWithPosition(window.c_str(), center, ImGui::GetCursorPosY(), true);
 	//ImGui::SetCursorPosX(centerTextX);
@@ -1632,11 +1589,11 @@ void Renderer::renderSubWindow() {
 		default:
 			break;
 		}
-		if (createButtonWithPos("Back", centerTextX / 3, 575.0f)) {
+		if (createButtonWithPos("Back", (25.0f * (generateBlockSize.x)) / 100, (95.0f * (generateBlockSize.y)) / 100)) {
 			windowsManagement->setSubWindow("generate", true);
 			windowsManagement->setSubWindow("designer", false);
 		}
-		if (createButtonWithPos("Regenerate", centerTextX / 3, 575.0f)) {
+		if (createButtonWithPos("Regenerate", (75.0f * (generateBlockSize.x)) / 100, (95.0f * (generateBlockSize.y)) / 100)) {
 			if (unitType == UnitType::Ship) {
 				Ship ship = Ship::generateRandomShip(static_cast<Hull::Type>(columnSelected));
 				ship.iconName = Icon::GetInstance()->getShipIcon(ship);

@@ -12,6 +12,7 @@
 #include "tank.hpp"
 #include "tanktype.hpp"
 #include "texture.hpp"
+#include "tooltip.hpp"
 #include "unittype.hpp"
 #include "utils.hpp"
 #include "windowsmanagement.hpp"

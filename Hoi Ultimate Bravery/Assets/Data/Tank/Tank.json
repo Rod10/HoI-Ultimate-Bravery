@@ -4,7 +4,7 @@
             "stats": {
                 "speed": 4.0,
                 "reliabilityP": 80.0,
-                "armor": 5.0,
+                "armor": 10.0,
                 "hardnessP": 80.0,
                 "productionCost": 1.0,
                 "supplyUse": 0.22,
@@ -19,7 +19,7 @@
             "stats": {
                 "speed": 5.0,
                 "reliabilityP": 95.0,
-                "armor": 10.0,
+                "armor": 15.0,
                 "hardnessP": 80,
                 "productionCost": 1.25,
                 "supplyUse": 0.22,
@@ -34,7 +34,7 @@
             "stats": {
                 "speed": 6.0,
                 "reliabilityP": 110.0,
-                "armor": 15.0,
+                "armor": 20.0,
                 "hardnessP": 80,
                 "productionCost": 1.60,
                 "supplyUse": 0.22,
@@ -49,7 +49,7 @@
             "stats": {
                 "speed": 7.0,
                 "reliabilityP": 130.0,
-                "armor": 20.0,
+                "armor": 25.0,
                 "hardnessP": 80,
                 "productionCost": 2.0,
                 "supplyUse": 0.22,
@@ -82,7 +82,7 @@
             "stats": {
                 "speed": 4.0,
                 "reliabilityP": 75.0,
-                "armor": 25.0,
+                "armor": 20.0,
                 "hardnessP": 85,
                 "productionCost": 2.50,
                 "supplyUse": 0.25,
@@ -96,8 +96,8 @@
         "basic": {
             "stats": {
                 "speed": 5.0,
-                "reliabilityP": 100.0,
-                "armor": 35.0,
+                "reliabilityP": 80.0,
+                "armor": 30.0,
                 "hardnessP": 85,
                 "productionCost": 2.50,
                 "supplyUse": 0.25,
@@ -111,8 +111,8 @@
         "improved": {
             "stats": {
                 "speed": 6.0,
-                "reliabilityP": 130.0,
-                "armor": 45.0,
+                "reliabilityP": 100.0,
+                "armor": 40.0,
                 "hardnessP": 85,
                 "productionCost": 3.20,
                 "supplyUse": 0.25,
@@ -126,7 +126,7 @@
         "advanced": {
             "stats": {
                 "speed": 6,
-                "reliabilityP": 160.0,
+                "reliabilityP": 120.0,
                 "armor": 50.0,
                 "hardnessP": 85,
                 "productionCost": 4.0,
@@ -143,8 +143,8 @@
         "interWar": {
             "stats": {
                 "speed": 3.0,
-                "reliabilityP": 100.0,
-                "armor": 30.0,
+                "reliabilityP": 75.0,
+                "armor": 35.0,
                 "hardnessP": 95,
                 "productionCost": 10.0,
                 "supplyUse": 0.32,
@@ -158,8 +158,8 @@
         "basic": {
             "stats": {
                 "speed": 5.0,
-                "reliabilityP": 100.0,
-                "armor": 35.0,
+                "reliabilityP": 80.0,
+                "armor": 55.0,
                 "hardnessP": 95,
                 "productionCost": 10.0,
                 "supplyUse": 0.32,
@@ -173,8 +173,8 @@
         "improved": {
             "stats": {
                 "speed": 5.0,
-                "reliabilityP": 115.0,
-                "armor": 55.0,
+                "reliabilityP": 110.0,
+                "armor": 60.0,
                 "hardnessP": 95,
                 "productionCost": 10.0,
                 "supplyUse": 0.32,
@@ -188,7 +188,7 @@
         "advanced": {
             "stats": {
                 "speed": 6.0,
-                "reliabilityP": 130.0,
+                "reliabilityP": 120.0,
                 "armor": 75.0,
                 "hardnessP": 95,
                 "productionCost": 12.0,
@@ -205,8 +205,8 @@
         "basic": {
             "stats": {
                 "speed": 4,
-                "reliabilityP": 130.0,
-                "armor": 85.0,
+                "reliabilityP": 100.0,
+                "armor": 90.0,
                 "hardnessP": 95,
                 "productionCost": 24.0,
                 "supplyUse": 0.40,
@@ -222,8 +222,8 @@
         "basic": {
             "stats": {
                 "speed": 7,
-                "reliabilityP": 160.0,
-                "armor": 75.0,
+                "reliabilityP": 120.0,
+                "armor": 65.0,
                 "hardnessP": 95,
                 "productionCost": 6.0,
                 "supplyUse": 0.25,

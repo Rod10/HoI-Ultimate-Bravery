@@ -252,6 +252,9 @@
     <ClCompile Include="support.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="tooltip.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Librairies\Imgui\imstb_textedit.h">
@@ -451,6 +454,9 @@
     </ClInclude>
     <ClInclude Include="support.hpp">
       <Filter>Fichiers d%27en-tête\Division</Filter>
+    </ClInclude>
+    <ClInclude Include="tooltip.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

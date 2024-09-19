@@ -104,10 +104,13 @@ public:
 	void setNewUnits(UnitType::Type unitType, Plane unit);
 	void setNewUnits(UnitType::Type unitType, Division unit);
 	void setNewUnits(UnitType::Type unitType, Division unit, int column);
+
 	Ship getShipByHull(int type);
 	std::tuple<Tank, TankStats> getTankByType(int type);
 	Plane getPlaneByRole(int type);
 	Division* getDivisionByIndex(int column);
+
+	void setTankName(int type, std::string value);
 
 	std::map<Hull::Type, std::vector<std::any>>& getHullList();
 	std::map<TankType::Type, std::vector<std::any>>& getTankList();

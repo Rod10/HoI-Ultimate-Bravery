@@ -197,6 +197,7 @@
     <ClCompile Include="tank.cpp" />
     <ClCompile Include="tanktype.cpp" />
     <ClCompile Include="texture.cpp" />
+    <ClCompile Include="tooltip.cpp" />
     <ClCompile Include="turret.cpp" />
     <ClCompile Include="turrettype.cpp" />
     <ClCompile Include="unit.cpp" />
@@ -265,6 +266,7 @@
     <ClInclude Include="tank.hpp" />
     <ClInclude Include="tanktype.hpp" />
     <ClInclude Include="texture.hpp" />
+    <ClInclude Include="tooltip.hpp" />
     <ClInclude Include="turret.hpp" />
     <ClInclude Include="turrettype.hpp" />
     <ClInclude Include="unit.hpp" />

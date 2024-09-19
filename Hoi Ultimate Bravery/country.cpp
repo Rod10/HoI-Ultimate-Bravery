@@ -125,6 +125,12 @@ int Country::getTankTypeListSize(int type) {
     return tankTypeList.find(static_cast<TankType::Type>(type))->second.size();
 }
 
+void Country::setTankName(int type, std::string value) {
+    auto& tankTypeList = std::any_cast<std::map<TankType::Type, std::vector<std::any>>&>(units.find(UnitType::Tank)->second);
+    Tank& tank = std::any_cast<Tank&>(tankTypeList.find(static_cast<TankType::Type>(type))->second[0]);
+    tank.name = value;
+}
+
 Plane Country::getPlaneByRole(int type) {
     auto& planeTypeList = std::any_cast<std::map<PlaneRole::Role, std::vector<std::any>>&>(units.find(UnitType::Plane)->second);
     return std::any_cast<Plane>(planeTypeList.find(static_cast<PlaneRole::Role>(type))->second[0]);
