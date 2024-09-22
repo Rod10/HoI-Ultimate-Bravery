@@ -54,7 +54,7 @@
             "year": 1936,
             "speedP": 0.0,
             "reliabilityP": -20.0,
-            "hardnessPP": -30.0,
+            "hardnessP": -40.0,
             "breakthrough": 0.0,
             "productionCostP": -10.0
         }

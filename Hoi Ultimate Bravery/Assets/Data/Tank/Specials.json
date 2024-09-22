@@ -4,7 +4,7 @@
         "stats": {
             "year": 1936,
             "breakthroughP": 15.0,
-            "defenseO": 20.0,
+            "defenseP": 20.0,
             "productionCost": 0.50,
             "ressources": {
                 "steel": 0,
@@ -83,10 +83,10 @@
         "onlyOne": true,
         "stats": {
             "year": 1936,
-            "reliabilityP": -15,
-            "softAttack": 1.0,
+            "reliabilityP": 0.0,
+            "softAttack": 0.0,
             "piercing": 0.0,
-            "armor": 2.0,
+            "armor": 3.0,
             "breakthrough": 3.0,
             "defense": 0.0,
             "entrenchment":0.0,
@@ -102,7 +102,6 @@
         "onlyOne": true,
         "stats": {
             "year": 1943,
-            "reliabilityP": -15,
             "softAttack": 0.0,
             "piercing": 0.0,
             "armor": 0.0,
@@ -121,11 +120,11 @@
         "onlyOne": true,
         "stats": {
             "year": 1939,
-            "reliabilityP": -15,
-            "softAttack": 1.0,
+            "reliabilityP": 0.0,
+            "softAttack": 0.0,
             "piercing": 0.0,
             "armor": 0.0,
-            "breakthrough": 3.0,
+            "breakthrough": 0.0,
             "defense": 0.0,
             "entrenchment": 1.0,
             "productionCost": 1.0,
@@ -143,7 +142,6 @@
             "reliabilityP": 10.0,
             "softAttack": 0.0,
             "piercing": 0.0,
-            "armor": 2.0,
             "breakthrough": 3.0,
             "defense": 0.0,
             "entrenchment":0.0,

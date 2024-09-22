@@ -92,12 +92,12 @@ void renderTankReliabilityTooltip(Tank tank) {
 	}
 
 	if (tank.engineLevel != 0) {
-		std::string stringT = std::format("Engine Level : {0}%%\r\n", engineLevel);
+		std::string stringT = std::format("Engine Level : {0}%%\r\n", (tank.stats.reliabilityP * engineLevel) / 100);
 		testTooltip.append(stringT);
 	}
 
 	if (tank.armorLevel != 0) {
-		std::string stringT = std::format("Armor Level : {0}%%\r\n", armorLevel);
+		std::string stringT = std::format("Armor Level : {0}%%\r\n", (tank.stats.reliabilityP * armorLevel) / 100);
 		testTooltip.append(stringT);
 	}
 
@@ -198,11 +198,14 @@ void renderTankArmorTooltip(Tank tank) {
 		if (module.stats.armor != 0.0f) {
 			std::string stringT = std::format("{0}: {1}\r\n", module.typeToString(module.type), module.stats.armor);
 			testTooltip.append(stringT);
+		} else if (module.stats.armorP != 0.0f) {
+			std::string stringT = std::format("{0}: {1}%%\r\n", module.typeToString(module.type), module.stats.armorP);
+			testTooltip.append(stringT);
 		}
 	}
 
-	if (tank.armor.stats.armor != 0.0f) {
-		std::string stringT = std::format("{0} armor: {1}\r\n", Armor::typeToString(tank.armor.type), tank.armor.stats.armor);
+	if (tank.armor.stats.armorP != 0.0f) {
+		std::string stringT = std::format("{0} armor: {1}\r\n", Armor::typeToString(tank.armor.type), ((tank.stats.armor + armorLevel) * tank.armor.stats.armorP) / 100);
 		testTooltip.append(stringT);
 	}
 

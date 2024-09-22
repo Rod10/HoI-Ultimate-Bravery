@@ -1,9 +1,10 @@
 {
     "cast": {
         "stats": {
-            "armorP": 50.0,
+            "armorP": 30.0,
             "breakthrough": 4.0,
             "defense": 4.0,
+            "hardnessP": 2.0,
             "productionCostP": 20.0
         } 
     },
@@ -18,8 +19,8 @@
     "welded": {
         "stats": {
             "armorP": 30.0,
-            "breakthrough": 2.0,
-            "defense": 2.0,
+            "breakthrough": 4.0,
+            "defense": 4.0,
             "productionCostP": 0.0
         } 
     }
