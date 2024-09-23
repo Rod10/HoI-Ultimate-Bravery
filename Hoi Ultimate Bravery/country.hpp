@@ -98,7 +98,6 @@ public:
 			{ UnitType::Division, {false} }
 		));
 	}
-	static std::vector<Country> generateCountryList();
 	void setNewUnits(UnitType::Type unitType, Ship unit);
 	void setNewUnits(UnitType::Type unitType, Tank unit);
 	void setNewUnits(UnitType::Type unitType, Plane unit);

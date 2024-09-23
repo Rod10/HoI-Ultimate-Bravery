@@ -74,7 +74,7 @@ public:
 	SubType subType;
 	Version version;
 
-	static std::string moduleTypeToStringFile(Type type) {
+	static std::string moduleTypeToStringFile(Module::Type type) {
 		switch (type)
 		{
 		case Module::Engine: return "Engine";
@@ -100,7 +100,7 @@ public:
 		}
 	}
 
-	static std::string moduleTypeToEquipmentString(Type type) {
+	static std::string moduleTypeToEquipmentString(Module::Type type) {
 		switch (type)
 		{
 		case Module::Engine: return "fixed_ship_engine_slot";
@@ -210,7 +210,7 @@ public:
 		}
 	}
 
-	static std::string typeToImagesString(Type type, SubType subType, ShipType::Type shipType) {
+	static std::string typeToImagesString(Module::Type type, Module::SubType subType, ShipType::Type shipType) {
 		switch (type)
 		{
 		case Module::Engine: return "Engine";
@@ -275,7 +275,7 @@ public:
 		}
 	}
 
-	static std::string versionToString(Version version) {
+	static std::string versionToString(Module::Version version) {
 		switch (version)
 		{
 		case Module::Basic: return "1";
