@@ -106,28 +106,6 @@ TankStats Tank::generateNewStats(Tank tank)
 	return newStats;
 }
 
-Tank Tank::generateRandomTank()
-{
-	TankType::Type tankType = static_cast<TankType::Type>(rand() % TankType::Type::Last);
-
-	Tank::Version tankVersion = Tank::generatingRandomVersion(tankType);
-	TankStats tankStats = Tank::getStatsFromVersion(tankType, tankVersion);
-
-	Turret turret = Turret::generatingRandomTurret(tankType);
-	std::cout << "Turret Type: " << TurretType::turretTypeToString(turret.type) << std::endl;
-
-	Gun gun = Gun::generateRandomGun(turret.allowedGun);
-	Role::Type role = *Utils::select_randomly(gun.roleAllowed.begin(), gun.roleAllowed.end());
-
-	std::array<SpecialModule, 4> specialModules = SpecialModule::generateSpecialModule();
-
-	Suspension suspension = Suspension::generateRandomSuspension(tankType);
-
-	Armor armor = Armor::generateRandomArmor();
-	Engine engine = Engine::generateRandomEngine();
-	return Tank(tankType, tankVersion, turret, gun, specialModules, suspension, armor, engine, tankStats, role, std::format("{0} {1}", Tank::tankVersionToString(tankVersion).c_str(), Tank::tankTypeToString(tankType).c_str()));
-}
-
 Tank Tank::generateRandomTank(TankType::Type type)
 {
 	Tank::Version tankVersion = Tank::generatingRandomVersion(type);

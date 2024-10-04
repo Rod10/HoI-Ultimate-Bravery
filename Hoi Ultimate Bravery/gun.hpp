@@ -74,6 +74,14 @@ public:
 		type(type),
 		roleAllowed(roleAllowed) {}
 
+	Gun::Category category;
+	GunSize::Size size;
+	Gun::Type type;
+	Gun::Name name;
+	std::map<Type, TankStats> statsByType;
+	TankStats stats;
+	std::vector<Role::Type> roleAllowed;
+
 	static std::string gunCategoryToString(Gun::Category& category) {
 		switch (category) {
 		default: return "INVALID CATEGORY";
@@ -267,13 +275,4 @@ public:
 
 	static std::map<Gun::Category, std::vector<Gun>> generateGunList();
 	static Gun generateRandomGun(std::vector<GunSize::Size> turret);
-	static std::string getLongestTextByCate(Gun::Category category);
-
-	Gun::Category category;
-	GunSize::Size size;
-	Gun::Type type;
-	Gun::Name name;
-	std::map<Type, TankStats> statsByType;
-	TankStats stats;
-	std::vector<Role::Type> roleAllowed;
 };

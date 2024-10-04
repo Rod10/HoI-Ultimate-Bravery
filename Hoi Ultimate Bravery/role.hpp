@@ -13,7 +13,7 @@ public:
 		Last
 	};
 
-	static std::string typeToString(Type role) {
+	static std::string typeToString(Role::Type role) {
 		switch (role) {
 		case Tank: return "tank";
 		case Artillery: return "tank_artillery";
@@ -31,7 +31,7 @@ public:
 		if (role == "flameTank") return 4;
 	}
 
-	static Type stringToType(std::string role) {
+	static Role::Type stringToType(std::string role) {
 		switch(stringToInt(role)) {
 		case 0: return Tank;
 		case 1: return Artillery;

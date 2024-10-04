@@ -130,6 +130,5 @@ public:
 	static TankStats getStatsFromVersion(TankType::Type type, Tank::Version version);
 	static TankStats generateNewStats(Tank tank);
 
-	static Tank generateRandomTank();
 	static Tank generateRandomTank(TankType::Type type);
 };
