@@ -19,10 +19,12 @@ namespace HoI_Ultimate_Bravery.Utils
             Idea? currentIdea = null;
             string? currentIdeaName = null;
             var result = new Dictionary<string, object>();
+            string previousLine = null;
 
             while ((line = reader.ReadLine()) != null)
             {
                 line = line.Trim();
+                Console.WriteLine(line);
                 if (string.IsNullOrEmpty(line) || line.StartsWith("#"))
                     continue;
 
@@ -39,22 +41,22 @@ namespace HoI_Ultimate_Bravery.Utils
                     continue; // sub-level block
                 }
 
-                if (line.EndsWith("={") || line.EndsWith(" = {") || line.EndsWith("= {") || line.EndsWith(" ={") && currentIdeaName == null)
+                if ((line.EndsWith("={") || line.EndsWith(" = {") || line.EndsWith("= {") || line.EndsWith(" ={")) && currentIdeaName == null)
                 {
                     // new idea block
                     currentIdea = new Idea();
                     currentIdeaName = line[..line.IndexOf("=")].Trim();
                     continue;
                 }
-
                 if (line == "}" && currentIdea != null)
                 {
-                    if (currentIdea != null && currentIdeaName != null)
+                    if (currentIdea != null && currentIdeaName != null && previousLine == "}")
                     {
                         ideas.ideas.Values.FirstOrDefault().country.Values.FirstOrDefault().idea.Add(currentIdeaName, currentIdea);
                         currentIdea = null;
                         currentIdeaName = null;
                     }
+                    previousLine = line;
                     continue;
                 }
 
