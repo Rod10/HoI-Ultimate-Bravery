@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
-using HoI_Ultimate_Bravery.Classes;
+using HoI_Ultimate_Bravery.Classes.Ideas;
 
 namespace HoI_Ultimate_Bravery.Utils
 {
@@ -68,7 +68,7 @@ namespace HoI_Ultimate_Bravery.Utils
                         var key = match.Groups[1].Value;
                         var value = match.Groups[3].Value.Trim();
 
-                        switch (currentIdeaName)
+                        switch (line)
                         {
                             case "allowed":
                                 result[key] = value;

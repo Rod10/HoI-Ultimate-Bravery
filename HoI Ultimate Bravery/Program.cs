@@ -1,4 +1,4 @@
-using HoI_Ultimate_Bravery.Classes;
+using HoI_Ultimate_Bravery.Classes.Ideas;
 using HoI_Ultimate_Bravery.Utils;
 using System.Runtime.InteropServices;
 using System.Text.Json;
