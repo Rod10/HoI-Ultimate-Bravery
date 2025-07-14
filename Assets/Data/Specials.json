@@ -1,0 +1,279 @@
+{
+    "basicRadio": {
+        "onlyOne": true,
+        "stats": {
+            "year": 1936,
+            "breakthroughP": 15.0,
+            "defenseO": 20.0,
+            "productionCost": 0.50,
+            "ressources": {
+                "steel": 0,
+                "tungsten": 0,
+                "chromium": 0
+            }
+        }
+    },
+    "improvedRadio": {
+        "onlyOne": true,
+        "stats": {
+            "year": 1938,
+            "breakthroughP": 25.0,
+            "defenseP": 40.0,
+            "productionCost": 1.50,
+            "ressources": {
+                "steel": 0,
+                "tungsten": 0,
+                "chromium": 0
+            }
+        }
+    },
+    "advancedRadio": {
+        "onlyOne": true,
+        "stats": {
+            "year": 1940,
+            "breakthroughP": 40.0,
+            "defenseP": 60.0,
+            "productionCost": 2.50,
+            "ressources": {
+                "steel": 0,
+                "tungsten": 0,
+                "chromium": 0
+            }
+        }
+    },
+    "machineGuns": {
+        "onlyOne": true,
+        "stats": {
+            "year": 0,
+            "softAttack": 1.0,
+            "piercing": 0.0,
+            "armor": 0.0,
+            "breakthrough": 0.0,
+            "defense": 2.0,
+            "entrenchment":0.0,
+            "productionCost": 0.50,
+            "ressources": {
+                "steel": 0,
+                "tungsten": 0,
+                "chromium": 0
+            }
+        }
+    },
+    "amphibious": {
+        "onlyOne": true,
+        "stats": {
+            "year": 1941,
+            "reliabilityP": -15.0,
+            "softAttack": 0.0,
+            "piercing": 0.0,
+            "armor": 0.0,
+            "breakthrough": 0.0,
+            "defense": 0.0,
+            "entrenchment": 0.0,
+            "productionCost": 2.0,
+            "productionCostP": 10.0,
+            "ressources": {
+                "steel": 0,
+                "tungsten": 0,
+                "chromium": 0
+            }
+        }
+    },
+    "armorSkirts": {
+        "onlyOne": true,
+        "stats": {
+            "year": 1936,
+            "reliabilityP": -15,
+            "softAttack": 1.0,
+            "piercing": 0.0,
+            "armor": 2.0,
+            "breakthrough": 3.0,
+            "defense": 0.0,
+            "entrenchment":0.0,
+            "productionCost": 0.50,
+            "ressources": {
+                "steel": 0,
+                "tungsten": 0,
+                "chromium": 0
+            }
+        }
+    },
+    "autoLoader": {
+        "onlyOne": true,
+        "stats": {
+            "year": 1943,
+            "reliabilityP": -15,
+            "softAttack": 1.0,
+            "piercing": 0.0,
+            "armor": 0.0,
+            "breakthrough": 4.0,
+            "defense": 4.0,
+            "entrenchment":0.0,
+            "productionCost": 2.50,
+            "ressources": {
+                "steel": 0,
+                "tungsten": 0,
+                "chromium": 0
+            }
+        }
+    },
+    "dozerBlade": {
+        "onlyOne": true,
+        "stats": {
+            "year": 1939,
+            "reliabilityP": -15,
+            "softAttack": 1.0,
+            "piercing": 0.0,
+            "armor": 2.0,
+            "breakthrough": 3.0,
+            "defense": 0.0,
+            "entrenchment": 1.0,
+            "productionCost": 1.0,
+            "ressources": {
+                "steel": 0,
+                "tungsten": 0,
+                "chromium": 0
+            }
+        }
+    },
+    "maintenance": {
+        "onlyOne": true,
+        "stats": {
+            "year": 1939,
+            "reliabilityP": 10.0,
+            "softAttack": 0.0,
+            "piercing": 0.0,
+            "armor": 2.0,
+            "breakthrough": 3.0,
+            "defense": 0.0,
+            "entrenchment":0.0,
+            "productionCostP": -5.0,
+            "ressources": {
+                "steel": 0,
+                "tungsten": 0,
+                "chromium": 0
+            }
+        }
+    },
+    "extraAmmo": {
+        "onlyOne": true,
+        "stats": {
+            "year": 0,
+            "reliabilityP": -10,
+            "softAttack": 0.0,
+            "piercing": 0.0,
+            "armor": 0.0,
+            "breakthrough": 2.0,
+            "defense": 4.0,
+            "entrenchment": 0.0,
+            "productionCost": 0.00,
+            "ressources": {
+                "steel": 0,
+                "tungsten": 0,
+                "chromium": 0
+            }
+        }
+    },
+    "sloppedArmor": {
+        "onlyOne": true,
+        "stats": {
+            "year": 0,
+            "reliability": 0.0,
+            "softAttack": 0.0,
+            "piercing": 0.0,
+            "armorP": 25.0,
+            "breakthrough": 0.0,
+            "defense": 0.0,
+            "entrenchment": 0.0,
+            "productionCost": 10.0,
+            "ressources": {
+                "steel": 0,
+                "tungsten": 0,
+                "chromium": 0
+            }
+        }
+    },
+    "smokeLauncher": {
+        "onlyOne": true,
+        "stats": {
+            "year": 0,
+            "reliability": 0.0,
+            "softAttack": 0.0,
+            "piercing": 0.0,
+            "armor": 0.0,
+            "breakthrough": 1.0,
+            "defense": 2.0,
+            "entrenchment": 0.0,
+            "productionCost": 0.50,
+            "ressources": {
+                "steel": 0,
+                "tungsten": 0,
+                "chromium": 0
+            }
+        }
+    },
+    "adaptor": {
+        "onlyOne": true,
+        "stats": {
+            "year": 1939,
+            "reliability": 0.0,
+            "softAttack": 0.0,
+            "piercingP": 10,
+            "armor": 0.0,
+            "breakthrough": 0.0,
+            "defense": 0.0,
+            "entrenchment": 0.0,
+            "productionCost": 0.0,
+            "ressources": {
+                "steel": 0,
+                "tungsten": 1,
+                "chromium": 0
+            }
+        }
+    },
+    "stabilizer": {
+        "onlyOne": true,
+        "stats": {
+            "year": 1940,
+            "reliability": 0.0,
+            "softAttack": 0.0,
+            "piercing": 0.0,
+            "armor": 0.0,
+            "breakthrough": 5.0,
+            "defense": 0.0,
+            "entrenchment": 0.0,
+            "productionCost": 2.0,
+            "ressources": {
+                "steel": 0,
+                "tungsten": 0,
+                "chromium": 0
+            }
+        }
+    },
+    "wetAmmo": {
+        "onlyOne": true,
+        "stats": {
+            "year": 0,
+            "reliabilityP": 15,
+            "softAttack": 0.0,
+            "piercing": 0.0,
+            "armor": 0.0,
+            "breakthrough": 0.0,
+            "defense": 0.0,
+            "entrenchment":0.0,
+            "productionCost": 1.0,
+            "ressources": {
+                "steel": 0,
+                "tungsten": 0,
+                "chromium": 0
+            }
+        }
+    },
+    "fuelDrum": {
+        "stats": {
+            "speed": -0.25,
+            "fuelCapacity": 100.0,
+            "productionCost": 1.0
+        }
+    }
+}

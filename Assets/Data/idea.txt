@@ -1,0 +1,39 @@
+		ultimate_bravery = {
+
+			picture = tfv_can_conscription_crisis
+			allowed = {
+				always = no
+			}
+
+			removal_cost = -1
+			
+			modifier = {
+				#Base
+				light_tank_chassis_design_cost_factor = 999
+				medium_tank_chassis_design_cost_factor = 999
+				heavy_tank_chassis_design_cost_factor = 999
+				super_heavy_tank_chassis_design_cost_factor = 999
+				modern_tank_chassis_design_cost_factor = 999
+
+				#TD
+				light_tank_destroyer_chassis_design_cost_factor = 999
+				medium_tank_destroyer_chassis_design_cost_factor = 999
+				heavy_tank_destroyer_chassis_design_cost_factor = 999
+				super_heavy_destroyer_tank_chassis_design_cost_factor = 999
+				modern_tank_destroyer_chassis_cost_factor = 999
+
+				#Artillery
+				light_tank_artillery_chassis_design_cost_factor = 999
+				medium_tank_artillery_chassis_design_cost_factor = 999
+				heavy_tank_artillery_chassis_design_cost_factor = 999
+				super_heavy_tank_artillery_chassis_design_cost_factor = 999
+				modern_tank_artillery_chassis_cost_factor = 999
+
+				#AA
+				light_tank_aa_chassis_design_cost_factor = 999
+				medium_tank_aa_chassis_design_cost_factor = 999
+				heavy_tank_aa_chassis_design_cost_factor = 999
+				super_heavy_aa_tank_chassis_design_cost_factor = 999
+				modern_tank_aa_chassis_design_cost_factor = 999
+    		}
+		}

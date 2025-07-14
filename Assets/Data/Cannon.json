@@ -1,0 +1,604 @@
+{
+    "cannon": {
+        "smallCannon": {
+            "size": "small",
+            "type": {
+                "basic": {
+                    "technologies": [
+                        "artillery"
+                    ],
+                    "year": 1934,
+                    "speed": -0.1,
+                    "reliability": 0.0,
+                    "reliabilityP": -10,
+                    "softAttack": 10.0,
+                    "hardAttack": 6.0,
+                    "piercing": 25.0,
+                    "breakthrough": 0.0,
+                    "airAttack": 0.0,
+                    "productionCost": 1.50,
+                    "ressources": {
+                        "steel": 0,
+                        "tungsten": 0,
+                        "chromium": 0
+                    }
+                },
+                "improved": {
+                    "technologies": [
+                        "artillery"
+                    ],
+                    "year": 1936,
+                    "speed": -0.2,
+                    "reliability": 0.0,
+                    "reliabilityP": -10,
+                    "softAttack": 15.0,
+                    "hardAttack": 15.0,
+                    "piercing": 50.0,
+                    "breakthrough": 0.0,
+                    "airAttack": 0.0,
+                    "productionCost": 3.0,
+                    "ressources": {
+                        "steel": 0,
+                        "tungsten": 0,
+                        "chromium": 0
+                    }
+                }
+            },
+            "roleAllowed": [
+                "tank"
+            ]
+        },
+        "mediumCannon": {
+            "size": "medium",
+            "type": {
+                "basic": {
+                    "technologies": [
+                        "artillery",
+                        "antiTank"
+                    ],
+                    "year": 1939,
+                    "speed": -0.2,
+                    "reliability": 0.0,
+                    "reliabilityP": -15.0,
+                    "softAttack": 20.0,
+                    "hardAttack": 15.0,
+                    "piercing": 60.0,
+                    "breakthrough": 2.0,
+                    "airAttack": 0.0,
+                    "productionCost": 3.00,
+                    "ressources": {
+                        "steel": 1,
+                        "tungsten": 1,
+                        "chromium": 0
+                    }
+                },
+                "improved": {
+                    "technologies": [
+                        "artillery",
+                        "antiTank"
+                    ],
+                    "year": 1941,
+                    "speed": -0.3,
+                    "reliability": 0.0,
+                    "reliabilityP": -15.0,
+                    "softAttack": 32.0,
+                    "hardAttack": 20.0,
+                    "piercing": 90.0,
+                    "breakthrough": 4.0,
+                    "airAttack": 0.0,
+                    "productionCost": 4.0,
+                    "ressources": {
+                        "steel": 2,
+                        "tungsten": 1,
+                        "chromium": 1
+                    }
+                }
+            },
+            "roleAllowed": [
+                "tank",
+                "tankDestroyer"
+            ]
+        },
+        "heavyCannon": {
+            "size": "large",
+            "type": {
+                "basic": {
+                    "technologies": [
+                        "antiAir",
+                        "antiTank"
+                    ],
+                    "year": 1936,
+                    "speed": -0.3,
+                    "reliability": 0.0,
+                    "reliabilityP": -25.0,
+                    "softAttack": 20.0,
+                    "hardAttack": 20.0,
+                    "piercing": 90.0,
+                    "breakthrough": 0.0,
+                    "airAttack": 0.0,
+                    "productionCost": 6.00,
+                    "ressources": {
+                        "steel": 2,
+                        "tungsten": 1,
+                        "chromium": 0
+                    }
+                },
+                "improved": {
+                    "year": 1940,
+                    "speed": -0.4,
+                    "reliability": 0.0,
+                    "reliabilityP": -25.0,
+                    "softAttack": 25.0,
+                    "hardAttack": 35.0,
+                    "piercing": 125.0,
+                    "breakthrough": 0.0,
+                    "airAttack": 0.0,
+                    "productionCost": 7.0,
+                    "ressources": {
+                        "steel": 2,
+                        "tungsten": 2,
+                        "chromium": 1
+                    }
+                },
+                "advanced": {
+                    "year": 1943,
+                    "speed": -0.5,
+                    "reliability": 0.0,
+                    "reliabilityP": -30.0,
+                    "softAttack": 30.0,
+                    "hardAttack": 40.0,
+                    "piercing": 170.0,
+                    "breakthrough": 0.0,
+                    "airAttack": 0.0,
+                    "productionCost": 8.0,
+                    "ressources": {
+                        "steel": 3,
+                        "tungsten": 3,
+                        "chromium": 1
+                    }
+                }
+            },
+            "roleAllowed": [
+                "tank",
+                "tankDestroyer"
+            ]
+        },
+        "superHeavyCannon": {
+            "size": "bfg",
+            "type": {
+                "basic": {
+                    "technologies": [
+                        "superHeavyTank"
+                    ],
+                    "year": 1943,
+                    "speed": -0.6,
+                    "reliability": 0.0,
+                    "reliabilityP": -35.0,
+                    "softAttack": 35.0,
+                    "hardAttack": 45.0,
+                    "piercing": 225.0,
+                    "breakthrough": 0.0,
+                    "airAttack": 0.0,
+                    "productionCost": 12.50,
+                    "ressources": {
+                        "steel": 0,
+                        "tungsten": 5,
+                        "chromium": 2
+                    }
+                }
+            },
+            "roleAllowed": [
+                "tank",
+                "tankDestroyer"
+            ]
+        }
+    },
+    "flamethrower": {
+        "flamethrower": {
+            "size": "small",
+            "type": {
+                "basic": {
+                    "technologies": [
+                        "supportEngineers"
+                    ],
+                    "year": 1939,
+                    "speed": 0.0,
+                    "reliability": 0.0,
+                    "reliabilityP": -5.0,
+                    "softAttack": 5.0,
+                    "hardAttack": 0.0,
+                    "piercing": 0.0,
+                    "breakthrough": 0.0,
+                    "airAttack": 0.0,
+                    "productionCost": 0.50,
+                    "ressources": {
+                        "steel": 0,
+                        "tungsten": 0,
+                        "chromium": 0
+                    }
+                }
+            },
+            "roleAllowed": [
+                "flameTank"
+            ]
+        }
+    },
+    "fastFiringAntiGround": {
+        "hmg": {
+            "size": "small",
+            "type": {
+                "basic": {
+                    "technologies": [
+                        "supportEngineers"
+                    ],
+                    "year": 0,
+                    "speed": 0.0,
+                    "reliability": 0.0,
+                    "reliabilityP": 0.0,
+                    "softAttack": 8.0,
+                    "hardAttack": 2.0,
+                    "piercing": 6.0,
+                    "breakthrough": 0.0,
+                    "airAttack": 0.0,
+                    "productionCost": 0.50,
+                    "ressources": {
+                        "steel": 0,
+                        "tungsten": 0,
+                        "chromium": 0
+                    }
+                }
+            },
+            "roleAllowed": [
+                "tank"
+            ]
+        },
+        "automaticCannon": {
+            "size": "small",
+            "type":{
+                "basic": {
+                    "technologies": [
+                        "antiAir"
+                    ],
+                    "year": 1936,
+                    "speed": -0.1,
+                    "reliability": 0.0,
+                    "reliabilityP": -10.0,
+                    "softAttack": 15.0,
+                    "hardAttack": 5.0,
+                    "piercing": 20.0,
+                    "breakthrough": 0.0,
+                    "airAttack": 0.0,
+                    "productionCost": 1.50,
+                    "ressources": {
+                        "steel": 0,
+                        "tungsten": 0,
+                        "chromium": 0
+                    }
+                },
+                "improved": {
+                    "technologies": [
+                        "antiAir"
+                    ],
+                    "year": 1940,
+                    "speed": -0.1,
+                    "reliability": 0,
+                    "reliabilityP": -10.0,
+                    "softAttack": 20.0,
+                    "hardAttack": 7.0,
+                    "piercing": 35.0,
+                    "breakthrough": 0.0,
+                    "airAttack": 0.0,
+                    "productionCost": 2.00,
+                    "ressources": {
+                        "steel": 0,
+                        "tungsten": 0,
+                        "chromium": 0
+                    }
+                }
+            },
+            "roleAllowed": [
+                "tank"
+            ]
+        }
+    },
+    "antiTank": {
+        "highVelocitySmall": {
+            "size": "small",
+            "type": {
+                "basic": {
+                    "technologies": ["antiTank"],
+                    "year": 1936,
+                    "speed": -0.1,
+                    "reliability": 0.0,
+                    "reliabilityP": -5.0,
+                    "softAttack": 10.0,
+                    "hardAttack": 26.0,
+                    "piercing": 68.0,
+                    "breakthrough": 0.0,
+                    "airAttack": 0.0,
+                    "productionCost": 3.00,
+                    "ressources": {
+                        "steel": 2,
+                        "tungsten": 2,
+                        "chromium": 0
+                    }
+                }
+            },
+            "roleAllowed": [
+                "tank",
+                "tankDestroyer"
+            ]
+        },
+        "highVelocityMedium": {
+            "size": "medium",
+            "type": {
+                "improved": {
+                    "technologies": ["antiTank"],
+                    "year": 1942,
+                    "speed": -0.3,
+                    "reliability": 0,
+                    "reliabilityP": -17.5,
+                    "softAttack": 20.0,
+                    "hardAttack": 35.0,
+                    "piercing": 125.0,
+                    "breakthrough": 0.0,
+                    "airAttack": 0.0,
+                    "productionCost": 5.00,
+                    "ressources": {
+                        "steel": 2,
+                        "tungsten": 2,
+                        "chromium": 1
+                    }
+                }
+            },
+            "roleAllowed": [
+                "tank",
+                "tankDestroyer"
+            ]
+        },
+        "highVelocityLarge": {
+            "size": "large",
+            "type": {
+                "advanced": {
+                    "technologies": ["antiTank"],
+                    "year": 1943,
+                    "speed": -0.4,
+                    "reliability": 0.0,
+                    "reliabilityP": -20.0,
+                    "softAttack": 25.0,
+                    "hardAttack": 45.0,
+                    "piercing": 200.0,
+                    "breakthrough": 0.0,
+                    "airAttack": 0.0,
+                    "productionCost": 7.00,
+                    "ressources": {
+                        "steel": 3,
+                        "tungsten": 2,
+                        "chromium": 1
+                    }
+                }
+            },
+            "roleAllowed": [
+                "tank",
+                "tankDestroyer"
+            ]
+        }
+    },
+    "antiInfantry": {
+        "name": "Anti-Infantry",
+        "closeSupportGun": {
+            "size": "small",
+            "type": {
+                "basic": {
+                    "technologies": ["artillery"],
+                    "year": 1936,
+                    "speed": -0.2,
+                    "reliability": 0,
+                    "reliabilityP": -10.0,
+                    "softAttack": 25.0,
+                    "hardAttack": 5.0,
+                    "piercing": 10.0,
+                    "breakthrough": 0.0,
+                    "airAttack": 0.0,
+                    "productionCost": 4.00,
+                    "ressources": {
+                        "steel": 1,
+                        "tungsten": 0,
+                        "chromium": 0
+                    }
+                }
+            },
+            "roleAllowed": [
+                "tank",
+                "spArtillery"
+            ]
+        },
+        "mediumHowitzer": {
+            "size": "medium",
+            "type": {
+                "basic": {
+                    "technologies": ["artillery"],
+                    "year": 1939,
+                    "speed": -0.3,
+                    "reliability": 0.0,
+                    "reliabilityP": -20.0,
+                    "softAttack": 35.0,
+                    "hardAttack": 1.0,
+                    "piercing": 20.0,
+                    "breakthrough": -2.0,
+                    "airAttack": 0.0,
+                    "productionCost": 4.00,
+                    "ressources": {
+                        "steel": 2,
+                        "tungsten": 1,
+                        "chromium": 0
+                    }
+                },
+                "improved": {
+                    "technologies": ["artillery"],
+                    "year": 1941,
+                    "speed": -0.4,
+                    "reliability": 0,
+                    "reliabilityP": -20.0,
+                    "softAttack": 45.0,
+                    "hardAttack": 2.0,
+                    "piercing": 30.0,
+                    "breakthrough": -2.0,
+                    "airAttack": 0.0,
+                    "productionCost": 5.00,
+                    "ressources": {
+                        "steel": 3,
+                        "tungsten": 1,
+                        "chromium": 1
+                    }
+                }
+            },
+            "roleAllowed": [
+                "tank",
+                "spArtillery"
+            ]
+        },
+        "rocketLauncher": {
+            "size": "medium",
+            "type": {
+                "basic": {
+                    "technologies": ["rocket"],
+                    "year": 1940,
+                    "speed": -0.1,
+                    "reliability": 0,
+                    "reliabilityP": -10.0,
+                    "softAttack": 25.0,
+                    "hardAttack": 1.0,
+                    "piercing": 2.0,
+                    "breakthrough": -4.0,
+                    "airAttack": 0.0,
+                    "productionCost": 4.00,
+                    "ressources": {
+                        "steel": 1,
+                        "tungsten": 2,
+                        "chromium": 0
+                    }
+                },
+                "improved": {
+                    "technologies": ["rocket"],
+                    "year": 1943,
+                    "speed": -0.2,
+                    "reliability": 0,
+                    "reliabilityP": -10.0,
+                    "softAttack": 35.0,
+                    "hardAttack": 1.0,
+                    "piercing": 2.0,
+                    "breakthrough": -4.0,
+                    "airAttack": 0.0,
+                    "productionCost": 5.00,
+                    "ressources": {
+                        "steel": 1,
+                        "tungsten": 2,
+                        "chromium": 0
+                    }
+                }
+            },
+            "roleAllowed": [
+                "spArtillery"
+            ]
+        },
+        "heavyHowitzer": {
+            "size": "large",
+            "type": {
+                "basic": {
+                    "technologies": ["artillery"],
+                    "year": 1943,
+                    "speed": -0.5,
+                    "reliability": 0,
+                    "reliabilityP": -30.0,
+                    "softAttack": 55.0,
+                    "hardAttack": 2.0,
+                    "piercing": 60.0,
+                    "breakthrough": -4.0,
+                    "airAttack": 0.0,
+                    "productionCost": 4.00,
+                    "ressources": {
+                        "steel": 3,
+                        "tungsten": 1,
+                        "chromium": 1
+                    }
+                }
+            },
+            "roleAllowed": [
+                "tank",
+                "spArtillery"
+            ]
+        }
+    },
+    "antiAir": {
+        "antiAirSmall": {
+            "size": "small",
+            "type": {
+                "basic": {
+                    "technologies": ["antiAir"],
+                    "year": 1936,
+                    "speed": 0.0,
+                    "reliability": 0.0,
+                    "reliabilityP": -10.0,
+                    "softAttack": 6.0,
+                    "hardAttack": 2.0,
+                    "piercing": 10.0,
+                    "breakthrough": 0.0,
+                    "airAttack": 16.0,
+                    "productionCost": 2.00,
+                    "ressources": {
+                        "steel": 0,
+                        "tungsten": 0,
+                        "chromium": 0
+                    }
+                },
+                "improved": {
+                    "technologies": ["antiAir"],
+                    "year": 1940,
+                    "speed": 0.0,
+                    "reliability": 0.0,
+                    "reliabilityP": -10.0,
+                    "softAttack": 8.0,
+                    "hardAttack": 5.0,
+                    "piercing": 20.0,
+                    "breakthrough": 0.0,
+                    "airAttack": 32.0,
+                    "productionCost": 3.00,
+                    "ressources": {
+                        "steel": 2,
+                        "tungsten": 1,
+                        "chromium": 0
+                    }
+                }
+            },
+            "roleAllowed": [
+                "spAA"
+            ]
+        },
+        "antiAirMedium": {
+            "type": {
+                "advanced": {
+                    "technologies": ["antiAir"],
+                    "year": 1943,
+                    "speed": 0.0,
+                    "reliability": 0.0,
+                    "reliabilityP": -10.0,
+                    "softAttack": 10.0,
+                    "hardAttack": 5.0,
+                    "piercing": 30.0,
+                    "breakthrough": 0.0,
+                    "airAttack": 43.0,
+                    "productionCost": 4.00,
+                    "ressources": {
+                        "steel": 3,
+                        "tungsten": 1,
+                        "chromium": 0
+                    }
+                }
+            },
+            "roleAllowed": [
+                "spAA"
+            ]
+        }
+    }
+}
