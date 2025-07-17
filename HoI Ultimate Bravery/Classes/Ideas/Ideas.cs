@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace HoI_Ultimate_Bravery.Classes.Ideas
 {
-    public class Ideas
+    internal class Ideas
     {
-        public Dictionary<string, IdeasDictionnary> ideas = new Dictionary<string, IdeasDictionnary>();
+        internal Dictionary<string, List<Idea>> ideas = new();
     }
 }
